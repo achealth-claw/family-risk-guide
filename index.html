@@ -368,12 +368,24 @@
             </div>
           </div>
 
-          <!-- Sub-views B & C: 5-bar scale + 4-pipe flow -->
-          <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
-            <div class="card-head">
-              <div>
+          <!-- Sub-views B & C: 5-bar scale + 4-pipe flow (collapsed by default) -->
+          <details class="view-fold" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
+            <summary class="view-fold-summary">
+              <div class="view-fold-copy">
                 <span class="badge">视角 B & C · 换个角度看四种家庭活法在 20 年后的兑现能力</span>
                 <h3 style="margin:6px 0 0;font-size:18px">三张家庭硬账单的「5 格电量刻度」与「35–65 岁四条财富管道」</h3>
+                <p class="view-fold-hint">默认收起，避免打断主线阅读；需要更细的对照图时再展开。</p>
+              </div>
+              <span class="view-fold-toggle" aria-hidden="true">
+                <span class="view-fold-closed">点击展开 ▼</span>
+                <span class="view-fold-open">点击收起 ▲</span>
+              </span>
+            </summary>
+
+            <div class="view-fold-body">
+            <div class="card-head" style="margin-top:14px">
+              <div>
+                <span class="badge amber">辅助视图切换</span>
               </div>
               <div class="seg two" role="tablist" aria-label="购买力辅助视图切换">
                 <button type="button" data-pp-tab="basket" aria-pressed="true">① 三件大事 5 格电量尺</button>
@@ -621,7 +633,8 @@
                 </svg>
               </div>
             </div>
-          </div>
+            </div>
+          </details>
         </div>
       </section>
 
