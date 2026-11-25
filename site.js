@@ -266,8 +266,8 @@ function initStageBench() {
         `).join("")}
       </div>
       <div class="tool-Jump">
-        <a class="btn" href="lifecycle-map/index.html?${q.toString()}">打开生命周期地图（看风险与准备点）</a>
-        <a class="btn ghost" href="lifecycle-map/fit/index.html?${q.toString()}">看全部阶段适配表</a>
+        <a class="btn" href="../lifecycle-map/index.html?${q.toString()}">打开生命周期地图（看风险与准备点）</a>
+        <a class="btn ghost" href="../lifecycle-map/fit/index.html?${q.toString()}">看全部阶段适配表</a>
       </div>
     `;
   }
@@ -503,4 +503,24 @@ function initCopyButtons() {
 }
 
 initCopyButtons();
+
+function initCompareTabs() {
+  const root = document.querySelector("[data-compare]");
+  if (!root) return;
+  const tabs = [...root.querySelectorAll("[data-compare-tab]")];
+  const panels = [...root.querySelectorAll("[data-compare-panel]")];
+
+  function show(key) {
+    tabs.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.compareTab === key)));
+    panels.forEach((p) => {
+      const on = p.dataset.comparePanel === key;
+      p.hidden = !on;
+    });
+  }
+
+  tabs.forEach((b) => b.addEventListener("click", () => show(b.dataset.compareTab)));
+  show(tabs.find((b) => b.getAttribute("aria-pressed") === "true")?.dataset.compareTab || "medical");
+}
+
+initCompareTabs();
 

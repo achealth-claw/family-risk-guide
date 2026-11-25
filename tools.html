@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>分析工具箱 · 安康家庭风险与财务</title>
-  <link rel="stylesheet" href="site.css" />
+  <title>怎么做 · 诊断与测算 · 安康家庭风险与财务</title>
+  <meta name="description" content="家庭阶段诊断、保额锚点测算，以及医疗/重疾/寿险/储蓄的内地与港险匿名结构对照（不构成产品推荐）。" />
+  <link rel="stylesheet" href="site.css?v=6" />
 </head>
 <body>
   <header class="site">
@@ -14,9 +15,9 @@
         <span class="brand-sub">医学背景 · 香港持牌顾问的学习与分析站</span>
       </div>
       <nav class="nav" aria-label="主导航">
-        <a href="index.html">总览与诊断</a>
-        <a href="notes.html">保险价值与数据</a>
-        <a href="tools.html" aria-current="page">分析工具箱</a>
+        <a href="index.html">为什么 · 底层原理</a>
+        <a href="tools.html" aria-current="page">怎么做 · 诊断与测算</a>
+        <a href="notes.html">深度专题</a>
         <a href="about.html">关于与问诊</a>
       </nav>
     </div>
@@ -26,19 +27,73 @@
     <div class="wrap">
       <section class="hero">
         <div>
-          <div class="eyebrow">ANALYSIS WORKBENCH</div>
-          <h1>家庭风险与保额分析工具箱</h1>
-          <p class="lede">把年龄阶段、家庭概率、刚需支出与条款结构拆成可自己动手的计算器。所有工具均在浏览器本地运行，不收集任何个人隐私数据。</p>
+          <div class="eyebrow">第二页 · 怎么做（HOW）—— 按阶段定位、算清保额、选对形态</div>
+          <h1>三步把你家的保障框架与保额算清楚</h1>
+          <p class="lede">不需要一上来就看几十页产品计划书。按<strong>「① 定阶段优先级 → ② 算保额与保费边界 → ③ 核对险种条款结构」</strong>三步走，所有测算均在浏览器本地完成。</p>
+        </div>
+        <div class="stat-strip" aria-label="三步流程">
+          <div><strong>第 1 步</strong>定家庭阶段与险种先后</div>
+          <div><strong>第 2 步</strong>算重疾/定寿保额锚点</div>
+          <div><strong>第 3 步</strong>对照主要险种结构差异</div>
         </div>
       </section>
 
-      <!-- Tool 1: Budget & Coverage Anchor Calculator -->
+      <!-- Step 1: Family Stage x Insurance Priority Workbench -->
+      <section id="stage" class="card" style="margin-top:24px" data-bench aria-labelledby="bench-title">
+        <div class="card-head">
+          <div>
+            <span class="badge">第 1 步 · 阶段诊断</span>
+            <h2 id="bench-title" style="margin-top:6px">家庭阶段 × 险种优先级诊断台</h2>
+          </div>
+          <a class="btn ghost" href="lifecycle-map/fit/index.html?profile=family">看 17 阶段完整适配总表 ›</a>
+        </div>
+        <p class="hint">选择家庭结构与年龄，直接给出这一阶段该「优先 / 补充 / 视情况 / 暂缓」的险种类型与原因。只到险种层，不推销具体产品。</p>
+
+        <form>
+          <span class="control-label">1. 家庭结构（一个人、夫妻二人均指没有孩子）</span>
+          <div class="seg" role="group" aria-label="家庭结构">
+            <button type="button" data-profile="single" aria-pressed="false">
+              一个人<small>没有孩子</small>
+            </button>
+            <button type="button" data-profile="couple" aria-pressed="false">
+              夫妻二人<small>没有孩子</small>
+            </button>
+            <button type="button" data-profile="family" aria-pressed="true">
+              有孩子家庭<small>按孩子年龄定位</small>
+            </button>
+          </div>
+
+          <div class="fields">
+            <label>你的年龄（岁）
+              <input id="age" type="number" inputmode="numeric" min="20" max="85" value="35" />
+            </label>
+            <label id="child-field">最小孩子年龄（岁）
+              <input id="child" type="number" inputmode="numeric" min="0" max="30" value="4" />
+            </label>
+          </div>
+
+          <span class="control-label">2. 当前现金流松紧（可选，不改阶段，只调先后顺序）</span>
+          <div class="seg four" role="group" aria-label="现金流松紧">
+            <button type="button" data-money="skip" aria-pressed="true">默认标准</button>
+            <button type="button" data-money="tight" aria-pressed="false">手头紧一点</button>
+            <button type="button" data-money="ok" aria-pressed="false">大致够用</button>
+            <button type="button" data-money="ample" aria-pressed="false">相对宽裕</button>
+          </div>
+        </form>
+
+        <div class="stage-out" data-stage-out></div>
+      </section>
+
+      <!-- Step 2: Budget & Coverage Anchor Calculator -->
       <section id="budget" class="card" style="margin-top:24px" data-budget>
         <div class="card-head">
-          <h2>工具 01 · 家庭刚性支出与保额锚点测算器</h2>
-          <span class="badge">量化测算</span>
+          <div>
+            <span class="badge">第 2 步 · 量化保额</span>
+            <h2 style="margin-top:6px">家庭刚性支出与保额锚点测算器</h2>
+          </div>
+          <span class="badge amber">防保费超支</span>
         </div>
-        <p class="hint">不知道重疾险和定期寿险该买多少保额？按「停工 3 年收入替代」与「剩余负债 + 5 年刚需支出」两个客观锚点即时试算：</p>
+        <p class="hint">知道了该配什么险种后，到底买多少保额才够用、每年交多少保费不会压垮生活？按「停工 3 年收入替代」与「剩余负债 + 5 年刚需支出」两个客观锚点即时试算：</p>
 
         <div class="fields" style="grid-template-columns:repeat(4, 1fr);margin-top:16px">
           <label>家庭税后年收入（万元）
@@ -58,72 +113,238 @@
         <div class="stage-out" data-budget-out></div>
       </section>
 
-      <!-- Tool 2: Medical Insurance G-Table -->
-      <section class="card" style="margin-top:22px">
+      <!-- Step 3: Anonymous structure compare across major lines -->
+      <section id="compare" class="card" style="margin-top:24px" data-compare>
         <div class="card-head">
-          <h2>工具 02 · 医疗险四类形态速查表（普通百万 vs 中端特需 vs 高端 vs 港险 VHIS）</h2>
-          <span class="badge">条款关键点对照</span>
+          <div>
+            <span class="badge">第 3 步 · 主要险种结构对照</span>
+            <h2 style="margin-top:6px">内地 × 港险：医疗 / 重疾 / 寿险 / 储蓄差在哪</h2>
+          </div>
+          <span class="badge amber">不构成产品推荐</span>
         </div>
-        <p class="hint">买医疗险最常见的坑，是把「一年期不保证续保」当成长期保障，或以为普通百万医疗能住公立特需病房。先按下面这 5 项对号入座：</p>
+        <p class="hint">下面只比较<strong>同类险种的常见结构差异</strong>，不点名任何具体产品，也不比较哪家「更好」或演示收益高低。正式结论以保险公司最新保单条款为准；是否适合配置，需结合你家阶段与现金流单独判断。</p>
 
-        <table class="data">
-          <thead>
-            <tr>
-              <th>对照项</th>
-              <th>长期百万医疗（内地）</th>
-              <th>中端/特需医疗（内地）</th>
-              <th>一年期高端医疗</th>
-              <th>香港自愿医保（VHIS 灵活/高端）</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="diff">
-              <td><strong>医院与病房范围</strong></td>
-              <td>二级及以上公立医院<strong>普通部</strong>（不含特需/国际/VIP）</td>
-              <td>公立普通部 + <strong>公立特需部 / 国际部 / 指定私立</strong></td>
-              <td>全球 / 全球除美私立与昂贵医院，<strong>标准单人间</strong></td>
-              <td>香港私家医院（半私家房 / 标准私家房）及亚洲/全球网络</td>
-            </tr>
-            <tr class="diff">
-              <td><strong>保证续保条款</strong></td>
-              <td>主流旗舰为 <strong>20 年保证续保</strong>（期间费率可调）</td>
-              <td>多为<strong>一年期、不保证续保</strong>（理赔或停售可能影响续保）</td>
-              <td><strong>一年期、不保证续保</strong>（看重服务与直付，非锁定终身）</td>
-              <td>条款写明<strong>保证续保至 100 岁</strong>（池子整体按年龄与通胀调费）</td>
-            </tr>
-            <tr>
-              <td><strong>免赔额设计</strong></td>
-              <td>常见年免赔 1 万（部分产品 1 万内赔付 30%–50%）</td>
-              <td>常见 0 免赔 / 5,000 / 1.5 万可选</td>
-              <td>0 免赔至数万元可选</td>
-              <td>0 自付额，或设 1.6 万 / 2.5 万 / 5 万港币自付额换取低保费</td>
-            </tr>
-            <tr>
-              <td><strong>院外特药 / CAR-T</strong></td>
-              <td>按合同指定特药清单与认可药房报销</td>
-              <td>部分含院外药械限额，或特需部内直付</td>
-              <td>通常全额涵盖合理必需之院外靶向与前沿疗法</td>
-              <td>按全数赔偿或分项限额涵盖订明非手术癌症治疗</td>
-            </tr>
-            <tr>
-              <td><strong>适合解决什么问题</strong></td>
-              <td><strong>全家的底层大病兜底</strong>，防大额住院打穿存款</td>
-              <td>追求公立特需专家号、少排队、单人/双人病房体验</td>
-              <td>跨国生活、私立医院门诊与住院直付体验</td>
-              <td>有赴港/在港就医能力的家庭；长期常住内地、主要在内地看病者不宜作为第一层</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="fine">注：表格按常见备案条款要点归纳，具体以保险公司最新保单条款为准。</p>
+        <div class="seg four" style="margin-top:14px" role="tablist" aria-label="险种结构对照">
+          <button type="button" data-compare-tab="medical" aria-pressed="true">医疗险</button>
+          <button type="button" data-compare-tab="ci" aria-pressed="false">重疾 / 危疾</button>
+          <button type="button" data-compare-tab="life" aria-pressed="false">寿险</button>
+          <button type="button" data-compare-tab="save" aria-pressed="false">储蓄 / 年金</button>
+        </div>
+
+        <!-- Medical -->
+        <div class="compare-panel" data-compare-panel="medical">
+          <p class="hint" style="margin-top:14px">同一需求是「住院与医疗账单」。先分清普通百万、中端特需、高端与港险自愿医保，避免把一年期产品当成长期保障。</p>
+          <table class="data">
+            <thead>
+              <tr>
+                <th>对照项</th>
+                <th>长期百万医疗（内地）</th>
+                <th>中端/特需医疗（内地）</th>
+                <th>一年期高端医疗</th>
+                <th>香港自愿医保（VHIS）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="diff">
+                <td><strong>医院与病房范围</strong></td>
+                <td>二级及以上公立医院<strong>普通部</strong>（通常不含特需/国际/VIP）</td>
+                <td>公立普通部 + <strong>公立特需 / 国际部 / 指定私立</strong></td>
+                <td>全球或全球除美，常见<strong>标准单人间</strong></td>
+                <td>香港私家医院（半私家房 / 私家房）及约定亚洲/全球网络</td>
+              </tr>
+              <tr class="diff">
+                <td><strong>保证续保</strong></td>
+                <td>主流旗舰多为<strong>20 年保证续保</strong>（期间费率可调）</td>
+                <td>多为<strong>一年期、不保证续保</strong></td>
+                <td><strong>一年期、不保证续保</strong></td>
+                <td>条款写明<strong>保证续保至高龄 / 终身</strong>（整体按年龄与通胀调费）</td>
+              </tr>
+              <tr>
+                <td><strong>免赔 / 自付</strong></td>
+                <td>常见年免赔约 1 万</td>
+                <td>0 / 数千 / 1 万余可选</td>
+                <td>0 至数万可选</td>
+                <td>0 自付，或设数万港币自付额换低保费</td>
+              </tr>
+              <tr>
+                <td><strong>院外特药</strong></td>
+                <td>按合同清单与认可药房报销</td>
+                <td>部分含院外药械限额或特需部内直付</td>
+                <td>通常覆盖合理必需的院外靶向与前沿疗法</td>
+                <td>按全数赔偿或分项限额覆盖订明非手术癌症治疗</td>
+              </tr>
+              <tr>
+                <td><strong>更适合谁</strong></td>
+                <td>长期常住内地家庭的<strong>底层医疗兜底</strong></td>
+                <td>需要公立特需 / 少排队体验的家庭</td>
+                <td>跨国生活、私立医院直付需求</td>
+                <td>有赴港/在港就医能力者；常住内地、主要在内地看病者不宜作第一层</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Critical illness -->
+        <div class="compare-panel" data-compare-panel="ci" hidden>
+          <p class="hint" style="margin-top:14px">同一需求是「大病后的收入替代与康复期开销」。内地常见消费型重疾；香港危疾常带现金价值与分红，结构更复杂，不能按「保费贵便宜」直接对标。</p>
+          <table class="data">
+            <thead>
+              <tr>
+                <th>对照项</th>
+                <th>内地消费型重疾（常见）</th>
+                <th>内地储蓄型重疾（较少作主力）</th>
+                <th>香港危疾（常见结构）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="diff">
+                <td><strong>疾病定义口径</strong></td>
+                <td>以监管<strong>核心重疾定义</strong>为基础，叠加轻症 / 中症</td>
+                <td>同左，但保单含现价，保费显著更高</td>
+                <td>以行业<strong>危疾定义</strong>为基础，常见早期危疾 + 严重危疾分组</td>
+              </tr>
+              <tr class="diff">
+                <td><strong>等待期</strong></td>
+                <td>常见 90 日或 180 日（意外多除外）</td>
+                <td>同类</td>
+                <td>严重危疾常见约 <strong>60 日</strong>（以条款为准）</td>
+              </tr>
+              <tr class="diff">
+                <td><strong>赔付形态</strong></td>
+                <td>确诊达到标准后<strong>一笔过给付</strong>；可含多次赔、额外癌症赔</td>
+                <td>保障 + 长期现金价值并存，杠杆通常低于消费型</td>
+                <td>严重危疾可<strong>分组多次</strong>（如癌/心/中风一组多次）；首次大赔后现价常归零</td>
+              </tr>
+              <tr class="diff">
+                <td><strong>现金价值 / 分红</strong></td>
+                <td>多数<strong>无现价或极低</strong>，主打高杠杆保额</td>
+                <td>有保证现金价值，部分含分红</td>
+                <td>常见<strong>有保证现价 + 非保证特别红利</strong>；主业仍是保障，不是增额寿</td>
+              </tr>
+              <tr>
+                <td><strong>与身故责任关系</strong></td>
+                <td>消费型常另设身故/退保返还已交保费或约定比例</td>
+                <td>现价与身故、重疾给付需按条款取高或冲减</td>
+                <td>多为<strong>加速给付</strong>：首次严重危疾后身故责任常终止或大幅变化</td>
+              </tr>
+              <tr>
+                <td><strong>更适合谁</strong></td>
+                <td>要先把<strong>3–5 年收入保额</strong>做够的内地家庭主力选择</td>
+                <td>预算极宽、想保障与储蓄绑一张单时再评估</td>
+                <td>已有内地保额底盘，且接受赴港投保、外币保单与更复杂条款的家庭作补充</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Life -->
+        <div class="compare-panel" data-compare-panel="life" hidden>
+          <p class="hint" style="margin-top:14px">同一需求是「经济支柱身故或全残后，房贷与抚养不断供」。纯杠杆优先看定期寿险；终身寿 / 储蓄寿是另一类目标，不要和定寿比「谁划算」。</p>
+          <table class="data">
+            <thead>
+              <tr>
+                <th>对照项</th>
+                <th>内地定期寿险</th>
+                <th>香港定期寿险</th>
+                <th>终身 / 储蓄型人寿（两地均有）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="diff">
+                <td><strong>核心功能</strong></td>
+                <td>高杠杆覆盖<strong>剩余负债 + 抚养年限</strong></td>
+                <td>同样是杠杆型身故保障，条款结构与核保规则按香港标准</td>
+                <td>身故保障 + 长期现金价值 / 传承安排，保费远高于定寿</td>
+              </tr>
+              <tr class="diff">
+                <td><strong>保费与杠杆</strong></td>
+                <td>同等保额下通常<strong>保费更低、杠杆更高</strong>，适合作为有房贷家庭的第一层</td>
+                <td>保费因年龄、币种、核保与市场定价而异，不宜默认「一定更贵/更便宜」</td>
+                <td>杠杆显著低于定寿；主要不解决「便宜覆盖房贷」</td>
+              </tr>
+              <tr>
+                <td><strong>保险期间</strong></td>
+                <td>常见保至 60 / 70 / 88 岁或固定年期；责任结束即停止</td>
+                <td>可保固定年期或至约定年龄；部分可转换</td>
+                <td>终身；或与储蓄计划长期绑定</td>
+              </tr>
+              <tr>
+                <td><strong>币种与缴费</strong></td>
+                <td>人民币计价，适配内地收入与房贷币种</td>
+                <td>常见港币 / 美元等；需匹配未来负债币种与换汇安排</td>
+                <td>内地多为人民币；香港常见美元及多币种切换</td>
+              </tr>
+              <tr>
+                <td><strong>更适合谁</strong></td>
+                <td>背负房贷、抚养或赡养责任的<strong>经济支柱</strong>（内地常住家庭通常先做这一层）</td>
+                <td>负债或生活重心在香港、或以港币/美元负债为主的家庭</td>
+                <td>保障已齐、有明确传承或长期锁仓目标时再谈；不能替代定寿的杠杆功能</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Savings -->
+        <div class="compare-panel" data-compare-panel="save" hidden>
+          <p class="hint" style="margin-top:14px">同一需求是「把 10–30 年后要用的教育金 / 养老金锁住」。先分清<strong>保证利益</strong>与<strong>非保证演示</strong>；任何储蓄形态都不能排在大人医疗、重疾、定寿前面。</p>
+          <table class="data">
+            <thead>
+              <tr>
+                <th>对照项</th>
+                <th>内地增额寿 / 年金（偏保证叙事）</th>
+                <th>内地分红储蓄</th>
+                <th>香港分红储蓄 / 年金（常见）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="diff">
+                <td><strong>利益结构</strong></td>
+                <td>强调<strong>保证现金价值</strong>按约定增长或保证领取</td>
+                <td>保证部分 + 非保证分红；演示与实际可能偏离</td>
+                <td>保证现金价值通常起步较低；长期演示大量来自<strong>非保证红利 / 终期分红</strong></td>
+              </tr>
+              <tr class="diff">
+                <td><strong>怎么读计划书</strong></td>
+                <td>先核对保证现价表与回本年限，再看其他</td>
+                <td>把保证利益与分红利益分开看，不把演示合计当成承诺</td>
+                <td>先看保证现价与退保损失期；再查公司公布的<strong>红利实现率</strong>，不把高演示年化当预期收益</td>
+              </tr>
+              <tr>
+                <td><strong>流动性</strong></td>
+                <td>早期退保损失常见；减保 / 贷款规则因产品而异</td>
+                <td>同类，需看现金价值与分红结算时点</td>
+                <td>部分计划支持减保、部分提取、保费假期等，但仍有漫长低现价期</td>
+              </tr>
+              <tr>
+                <td><strong>币种与用途</strong></td>
+                <td>人民币，对接国内教育 / 养老开支较直接</td>
+                <td>人民币</td>
+                <td>常见美元及多币种；适合有外币支出、资产配置需求且能接受汇率波动者</td>
+              </tr>
+              <tr>
+                <td><strong>前置条件</strong></td>
+                <td colspan="3">应急金 3–6 个月 + 大人医疗 / 重疾 / 定寿闭环之后，再用<strong>10 年以上确定不动用</strong>的闲钱启动。保费占比过高或用储蓄险顶替保障，属于顺序错误。</td>
+              </tr>
+              <tr>
+                <td><strong>更适合谁</strong></td>
+                <td>要确定现金流、厌恶演示波动的家庭</td>
+                <td>能理解分红波动、仍以保证利益托底的家庭</td>
+                <td>保障已齐、有赴港与外币安排能力，并把非保证部分当作「可能有、不是承诺」的家庭</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="fine" style="margin-top:12px">声明：以上为同类险种的结构科普对照，<strong>不构成任何保险产品推荐、收益承诺或投保要约</strong>；不比较具体产品名称与报价。涉及香港保单的讨论与投保，须在符合监管要求下于香港境内合规进行。</p>
       </section>
 
-      <!-- Tool 3: Stage + Fit full interactive + Standalone deep tools -->
+      <!-- Step 4: Standalone Deep Interactive Tools -->
       <section class="section">
         <div class="section-head">
           <div>
-            <div class="eyebrow">专项独立工具</div>
-            <h2>进入完整交互式视图</h2>
-            <p>以下四个独立模块均已就绪，点击可直接打开对应工具视图：</p>
+            <div class="eyebrow">04 · 专项深度工具视图</div>
+            <h2>进一步查看全周期地图与条款怎么读</h2>
+            <p>以下公开工具只到阶段与险种结构层；具体产品条款并排对照仅在 1v1 问诊中按你家旧保单展开，不在站内点名比款。</p>
           </div>
         </div>
 
@@ -150,18 +371,62 @@
             <div>
               <span class="badge">条款阅读清单（不点名产品）</span>
               <h3>看旧保单时，优先核对这几项</h3>
-              <p>等待期、轻/中/重症定义与比例、癌症多次赔付间隔、身故/全残责任、保证续保与医院范围。具体保单怎么比，留在一对一检视里做。</p>
+              <p>等待期、轻/中/重症定义与比例、癌症多次赔付间隔、身故/全残责任、保证续保与医院范围。公开站只讲「该看什么」；具体保单怎么比，留在一对一检视里做。</p>
             </div>
             <div class="go"><a href="about.html#contact" style="color:var(--green);font-weight:650">需要旧单体检时联系问诊 ›</a></div>
           </div>
+        </div>
+      </section>
+
+      <!-- Advisor Consult CTA -->
+      <section class="author" aria-label="关于顾问与问诊流程">
+        <div>
+          <div class="eyebrow">如果自己算完还有拿不准的地方</div>
+          <h2>1v1 医生式问诊：先检视旧保单与缺口，再谈是否配置</h2>
+          <p>如果你手里已经有几份旧保单拿不准去留，或者存在体检小异常（结节、乙肝、三高等）需要做内地与香港双市场核保预评，可以带上刚才测算出的阶段与预算找我对齐。</p>
+          <p><strong>第一次对话不推销具体产品、不承诺非保证收益、也不谈返佣；如果当前阶段不适合买，我会直接劝你暂缓。</strong></p>
+          <div class="tool-Jump" style="margin-top:18px">
+            <a class="btn" href="about.html">查看三步问诊工作流与联系方式 ›</a>
+            <a class="btn ghost" href="notes.html">先读深度数据与税务专题 ›</a>
+          </div>
+        </div>
+        <div class="steps-mini">
+          <div class="eyebrow">1v1 首咨前，只需先对齐这三件事</div>
+          <div class="step-row"><strong>① 家庭阶段</strong>一个人、夫妻二人（无孩），还是有孩家庭？目前刚需和负债多重？</div>
+          <div class="step-row"><strong>② 最怕哪种中断</strong>是怕大额医疗账单、停工期间房贷断供，还是 10 年后的教育/养老专款被挪用？</div>
+          <div class="step-row"><strong>③ 资金约束条件</strong>这笔钱几年内会不会动用？如考虑港险，近 3–6 个月是否方便本人赴港？</div>
         </div>
       </section>
     </div>
   </main>
 
   <footer class="site">
+    <div class="wrap foot">
+      <div>
+        <strong>安康 · 家庭风险与长期财务</strong>
+        <p style="margin:0">用公开文献、统计数据与条款原文，把保险与家庭长期规划算明白。</p>
+      </div>
+      <div>
+        <strong>核心页面</strong>
+        <a href="index.html">第一页：为什么（原理与草帽图）</a>
+        <a href="tools.html">第二页：怎么做（阶段诊断与测算）</a>
+        <a href="notes.html">深度专题与文献出处</a>
+        <a href="about.html">关于顾问与问诊流程</a>
+      </div>
+      <div>
+        <strong>专项交互工具</strong>
+        <a href="lifecycle-map/index.html?wx=achealth&profile=family">家庭生命周期地图（全屏版）</a>
+        <a href="lifecycle-map/fit/index.html?profile=family">17 阶段 × 险种适配全表</a>
+        <a href="tools.html#budget">刚性支出与保额锚点测算</a>
+      </div>
+      <div>
+        <strong>关于与联系</strong>
+        <a href="about.html">工作方法与底层资料库</a>
+        <a href="about.html#contact">微信联系：achealth</a>
+      </div>
+    </div>
     <p class="legal">声明：工具测算结果基于公开统计模型与经验法则，仅供家庭财务规划参考，不构成任何保险产品要约或投保建议。</p>
   </footer>
-  <script src="site.js"></script>
+  <script src="site.js?v=6"></script>
 </body>
 </html>

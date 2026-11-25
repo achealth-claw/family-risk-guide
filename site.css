@@ -724,6 +724,11 @@ table.data tr.diff { background: var(--amber-soft); }
 
 .fine { margin: 12px 0 0; color: var(--faint); font-size: 12.5px; line-height: 1.55; }
 
+/* Structure compare panels */
+.compare-panel[hidden] { display: none !important; }
+.compare-panel { margin-top: 4px; }
+.compare-panel .data { margin-top: 8px; }
+
 /* WeChat copy button */
 .wx-copy {
   display: flex;
