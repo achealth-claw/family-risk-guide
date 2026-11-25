@@ -932,6 +932,22 @@ table.data tr.diff { background: var(--amber-soft); }
   border-radius: 12px;
   padding: 13px 15px;
 }
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.meter-head strong { min-width: 0; }
+.meter-head .meter-verdict {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.meter-head .meter-verdict.good { color: var(--green); }
+.meter-head .meter-verdict.bad { color: var(--red); }
+.meter-head .meter-verdict.warn { color: var(--amber); }
 .meter-track {
   height: 28px;
   background: #eeeae0;
@@ -1127,6 +1143,15 @@ footer.site {
   .good-stack .meter-fill {
     width: 100% !important;
     padding: 7px 10px;
+    white-space: normal;
+  }
+  .meter-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 13px;
+  }
+  .meter-head .meter-verdict {
     white-space: normal;
   }
   .meter-fill, .meter-lost, .meter-swing {
