@@ -239,7 +239,7 @@ h1 {
 }
 .lede {
   margin: 10px 0 0;
-  max-width: 44em;
+  max-width: min(58em, 100%);
   color: var(--ink-2);
   font-size: 15.5px;
 }

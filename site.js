@@ -267,8 +267,8 @@ function initStageBench() {
       </div>
       <div class="tool-Jump">
         <a class="btn" href="#budget">第 2 步：按这一阶段算出你家的保额锚点 ↓</a>
-        <a class="btn ghost" href="lifecycle-map/index.html?${q.toString()}">打开生命周期地图</a>
-        <a class="btn ghost" href="lifecycle-map/fit/index.html?${q.toString()}">看 17 阶段适配总表</a>
+        <a class="btn ghost" href="../lifecycle-map/index.html?${q.toString()}">打开生命周期地图</a>
+        <a class="btn ghost" href="../lifecycle-map/fit/index.html?${q.toString()}">看 17 阶段适配总表</a>
       </div>
     `;
   }
