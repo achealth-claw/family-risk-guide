@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>为什么需要配置 · 安康家庭风险与长期财务</title>
   <meta name="description" content="从人生草帽图看懂家庭财务底层原理：一生面临哪些导致资产缩水的风险、不同险种对应解决什么问题，以及为什么必须先保大人、后保孩子。" />
-  <link rel="stylesheet" href="site.css?v=15" />
+  <link rel="stylesheet" href="site.css?v=16" />
 </head>
 <body>
   <header class="site">
@@ -369,17 +369,24 @@
           </div>
 
           <!-- Sub-views B & C: 5-bar scale + 4-pipe flow (collapsed by default) -->
-          <details class="view-fold" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)">
-            <summary class="view-fold-summary">
-              <div class="view-fold-copy">
+          <details
+            class="view-fold"
+            style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line)"
+            ontoggle="var b=this.querySelector('[data-fold-label]');if(b)b.textContent=this.open?'点击收起':'点击展开';"
+          >
+            <summary
+              class="view-fold-summary"
+              style="list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#faf9f5;cursor:pointer"
+            >
+              <div class="view-fold-copy" style="flex:1;min-width:0">
                 <span class="badge">视角 B & C · 换个角度看四种家庭活法在 20 年后的兑现能力</span>
                 <h3 style="margin:6px 0 0;font-size:18px">三张家庭硬账单的「5 格电量刻度」与「35–65 岁四条财富管道」</h3>
-                <p class="view-fold-hint">默认收起，避免打断主线阅读；需要更细的对照图时再展开。</p>
               </div>
-              <span class="view-fold-toggle" aria-hidden="true">
-                <span class="view-fold-closed">点击展开 ▼</span>
-                <span class="view-fold-open">点击收起 ▲</span>
-              </span>
+              <span
+                class="view-fold-toggle"
+                data-fold-label
+                style="flex-shrink:0;padding:6px 14px;border-radius:999px;border:1px solid #c8d9d0;background:#fff;color:var(--green-2);font-size:13px;font-weight:700;white-space:nowrap"
+              >点击展开</span>
             </summary>
 
             <div class="view-fold-body">
