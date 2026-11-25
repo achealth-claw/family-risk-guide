@@ -869,12 +869,15 @@ table.data tr.diff { background: var(--amber-soft); }
 .compare-panel { margin-top: 4px; }
 .compare-panel .data { margin-top: 8px; }
 
-/* Purchasing Power Section (2 Extremes over 1 Rational + Sub-views) */
+/* Purchasing Power Section (3 Imbalances over 1 Rational + Sub-views) */
 .alloc-grid-top {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 16px;
+}
+.alloc-grid-top.three {
+  grid-template-columns: repeat(3, 1fr);
 }
 .alloc-bottom { margin-top: 16px; }
 .alloc-col {
@@ -887,6 +890,7 @@ table.data tr.diff { background: var(--amber-soft); }
   justify-content: space-between;
 }
 .alloc-col.bad { background: #fdf7f5; border-color: #e8c9c1; }
+.alloc-col.house { background: #fcf5f2; border-color: #dfb8ad; }
 .alloc-col.warn { background: #fdf8ee; border-color: #e6cfa8; }
 .alloc-col.good {
   background: #f3f8f5;
@@ -967,6 +971,7 @@ table.data tr.diff { background: var(--amber-soft); }
 }
 .good-stack { display: grid; grid-template-columns: 1fr; gap: 4px; margin-top: 12px; }
 .good-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+.good-perks.four { grid-template-columns: repeat(4, 1fr); }
 .good-perk {
   background: #f6faf8;
   border: 1px solid #d5e6dd;
@@ -987,6 +992,10 @@ table.data tr.diff { background: var(--amber-soft); }
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 13px 14px;
+}
+.basket-row.four-ways {
+  grid-template-columns: 138px 1fr 1fr 1fr 1.08fr;
+  gap: 10px;
 }
 .basket-item strong { display: block; font-size: 14.5px; }
 .basket-item small { color: var(--muted); font-size: 12px; }
@@ -1069,7 +1078,7 @@ footer.site {
 }
 
 @media (max-width: 920px) {
-  .grid-main, .value-grid, .pillars, .compare-two, .order-steps, .tool-cards, .trio, .author, .foot, .alloc-grid-top, .good-perks, .basket-row, .legacy-timeline, .arch-grid {
+  .grid-main, .value-grid, .pillars, .compare-two, .order-steps, .tool-cards, .trio, .author, .foot, .alloc-grid-top, .alloc-grid-top.three, .good-perks, .good-perks.four, .basket-row, .basket-row.four-ways, .legacy-timeline, .arch-grid {
     grid-template-columns: 1fr;
   }
   .seg.four { grid-template-columns: repeat(2, 1fr); }
