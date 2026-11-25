@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>多少钱可以拿去炒股？先把家里这三道底盘锁死，再算你的「真子弹」</title>
+  <style>
+    :root {
+      --bg: #ededed;
+      --paper: #ffffff;
+      --ink: #1f2329;
+      --sub: #5c6460;
+      --muted: #8c938f;
+      --green: #184c3f;
+      --green-soft: #eef5f1;
+      --amber: #b86b1b;
+      --amber-soft: #fcf4e8;
+      --blue: #1d5a73;
+      --blue-soft: #edf4f7;
+      --line: #e6e4de;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.78;
+    }
+    /* Top Preview Toolbar */
+    .preview-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(24, 76, 63, 0.96);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    }
+    .preview-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+    .preview-badge {
+      background: rgba(255,255,255,0.18);
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 500;
+    }
+    .preview-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .preview-btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .preview-btn:hover {
+      background: rgba(255,255,255,0.24);
+    }
+    .preview-btn.primary {
+      background: #fff;
+      color: var(--green);
+      border-color: #fff;
+    }
+    .preview-btn.primary:hover {
+      background: #f0f5f2;
+    }
+
+    /* WeChat Phone Frame Wrapper */
+    .stage {
+      max-width: 677px;
+      margin: 0 auto;
+      background: var(--paper);
+      min-height: calc(100vh - 48px);
+      padding: 28px 20px 64px;
+      box-shadow: 0 0 24px rgba(0,0,0,0.05);
+      transition: max-width 0.25s ease, margin 0.25s ease, border-radius 0.25s ease;
+    }
+    body.mobile-frame .stage {
+      max-width: 414px;
+      margin: 20px auto 40px;
+      border-radius: 28px;
+      border: 8px solid #2b2f36;
+      padding: 24px 16px 48px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+    }
+
+    /* WeChat Article Header */
+    .wx-title {
+      font-size: 22px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #191919;
+      margin: 0 0 14px;
+      letter-spacing: 0.2px;
+    }
+    .wx-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(0,0,0,0.3);
+      margin-bottom: 24px;
+    }
+    .wx-tag {
+      background: #f2f2f2;
+      color: #576b95;
+      font-size: 12px;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .wx-author {
+      color: #576b95;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    @media (max-width: 680px) {
+      .preview-bar {
+        padding: 8px 12px;
+      }
+      .hide-mobile {
+        display: none;
+      }
+      .stage {
+        padding: 22px 16px 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Control Bar (Not copied when clicking Copy Article) -->
+  <div class="preview-bar">
+    <div class="preview-bar-left">
+      <span>微信公众号文章预览</span>
+      <span class="preview-badge hide-mobile">两段式算账法 · 定稿预览</span>
+    </div>
+    <div class="preview-actions">
+      <button type="button" class="preview-btn hide-mobile" id="toggleFrameBtn">📱 切换手机窄屏框</button>
+      <button type="button" class="preview-btn primary" id="copyWxBtn">📋 一键复制排版（直接粘贴公众号后台）</button>
+    </div>
+  </div>
+
+  <main class="stage">
+    <h1 class="wx-title">多少钱可以拿去炒股？先把家里这三道底盘锁死，再算你的「真子弹」</h1>
+    <div class="wx-meta">
+      <span class="wx-tag">原创</span>
+      <span>安康 · 医学与数据分析背景</span>
+      <a class="wx-author" href="index.html">安康家庭风险与财务</a>
+      <span>香港</span>
+    </div>
+
+    <!-- #js_content uses inline styles so copying directly into WeChat MP Editor preserves formatting -->
+    <div id="js_content" style="font-size:15.5px;color:#2b2b2b;line-height:1.82;letter-spacing:0.3px;">
+
+      <!-- Lead Quote Box -->
+      <section style="background:#f6f8f7;border-left:4px solid #184c3f;padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 22px;font-size:14.5px;color:#3d4843;line-height:1.72;">
+        <strong style="color:#184c3f;display:block;margin-bottom:4px;">写在前面：</strong>
+        真正能拿去个人炒股的钱，从来不是「打开银行 App 看到还能动的余额」，而是<strong>按先后顺序把家庭三道底盘全部配齐之后，在剩下的「纯自由余量」里，再按风险承受力算出来的份额</strong>。
+      </section>
+
+      <p style="margin:0 0 16px;">身边很多朋友炒股亏钱，复盘下来会发现一个扎心的事实：</p>
+      <p style="margin:0 0 16px;">他们往往不是输在「看不懂财报」或「选错了公司」，而是输在<strong style="color:#184c3f;">家庭资产配置的先后顺序反了</strong>——在家里连防波堤都没修好的时候，先把全家的大半身家推上了牌桌。</p>
+      <p style="margin:0 0 16px;">结果就是：股票稍微跌 20%，心里就开始发慌；家里一旦有人生病、工作遇到变动、或者撞上孩子要交学费、换房要凑首付，哪怕明知当时是熊市最底部，也只能含泪割肉。</p>
+      <p style="margin:0 0 24px;">今天把我在家庭财务诊断中常用的<strong style="color:#184c3f;">「两段式算账法（先筑三道底盘 → 再算炒股比例）」</strong>完整拆开，你可以直接拿自家的数字往里套。</p>
+
+      <!-- Visual Funnel Diagram -->
+      <section style="background:#faf9f5;border:1px solid #e4dfd5;border-radius:12px;padding:16px 14px;margin:0 0 28px;">
+        <div style="font-size:13px;font-weight:700;color:#184c3f;text-align:center;margin-bottom:12px;letter-spacing:0.5px;">
+          ▼ 一图看懂：家庭可炒股资金「两段式四道筛子」
+        </div>
+        <div style="background:#ffffff;border:1px solid #dcd6ca;border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:13.5px;">
+          <strong style="color:#17211d;">家庭可支配金融总资产 A</strong>（存款 + 理财 + 到期现金，先剔除本月待扣账单）
+        </div>
+        <div style="text-align:center;color:#8a7968;font-size:12px;line-height:1.2;margin:4px 0;">↓ 第一筛：留足日常不断供活水</div>
+        <div style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:13px;color:#184c3f;">
+          <strong>减去 B₁ · 第 1 顺位【日常活水池】</strong>：6～12 个月刚性开支（房贷月供 + 基本生活费）
+        </div>
+        <div style="text-align:center;color:#8a7968;font-size:12px;line-height:1.2;margin:4px 0;">↓ 第二筛：给股票账户买「免强平令」</div>
+        <div style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:13px;color:#184c3f;">
+          <strong>减去 B₂ · 第 2 顺位【杠杆保护池】</strong>：年结余 5%～8% 配齐医疗/重疾/定寿（先大人后小孩）
+        </div>
+        <div style="text-align:center;color:#8a7968;font-size:12px;line-height:1.2;margin:4px 0;">↓ 第三筛：隔离输不起的「日历钱」</div>
+        <div style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:13px;color:#184c3f;">
+          <strong>减去 B₃ · 第 3 顺位【确定目标与锁利池】</strong>：5 年内刚性支出 + 10～20 年教育/养老安全底仓
+        </div>
+        <div style="text-align:center;color:#184c3f;font-weight:700;font-size:12.5px;line-height:1.3;margin:6px 0;">
+          ＝ 得出【家庭纯自由余量 F = A − B₁ − B₂ − B₃】<br />
+          <span style="font-weight:400;color:#63706a;font-size:11.5px;">↓ 第四筛：在自由余量 F 里做双校准取最小值</span>
+        </div>
+        <div style="background:#184c3f;color:#ffffff;border-radius:8px;padding:11px 12px;font-size:13.5px;text-align:center;">
+          <strong>最终可炒股真子弹 S = Min（自由余量 F × 造血系数 k ， 失眠亏损阈值 ÷ 35%）</strong>
+        </div>
+      </section>
+
+      <!-- Section 1 Header -->
+      <section style="margin:32px 0 18px;">
+        <span style="display:inline-block;background:#184c3f;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第一阶段 · 先做减法</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">按先后顺序，先把家里「绝不能进股市」的三道底盘配齐</h2>
+      </section>
+
+      <p style="margin:0 0 16px;">家庭资产配置有严格的先后顺序。就像盖楼一样，地基和承重墙没浇筑好之前，所有的「进攻」都是裸奔。在打开股票账户之前，先把家庭总资金按顺序划走下面三笔钱：</p>
+
+      <!-- Step 1 -->
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 18px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          第 1 顺位：日常活水池（6～12 个月刚性开支）
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">先把全家的<strong>每月刚性支出</strong>算清楚：房贷月供/房租 + 基本伙食水电 + 孩子日常学费 + 必要保费。</p>
+        <ul style="margin:0 0 10px;padding-left:20px;font-size:14px;color:#3d4843;">
+          <li style="margin-bottom:4px;"><strong>双职工、收入稳定</strong>：留足 <strong>6 个月</strong>；</li>
+          <li style="margin-bottom:4px;"><strong>单职工、背大额房贷、或处于 35+ 职场调整期 / 创业期</strong>：留足 <strong>9～12 个月</strong>。</li>
+        </ul>
+        <p style="margin:0;font-size:13.5px;color:#63706a;background:#f7f6f2;padding:8px 10px;border-radius:6px;">
+          💡 <strong>它的唯一使命</strong>：万一明天停薪或生意停摆，家里半年到一年内不断供、不用动股票账户一分钱。但光有它还不够——6 个月生活费防得住失业过渡，却防不住一场大病。
+        </p>
+      </section>
+
+      <!-- Step 2 -->
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 18px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          第 2 顺位：杠杆保护池（年结余 5%～8%）——给股票账户买一张「免强平令」
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">很多股民有一个巨大的盲区：<strong>觉得自己没开融资融券，就是「无杠杆炒股」。</strong></p>
+        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">其实只要你家里还没配齐足额的医疗、重疾和定期寿险（尤其是顶梁柱大人的保障），你放进股市的每一分钱，都背着<strong style="color:#b86b1b;">「隐性健康杠杆」</strong>——因为一旦家里有人倒下需要五六十万医疗与康复费，或者顶梁柱停工断收，你的股票账户就是全家唯一的提款机。</p>
+        <div style="background:#eef5f1;border-radius:8px;padding:10px 12px;font-size:13.5px;color:#184c3f;margin-bottom:10px;">
+          <strong>正确顺序（先大人、后小孩，先保额、后收益）：</strong><br />
+          ① <strong>医疗险</strong>：报销大额住院与靶向药，守住医疗费底线；<br />
+          ② <strong>重疾险（3～5 年家庭年收入）</strong>：弥补生病停工 3～5 年的收入损失与房贷月供；<br />
+          ③ <strong>定期寿险（覆盖剩余房贷 + 抚养责任）</strong>：防止极端意外下房贷变成家人的债；<br />
+          ④ <strong>意外险</strong>：几百元封住突发意外与伤残敞口。
+        </div>
+        <p style="margin:0;font-size:13.5px;color:#63706a;">
+          💡 <strong>对股民的意义</strong>：花极小的保费成本，等于给股票账户买了一道<strong>「免强制平仓令」</strong>——家里任何健康黑天鹅由保险公司资金池去赔，永远不会逼你在熊市底部割肉救命。
+        </p>
+      </section>
+
+      <!-- Step 3 -->
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 24px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          第 3 顺位：确定目标与跨周期锁利池——把「输不起的日历钱」隔离出去
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">把安全垫留好、大病风险转移走之后，接下来看未来 <strong>3～20 年</strong> 家里写进日历里的刚性大事：</p>
+        <ul style="margin:0 0 10px;padding-left:20px;font-size:14px;color:#3d4843;">
+          <li style="margin-bottom:6px;"><strong>短期日历钱（1～5 年内必用）</strong>：比如两年后换房补首付、三年后孩子留学学费。这些钱有铁打的出场日期，<strong>一分钱都不能进股市</strong>，老老实实放定期或短债。</li>
+          <li style="margin-bottom:4px;"><strong>中长期底线钱（10～20 年后必用）</strong>：比如孩子 18 岁上大学的教育金底仓、自己 60 岁退休后的基本生活月薪。</li>
+        </ul>
+        <p style="margin:0;font-size:13.5px;color:#7c4813;background:#fcf4e8;padding:9px 12px;border-radius:6px;">
+          ⚠️ <strong>为什么 15 年后的教育金和养老底仓，也不能全靠自己炒股？</strong><br />
+          因为股市有致命的<strong>「顺序风险（Sequence of Returns Risk）」</strong>——哪怕前 12 年年化赚 8%，只要孩子 18 岁出国当年或你 60 岁退休当年撞上股灾回撤 35%，低位卖股票换学费就会永久伤本。先把「到点必须有、一分不能少」的底线放进带缓和机制、能锁定复利与终身现金流的稳健契约池里；<strong>底线锁死之后，多出来的钱，才真正解放为「纯自由余量 F」</strong>。
+        </p>
+      </section>
+
+      <!-- Section 2 Header -->
+      <section style="margin:34px 0 18px;">
+        <span style="display:inline-block;background:#1d5a73;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第二阶段 · 再做乘法</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">三道底盘配齐后，「剩下的钱 F」有多少能拿去炒股？</h2>
+      </section>
+
+      <p style="margin:0 0 16px;">当你按顺序减掉了日常活水（B₁）、风险保障预算（B₂）与确定目标锁利底仓（B₃），剩下的这笔<strong style="color:#184c3f;">「纯自由余量 F」</strong>终于实现了「三无」——无出场时间表、无救命负担、无断供抽血压力。</p>
+      <p style="margin:0 0 18px;">但即便如此，<strong>F 也不等于可以立刻 100% 满仓杀进股市</strong>。要算出最终能放进股票账户的真子弹 S，还要过最后两道校准：</p>
+
+      <h3 style="font-size:16px;font-weight:700;color:#17211d;margin:20px 0 10px;">校准一：乘以你的「家庭造血与房贷稳定系数 k」</h3>
+      <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">同样是剩下 80 万纯自由余量，不同家庭的场外造血能力完全不同，能直接下场博弈的比例 k 也不同：</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 22px;border:1px solid #dcd6ca;">
+        <thead>
+          <tr style="background:#eef5f1;color:#184c3f;text-align:left;">
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:36%;">家庭造血与负债画像</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:22%;">炒股系数 k</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;">底层原因</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #eae6de;">
+            <td style="padding:9px 10px;font-weight:600;">A. 双职工稳定收入 + 无房贷/低月供（&lt;20%）</td>
+            <td style="padding:9px 10px;color:#184c3f;font-weight:700;">60%～80%</td>
+            <td style="padding:9px 10px;color:#44514b;">场外每年有稳定工资结余流入，就算股市被套 3 年也毫无现金流压力。</td>
+          </tr>
+          <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;">
+            <td style="padding:9px 10px;font-weight:600;">B. 大厂/外企中高层 + 中等房贷（月供占 25%～40%）</td>
+            <td style="padding:9px 10px;color:#1d5a73;font-weight:700;">40%～60%</td>
+            <td style="padding:9px 10px;color:#44514b;">收入虽高但中年职业周期波动大（人力资本在折旧），需留一半做低波缓冲与底部备用金。</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 10px;font-weight:600;">C. 企业主 / 创业者 / 强周期行业</td>
+            <td style="padding:9px 10px;color:#b86b1b;font-weight:700;">20%～40%</td>
+            <td style="padding:9px 10px;color:#44514b;"><strong>你的生意本身就是一只「满仓单押的高波动股票」</strong>，宏观下行时生意与股市常同步承压。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:16px;font-weight:700;color:#17211d;margin:20px 0 10px;">校准二：用「失眠阈值」反推你的心理持仓上限</h3>
+      <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">这是老股民最容易忽略的一步：<strong>资产负债表受得了，不代表你的神经系统受得了。</strong></p>
+      <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">买股票前，诚实问自己一句：<strong>「如果未来半年股市走熊，账面浮亏多少钱，我会开始失眠、没心情工作、回家对伴侣发无名火？」</strong></p>
+      <p style="margin:0 0 16px;font-size:14.5px;color:#3d4843;">假设你的失眠亏损阈值是 <strong>12 万元</strong>，而股市一轮中等熊市回撤通常是 <strong>35% 左右</strong>，那么你的心理持仓上限就是：<br />
+      <strong style="color:#1d5a73;">心理上限 S₂ = 12 万 ÷ 35% ≈ 34 万元</strong>。</p>
+
+      <section style="background:#edf4f7;border:1px solid #bfd5df;border-radius:10px;padding:14px 16px;margin:0 0 28px;font-size:14px;color:#1d5a73;">
+        <strong>★ 最终公式（两者取最小值 Min）：</strong><br />
+        个人可炒股真子弹 <strong>S = Min（ 自由余量 F × 系数 k ， 失眠阈值 ÷ 35% ）</strong>
+      </section>
+
+      <!-- Case Study -->
+      <section style="margin:34px 0 18px;">
+        <span style="display:inline-block;background:#b86b1b;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">真实算账演练</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">手头同样有 200 万金融资产，到底多少能进股市？</h2>
+      </section>
+
+      <p style="margin:0 0 14px;font-size:14.5px;">以一位 36 岁大厂双职工家庭为例：手头金融资产总额 <strong>A = 200 万</strong>，每月房贷+生活刚性开支 <strong>3 万元</strong>，有一个 5 岁孩子。</p>
+
+      <section style="background:#faf9f5;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 20px;font-size:14px;">
+        <div style="font-weight:700;color:#184c3f;margin-bottom:8px;">第一步：先按顺序划走三道家庭底盘（共 120 万）</div>
+        <p style="margin:0 0 6px;">① <strong>第 1 顺位（日常活水池 B₁）</strong>：留 8 个月刚性开支 = 3 万 × 8 = <strong>24 万</strong>（活期/货基）；</p>
+        <p style="margin:0 0 6px;">② <strong>第 2 顺位（杠杆保护池 B₂）</strong>：夫妻配齐医疗+重疾+定寿、孩子配齐医疗+重疾，首年保费预算约 <strong>4 万</strong>（锁住夫妻各 200 万+保额，封死因病卖股风险）；</p>
+        <p style="margin:0 0 10px;">③ <strong>第 3 顺位（确定目标与锁利池 B₃）</strong>：近 3 年换车与老人医疗备用 <strong>22 万</strong> + 预先锁定的孩子 18 岁留学与夫妻退休稳健底仓 <strong>70 万</strong> = <strong>92 万</strong>。</p>
+        <div style="border-top:1px dashed #d2ccc0;padding-top:10px;margin-top:8px;color:#17211d;">
+          👉 扣完三道底盘，得出<strong>家庭纯自由余量 F = 200 万 − 120 万 = 80 万</strong>。
+        </div>
+      </section>
+
+      <section style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:10px;padding:16px;margin:0 0 22px;font-size:14px;">
+        <div style="font-weight:700;color:#184c3f;margin-bottom:8px;">第二步：在剩下的 80 万自由余量里，精算可炒股额度</div>
+        <p style="margin:0 0 6px;">• <strong>财务上限 S₁</strong>：大厂有房贷（类型 B，取 k = 50%）→ 80 万 × 50% = <strong>40 万</strong>；</p>
+        <p style="margin:0 0 10px;">• <strong>心理上限 S₂</strong>：夫妻认为浮亏超 12 万会影响生活心情 → 12 万 ÷ 35% ≈ <strong>34 万</strong>。</p>
+        <div style="border-top:1px dashed #9ec2b3;padding-top:10px;margin-top:8px;color:#113a30;font-weight:700;font-size:14.5px;">
+          🎯 最终结论：S = Min(40 万, 34 万) = 34 万。
+        </div>
+      </section>
+
+      <p style="margin:0 0 16px;">你看，账面上同样有 200 万现金：</p>
+      <p style="margin:0 0 16px;"><strong>没有顺序思维的人</strong>，直接拿 150 万冲进股市。结果一旦遇上熊市跌 30%（亏 45 万），同时家里有人生病或工作变动，瞬间陷入被动割肉的绝境；</p>
+      <p style="margin:0 0 24px;"><strong>有先后顺序思维的人</strong>，先把活水、重疾定寿护城河、孩子教育与养老底仓锁得严严实实，最后拿 <strong>34 万</strong> 进股市（另外 46 万自由余量放在低波资产里随时准备在极端股灾时抄底）。因为后方固若金汤，这 34 万就算在股市里熬过三年熊市，他也丝毫不慌，反而真正拿得住好筹码、赚得到周期的钱。</p>
+
+      <!-- Closing Summary -->
+      <section style="background:#f6f8f7;border-radius:10px;padding:18px 16px;margin:28px 0 22px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          写在最后：为什么底盘越稳的人，炒股反而越容易赚钱？
+        </div>
+        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">很多散户在股市里拿不住好资产、总是高买低卖，表面上看是「心态不好」，往底层刨根问底，其实是<strong>家庭资产配置的先后顺序错了</strong>——你让股票账户去承担它根本承担不起的「全家大病兜底、房贷不断供、孩子按时上学」的责任。</p>
+        <p style="margin:0;font-size:14.5px;color:#3d4843;">当你按顺序把<strong>「活水池 → 风险转移池 → 教育养老锁利池」</strong>这三根柱子全部立稳之后，再拿算出来的「纯自由子弹」去股市冲浪，你会发现自己的投资心态完全变了：<strong>跌了不慌，涨了不狂；顺风期赚到了超额利润，还能定期抽出一部分利润转回第三池锁死落袋。</strong>这才是家庭财富「攻守兼备」的真正闭环。</p>
+      </section>
+
+      <!-- Footer Call-to-Action Card -->
+      <section style="border:1px solid #dcd6ca;border-radius:10px;padding:14px 16px;margin:24px 0 0;background:#ffffff;font-size:13px;color:#63706a;line-height:1.68;">
+        <strong style="color:#17211d;display:block;margin-bottom:4px;">📌 延伸工具 · 算一算你家的「四仓比例」与安全底盘</strong>
+        我把这套家庭资产配置先后顺序、保额缺口公式（收入倍数法 + 负债叠加法）以及教育/养老现金流测算，做成了一个<strong>免登录、零推销的在线交互诊断小工具</strong>。点击下方阅读原文或访问：<br />
+        <a href="https://achealth-claw.github.io/family-risk-guide/tools.html" style="color:#184c3f;font-weight:600;word-break:break-all;">https://achealth-claw.github.io/family-risk-guide/tools.html</a>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // Toggle phone frame preview
+    const toggleBtn = document.getElementById('toggleFrameBtn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('mobile-frame');
+        toggleBtn.textContent = document.body.classList.contains('mobile-frame')
+          ? '🖥️ 切回标准宽屏预览'
+          : '📱 切换手机窄屏框';
+      });
+    }
+
+    // One-click rich text copy for WeChat Official Account Editor
+    const copyBtn = document.getElementById('copyWxBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const content = document.getElementById('js_content');
+        const range = document.createRange();
+        range.selectNodeContents(content);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        try {
+          document.execCommand('copy');
+          selection.removeAllRanges();
+          const orig = copyBtn.textContent;
+          copyBtn.textContent = '✅ 已复制富文本！可直接去公众号后台粘贴';
+          setTimeout(() => { copyBtn.textContent = orig; }, 3000);
+        } catch (err) {
+          alert('复制失败，请手动全选正文复制');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
