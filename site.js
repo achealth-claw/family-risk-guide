@@ -320,9 +320,9 @@ function initProbCalc() {
     const m = membersSel.value;
     let ps = [b.self];
     let desc = "1 位成年人";
-    if (m === "couple") { ps = [b.self, b.spouse]; desc = "夫妻 2 人"; }
-    else if (m === "plus1") { ps = [b.self, b.spouse, b.elder]; desc = "夫妻 + 1 位长辈"; }
-    else if (m === "plus2") { ps = [b.self, b.spouse, b.elder, b.elder]; desc = "夫妻 + 2 位长辈"; }
+    if (m === "couple") { ps = [b.self, b.spouse]; desc = "双人家庭"; }
+    else if (m === "plus1") { ps = [b.self, b.spouse, b.elder]; desc = "3 位成年人"; }
+    else if (m === "plus2") { ps = [b.self, b.spouse, b.elder, b.elder]; desc = "4 位成年人"; }
 
     const none = ps.reduce((acc, p) => acc * (1 - p), 1);
     const any = 1 - none;
@@ -332,7 +332,7 @@ function initProbCalc() {
     out.innerHTML = `
       <div class="prob-num">
         <strong>${pct}%</strong>
-        <span>${desc} · 家中至少 1 人发生</span>
+        <span>${desc} · 全周期需要动用医疗护盾的统计概率</span>
       </div>
       <div class="prob-bar"><i style="width:${Math.min(100, any * 100)}%"></i></div>
       <div class="formula">${expr} = ${pct}%</div>
