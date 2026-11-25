@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>安康 · 家庭风险与长期财务研究室</title>
-  <meta name="description" content="懂医学的家庭财务规划。用流行病学文献、官方消费统计与条款要点，帮家庭看清保险价值、所处阶段与配置优先级。" />
-  <link rel="stylesheet" href="site.css?v=3" />
+  <title>为什么需要配置 · 安康家庭风险与长期财务</title>
+  <meta name="description" content="从人生草帽图看懂家庭财务底层原理：一生面临哪些导致资产缩水的风险、不同险种对应解决什么问题，以及为什么必须先保大人、后保孩子。" />
+  <link rel="stylesheet" href="site.css?v=4" />
 </head>
 <body>
   <header class="site">
@@ -15,9 +15,9 @@
         <span class="brand-sub">医学背景 · 香港持牌顾问的学习与分析站</span>
       </div>
       <nav class="nav" aria-label="主导航">
-        <a href="index.html" aria-current="page">总览与诊断</a>
-        <a href="notes.html">保险价值与数据</a>
-        <a href="tools.html">分析工具箱</a>
+        <a href="index.html" aria-current="page">为什么 · 底层原理</a>
+        <a href="tools.html">怎么做 · 诊断与测算</a>
+        <a href="notes.html">深度专题</a>
         <a href="about.html">关于与问诊</a>
       </nav>
     </div>
@@ -25,11 +25,12 @@
 
   <main>
     <div class="wrap">
+      <!-- Part 0: Top Header -->
       <section class="hero">
         <div>
-          <div class="eyebrow">问诊 · 诊断 · 排序（第一次对话不谈具体产品）</div>
-          <h1>先看清家庭敞口，再谈买什么</h1>
-          <p class="lede">保险不是理财替代品，而是用来接住「小概率、算得清、一旦发生家庭现金流就会断」的冲击。这里整理了公开流行病学文献、中美官方家庭消费账本，以及可直接动手测算的分析工具。</p>
+          <div class="eyebrow">第一页 · 为什么（WHY）—— 先看懂原理，再谈买什么</div>
+          <h1>一张「草帽图」，看懂人一生的收支与风险</h1>
+          <p class="lede">所有家庭财务与保险规划，本质上都在回答两个问题：<strong>工作期如何留住盈余填平退休缺口？万一中途遭遇冲击，如何防止家庭资产一夜缩水？</strong></p>
         </div>
         <div class="stat-strip" aria-label="底层资料库规模">
           <div><strong>3 份</strong>NEJM / 国家癌症中心终生风险文献</div>
@@ -38,128 +39,18 @@
         </div>
       </section>
 
-      <div class="grid-main">
-        <!-- Left: Stage + Fit Diagnostic Workbench -->
-        <section class="card" data-bench aria-labelledby="bench-title">
-          <div class="card-head">
-            <h2 id="bench-title">家庭阶段 × 险种优先级诊断</h2>
-            <span class="badge">核心工具 01</span>
-          </div>
-          <p class="hint">选择家庭结构与年龄，直接给出这一阶段该「优先 / 补充 / 视情况 / 暂缓」的险种类型与原因。只到险种层，不推销具体产品。</p>
-
-          <form>
-            <span class="control-label">1. 家庭结构（一个人、夫妻二人均指没有孩子）</span>
-            <div class="seg" role="group" aria-label="家庭结构">
-              <button type="button" data-profile="single" aria-pressed="false">
-                一个人<small>没有孩子</small>
-              </button>
-              <button type="button" data-profile="couple" aria-pressed="false">
-                夫妻二人<small>没有孩子</small>
-              </button>
-              <button type="button" data-profile="family" aria-pressed="true">
-                有孩子家庭<small>按孩子年龄定位</small>
-              </button>
-            </div>
-
-            <div class="fields">
-              <label>你的年龄（岁）
-                <input id="age" type="number" inputmode="numeric" min="20" max="85" value="35" />
-              </label>
-              <label id="child-field">最小孩子年龄（岁）
-                <input id="child" type="number" inputmode="numeric" min="0" max="30" value="4" />
-              </label>
-            </div>
-
-            <span class="control-label">2. 当前现金流松紧（可选，不改阶段，只调先后顺序）</span>
-            <div class="seg four" role="group" aria-label="现金流松紧">
-              <button type="button" data-money="skip" aria-pressed="true">默认标准</button>
-              <button type="button" data-money="tight" aria-pressed="false">手头紧一点</button>
-              <button type="button" data-money="ok" aria-pressed="false">大致够用</button>
-              <button type="button" data-money="ample" aria-pressed="false">相对宽裕</button>
-            </div>
-          </form>
-
-          <div class="stage-out" data-stage-out></div>
-        </section>
-
-        <!-- Right: Epidemiological Probability + Evidence -->
-        <div class="side-stack">
-          <section class="card" data-prob aria-labelledby="prob-title">
-            <div class="card-head">
-              <h2 id="prob-title">家庭重大疾病概率推演器</h2>
-              <span class="badge">流行病学基线</span>
-            </div>
-            <p class="hint">很多家庭觉得「我们身体都不错，应该轮不到」。把单人终生风险放进家庭人数里，用组合概率算一次：</p>
-
-            <div class="fields" style="grid-template-columns:1fr">
-              <label>选用公开研究口径
-                <select id="prob-basis">
-                  <option value="cn_cancer">中国终生患癌率（约 27.6% · 国家癌症中心 2025）</option>
-                  <option value="hk_75">香港 75 岁前患癌（男 1/4，女 1/5 · 癌症资料统计中心）</option>
-                  <option value="cn_stroke">中国 25 岁起终生卒中风险（约 39.3% · NEJM）</option>
-                </select>
-              </label>
-              <label>家庭成年成员结构
-                <select id="prob-members">
-                  <option value="single">1 位成年人（仅自己）</option>
-                  <option value="couple" selected>夫妻 2 人</option>
-                  <option value="plus1">夫妻 2 人 + 1 位长辈</option>
-                  <option value="plus2">夫妻 2 人 + 2 位长辈</option>
-                </select>
-              </label>
-            </div>
-
-            <div class="prob-box" data-prob-out></div>
-            <p style="margin-top:10px;font-size:13.5px"><a style="color:var(--green);font-weight:650" href="note-principle.html">查看完整文献出处与「为什么不能把 28%+39% 直接相加」 ›</a></p>
-          </section>
-
-          <section class="card">
-            <h2>快速进入已上线工具</h2>
-            <div class="cite-list">
-              <div class="cite-item">
-                <a href="lifecycle-map/index.html?wx=achealth&profile=family">
-                  <strong>家庭生命周期地图（互动全屏版） ›</strong>
-                  <small>横向滑动看 17 个阶段的年龄节点、健康风险条、准备点与兑现点，支持导出阶段卡片。</small>
-                </a>
-              </div>
-              <div class="cite-item">
-                <a href="tools.html#budget">
-                  <strong>刚性支出与保额锚点测算器 ›</strong>
-                  <small>输入年收入、刚需支出与负债，即时测算应急金月数、重疾保额锚点与定期寿险缺口。</small>
-                </a>
-              </div>
-              <div class="cite-item">
-                <a href="about.html#contact">
-                  <strong>旧保单条款检视（1v1，不在站内点名比款） ›</strong>
-                  <small>公开站只讲「该看什么」；具体保单怎么比，留在一对一检视里做。</small>
-                </a>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <!-- Section 2: Why insurance exists (Straw Hat + Data & Four Pillars) -->
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">01 · 家庭理财与保险的底层原理</div>
-            <h2>一张「草帽图」看懂：为什么挣钱一阵子，却要花钱一辈子</h2>
-            <p>所有家庭财务与保险规划，本质上都在处理这两条线的关系：工作期如何切出盈余填平退休缺口，以及万一中途收入线断崖，如何防止整个帽顶塌陷。</p>
-          </div>
-          <a class="btn ghost" href="note-necessities.html">读完整数据报告 ›</a>
-        </div>
-
-        <!-- Straw Hat Interactive Card -->
+      <!-- Part 1: Straw Hat Chart (Top First Section) -->
+      <section class="section" style="margin-top:24px">
         <div class="card hat-card" data-hat>
           <div class="card-head">
             <div>
-              <h2>家庭全生命周期「草帽图」（0–90 岁收支轨迹）</h2>
-              <p class="hint">点击右侧切换按钮，对比「正常生命周期」与「中年遭遇重疾/身故冲击」时两条曲线的变化：</p>
+              <span class="badge">01 · 核心原理：人生收支草帽图</span>
+              <h2 style="margin-top:6px">为什么我们「挣钱一阵子，却要花钱一辈子」</h2>
+              <p class="hint">点击右侧切换按钮，对比「① 正常生命周期」与「② 中年遭遇大病/意外冲击」时家庭收支曲线的变化：</p>
             </div>
-            <div class="seg" style="width:auto;min-width:340px;margin:0" role="group" aria-label="草帽图状态切换">
-              <button type="button" data-hat-mode="normal" aria-pressed="true" style="padding:7px 14px">① 正常周期：挣钱一阵子</button>
-              <button type="button" data-hat-mode="shock" aria-pressed="false" style="padding:7px 14px">② 突发冲击：帽顶断崖</button>
+            <div class="seg" style="width:auto;min-width:340px;margin:0;grid-template-columns:1fr 1fr" role="group" aria-label="草帽图状态切换">
+              <button type="button" data-hat-mode="normal" aria-pressed="true" style="padding:8px 14px">① 正常周期：挣钱一阵子</button>
+              <button type="button" data-hat-mode="shock" aria-pressed="false" style="padding:8px 14px">② 突发冲击：帽顶断崖</button>
             </div>
           </div>
 
@@ -197,28 +88,20 @@
 
                 <!-- Normal Mode Group -->
                 <g id="hat-normal-group">
-                  <!-- Crown Surplus Fill (between income & expense 25-60) -->
                   <path d="M 190,164 C 235,62 305,34 345,38 C 395,42 430,86 455,148 Q 380,145 320,148 Q 255,154 190,164 Z" fill="url(#surplusGrad)" />
-                  <!-- Expense curve (0 to 90): lifetime continuous -->
                   <path d="M 55,182 Q 120,174 190,164 Q 255,154 320,148 Q 380,145 455,148 Q 520,152 575,142 Q 615,132 645,118" fill="none" stroke="#9b5b18" stroke-width="3" />
-                  <!-- Income curve (25 to 60): the hat crown -->
                   <path d="M 55,224 L 190,224 L 190,164 C 235,62 305,34 345,38 C 395,42 430,86 455,148 L 455,224 L 645,224" fill="none" stroke="#184c3f" stroke-width="3.5" />
-                  <!-- Arrow from Crown Surplus to Retirement Brim -->
                   <path d="M 355,88 C 430,72 500,92 542,155" fill="none" stroke="#184c3f" stroke-width="2" stroke-dasharray="5 4" />
                   <polygon points="542,155 534,148 544,145" fill="#184c3f" />
                   <text x="330" y="108" text-anchor="middle" fill="#113a30" font-size="13" font-weight="700">帽顶：奋斗期结余（活水）</text>
                   <text x="330" y="126" text-anchor="middle" fill="#184c3f" font-size="11.5">必须锁进长期专款，搬去填右帽檐 →</text>
                 </g>
 
-                <!-- Shock Mode Group (hidden by default) -->
+                <!-- Shock Mode Group -->
                 <g id="hat-shock-group" style="display:none">
-                  <!-- Shock Deficit Area between spiked expense and collapsed income (age 38 to 60) -->
                   <path d="M 290,152 L 305,68 L 355,78 L 395,146 L 455,148 L 455,205 L 340,205 L 305,212 L 290,152 Z" fill="url(#shockGrad)" />
-                  <!-- Baseline faint normal income for reference -->
                   <path d="M 190,164 C 235,62 305,34 345,38 C 395,42 430,86 455,148" fill="none" stroke="#184c3f" stroke-opacity="0.28" stroke-width="2" stroke-dasharray="4 4" />
-                  <!-- Spiked Expense curve (medical bill surge at ~38) -->
                   <path d="M 55,182 Q 120,174 190,164 Q 245,156 290,152 L 305,68 L 355,78 L 395,146 Q 425,147 455,148 Q 520,152 575,142 Q 615,132 645,118" fill="none" stroke="#9e3528" stroke-width="3" />
-                  <!-- Collapsed Income curve (drops at 38) -->
                   <path d="M 55,224 L 190,224 L 190,164 C 225,88 265,55 290,54 L 305,212 L 345,205 L 455,205 L 455,224 L 645,224" fill="none" stroke="#184c3f" stroke-width="3.2" />
                   <circle cx="290" cy="54" r="4.5" fill="#9e3528" />
                   <circle cx="305" cy="68" r="4.5" fill="#9e3528" />
@@ -266,14 +149,109 @@
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="value-grid">
-          <div class="card">
-            <div class="card-head">
-              <h2>家庭账本里的「刚需锁死率」</h2>
-              <span class="badge">BLS CEX 2024 / 国家统计局</span>
+      <!-- Part 2: Four Lifetime Wealth-Eroding Risks & Insurance Solutions -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">02 · 风险与工具一一对应</div>
+            <h2>一个人或一个家庭，一生面临哪 4 种「让资产缩水」的风险？</h2>
+            <p>很多家庭买错保险，是因为没分清自己怕的是哪一种缺口。每一类险种只解决一个特定问题，彼此不能互相替代：</p>
+          </div>
+        </div>
+
+        <div class="pillars">
+          <div class="pillar">
+            <div>
+              <span class="type shock">风险 01 · 大额医疗账单冲击</span>
+              <h3>住院、手术与院外昂贵特药</h3>
+              <p>一旦遇上重症，社保目录外的靶向药、免疫治疗、ICU 或私立/特需病房，几周就能直接抽干家庭存款。</p>
+              <div class="sol">
+                <strong>对应工具：医疗险 + 意外险</strong>
+                管「医院开的发票」，实报实销，把陡然翘起的医疗支出线压回正常轨道。
+              </div>
             </div>
-            <p class="hint">吃、住、必要交通与基础医疗是压不下去的。收入一旦中断，能砍的只有浅色弹性部分：</p>
+            <div class="rule">核心标准：看<strong>保证续保年限</strong>（如 20 年 vs 一年期）、院外特药清单与医院范围（普通部 vs 特需/私家）。</div>
+          </div>
+
+          <div class="pillar">
+            <div>
+              <span class="type shock">风险 02 · 大病停工的收入中断</span>
+              <h3>康复期 2–3 年没法上班，但房贷照扣</h3>
+              <p>医疗险只报医药费，不管出院后的房贷、车贷、孩子学费、营养护工，以及夫妻一方辞职陪护的薪水损失。</p>
+              <div class="sol">
+                <strong>对应工具：重疾险</strong>
+                管「家里的开销」，确诊达到条款标准即<strong>一笔过赔付现金</strong>，不看发票、自由支配。
+              </div>
+            </div>
+            <div class="rule">核心标准：保额必须对齐<strong>家庭 3–5 年年收入</strong>；买太低（如仅 10–20 万）起不到顶替收入的作用。</div>
+          </div>
+
+          <div class="pillar">
+            <div>
+              <span class="type shock">风险 03 · 家庭支柱身故或全残</span>
+              <h3>挣钱的人突然不在了，债务与抚养谁扛</h3>
+              <p>背着百万元房贷、孩子还没成年、父母渐老时，如果主要赚钱的人极端离世或全残，家庭账本会永久断流。</p>
+              <div class="sol">
+                <strong>对应工具：定期寿险（+ 伤残意外险）</strong>
+                管「留给家人的责任」，用极低保费撬动高保额，替家人把房贷还清、把孩子养到独立。
+              </div>
+            </div>
+            <div class="rule">核心标准：只给<strong>背负房贷与抚养责任的经济支柱</strong>买；保额对齐「剩余债务 + 5–10 年刚性支出」。</div>
+          </div>
+
+          <div class="pillar">
+            <div>
+              <span class="type long">风险 04 · 储蓄漏损、利率下行与长寿</span>
+              <h3>年轻时钱没留住，老了人还在钱没了</h3>
+              <p>工作期结余如果全放在活期或高波动股市，很容易在买车换房、消费或股灾中漏光，到了 18 岁学费和 60 岁退休时拿不出确定现金。</p>
+              <div class="sol">
+                <strong>对应工具：长期储蓄险 / 养老年金 / 教育金</strong>
+                管「跨时间锁钱」，用保险契约把现在的余钱强制搬到 10–30 年后。
+              </div>
+            </div>
+            <div class="rule">核心标准：必须在<strong>大人保障做齐、应急金留足之后</strong>才启动；先看保证现金价值，再看分红实现率。</div>
+          </div>
+        </div>
+
+        <!-- Supporting Data: Probability + Household Expense Rigidity -->
+        <div class="value-grid" style="margin-top:20px">
+          <section class="card" data-prob aria-labelledby="prob-title">
+            <div class="card-head">
+              <h2 id="prob-title">为什么不能赌「我们身体好，轮不到」？</h2>
+              <span class="badge">流行病学基线</span>
+            </div>
+            <p class="hint">单个人看风险似乎只有两三成，但放进一家几口人的时间轴里，用组合概率算一次：</p>
+
+            <div class="fields">
+              <label>公开研究口径
+                <select id="prob-basis">
+                  <option value="cn_cancer">中国终生患癌率（约 27.6% · 国家癌症中心）</option>
+                  <option value="hk_75">香港 75 岁前患癌（男 1/4，女 1/5 · 癌症统计中心）</option>
+                  <option value="cn_stroke">中国 25 岁起终生卒中风险（约 39.3% · NEJM）</option>
+                </select>
+              </label>
+              <label>家庭成年成员数
+                <select id="prob-members">
+                  <option value="single">1 位成年人（仅自己）</option>
+                  <option value="couple" selected>夫妻 2 人</option>
+                  <option value="plus1">夫妻 2 人 + 1 位长辈</option>
+                  <option value="plus2">夫妻 2 人 + 2 位长辈</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="prob-box" data-prob-out></div>
+            <p style="margin-top:8px;font-size:13px"><a style="color:var(--green);font-weight:650" href="note-principle.html">查看完整文献出处与「为什么不能把 28%+39% 直接相加」 ›</a></p>
+          </section>
+
+          <section class="card">
+            <div class="card-head">
+              <h2>为什么一旦停工，家庭资产掉得比想象快？</h2>
+              <span class="badge">BLS CEX / 国家统计局</span>
+            </div>
+            <p class="hint">因为家庭账本里有超过一半是「刚需锁死」的——吃、住、房贷与基础医疗并不会因为你生病停工就暂停扣款：</p>
             <div class="bars">
               <div class="bar-row">
                 <span>最低 20% 户</span>
@@ -300,124 +278,76 @@
                 <span class="bar-val">有缓冲</span>
               </div>
             </div>
-            <p class="fine">数据来源：美国劳工统计局（BLS）消费者支出调查五等分表（食品+住房+医疗占总支出比例）；纽约州五等分账本中，第三层（中间层）税前约 6.8 万、支出约 6.6 万，刚刚收支平衡，工资占收入 74%——一旦停工，失血最快。</p>
-          </div>
-
-          <div class="card">
-            <div class="card-head">
-              <h2>从起源看本质：用确定小支出，换掉致命大冲击</h2>
-              <span class="badge">风险共担机制</span>
-            </div>
-            <p style="margin-top:10px;color:var(--ink-2);font-size:14.5px">航海时代，十艘船的船主如果只丢一艘还能承受；只有一艘船的人一旦遇上风浪，就永远翻不了身。大家各出一点钱放进池子，不是为了赌自己出事，而是为了<strong>万一撞上小概率事件，家庭资产负债表不会一夜清零</strong>。</p>
-            <div class="fit-list" style="margin-top:12px">
-              <div class="fit-row">
-                <span class="tag p">管什么</span>
-                <div><strong>小概率 · 大杀伤</strong><span> · 感冒几百块靠现金流；几十万的院外靶向药、停工两年的房贷，才轮到保险出场。</span></div>
-              </div>
-              <div class="fit-row">
-                <span class="tag s">怎么排</span>
-                <div><strong>先留应急 → 再堵缺口 → 后谈专款</strong><span> · 应急金和大人保障没闭环前，任何长期储蓄险都可能在急用钱时被迫退保亏损。</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pillars" style="margin-top:16px">
-          <div class="pillar">
-            <span class="type">第 1 顺位 · 管住院账单</span>
-            <h3>医疗险</h3>
-            <p>报销社保目录外的大额住院、手术与院外特药费用（实报实销，不超过实际花费）。</p>
-            <div class="rule">核心看点：<strong>保证续保年限</strong>（如 20 年 vs 一年期）、医院范围（普通部 vs 公立特需/私立）、院外特药清单。</div>
-          </div>
-          <div class="pillar">
-            <span class="type">第 2 顺位 · 管停工损失</span>
-            <h3>重疾险</h3>
-            <p>确诊合同约定重疾后<strong>一笔过给付现金</strong>，不看住院发票，自由用于康复期房贷、生活费与护工。</p>
-            <div class="rule">核心看点：保额需对齐 <strong>3–5 年家庭收入</strong>；医疗险管医院的钱，重疾险管家里的钱，两者不能互相替代。</div>
-          </div>
-          <div class="pillar">
-            <span class="type">第 3 顺位 · 管债务与抚养</span>
-            <h3>定期寿险</h3>
-            <p>家庭经济支柱极端身故或全残时，留给家人还清房贷、抚养孩子到独立的一笔确定资金。</p>
-            <div class="rule">核心看点：只给<strong>背负房贷、抚养、赡养责任的人</strong>买；保额对齐「剩余债务 + 5–10 年刚需支出」。</div>
-          </div>
-          <div class="pillar">
-            <span class="type">第 4 顺位 · 管远期现金流</span>
-            <h3>储蓄 / 年金 / 教育金</h3>
-            <p>在保障做齐、应急金留足之后，把 10–20 年后确定要用的教育或养老钱锁进独立契约。</p>
-            <div class="rule">核心看点：先看<strong>保证现金价值与回本周期</strong>，再看非保证分红实现率与资金流动性约束。</div>
-          </div>
+            <p class="fine">数据来源：美国劳工统计局（BLS）消费者支出调查五等分表；中间层家庭工资占总收入 74%，平时看着收支平衡，但没有任何硬扛停工 2 年的容错率。<a style="color:var(--green);font-weight:600" href="note-necessities.html">读完整账本拆解 ›</a></p>
+          </section>
         </div>
       </section>
 
-      <!-- Section 3: Deep-dive Evidence & Articles -->
+      <!-- Part 3: Family Iron Rule: Adults First, Children Second -->
       <section class="section">
         <div class="section-head">
           <div>
-            <div class="eyebrow">02 · 宣教与避坑专题</div>
-            <h2>用实际问题和公开文献说话</h2>
-            <p>每一篇都标明统计口径、法律条文或条款字段出处，帮你建立自己的判断坐标系。</p>
+            <div class="eyebrow">03 · 家庭投保的核心铁律</div>
+            <h2>先保大人，后保孩子；先保高发大额风险，后谈教育储蓄</h2>
+            <p>这是有娃家庭最容易踩、也最致命的坑：孩子一出生就花几万块买教育金或终身重疾，而背房贷、挣工资的父母却只有基本医保。</p>
           </div>
-          <a class="btn ghost" href="notes.html">查看全部专题 ›</a>
         </div>
 
-        <div class="trio">
-          <a class="q-card" href="note-principle.html">
-            <div>
-              <span class="badge">流行病学推演</span>
-              <h3>一个人、一个家庭，一生遇上重疾的概率到底怎么算？</h3>
-              <p>拆解中国终生患癌 27.6%、卒中 39.3% 与香港 75 岁前患癌统计。讲清楚为什么不能把两个百分比直接相加，以及如何换算成家庭概率。</p>
-            </div>
-            <div>
-              <div class="src">出处：Science China Life Sciences 2025 · NEJM · 香港癌症资料统计中心</div>
-              <div class="go">阅读推演与公式 ›</div>
-            </div>
-          </a>
+        <div class="card">
+          <div class="card-head">
+            <h2>为什么「大人裸奔、只保孩子」在财务上极其危险？</h2>
+            <span class="badge red">常见顺序颠倒</span>
+          </div>
+          <p class="hint">从草帽图就能看出来：孩子处在 0–22 岁的「左帽檐纯支出期」，本身不产生现金流；<strong>父母才是托起整个草帽帽顶的印钞机，也是孩子最大的保险。</strong></p>
 
-          <a class="q-card" href="note-necessities.html">
-            <div>
-              <span class="badge">家庭账本实证</span>
-              <h3>纽约州五层账本与中美消费对照：为什么教育金不能排在保障前面？</h3>
-              <p>从五等分税前收入与刚需占比看家庭抗风险底线：中间层家庭工资占 74%，账面刚翻正；顺序一旦排反，保费就会变成新的刚性负担。</p>
+          <div class="compare-two">
+            <div class="compare-box wrong">
+              <span class="badge red">错误顺序（沙上盖楼）</span>
+              <h3>先给孩子年交 2–5 万买教育金，父母没配齐或嫌贵不买</h3>
+              <p style="font-size:14px;color:var(--ink-2);margin:0">一旦父母任何一方在 35–45 岁遭遇重疾或意外停工：<br />① 家里瞬间失去主要收入，连房贷和日常开销都吃紧；<br />② 孩子那份还没交完保费的储蓄险，不但救不了急，反而变成每年必须硬凑的<strong>新负债</strong>，最终往往被迫在现金价值最低的头几年亏本退保。</p>
             </div>
-            <div>
-              <div class="src">出处：美国劳工统计局 BLS CEX 2022–2024 · 中国国家统计局公报</div>
-              <div class="go">阅读数据与顺序 ›</div>
-            </div>
-          </a>
 
-          <a class="q-card" href="note-order.html">
-            <div>
-              <span class="badge">跨境与税务口径</span>
-              <h3>买了香港储蓄险或内地保单，理赔与分红要交个人所得税吗？</h3>
-              <p>逐条对照《个人所得税法》第一条、第四条第五项「保险赔款」免税边界、国税函旧规废止历史，以及 CRS 信息交换与征税的区别。</p>
+            <div class="compare-box right">
+              <span class="badge">正确顺序（底盘稳固）</span>
+              <h3>先锁死夫妻二人的医疗 + 重疾 + 定寿，再配孩子基础保障</h3>
+              <p style="font-size:14px;color:var(--ink-2);margin:0">即使父母遇上大病或极端风险：<br />① 医疗险报销住院费，重疾险赔出 3–5 年收入顶上生活费，定期寿险结清房贷；<br />② 孩子的少儿医保 + 百万医疗 + 意外 + 少儿重疾，其实<strong>每年合计只需一两千元</strong>就能把白血病与大额住院兜得很稳；剩下的余钱，才安心放进教育金。</p>
             </div>
-            <div>
-              <div class="src">出处：《个人所得税法》· 财政部/税务总局 2019 第 74 号公告 · CRS 尽调办法</div>
-              <div class="go">阅读法律条文拆解 ›</div>
+          </div>
+
+          <h3 style="margin:22px 0 6px;font-size:16.5px">一张标准的家庭保障构建顺序图（四步闭环）</h3>
+          <div class="order-steps">
+            <div class="order-step">
+              <span class="num">STEP 01 · 底线池</span>
+              <h4>留足 3–6 个月应急现金</h4>
+              <p>放在随时可取的活期/货基里，应付小病、修车或短期换工作，绝不用长期保单去装短期要用的钱。</p>
             </div>
-          </a>
+            <div class="order-step">
+              <span class="num">STEP 02 · 顶梁柱</span>
+              <h4>夫妻双方配齐「医疗+重疾+定寿+意外」</h4>
+              <p>按各自对家庭收入与房贷的贡献比例分配保额；谁挣得多、扛的债重，谁的保额就优先做足。</p>
+            </div>
+            <div class="order-step">
+              <span class="num">STEP 03 · 孩子与老人</span>
+              <h4>用高杠杆消费型保险兜底医药费</h4>
+              <p>孩子：少儿医保 + 百万医疗 + 意外 + 定期/基础少儿重疾；老人：百万医疗或防癌医疗 + 高龄意外险。</p>
+            </div>
+            <div class="order-step">
+              <span class="num">STEP 04 · 远期专款</span>
+              <h4>最后用 10 年不动用的闲钱做教育金/养老金</h4>
+              <p>前三步闭环后，再把孩子 18 岁大学金和夫妻 60 岁退休金锁进长期储蓄或年金契约，专款专用。</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Section 4: About Advisor -->
-      <section class="author" aria-label="关于顾问与问诊流程">
+      <!-- Next Page CTA: Jump to Page 2 (HOW) -->
+      <section class="next-page-cta" aria-label="前往第二页怎么做">
         <div>
-          <div class="eyebrow">关于我 · 医生式问诊工作流</div>
-          <h2>懂医学的财务规划者 · 香港持牌顾问</h2>
-          <p>我习惯用做科研和临床问诊的严谨来拆解家庭长期财务：<strong>先问诊（家庭阶段与现金流约束）→ 再诊断（保障缺口与既有保单检视）→ 最后才谈是否需要配置、怎么配置、怎么合规赴港。</strong></p>
-          <p>为了保证判断客观，我在底层整理了内地 31 家保司 4,809 款与香港 164 款在售产品的目录，并按可对比的条款要点整理。<strong>第一次对话不谈具体产品，不承诺收益，也不谈返佣；如果不适合，我会直接劝你暂缓。</strong></p>
-          <div class="tool-Jump" style="margin-top:18px">
-            <a class="btn" href="about.html">查看完整工作流与联系方式</a>
-            <a class="btn ghost" href="tools.html">打开全部分析工具</a>
-          </div>
+          <div class="eyebrow">NEXT · 看懂了「为什么」，下一步看「怎么做」</div>
+          <h2>算一算：你现在的家庭阶段，具体该优先配哪几样、买多少保额？</h2>
+          <p>进入第二页「怎么做 · 诊断与测算」：输入家庭结构（一个人 / 夫妻二人 / 有孩家庭）、年龄与收支，即时生成阶段优先级清单与重疾/寿险保额锚点。</p>
         </div>
-        <div class="steps-mini">
-          <div class="eyebrow">1v1 首咨前，只需先对齐这三件事</div>
-          <div class="step-row"><strong>① 家庭阶段</strong>一个人、夫妻二人（无孩），还是有孩家庭？目前刚需和负债多重？</div>
-          <div class="step-row"><strong>② 最怕哪种中断</strong>是怕大额医疗账单、停工期间房贷断供，还是 10 年后的教育/养老专款被挪用？</div>
-          <div class="step-row"><strong>③ 资金约束条件</strong>这笔钱几年内会不会动用？如考虑港险，近 3–6 个月是否方便本人赴港？</div>
-        </div>
+        <a class="btn light" href="tools.html">进入第二页：怎么做（诊断与测算） ›</a>
       </section>
     </div>
   </main>
@@ -429,18 +359,17 @@
         <p style="margin:0">用公开文献、统计数据与条款原文，把保险与家庭长期规划算明白。</p>
       </div>
       <div>
-        <strong>分析工具</strong>
-        <a href="index.html#bench-title">阶段 × 险种优先级诊断</a>
-        <a href="tools.html#budget">刚性支出与保额锚点测算</a>
-        <a href="lifecycle-map/index.html?wx=achealth&profile=family">家庭生命周期地图</a>
-        <a href="tools.html#budget">刚性支出与保额锚点测算</a>
+        <strong>核心页面</strong>
+        <a href="index.html">第一页：为什么（原理与草帽图）</a>
+        <a href="tools.html">第二页：怎么做（阶段诊断与测算）</a>
+        <a href="notes.html">深度专题与文献出处</a>
+        <a href="about.html">关于顾问与问诊流程</a>
       </div>
       <div>
-        <strong>研究与专题</strong>
-        <a href="note-principle.html">家庭重疾概率流行病学推演</a>
-        <a href="note-necessities.html">中美家庭刚需账本与配置顺序</a>
-        <a href="note-order.html">保单理赔与分红个税法律逻辑</a>
-        <a href="insurance-guide/index.html">五层问题科普导览</a>
+        <strong>专项交互工具</strong>
+        <a href="lifecycle-map/index.html?wx=achealth&profile=family">家庭生命周期地图（全屏版）</a>
+        <a href="lifecycle-map/fit/index.html?profile=family">17 阶段 × 险种适配全表</a>
+        <a href="tools.html#budget">刚性支出与保额锚点测算</a>
       </div>
       <div>
         <strong>关于与联系</strong>
@@ -452,6 +381,6 @@
       声明：本站所有文章、概率推演与测算工具仅供家庭财务学习与风险框架对照，不构成任何保险产品要约、招揽、推荐或税务/医疗意见。涉及香港保险之具体讨论，仅在符合监管要求之前提下，面向身处香港特别行政区或明确预约赴港之人士一对一进行；正式保费、核保结论及理赔标准概以保险公司官方保单条款为准。
     </p>
   </footer>
-  <script src="site.js?v=3"></script>
+  <script src="site.js?v=4"></script>
 </body>
 </html>

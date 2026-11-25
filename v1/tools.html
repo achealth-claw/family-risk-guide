@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>分析工具箱 · 安康家庭风险与财务</title>
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap bar">
+      <div class="brand">
+        <a class="logo" href="index.html">安康 · 家庭风险与财务</a>
+        <span class="brand-sub">医学背景 · 香港持牌顾问的学习与分析站</span>
+      </div>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html">总览与诊断</a>
+        <a href="notes.html">保险价值与数据</a>
+        <a href="tools.html" aria-current="page">分析工具箱</a>
+        <a href="about.html">关于与问诊</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">ANALYSIS WORKBENCH</div>
+          <h1>家庭风险与保额分析工具箱</h1>
+          <p class="lede">把年龄阶段、家庭概率、刚需支出与条款结构拆成可自己动手的计算器。所有工具均在浏览器本地运行，不收集任何个人隐私数据。</p>
+        </div>
+      </section>
+
+      <!-- Tool 1: Budget & Coverage Anchor Calculator -->
+      <section id="budget" class="card" style="margin-top:24px" data-budget>
+        <div class="card-head">
+          <h2>工具 01 · 家庭刚性支出与保额锚点测算器</h2>
+          <span class="badge">量化测算</span>
+        </div>
+        <p class="hint">不知道重疾险和定期寿险该买多少保额？按「停工 3 年收入替代」与「剩余负债 + 5 年刚需支出」两个客观锚点即时试算：</p>
+
+        <div class="fields" style="grid-template-columns:repeat(4, 1fr);margin-top:16px">
+          <label>家庭税后年收入（万元）
+            <input id="b-income" type="number" min="5" max="2000" step="5" value="50" />
+          </label>
+          <label>全年压不住的刚需支出（万元）
+            <input id="b-fixed" type="number" min="2" max="1000" step="2" value="24" />
+          </label>
+          <label>随时可动用应急现金（万元）
+            <input id="b-cash" type="number" min="0" max="1000" step="2" value="15" />
+          </label>
+          <label>剩余房贷/刚性负债（万元）
+            <input id="b-debt" type="number" min="0" max="5000" step="10" value="180" />
+          </label>
+        </div>
+
+        <div class="stage-out" data-budget-out></div>
+      </section>
+
+      <!-- Tool 2: Medical Insurance G-Table -->
+      <section class="card" style="margin-top:22px">
+        <div class="card-head">
+          <h2>工具 02 · 医疗险四类形态速查表（普通百万 vs 中端特需 vs 高端 vs 港险 VHIS）</h2>
+          <span class="badge">L2 受控字段抽取</span>
+        </div>
+        <p class="hint">买医疗险最常见的坑，是把「一年期不保证续保」当成长期保障，或以为普通百万医疗能住公立特需病房。先按这 5 个受控字段对号入座：</p>
+
+        <table class="data">
+          <thead>
+            <tr>
+              <th>受控维度</th>
+              <th>长期百万医疗（内地）</th>
+              <th>中端/特需医疗（内地）</th>
+              <th>一年期高端医疗</th>
+              <th>香港自愿医保（VHIS 灵活/高端）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="diff">
+              <td><strong>医院与病房范围</strong></td>
+              <td>二级及以上公立医院<strong>普通部</strong>（不含特需/国际/VIP）</td>
+              <td>公立普通部 + <strong>公立特需部 / 国际部 / 指定私立</strong></td>
+              <td>全球 / 全球除美私立与昂贵医院，<strong>标准单人间</strong></td>
+              <td>香港私家医院（半私家房 / 标准私家房）及亚洲/全球网络</td>
+            </tr>
+            <tr class="diff">
+              <td><strong>保证续保条款</strong></td>
+              <td>主流旗舰为 <strong>20 年保证续保</strong>（期间费率可调）</td>
+              <td>多为<strong>一年期、不保证续保</strong>（理赔或停售可能影响续保）</td>
+              <td><strong>一年期、不保证续保</strong>（看重服务与直付，非锁定终身）</td>
+              <td>条款写明<strong>保证续保至 100 岁</strong>（池子整体按年龄与通胀调费）</td>
+            </tr>
+            <tr>
+              <td><strong>免赔额设计</strong></td>
+              <td>常见年免赔 1 万（部分产品 1 万内赔付 30%–50%）</td>
+              <td>常见 0 免赔 / 5,000 / 1.5 万可选</td>
+              <td>0 免赔至数万元可选</td>
+              <td>0 自付额，或设 1.6 万 / 2.5 万 / 5 万港币自付额换取低保费</td>
+            </tr>
+            <tr>
+              <td><strong>院外特药 / CAR-T</strong></td>
+              <td>按合同指定特药清单与认可药房报销</td>
+              <td>部分含院外药械限额，或特需部内直付</td>
+              <td>通常全额涵盖合理必需之院外靶向与前沿疗法</td>
+              <td>按全数赔偿或分项限额涵盖订明非手术癌症治疗</td>
+            </tr>
+            <tr>
+              <td><strong>适合解决什么问题</strong></td>
+              <td><strong>全家的底层大病兜底</strong>，防大额住院打穿存款</td>
+              <td>追求公立特需专家号、少排队、单人/双人病房体验</td>
+              <td>跨国生活、私立医院门诊与住院直付体验</td>
+              <td>需要长期续保确定性、跨境就医及全球重症医疗通道的家庭</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fine">注：表格基于仓库 L2 医疗样卡（23 张受控样卡）提炼，具体产品以保险公司最新备案条款为准。</p>
+      </section>
+
+      <!-- Tool 3: Stage + Fit full interactive + Standalone deep tools -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">专项独立工具</div>
+            <h2>进入完整交互式视图</h2>
+            <p>以下四个独立模块均已就绪，点击可直接打开对应工具视图：</p>
+          </div>
+        </div>
+
+        <div class="tool-cards">
+          <a class="tool-card" href="../lifecycle-map/index.html?wx=achealth&profile=family">
+            <div>
+              <span class="badge">全屏交互地图</span>
+              <h3>家庭生命周期地图</h3>
+              <p>支持「一个人（无孩）/ 夫妻二人（无孩）/ 有孩子」三套时间轴，含各年龄段高发疾病风险条、准备点与兑现点跳转，可一键导出当前阶段卡片长图。</p>
+            </div>
+            <div class="go">打开生命周期地图 ›</div>
+          </a>
+
+          <a class="tool-card" href="../lifecycle-map/fit/index.html?profile=family">
+            <div>
+              <span class="badge">17 阶段总表</span>
+              <h3>阶段 × 险种适配全表</h3>
+              <p>把三类家庭结构共 17 个阶段的「优先 / 补充 / 视情况 / 暂缓」全部摊开，支持按「手头紧 / 大致够用 / 相对宽裕」实时切换全表优先级。</p>
+            </div>
+            <div class="go">打开阶段 × 险种总表 ›</div>
+          </a>
+
+          <a class="tool-card" href="about.html#contact">
+            <div>
+              <span class="badge">条款结构样板</span>
+              <h3>内地 × 香港重疾条款字段并排对照</h3>
+              <p>以 L2 样卡受控字段并排展示等待期、轻中症比例、癌症多次赔付间隔与身故责任差异，高亮两边不同点与条款原文出处。</p>
+            </div>
+            <div class="go">打开条款字段对照表 ›</div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site">
+    <p class="legal">声明：工具测算结果基于公开统计模型与经验法则，仅供家庭财务规划参考，不构成任何保险产品要约或投保建议。</p>
+  </footer>
+  <script src="site.js"></script>
+</body>
+</html>
