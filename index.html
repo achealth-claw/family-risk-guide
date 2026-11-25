@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>为什么需要配置 · 安康家庭风险与长期财务</title>
   <meta name="description" content="从人生草帽图看懂家庭财务底层原理：一生面临哪些导致资产缩水的风险、不同险种对应解决什么问题，以及为什么必须先保大人、后保孩子。" />
-  <link rel="stylesheet" href="site.css?v=14" />
+  <link rel="stylesheet" href="site.css?v=15" />
 </head>
 <body>
   <header class="site">
@@ -36,12 +36,12 @@
 
   <main>
     <div class="wrap">
-      <!-- Part 0: Top Header -->
+      <!-- Part 0: Top Header & Dual-Track Audience Selector -->
       <section class="hero">
         <div>
-          <div class="eyebrow">第一页 · 为什么（WHY）—— 先看懂原理，再谈买什么</div>
-          <h1>一张「草帽图」，看懂人一生的收支与风险</h1>
-          <p class="lede">所有家庭财务与保险规划，本质上都在回答两个问题：<strong>工作期如何留住盈余填平退休缺口？万一中途遭遇冲击，如何防止家庭资产一夜缩水？</strong></p>
+          <div class="eyebrow" data-hero-eyebrow>第一页 · 为什么（WHY）—— 先看懂原理，再谈买什么</div>
+          <h1 data-hero-title>一张「草帽图」，看懂人一生的收支与风险</h1>
+          <p class="lede" data-hero-lede>所有家庭财务与保险规划，本质上都在回答两个问题：<strong>工作期如何留住盈余填平退休缺口？万一中途遭遇冲击，如何防止家庭资产一夜缩水？</strong></p>
         </div>
         <div class="stat-strip" aria-label="底层资料库规模">
           <div><strong>3 份</strong>NEJM / 国家癌症中心终生风险文献</div>
@@ -49,6 +49,33 @@
           <div><strong>4,809+164 款</strong>内地与香港产品条款目录</div>
         </div>
       </section>
+
+      <!-- Audience Dual-Track Selector -->
+      <section class="audience-switch" data-audience-switch aria-label="选择家庭财务结构视角">
+        <div class="audience-head">
+          <span>请选择更贴近你家的财富与收入结构（点击切换全页分析视角）：</span>
+          <span class="tip">支持专属链接直达 · 随时可来回切换对照</span>
+        </div>
+        <div class="audience-tabs" role="tablist">
+          <button type="button" class="audience-btn" data-audience-btn="salary" aria-pressed="true">
+            <div class="aud-top">
+              <span class="aud-title">① 职场与中产家庭</span>
+              <span class="aud-tag">默认视角</span>
+            </div>
+            <div class="aud-desc">靠薪资或专业收入 · 背房贷 · 核心痛点是「防大病停工断供、抗存款通胀、攒孩子学费与退休金」</div>
+          </button>
+          <button type="button" class="audience-btn" data-audience-btn="owner" aria-pressed="false">
+            <div class="aud-top">
+              <span class="aud-title">② 企业主与高资产家庭</span>
+              <span class="aud-tag">家企隔离与传承</span>
+            </div>
+            <div class="aud-desc">办企业或持大额房产/股权 · 不缺看病小钱 · 核心痛点是「家企连带债务、身故流动性挤兑、子女婚变与大额核保」</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================== TRACK 1: SALARY & MIDDLE-CLASS ==================== -->
+      <div data-audience-panel="salary">
 
       <!-- Part 1: Straw Hat Chart (Top First Section) -->
       <section class="section" style="margin-top:24px">
@@ -794,6 +821,372 @@
         </div>
         <a class="btn light" href="tools.html">进入第二页：怎么做（诊断与测算） ›</a>
       </section>
+      </div><!-- /data-audience-panel="salary" -->
+
+      <!-- ==================== TRACK 2: ENTREPRENEUR & HNW ==================== -->
+      <div data-audience-panel="owner" hidden>
+        <!-- Owner Part 1: Entrepreneur Straw Hat Chart -->
+        <section class="section" style="margin-top:24px">
+          <div class="card hat-card" data-owner-hat>
+            <div class="card-head">
+              <div>
+                <span class="badge" style="background:var(--blue-soft);color:var(--blue)">01 · 企业主版「草帽图」：顺风期赚再多，也不等于家庭真安全</span>
+                <h2 style="margin-top:6px">工薪族怕「生病停工断工资」，企业主怕「顺周期赚的钱，在逆周期连本带利还回去」</h2>
+                <p class="hint">点击右侧切换按钮，对比「① 家企混同裸奔：遇周期下行或连带追偿」与「② 顺风期抽离 10%–20% 利润：建立家庭独立安全舱」的结局差异：</p>
+              </div>
+              <div class="seg two" role="group" aria-label="企业主草帽图状态切换">
+                <button type="button" data-owner-hat-mode="safe" aria-pressed="true">① 建安全舱：顺风期抽离利润</button>
+                <button type="button" data-owner-hat-mode="crash" aria-pressed="false">② 家企混同：逆周期连带清零</button>
+              </div>
+            </div>
+
+            <div class="hat-grid">
+              <div class="hat-svg-wrap">
+                <svg class="hat-svg" viewBox="0 0 680 270" role="img" aria-label="企业主财富周期与安全舱隔离示意图">
+                  <defs>
+                    <linearGradient id="entPeak" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#184c3f" stop-opacity="0.24" />
+                      <stop offset="100%" stop-color="#184c3f" stop-opacity="0.03" />
+                    </linearGradient>
+                    <linearGradient id="entSafe" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#1d5a73" stop-opacity="0.22" />
+                      <stop offset="100%" stop-color="#184c3f" stop-opacity="0.26" />
+                    </linearGradient>
+                    <linearGradient id="entCrash" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#9e3528" stop-opacity="0.28" />
+                      <stop offset="100%" stop-color="#9e3528" stop-opacity="0.05" />
+                    </linearGradient>
+                  </defs>
+
+                  <line x1="48" y1="36" x2="650" y2="36" stroke="#e5e0d5" stroke-dasharray="3 3" />
+                  <line x1="48" y1="115" x2="650" y2="115" stroke="#e5e0d5" stroke-dasharray="3 3" />
+                  <line x1="48" y1="220" x2="650" y2="220" stroke="#cfc8ba" stroke-width="1.5" />
+
+                  <!-- Entrepreneur Peak Curve (30 to 52) -->
+                  <path d="M 60,220 L 120,202 C 175,118 235,34 305,32 C 360,30 400,56 435,96 L 435,220 Z" fill="url(#entPeak)" />
+                  <path d="M 60,220 L 120,202 C 175,118 235,34 305,32 C 360,30 400,56 435,96" fill="none" stroke="#184c3f" stroke-width="3.5" />
+
+                  <!-- Safe Vault Mode Group -->
+                  <g id="owner-hat-safe-group">
+                    <path d="M 210,182 Q 355,156 485,134 Q 575,118 648,100 L 648,220 L 210,220 Z" fill="url(#entSafe)" />
+                    <path d="M 210,182 Q 355,156 485,134 Q 575,118 648,100" fill="none" stroke="#1d5a73" stroke-width="3.5" />
+                    <path d="M 435,96 L 475,198 L 648,198" fill="none" stroke="#9e3528" stroke-width="2" stroke-dasharray="4 4" opacity="0.55" />
+
+                    <path d="M 285,62 L 285,160" fill="none" stroke="#1d5a73" stroke-width="2" stroke-dasharray="4 3" />
+                    <polygon points="285,165 280,155 290,155" fill="#1d5a73" />
+                    <path d="M 355,68 L 355,148" fill="none" stroke="#1d5a73" stroke-width="2" stroke-dasharray="4 3" />
+                    <polygon points="355,153 350,143 360,143" fill="#1d5a73" />
+
+                    <rect x="172" y="72" width="236" height="42" rx="8" fill="#ffffff" stroke="#9ec2b3" stroke-width="1.5" />
+                    <text x="290" y="90" text-anchor="middle" fill="#113a30" font-size="11.5" font-weight="700">顺风期：每年抽 10%–20% 税后利润</text>
+                    <text x="290" y="106" text-anchor="middle" fill="#1d5a73" font-size="10.5">下沉锁入「与企业隔离的家庭保单金库」↓</text>
+
+                    <text x="535" y="156" text-anchor="middle" fill="#113a30" font-size="12" font-weight="700">✓ 家庭独立安全舱（稳步抬升）</text>
+                    <text x="535" y="173" text-anchor="middle" fill="#1d5a73" font-size="11">哪怕企业遇风浪，妻儿生活与东山再起本金稳固</text>
+                  </g>
+
+                  <!-- Crash Mode Group -->
+                  <g id="owner-hat-crash-group" style="display:none">
+                    <path d="M 435,96 L 472,212 L 648,212 L 648,220 L 435,220 Z" fill="url(#entCrash)" />
+                    <path d="M 435,96 L 472,212 L 648,212" fill="none" stroke="#9e3528" stroke-width="3.5" />
+                    <circle cx="435" cy="96" r="5" fill="#9e3528" />
+                    <circle cx="472" cy="212" r="5" fill="#9e3528" />
+                    <text x="290" y="92" text-anchor="middle" fill="#7c4813" font-size="12" font-weight="700">顺风期 100% 利润继续滚在工厂/房产/担保里</text>
+                    <text x="290" y="110" text-anchor="middle" fill="#9b5b18" font-size="11">未做家企隔离，个人无限连带责任敞口裸奔</text>
+                    <text x="542" y="142" text-anchor="middle" fill="#9e3528" font-size="12.5" font-weight="700">① 行业周期下行 / 抽贷 / 客户违约</text>
+                    <text x="542" y="162" text-anchor="middle" fill="#9e3528" font-size="12" font-weight="700">② 连带担保触发 → 房产与家庭存款一并冻结清零</text>
+                  </g>
+
+                  <text x="110" y="244" text-anchor="middle" fill="#63706a" font-size="11.5">创业起步期</text>
+                  <text x="295" y="244" text-anchor="middle" fill="#17211d" font-size="11.5" font-weight="700">35–50 岁：企业利润高光期（唯一建仓窗）</text>
+                  <text x="465" y="244" text-anchor="middle" fill="#9e3528" font-size="11.5" font-weight="700">周期/传承关口</text>
+                  <text x="605" y="244" text-anchor="middle" fill="#184c3f" font-size="11.5" font-weight="700">60–90+ 岁：家族传承</text>
+                </svg>
+
+                <div class="hat-legend">
+                  <span><i class="hat-dot" style="background:#184c3f"></i>企业创富曲线（高收益但伴随高周期波动）</span>
+                  <span><i class="hat-dot" style="background:#1d5a73"></i>家庭隔离安全舱（税后分红锁入保单架构）</span>
+                  <span><i class="hat-dot" style="background:#9e3528"></i>家企混同连带清零风险（担保追偿/挤兑）</span>
+                </div>
+              </div>
+
+              <div data-owner-hat-desc>
+                <div class="stage-banner" style="background:var(--blue-soft)">
+                  <div>
+                    <div class="name" style="color:var(--blue)">企业主第一定律：顺境不修防火墙，逆境全是连带债</div>
+                    <p class="why">很多老板在 35–55 岁事业巅峰期身家几千万甚至上亿，但 90% 资金继续滚在公司账户、厂房、股权和大宗房产里，还签着个人无限连带责任担保。</p>
+                  </div>
+                </div>
+                <div class="fit-list" style="margin-top:10px">
+                  <div class="fit-row">
+                    <span class="tag p">隔离作用</span>
+                    <div><strong>把「企业阶段性战果」锁成「家庭永久底盘」</strong><span> · 趁企业顺风、无涉诉无欠税时，每年抽 10%–20% 税后利润放进合规保单架构，哪怕未来行业翻船，老婆孩子的下半生也绝不跟着归零。</span></div>
+                  </div>
+                  <div class="fit-row">
+                    <span class="tag s">护盘作用</span>
+                    <div><strong>用大额身故现金流护住股权与不动产</strong><span> · 创一代一旦突发变故，几千万免税身故赔偿金几天内到位，替家人还清授信、防止核心资产被 5 折贱卖。</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Owner Part 2: Three HNW Wealth Leaks vs Four-Pillar Firewall -->
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">02 · 高净值家庭最隐蔽的「三大失血漏斗」vs「四维防火墙」</div>
+              <h2>账面上有几千万资产，为什么遇到大事时依然极其脆弱？</h2>
+              <p>高净值家庭的财富往往呈现<strong>「高净值、低流动、高连带」</strong>特征——平时看着规模很大，但在法律追偿、突发继承和代际婚变面前，如果不做契约重构，几乎没有防御力：</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <span class="badge" style="background:var(--blue-soft);color:var(--blue)">高资产家庭的三种典型脆弱结构 vs 四维保单架构</span>
+                <h2 style="margin-top:6px">家企混同 vs 满手砖头缺现金 vs 巨额直给子女 vs 四维防火墙</h2>
+              </div>
+              <span class="badge amber">上 3 漏斗 · 下 1 破局</span>
+            </div>
+
+            <div class="alloc-grid-top three">
+              <div class="alloc-col house">
+                <div>
+                  <span class="badge red">漏斗 ① · 家企混同与连带担保</span>
+                  <h3>企业一口锅、家里一口锅，底下连着同一根管子</h3>
+                  <div class="why-tag">签过个人无限连带责任担保、用个人卡走公账、家里房产拿去抵押授信</div>
+
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="width:100%;background:#8f3d2f">
+                      100% 家族身家暴露在经营连带风险下
+                      <small>一荣俱荣，一损俱损</small>
+                    </div>
+                  </div>
+
+                  <div class="arrow-down">↓ 行业下行 / 客户违约 / 抽贷涉诉 ↓</div>
+
+                  <div class="result-meter">
+                    <div class="meter-head">
+                      <strong>极端情况下的家庭资产留存</strong>
+                      <span class="meter-verdict bad">连带冻结查封</span>
+                    </div>
+                    <div class="meter-track">
+                      <div class="meter-fill" style="width:20%;background:#8f3d2f">仅剩基本生活</div>
+                      <div class="meter-lost" style="width:80%">连带追偿 -80%+</div>
+                    </div>
+                    <p style="margin:6px 0 0;font-size:12.5px;color:var(--ink-2)">结局：<strong>出事后再转资产属恶意逃债（无效）</strong>；只有在顺境无涉诉时提前装进合规保单，才算真防火墙。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="alloc-col bad">
+                <div>
+                  <span class="badge red">漏斗 ② · 满手砖头股权，突发缺现金</span>
+                  <h3>身家几千万，账上却拿不出 500 万纯现金</h3>
+                  <div class="why-tag">80% 财富沉淀在厂房、商铺、大宅和未上市股权里，变现周期极长</div>
+
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="width:100%;background:#8a7968">
+                      重仓不动产 + 公司股权（低流动性）
+                      <small>平时看着富足，急用时无法原价变现</small>
+                    </div>
+                  </div>
+
+                  <div class="arrow-down">↓ 若创一代突发重疾或意外离世，银行停贷催收 ↓</div>
+
+                  <div class="result-meter">
+                    <div class="meter-head">
+                      <strong>继承关口的家族资产折损</strong>
+                      <span class="meter-verdict bad">被迫折价甩卖</span>
+                    </div>
+                    <div class="meter-track">
+                      <div class="meter-fill" style="width:55%;background:#8a7968">保住约 55%</div>
+                      <div class="meter-lost" style="width:45%">急售折损 -45%</div>
+                    </div>
+                    <p style="margin:6px 0 0;font-size:12.5px;color:var(--ink-2)">结局：创一代突然不在时，银行催贷、合伙人压价回购股权，家人若无<strong>几千万身故保险现金</strong>护盘，只能贱卖核心资产。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="alloc-col warn">
+                <div>
+                  <span class="badge amber">漏斗 ③ · 直接给下一代大钱，失控流散</span>
+                  <h3>直接给几千万现金或房产，最怕婚变与挥霍</h3>
+                  <div class="why-tag">不怕孩子没钱花，怕孩子太早拿到巨款躺平、被设局或离婚分走一半</div>
+
+                  <div class="bar-stack">
+                    <div class="bar-seg" style="width:100%;background:#b86b1b">
+                      直接赠与大额现金 / 房产过户 / 给股权
+                      <small>给出去的那一刻，父母彻底失去控制权</small>
+                    </div>
+                  </div>
+
+                  <div class="arrow-down">↓ 子女缺乏财商被骗 / 盲目创业亏光 / 婚姻生变 ↓</div>
+
+                  <div class="result-meter">
+                    <div class="meter-head">
+                      <strong>代际传承的真实留存率</strong>
+                      <span class="meter-verdict warn">极易流失过半</span>
+                    </div>
+                    <div class="meter-track">
+                      <div class="meter-fill" style="width:50%;background:#b86b1b">留存约 50%</div>
+                      <div class="meter-swing" style="width:50%">婚变/挥霍 -50%+</div>
+                    </div>
+                    <p style="margin:6px 0 0;font-size:12.5px;color:var(--ink-2)">结局：私行家族信托门槛动辄千万美元且收年费；<strong>香港分红保单天然就是「零管理费的微型家族信托」</strong>。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="alloc-bottom">
+              <div class="alloc-col good">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+                  <div>
+                    <span class="badge">破局方案 · 企业主与高净值「四维保单资产架构」</span>
+                    <h3 style="font-size:20px;margin-top:8px">把保险当成「家庭资产负债表上的法律契约工具」，而不只是报销凭证</h3>
+                  </div>
+                  <span style="font-size:13px;color:var(--green);font-weight:650">家企隔离 · 身故护盘现金 · 代际控制权 · 全球医疗直付</span>
+                </div>
+
+                <div class="good-perks four" style="margin-top:14px">
+                  <div class="good-perk">
+                    <strong>① 家企隔离「救生艇」</strong>
+                    趁企业顺风期、无涉诉无欠税时，用个人合法税后分红建立保单底仓，与未来企业经营风险构筑合规边界。
+                  </div>
+                  <div class="good-perk">
+                    <strong>② 大额人寿「护盘现金」</strong>
+                    配置高保额终身寿险/万用寿险。万一创一代突发离世，迅速赔出大额现金还清授信、保住股权与房产不被贱卖。
+                  </div>
+                  <div class="good-perk">
+                    <strong>③ 传富可控「类信托」</strong>
+                    父母做投保人握住 100% 控制权，通过保单拆分、后备持有人与分期给付，让孩子一辈子有现金流，但分不进婚产。
+                  </div>
+                  <div class="good-perk">
+                    <strong>④ 全球顶尖医疗直付</strong>
+                    香港高端医疗锁定亚洲/全球私立医院（养和、港怡、美国 MD 安德森等）直付额度，重症时抢占原研新药与床位时间窗。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Owner Part 3: Legal & Structural Boundaries -->
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">03 · 讲真话的专业边界：保单怎么设计才真能「隔离风险」？</div>
+              <h2>避开市面上「买保险就能绝对避债」的夸大忽悠，看清 4 条真实法律与契约规则</h2>
+              <p>越是高额保单，越不能听销售口头承诺。要让保单在债务、婚姻、全球币种与应急周转上真正生效，必须在投保第一天就把<strong>资金来源、投保人/受保人/受益人顺位、以及币种架构</strong>摆对位置：</p>
+            </div>
+          </div>
+
+          <div class="pillars">
+            <div class="pillar">
+              <div>
+                <span class="type" style="background:var(--blue-soft);color:var(--blue)">架构铁律 01 · 债务隔离</span>
+                <h3>什么时候保单能避债，什么时候会被执行？</h3>
+                <p>如果已经负债累累、官司缠身才突击挪用资金买储蓄险，法院照样可以强制执行现金价值。<strong>真正的隔离必须满足三个前提</strong>：</p>
+                <div class="sol">
+                  <strong>合规隔离三要素</strong>
+                  ① 投保时企业与个人无涉诉、无恶意逃债意图；<br />
+                  ② 保费来自干净的个人税后收入（不从公户直接打款）；<br />
+                  ③ 明确指定父母/配偶/子女为身故受益人（避免沦为遗产被债权人优先清偿）。
+                </div>
+              </div>
+              <div class="rule">底层逻辑：防火墙只能在「没起火的时候」修；人寿保单的指定受益权在法律上优先于法定继承与遗产清偿。</div>
+            </div>
+
+            <div class="pillar">
+              <div>
+                <span class="type" style="background:var(--blue-soft);color:var(--blue)">架构铁律 02 · 婚变隔离</span>
+                <h3>怎么给孩子钱，才不会在离婚时被分走一半？</h3>
+                <p>直接转账给已婚子女买房或理财，极易与配偶财产混同。而用保单做赠与和隔离，核心在于<strong>「所有权」与「享用权」分离</strong>：</p>
+                <div class="sol">
+                  <strong>防婚变双保险设计</strong>
+                  ① <strong>父母做投保人、子女做受保人</strong>：保单现价在法律上属于父母财产，子女离婚时配偶无权分割；<br />
+                  ② 或在给付/受益条款中明确约定属于子女个人专属利益，配合按年提取，绝不一次性进夫妻共同账户。
+                </div>
+              </div>
+              <div class="rule">底层逻辑：只要你不把保单持有人轻易过户给还没经历婚姻考验的子女，这笔钱就永远在父母手里受控。</div>
+            </div>
+
+            <div class="pillar">
+              <div>
+                <span class="type" style="background:var(--blue-soft);color:var(--blue)">架构铁律 03 · 全球币种</span>
+                <h3>为什么高净值家庭一定要有一块「多元货币底仓」？</h3>
+                <p>绝大多数内地企业主的工厂、房产、应收账款 100% 集中在单一人民币敞口，一旦孩子出国留学或家族成员海外生活，换汇额度与汇率波动就会卡脖子。</p>
+                <div class="sol">
+                  <strong>香港多元货币保单的战略作用</strong>
+                  一张保单内支持美元、港币、人民币、英镑、加元、澳元、新加坡元等 6–9 种货币自由转换，配合<strong>保单拆分（1 拆 N）</strong>，一套底仓同时对接多个子女在不同国家的留学与定居。
+                </div>
+              </div>
+              <div class="rule">底层逻辑：不是为了赌单一汇率涨跌，而是让家庭总资产里拥有一块「随时可跨国兑现的硬通货活水」。</div>
+            </div>
+
+            <div class="pillar">
+              <div>
+                <span class="type" style="background:var(--blue-soft);color:var(--blue)">架构铁律 04 · 应急周转</span>
+                <h3>锁进大额保单的钱，万一企业需要短期周转怎么办？</h3>
+                <p>很多老板担心钱放进保单就变成「死钱」。实际上，香港高现金价值储蓄险与万用寿险本身具备极强的<strong>保单贷款与部分提取机制</strong>：</p>
+                <div class="sol">
+                  <strong>进可攻、退可守的流动性</strong>
+                  保单过了早期锁定期后，平时享受长期复利滚存；万一遇到短期过桥周转，可直接向保险公司申请<strong>保单贷款（通常可贷出当时现金价值的 70%–80%）</strong>，无需审批征信、也不用变卖房产。
+                </div>
+              </div>
+              <div class="rule">底层逻辑：平时是锁住不乱花的长期金库，关键时刻是随借随还、不看银行脸色的家族备用授信池。</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Owner Part 4: Medical Background Edge for HNW Underwriting -->
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">04 · 医学背景 × 高净值专属壁垒</div>
+              <h2>有钱能随时买豪宅，但「大额标准体核保窗口」有钱也买不到</h2>
+              <p>企业主长期高压、熬夜、应酬，到了 40–55 岁想配几百万/上千万保额时，90% 体检报告上都有<strong>肺结节、冠脉斑块/钙化、脂肪肝、乙肝携带、三高或甲状腺/乳腺结节</strong>。这时候最忌讳「找不懂医学的销售盲目递交投保」：</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="compare-two" style="margin-top:0">
+              <div class="compare-box wrong">
+                <span class="badge red">常见踩坑 · 盲目递交留痕</span>
+                <h3>拿着体检报告直接裸交一家保司，被拒保/延期后全行业留底</h3>
+                <p style="font-size:14px;color:var(--ink-2);margin:0">
+                  ① 大额保单（超免体检额度）触发保司严格医务核保与财务核保；<br />
+                  ② 若未提前梳理病历描述、未按病理分级做预判就直接递交，一旦被某家保司给出「拒保 / 延期 / 大幅加费除外」，会在行业核保记录中留痕，导致本来能按标准体或轻度加费承保的其他保司通道也彻底关死。
+                </p>
+              </div>
+
+              <div class="compare-box right">
+                <span class="badge">医学循证工作流 · 先匿名预评再落子</span>
+                <h3>用临床医学逻辑拆解体检指标，在两地多保司间「精准匹配核保尺度」</h3>
+                <p style="font-size:14px;color:var(--ink-2);margin:0">
+                  ① <strong>投保前医学预审</strong>：先看影像描述（如肺结节实性成分与随访变化、肝功能与病毒载量），判断当下直接报还是复查达标后再报；<br />
+                  ② <strong>内地与香港双市场尺度比选</strong>：同一项体检异常，不同保司的核保手册尺度差异巨大。先做匿名预核保（不留拒保记录），必要时通过「多家拆分免体检额度」把高额保障稳稳落袋。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Owner Next Page CTA -->
+        <section class="next-page-cta" aria-label="企业主与高净值下一步">
+          <div>
+            <div class="eyebrow">NEXT · 看懂了家族防火墙，下一步看「代际传承细节」或「1v1 架构咨询」</div>
+            <h2>先盘清「家企边界、体检核保尺度与代际控制权」，再决定用哪套保单架构</h2>
+            <p>你可以继续查看《传承角度：如何保障孩子一生无忧》了解保单持有人/后备持有人/拆分与分期给付细则，或直接预约 1v1 个案咨询。</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn light" href="legacy.html">看《传承专题：如何保障孩子一生无忧》 ›</a>
+            <a class="btn ghost" style="background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.3)" href="about.html#contact">预约 1v1 个案咨询（微信：achealth） ›</a>
+          </div>
+        </section>
+      </div><!-- /data-audience-panel="owner" -->
     </div>
   </main>
 
@@ -826,6 +1219,6 @@
       声明：本站所有文章、概率推演与测算工具仅供家庭财务学习与风险框架对照，不构成任何保险产品要约、招揽、推荐或税务/医疗意见。涉及香港保险之具体讨论，仅在符合监管要求之前提下，面向身处香港特别行政区或明确预约赴港之人士一对一进行；正式保费、核保结论及理赔标准概以保险公司官方保单条款为准。
     </p>
   </footer>
-  <script src="site.js?v=9"></script>
+  <script src="site.js?v=10"></script>
 </body>
 </html>

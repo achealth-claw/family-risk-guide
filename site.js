@@ -547,3 +547,117 @@ function initPurchasingPowerTabs() {
 
 initPurchasingPowerTabs();
 
+function initAudienceSwitch() {
+  const root = document.querySelector("[data-audience-switch]");
+  if (!root) return;
+  const btns = [...root.querySelectorAll("[data-audience-btn]")];
+  const panels = [...document.querySelectorAll("[data-audience-panel]")];
+  const eyebrow = document.querySelector("[data-hero-eyebrow]");
+  const title = document.querySelector("[data-hero-title]");
+  const lede = document.querySelector("[data-hero-lede]");
+
+  const HERO_COPY = {
+    salary: {
+      eyebrow: "第一页 · 为什么（WHY）—— 职场与中产家庭视角",
+      title: "一张「草帽图」，看懂人一生的收支与风险",
+      lede: "所有家庭财务与保险规划，本质上都在回答两个问题：<strong>工作期如何留住盈余填平退休缺口？万一中途遭遇大病或停工，如何防止房贷断供、家庭资产一夜缩水？</strong>"
+    },
+    owner: {
+      eyebrow: "第一页 · 为什么（WHY）—— 企业主与高资产家庭视角",
+      title: "当家庭不缺「看病和买房的钱」，保险真正解决的是哪 4 个失控风险？",
+      lede: "对企业主与高净值家庭，几十万医药费根本不构成威胁——真正能让几代人打拼的财富一夜被动清零或流失过半的，是<strong>「家企混同连带债务」「创一代突发离世的股权/房产挤兑」「子女婚变与挥霍失控」</strong>，以及<strong>「体检异常后关上的大额核保窗」</strong>。"
+    }
+  };
+
+  function show(mode, syncUrl = true) {
+    const key = mode === "owner" ? "owner" : "salary";
+    btns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.audienceBtn === key)));
+    panels.forEach((p) => {
+      p.hidden = p.dataset.audiencePanel !== key;
+    });
+    const copy = HERO_COPY[key];
+    if (copy) {
+      if (eyebrow) eyebrow.textContent = copy.eyebrow;
+      if (title) title.textContent = copy.title;
+      if (lede) lede.innerHTML = copy.lede;
+    }
+    if (syncUrl && window.history && window.history.replaceState) {
+      const url = new URL(window.location.href);
+      if (key === "owner") {
+        url.searchParams.set("mode", "owner");
+      } else {
+        url.searchParams.delete("mode");
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  }
+
+  btns.forEach((b) => b.addEventListener("click", () => show(b.dataset.audienceBtn, true)));
+  const initialMode = new URLSearchParams(window.location.search).get("mode");
+  show(initialMode === "owner" ? "owner" : "salary", false);
+}
+
+initAudienceSwitch();
+
+function initOwnerStrawHat() {
+  const root = document.querySelector("[data-owner-hat]");
+  if (!root) return;
+  const btns = [...root.querySelectorAll("[data-owner-hat-mode]")];
+  const safeGroup = document.getElementById("owner-hat-safe-group");
+  const crashGroup = document.getElementById("owner-hat-crash-group");
+  const desc = root.querySelector("[data-owner-hat-desc]");
+
+  function setMode(mode) {
+    btns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.ownerHatMode === mode)));
+    if (safeGroup && crashGroup) {
+      safeGroup.style.display = mode === "safe" ? "" : "none";
+      crashGroup.style.display = mode === "crash" ? "" : "none";
+    }
+    if (!desc) return;
+    if (mode === "safe") {
+      desc.innerHTML = `
+        <div class="stage-banner" style="background:var(--blue-soft)">
+          <div>
+            <div class="name" style="color:var(--blue)">企业主第一定律：顺境不修防火墙，逆境全是连带债</div>
+            <p class="why">很多老板在 35–55 岁事业巅峰期身家几千万甚至上亿，但 90% 资金继续滚在公司账户、厂房、股权和大宗房产里，还签着个人无限连带责任担保。</p>
+          </div>
+        </div>
+        <div class="fit-list" style="margin-top:10px">
+          <div class="fit-row">
+            <span class="tag p">隔离作用</span>
+            <div><strong>把「企业阶段性战果」锁成「家庭永久底盘」</strong><span> · 趁企业顺风、无涉诉无欠税时，每年抽 10%–20% 税后利润放进合规保单架构，哪怕未来行业翻船，老婆孩子的下半生也绝不跟着归零。</span></div>
+          </div>
+          <div class="fit-row">
+            <span class="tag s">护盘作用</span>
+            <div><strong>用大额身故现金流护住股权与不动产</strong><span> · 创一代一旦突发变故，几千万免税身故赔偿金几天内到位，替家人还清授信、防止核心资产被 5 折贱卖。</span></div>
+          </div>
+        </div>
+      `;
+    } else {
+      desc.innerHTML = `
+        <div class="stage-banner" style="background:var(--red-soft)">
+          <div>
+            <div class="name" style="color:var(--red)">家企混同冲击：当行业周期下行或连带担保触发</div>
+            <p class="why">一旦遭遇供应链爆雷、抽贷或连带担保追偿，未隔离的家庭房产与存款会被一道查封冻结；出事后再转移资产属于恶意逃债（法律上无效）。</p>
+          </div>
+        </div>
+        <div class="fit-list" style="margin-top:10px">
+          <div class="fit-row">
+            <span class="tag p">事前建仓</span>
+            <div><strong>防火墙只能在「没起火时」修好</strong><span> · 必须在企业经营健康、个人无涉诉且资金来源为合法税后所得时投保，并明确指定家人为受益人，才具备法律隔离效力。</span></div>
+          </div>
+          <div class="fit-row">
+            <span class="tag s">应急周转</span>
+            <div><strong>保单现金价值可贷 70%–80% 作备用周转</strong><span> · 平时是锁住不乱花的长期美元/多元货币金库，遇到关键周转需求时可向保司申请保单贷款，不看银行脸色。</span></div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  btns.forEach((b) => b.addEventListener("click", () => setMode(b.dataset.ownerHatMode)));
+}
+
+initOwnerStrawHat();
+
+

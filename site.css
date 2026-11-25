@@ -262,6 +262,104 @@ h1 {
   margin-right: 4px;
 }
 
+/* Audience Dual-Track Switcher (Salary/Middle-Class vs Entrepreneur/HNW) */
+.audience-switch {
+  margin-top: 18px;
+  background: #ebe7dd;
+  border: 1.5px solid var(--line-2);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+.audience-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 9px;
+  font-size: 13px;
+  color: var(--ink-2);
+  font-weight: 650;
+}
+.audience-head span.tip {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.audience-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.audience-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+  background: rgba(255, 255, 255, 0.58);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.audience-btn:hover {
+  background: rgba(255, 255, 255, 0.88);
+}
+.audience-btn .aud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+.audience-btn .aud-title {
+  font-size: 16px;
+  font-weight: 740;
+  color: var(--ink);
+}
+.audience-btn .aud-tag {
+  font-size: 11.5px;
+  font-weight: 680;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e0dbd0;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.audience-btn .aud-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.audience-btn[aria-pressed="true"] {
+  background: #fff;
+  border-color: var(--green);
+  box-shadow: 0 4px 14px rgba(24, 76, 63, 0.1);
+}
+.audience-btn[aria-pressed="true"] .aud-title {
+  color: var(--green-2);
+}
+.audience-btn[aria-pressed="true"] .aud-tag {
+  background: var(--green);
+  color: #fff;
+}
+.audience-btn[data-audience-btn="owner"][aria-pressed="true"] {
+  border-color: var(--blue);
+  box-shadow: 0 4px 14px rgba(29, 90, 115, 0.12);
+}
+.audience-btn[data-audience-btn="owner"][aria-pressed="true"] .aud-title {
+  color: var(--blue);
+}
+.audience-btn[data-audience-btn="owner"][aria-pressed="true"] .aud-tag {
+  background: var(--blue);
+  color: #fff;
+}
+[data-audience-panel][hidden] {
+  display: none !important;
+}
+
 /* Main two-column workbench */
 .grid-main {
   display: grid;
@@ -1105,6 +1203,10 @@ footer.site {
   .wrap, .narrow, .legal { width: calc(100% - 28px); }
   .stat-strip { display: none; }
   .hero { padding-bottom: 14px; gap: 12px; }
+  .audience-switch { padding: 10px 11px; margin-top: 12px; }
+  .audience-tabs { grid-template-columns: 1fr; gap: 8px; }
+  .audience-btn { padding: 11px 13px; }
+  .audience-btn .aud-title { font-size: 15px; }
   .bar {
     flex-direction: column;
     align-items: flex-start;
