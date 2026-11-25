@@ -472,6 +472,150 @@
         max-width: 378px;
       }
     }
+
+    /* =====================================================
+       Xiaohongshu (RED) 3:4 Note Grid Mode + Ivory Theme
+       ===================================================== */
+    .xhs-section {
+      display: none;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 22px 20px 64px;
+    }
+    body.xhs-mode .workspace {
+      display: none;
+    }
+    body.xhs-mode .xhs-section {
+      display: block;
+    }
+    .xhs-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .xhs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
+      gap: 22px;
+      justify-items: center;
+    }
+    /* Exact 3:4 Xiaohongshu Card (360 x 480) */
+    .xhs-card {
+      width: 360px;
+      height: 480px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 60%, #121c1a 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(229, 184, 105, 0.28);
+      padding: 20px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.38);
+    }
+    .xhs-card .slide {
+      display: block !important;
+      animation: none !important;
+    }
+    .xhs-card .slide-title {
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+    .xhs-card .slide-sub {
+      font-size: 12.5px;
+      margin-bottom: 10px;
+    }
+    .xhs-card .v-card {
+      padding: 9px 11px;
+      margin-bottom: 7px;
+    }
+    .xhs-card .v-card-head {
+      font-size: 12.5px;
+    }
+    .xhs-card .v-card-desc {
+      font-size: 11.5px;
+    }
+    .xhs-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 8px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Warm Ivory Magazine Theme for Xiaohongshu */
+    body.xhs-ivory .xhs-card {
+      background: #faf7f0;
+      border: 1px solid #dfd8c8;
+      color: #17211d;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+    body.xhs-ivory .xhs-card .reel-brand {
+      color: #184c3f;
+    }
+    body.xhs-ivory .xhs-card .reel-step-indicator {
+      background: #e9e4d8;
+      color: #44514b;
+    }
+    body.xhs-ivory .xhs-card .slide-kicker {
+      background: #e4efe9;
+      color: #184c3f;
+      border-color: #b7d2c5;
+    }
+    body.xhs-ivory .xhs-card .slide-title {
+      color: #17211d;
+    }
+    body.xhs-ivory .xhs-card .slide-title .hl {
+      color: #b86b1b;
+    }
+    body.xhs-ivory .xhs-card .slide-title .green {
+      color: #184c3f;
+    }
+    body.xhs-ivory .xhs-card .slide-sub {
+      color: #44514b;
+    }
+    body.xhs-ivory .xhs-card .v-card {
+      background: #ffffff;
+      border-color: #dfd8c8;
+    }
+    body.xhs-ivory .xhs-card .v-card.gold-border {
+      background: #fcf4e8;
+      border-color: #e5c494;
+    }
+    body.xhs-ivory .xhs-card .v-card.green-border {
+      background: #eef5f1;
+      border-color: #b5d1c3;
+    }
+    body.xhs-ivory .xhs-card .v-card-head {
+      color: #17211d;
+    }
+    body.xhs-ivory .xhs-card .v-card-num {
+      color: #b86b1b;
+    }
+    body.xhs-ivory .xhs-card .v-card-desc {
+      color: #44514b;
+    }
+    body.xhs-ivory .xhs-card .pool-meter {
+      background: #f1ede4;
+      border-color: #dcd4c4;
+    }
+    body.xhs-ivory .xhs-card .pool-meter-top {
+      color: #17211d;
+    }
+    body.xhs-ivory .xhs-card .xhs-foot {
+      border-top-color: #e2dcd0;
+      color: #63706a;
+    }
   </style>
 </head>
 <body>
@@ -479,14 +623,15 @@
   <!-- Top Bar -->
   <div class="topbar">
     <div class="topbar-left">
-      <span>🎬 视频号 9:16 竖屏素材与提词工作台</span>
-      <span class="tag-pill">时长约 90 秒 · 7 幕动态算账卡</span>
+      <span>🎬 视频号 9:16 ＆ 📕 小红书 3:4 素材工作台</span>
+      <span class="tag-pill">一鱼三吃：公众号 + 视频号 + 小红书</span>
     </div>
     <div class="topbar-actions">
-      <a class="btn" href="wechat-stock-budget.html">📄 切回公众号图文版</a>
+      <a class="btn" href="wechat-stock-budget.html">📄 公众号图文版</a>
+      <button type="button" class="btn gold" id="xhsModeBtn">📕 切换小红书 3:4 笔记模式（7图平铺）</button>
       <button type="button" class="btn" id="autoPlayBtn">▶️ 自动轮播演示</button>
-      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式（按键盘 ← → 翻页）</button>
-      <button type="button" class="btn gold" id="copyScriptBtn">📋 一键复制全套口播稿+发布文案</button>
+      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式</button>
+      <button type="button" class="btn" id="copyScriptBtn">📋 复制视频号口播稿</button>
     </div>
   </div>
 
@@ -820,6 +965,65 @@
     </div>
   </div>
 
+  <!-- Xiaohongshu 3:4 Note Grid Section -->
+  <section class="xhs-section" id="xhsSection">
+    <div class="xhs-toolbar">
+      <div>
+        <strong style="font-size:15px;color:#fff;display:block;margin-bottom:3px;">📕 小红书 3:4 黄金比例笔记卡（共 7 张 · 360×480 标准封面比例，不裁边）</strong>
+        <span style="font-size:12.5px;color:var(--muted);">可直接框选单张卡片截屏保存，支持一键切换「暖白杂志风」与「深色黑金风」。</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn" id="toggleXhsThemeBtn">☀️ 切换为「暖白杂志风」</button>
+        <button type="button" class="btn gold" id="copyXhsCopyBtn">📋 一键复制小红书标题 + Emoji 正文 + 标签</button>
+      </div>
+    </div>
+
+    <!-- 7 Cards Grid (Auto-populated from the 7 slides) -->
+    <div class="xhs-grid" id="xhsGrid"></div>
+
+    <!-- Xiaohongshu Copy Preview Box -->
+    <div class="panel-card" style="margin-top:24px;">
+      <div class="panel-head">
+        <h2>📕 小红书专属爆款标题与正文（可直接复制发布）</h2>
+        <span class="tag-pill">高收藏干货笔记模板</span>
+      </div>
+      <div class="meta-box">
+        <strong>🔥 5 个小红书高点击标题（任选 1 个，控制在 20 字内）</strong>
+        1. 手头有200万，到底多少钱可以拿去炒股？<br />
+        2. 90%散户亏钱真相：家庭资产配置顺序反了！<br />
+        3. 200万存款只拿34万炒股？这套公式建议存下<br />
+        4. 别拿救命钱上牌桌！家庭可炒股资金计算法📊<br />
+        5. 为什么底盘越稳的人，炒股反而越容易赚钱？
+      </div>
+      <div class="meta-box" id="xhsPostBody" style="margin-bottom:0;white-space:pre-line;">身边很多朋友炒股亏钱，复盘下来往往不是选错了股票，而是【家庭资产配置的先后顺序反了】——家里连防波堤都没修好，先把大半身家推上了牌桌📉。
+
+今天分享我在家庭财务诊断中常用的【两段式四道筛子算账法】，直接拿自家的数字往里套👇
+
+✅ 第一阶段：先做减法，按先后顺序锁死三道底盘
+1️⃣ 第1顺位【日常活水池】：留足 6～12 个月刚性开支（房贷月供+生活费）。万一工作变动，半年到一年不断供，绝不动股票一分钱。
+2️⃣ 第2顺位【杠杆保护池（免强平令）】：没配齐大病兜底，你放进股市的每分钱其实都背着「隐性健康杠杆」！按「先大人后小孩」，用年结余 5%～8% 配齐医疗+重疾+定寿，等于给股票账户买一张「免强制平仓令」🛡️。
+3️⃣ 第3顺位【确定目标与锁利池】：近 3 年必用钱放定存短债；10～20 年后孩子留学教育金和自己退休底仓，先放进带缓和机制、能锁定复利与终身现金流的稳健契约池，躲开股市致命的「顺序风险」。
+
+👉 扣完上面三道底盘，剩下的才叫【家庭纯自由余量 F】！
+
+✅ 第二阶段：在自由余量 F 里过两道校准，取最小值 Min
+🔹 校准1（财务上限 S₁ = F × 造血系数 k）：
+• 无房贷稳定双职工：k = 60%～80%
+• 大厂/外企有房贷：k = 40%～60%（中年人力资本在折旧）
+• 企业主/创业者：k = 20%～40%（生意本身已是高波动股票）
+
+🔹 校准2（心理上限 S₂ = 失眠亏损阈值 ÷ 35%）：
+问自己：账面浮亏多少钱会开始失眠发脾气？用这个数字除以熊市常规回撤 35%，就是心理持仓上限。
+
+🎯 最终公式：个人可炒股真子弹 S = Min(财务上限 S₁, 心理上限 S₂)
+
+📌 200万大厂家庭算账实例（见图2～图7）：
+先划走 24万活水 + 4万全家保障预算 + 92万近期备用与教育养老底仓 = 剩 80万自由余量；再取 Min(40万, 34万) = 34万真子弹进场！后方固若金汤，熬过三年熊市也丝毫不慌✨
+
+#家庭资产配置 #中产家庭财务 #炒股仓位管理 #家庭风险管理 #香港保险 #理财干货 #理性投资 #教育金规划 #养老规划</div>
+    </div>
+  </section>
+
   <script>
     const slides = Array.from(document.querySelectorAll('.slide'));
     const dots = Array.from(document.querySelectorAll('.dot'));
@@ -889,6 +1093,70 @@
         const orig = copyScriptBtn.textContent;
         copyScriptBtn.textContent = '✅ 已复制全套口播稿与发布文案！';
         setTimeout(() => { copyScriptBtn.textContent = orig; }, 3000);
+      });
+    });
+
+    // Build 7 Xiaohongshu 3:4 Cards from the 7 slides
+    const xhsGrid = document.getElementById('xhsGrid');
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'xhs-card';
+      const clone = s.cloneNode(true);
+      clone.classList.add('active');
+      card.innerHTML = `
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator">${i === 0 ? '封面 · P1' : `P${i + 1} / 7`}</span>
+        </div>
+      `;
+      const bodyWrap = document.createElement('div');
+      bodyWrap.style.flex = '1';
+      bodyWrap.style.display = 'flex';
+      bodyWrap.style.flexDirection = 'column';
+      bodyWrap.style.justifyContent = 'center';
+      bodyWrap.appendChild(clone);
+      card.appendChild(bodyWrap);
+
+      const foot = document.createElement('div');
+      foot.className = 'xhs-foot';
+      foot.innerHTML = `<span>家庭资产配置先后顺序 · 两段式算账法</span><span>向右滑看完整公式 →</span>`;
+      card.appendChild(foot);
+      xhsGrid.appendChild(card);
+    });
+
+    // Toggle Xiaohongshu 3:4 Note Mode
+    const xhsModeBtn = document.getElementById('xhsModeBtn');
+    xhsModeBtn.addEventListener('click', () => {
+      const isXhs = document.body.classList.toggle('xhs-mode');
+      xhsModeBtn.textContent = isXhs
+        ? '🎬 切回视频号 9:16 竖屏演播台'
+        : '📕 切换小红书 3:4 笔记模式（7图平铺）';
+    });
+
+    // If URL has ?mode=xhs, open directly in Xiaohongshu 3:4 mode
+    if (location.search.includes('mode=xhs')) {
+      document.body.classList.add('xhs-mode');
+      xhsModeBtn.textContent = '🎬 切回视频号 9:16 竖屏演播台';
+    }
+
+    // Toggle Warm Ivory vs Dark Gold theme for Xiaohongshu cards
+    const toggleXhsThemeBtn = document.getElementById('toggleXhsThemeBtn');
+    toggleXhsThemeBtn.addEventListener('click', () => {
+      const isIvory = document.body.classList.toggle('xhs-ivory');
+      toggleXhsThemeBtn.textContent = isIvory
+        ? '🌙 切换为「深色黑金风」'
+        : '☀️ 切换为「暖白杂志风」';
+    });
+
+    // Copy Xiaohongshu Post Copy
+    const copyXhsCopyBtn = document.getElementById('copyXhsCopyBtn');
+    copyXhsCopyBtn.addEventListener('click', () => {
+      const bodyText = document.getElementById('xhsPostBody').innerText.trim();
+      const xhsFull = `手头有200万，到底多少钱可以拿去炒股？\n\n${bodyText}`;
+      navigator.clipboard.writeText(xhsFull).then(() => {
+        const orig = copyXhsCopyBtn.textContent;
+        copyXhsCopyBtn.textContent = '✅ 已复制小红书标题+正文+标签！';
+        setTimeout(() => { copyXhsCopyBtn.textContent = orig; }, 3000);
       });
     });
   </script>
