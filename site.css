@@ -1078,6 +1078,8 @@ footer.site {
 
 @media (max-width: 680px) {
   .wrap, .narrow, .legal { width: calc(100% - 28px); }
+  .stat-strip { display: none; }
+  .hero { padding-bottom: 14px; gap: 12px; }
   .bar {
     flex-direction: column;
     align-items: flex-start;
