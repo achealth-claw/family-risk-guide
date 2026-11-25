@@ -462,3 +462,45 @@ function initHatChart() {
 
 initHatChart();
 
+function initCopyButtons() {
+  const buttons = [...document.querySelectorAll("[data-copy]")];
+  if (!buttons.length) return;
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = btn.getAttribute("data-copy") || "";
+      const tip = btn.querySelector("[data-copy-tip]");
+      const prev = tip ? tip.textContent : "";
+      try {
+        await copyText(text);
+        btn.classList.add("is-copied");
+        if (tip) tip.textContent = "已复制";
+        window.setTimeout(() => {
+          btn.classList.remove("is-copied");
+          if (tip) tip.textContent = prev || "点击复制";
+        }, 1600);
+      } catch (_) {
+        if (tip) tip.textContent = "复制失败，请手动选择";
+      }
+    });
+  });
+}
+
+initCopyButtons();
+

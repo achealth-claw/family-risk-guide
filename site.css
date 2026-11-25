@@ -170,6 +170,8 @@ h1 {
   border-radius: 999px;
   font-weight: 600;
 }
+.badge.red { color: var(--red); background: var(--red-soft); }
+.badge.amber { color: var(--amber); background: var(--amber-soft); }
 .hint { margin: 6px 0 0; color: var(--muted); font-size: 13.5px; }
 
 /* Controls */
@@ -488,7 +490,7 @@ h1 {
 }
 .bar-val { font-family: var(--mono); font-weight: 650; text-align: right; }
 
-/* Four Pillars */
+/* Four Pillars & Risk Matrix */
 .pillars {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -499,6 +501,9 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 15px;
   padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .pillar .type {
   font-size: 12px;
@@ -509,15 +514,101 @@ h1 {
   border-radius: 6px;
   display: inline-block;
 }
+.pillar .type.shock { color: var(--red); background: var(--red-soft); }
+.pillar .type.long { color: var(--amber); background: var(--amber-soft); }
 .pillar h3 { margin: 10px 0 6px; font-size: 17px; }
 .pillar p { margin: 0; font-size: 13.5px; color: var(--ink-2); }
-.pillar .rule {
+.pillar .sol {
   margin-top: 12px;
+  padding: 10px 12px;
+  background: #faf9f5;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.pillar .sol strong { color: var(--green-2); display: block; margin-bottom: 2px; }
+.pillar .rule {
+  margin-top: 10px;
   padding-top: 10px;
   border-top: 1px dashed var(--line-2);
   font-size: 12.5px;
   color: var(--muted);
 }
+
+/* Adult vs Child comparison */
+.compare-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 14px;
+}
+.compare-box {
+  border-radius: 15px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  background: #faf9f5;
+}
+.compare-box.wrong {
+  background: #fdf6f4;
+  border-color: #ebcdc6;
+}
+.compare-box.right {
+  background: #f3f8f5;
+  border-color: #c2d9ce;
+}
+.compare-box h3 {
+  margin: 6px 0 8px;
+  font-size: 17.5px;
+}
+.order-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.order-step {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 14px 15px;
+}
+.order-step .num {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green-soft);
+  padding: 2px 7px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.order-step h4 { margin: 8px 0 4px; font-size: 15.5px; }
+.order-step p { margin: 0; font-size: 13px; color: var(--ink-2); }
+
+/* CTA Banner between pages */
+.next-page-cta {
+  margin-top: 44px;
+  background: linear-gradient(135deg, #184c3f 0%, #113a30 100%);
+  color: #fff;
+  border-radius: 18px;
+  padding: 26px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.next-page-cta h2 { margin: 4px 0 0; font-size: 23px; color: #fff; }
+.next-page-cta p { margin: 6px 0 0; color: rgba(255,255,255,0.82); font-size: 14.5px; max-width: 44em; }
+.next-page-cta .eyebrow { color: #a8d5c5; }
+.next-page-cta .btn.light {
+  background: #fff;
+  color: var(--green-2);
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.next-page-cta .btn.light:hover { background: var(--green-soft); }
 
 /* Tool Hub Cards */
 .tool-cards {
@@ -633,6 +724,43 @@ table.data tr.diff { background: var(--amber-soft); }
 
 .fine { margin: 12px 0 0; color: var(--faint); font-size: 12.5px; line-height: 1.55; }
 
+/* WeChat copy button */
+.wx-copy {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1.5px dashed #bfd4cb;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+.wx-copy:hover { border-color: var(--green); background: var(--green-soft); }
+.wx-copy:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.wx-copy .wx-id {
+  font-size: 24px;
+  font-weight: 750;
+  color: var(--green);
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+.wx-copy .wx-tip {
+  font-size: 12.5px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.wx-copy.is-copied {
+  border-style: solid;
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+.wx-copy.is-copied .wx-tip { color: var(--green); }
+
 footer.site {
   border-top: 1px solid var(--line);
   padding: 32px 0 48px;
@@ -658,7 +786,7 @@ footer.site {
 }
 
 @media (max-width: 920px) {
-  .grid-main, .value-grid, .pillars, .tool-cards, .trio, .author, .foot {
+  .grid-main, .value-grid, .pillars, .compare-two, .order-steps, .tool-cards, .trio, .author, .foot {
     grid-template-columns: 1fr;
   }
   .seg.four { grid-template-columns: repeat(2, 1fr); }

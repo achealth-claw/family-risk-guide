@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>关于与问诊流程 · 安康家庭风险与财务</title>
-  <link rel="stylesheet" href="site.css" />
+  <link rel="stylesheet" href="site.css?v=5" />
 </head>
 <body>
   <header class="site">
@@ -14,9 +14,9 @@
         <span class="brand-sub">医学背景 · 香港持牌顾问的学习与分析站</span>
       </div>
       <nav class="nav" aria-label="主导航">
-        <a href="index.html">总览与诊断</a>
-        <a href="notes.html">保险价值与数据</a>
-        <a href="tools.html">分析工具箱</a>
+        <a href="index.html">为什么 · 底层原理</a>
+        <a href="tools.html">怎么做 · 诊断与测算</a>
+        <a href="notes.html">深度专题</a>
         <a href="about.html" aria-current="page">关于与问诊</a>
       </nav>
     </div>
@@ -91,8 +91,11 @@
             <p class="hint">添加微信后，我会先发你《家庭财务与保障自查清单》或《赴港投保准备清单》。</p>
 
             <div class="prob-box" style="margin-top:14px">
-              <div style="font-size:12.5px;color:var(--muted)">微信号（点击可复制文字）</div>
-              <div style="font-size:24px;font-weight:750;color:var(--green);font-family:var(--mono);margin-top:4px">achealth</div>
+              <div style="font-size:12.5px;color:var(--muted)">微信号（点击下方即可复制）</div>
+              <button type="button" class="wx-copy" data-copy="achealth" aria-label="复制微信号 achealth">
+                <span class="wx-id">achealth</span>
+                <span class="wx-tip" data-copy-tip>点击复制</span>
+              </button>
               <p class="fine" style="margin-top:8px">加好友后只需先回 3 句话：<br />① 家庭结构（单身 / 夫妻无孩 / 有孩几岁）<br />② 当前最想解决哪一类问题（旧单体检 / 大病医疗 / 教育金与养老）<br />③ 大致年交预算区间与近半年能否赴港</p>
             </div>
 
@@ -111,5 +114,6 @@
   <footer class="site">
     <p class="legal">声明：本站为个人学习与分析工具入口。涉及香港保险之具体计划讨论及投保程序，须在符合香港保险业监管局（IA）及相关法规要求下，于香港境内当面进行。</p>
   </footer>
+  <script src="site.js?v=5"></script>
 </body>
 </html>
