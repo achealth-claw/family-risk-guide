@@ -1,3 +1,6 @@
+/* Local: /site/*.html needs ../lifecycle-map/; GitHub Pages root needs lifecycle-map/ */
+const ASSET_ROOT = /\/site(?:\/|$)/.test(location.pathname) ? "../" : "";
+
 const FIT_DATA = {
   single: {
     label: "一个人（没有孩子）",
@@ -267,8 +270,8 @@ function initStageBench() {
       </div>
       <div class="tool-Jump">
         <a class="btn" href="#budget">第 2 步：按这一阶段算出你家的保额锚点 ↓</a>
-        <a class="btn ghost" href="../lifecycle-map/index.html?${q.toString()}">打开生命周期地图</a>
-        <a class="btn ghost" href="../lifecycle-map/fit/index.html?${q.toString()}">看 17 阶段适配总表</a>
+        <a class="btn ghost" href="${ASSET_ROOT}lifecycle-map/index.html?${q.toString()}">打开生命周期地图</a>
+        <a class="btn ghost" href="${ASSET_ROOT}lifecycle-map/fit/index.html?${q.toString()}">看 17 阶段适配总表</a>
       </div>
     `;
   }
