@@ -729,6 +729,144 @@ table.data tr.diff { background: var(--amber-soft); }
 .compare-panel { margin-top: 4px; }
 .compare-panel .data { margin-top: 8px; }
 
+/* Purchasing Power Section (2 Extremes over 1 Rational + Sub-views) */
+.alloc-grid-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.alloc-bottom { margin-top: 16px; }
+.alloc-col {
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  background: #faf9f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.alloc-col.bad { background: #fdf7f5; border-color: #e8c9c1; }
+.alloc-col.warn { background: #fdf8ee; border-color: #e6cfa8; }
+.alloc-col.good {
+  background: #f3f8f5;
+  border: 2px solid #9ec2b3;
+  padding: 22px 24px;
+}
+.alloc-col h3 { margin: 8px 0 4px; font-size: 18px; }
+.alloc-col .why-tag { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.bar-stack {
+  height: 54px;
+  border-radius: 11px;
+  overflow: hidden;
+  display: flex;
+  border: 1px solid rgba(0,0,0,0.08);
+  font-size: 12px;
+  font-weight: 700;
+}
+.bar-seg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  line-height: 1.2;
+  padding: 0 4px;
+  text-align: center;
+}
+.bar-seg small { font-weight: 400; font-size: 10.5px; opacity: 0.92; }
+.arrow-down {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin: 12px 0;
+  font-weight: 600;
+}
+.result-meter {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 15px;
+}
+.meter-track {
+  height: 28px;
+  background: #eeeae0;
+  border-radius: 7px;
+  overflow: hidden;
+  display: flex;
+  margin: 8px 0;
+}
+.meter-fill {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.meter-lost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  color: var(--red);
+  background: repeating-linear-gradient(-45deg, #faeae6, #faeae6 6px, #f4dad4 6px, #f4dad4 12px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.meter-swing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  color: var(--amber);
+  background: repeating-linear-gradient(-45deg, #fbf0df, #fbf0df 6px, #f3dfc0 6px, #f3dfc0 12px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.good-stack { display: grid; grid-template-columns: 1fr; gap: 4px; margin-top: 12px; }
+.good-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+.good-perk {
+  background: #f6faf8;
+  border: 1px solid #d5e6dd;
+  border-radius: 9px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.good-perk strong { color: var(--green-2); display: block; margin-bottom: 2px; }
+
+.basket-rows { display: grid; gap: 12px; margin-top: 14px; }
+.basket-row {
+  display: grid;
+  grid-template-columns: 155px 1fr 1fr 1.1fr;
+  gap: 12px;
+  align-items: stretch;
+  background: #faf9f5;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 13px 14px;
+}
+.basket-item strong { display: block; font-size: 14.5px; }
+.basket-item small { color: var(--muted); font-size: 12px; }
+.basket-cell {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+}
+.basket-cell.bad { border-left: 3.5px solid var(--red); }
+.basket-cell.warn { border-left: 3.5px solid var(--amber); }
+.basket-cell.good { border-left: 3.5px solid var(--green); }
+.pills-visual { display: flex; gap: 4px; margin-bottom: 6px; }
+.pill-unit { height: 11px; flex: 1; border-radius: 3px; background: var(--green); }
+.pill-unit.empty { background: #faeae6; border: 1px dashed var(--red); }
+.pill-unit.warn { background: #fbf0df; border: 1px dashed var(--amber); }
+.pill-unit.bonus { background: #1d5a73; }
+[data-pp-panel][hidden] { display: none !important; }
+
 /* WeChat copy button */
 .wx-copy {
   display: flex;
@@ -791,7 +929,7 @@ footer.site {
 }
 
 @media (max-width: 920px) {
-  .grid-main, .value-grid, .pillars, .compare-two, .order-steps, .tool-cards, .trio, .author, .foot {
+  .grid-main, .value-grid, .pillars, .compare-two, .order-steps, .tool-cards, .trio, .author, .foot, .alloc-grid-top, .good-perks, .basket-row {
     grid-template-columns: 1fr;
   }
   .seg.four { grid-template-columns: repeat(2, 1fr); }

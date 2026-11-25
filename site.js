@@ -525,3 +525,22 @@ function initCompareTabs() {
 
 initCompareTabs();
 
+function initPurchasingPowerTabs() {
+  const root = document.querySelector("[data-pp]");
+  if (!root) return;
+  const tabs = [...root.querySelectorAll("[data-pp-tab]")];
+  const panels = [...root.querySelectorAll("[data-pp-panel]")];
+
+  function show(key) {
+    tabs.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.ppTab === key)));
+    panels.forEach((p) => {
+      p.hidden = p.dataset.ppPanel !== key;
+    });
+  }
+
+  tabs.forEach((b) => b.addEventListener("click", () => show(b.dataset.ppTab)));
+  show("basket");
+}
+
+initPurchasingPowerTabs();
+
