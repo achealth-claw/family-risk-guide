@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>对照 · 超级玛丽16 × 万家康尊尚保</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #152033; --muted: #5a6578; --faint: #8b95a8; --line: #d5dce8;
+      --bg: #f2f4f8; --paper: #fff; --accent: #3d5a40; --accent-soft: #e8f0e9;
+      --diff: #8a5a12; --diff-bg: #fff7ea; --same-bg: #f7f8fa; --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; color: var(--ink); font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+      font-size: 15px; line-height: 1.55;
+      background:
+        radial-gradient(1000px 480px at 0% 0%, #e2ebdd 0%, transparent 50%),
+        radial-gradient(900px 420px at 100% 0%, #dde5f0 0%, transparent 45%),
+        var(--bg);
+    }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 28px 24px 72px; }
+    h1 {
+      font-family: "Noto Serif SC", serif; font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+      margin: 0 0 8px; font-weight: 700;
+    }
+    .sub { color: var(--muted); margin: 0 0 14px; max-width: 48rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .chip {
+      padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line);
+      background: var(--paper); font-size: 0.8rem; color: var(--muted);
+    }
+    .chip.accent { background: var(--accent-soft); color: var(--accent); border-color: #c5d6c7; font-weight: 600; }
+    .links { margin: 0 0 22px; display: flex; flex-wrap: wrap; gap: 14px; }
+    .links a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+    .callout {
+      background: #fff4e0; border: 1px solid #f0d9a8; color: var(--diff);
+      border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; font-size: 0.92rem;
+    }
+    table {
+      width: 100%; border-collapse: collapse; background: var(--paper);
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    thead th { background: #e8edf3; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+    thead th.prod { color: var(--ink); font-size: 0.95rem; }
+    tr.sec td {
+      background: #eef2f7; font-family: "Noto Serif SC", serif; font-weight: 700;
+      font-size: 0.9rem; letter-spacing: 0.04em;
+    }
+    tr.diff { background: var(--diff-bg); }
+    tr.same { background: var(--same-bg); }
+    th { font-weight: 600; width: 9.5rem; color: var(--muted); font-size: 0.88rem; }
+    td.v { width: 22%; }
+    td.delta { width: 28%; color: var(--muted); font-size: 0.86rem; }
+    tr.diff td.delta { color: var(--diff); font-weight: 500; }
+    .val { font-weight: 600; color: var(--ink); }
+    .tip { margin-top: 4px; font-size: 0.78rem; color: var(--faint); line-height: 1.4; }
+    h2 {
+      margin: 28px 0 12px; font-family: "Noto Serif SC", serif; font-size: 1.2rem;
+    }
+    .struct {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    @media (max-width: 800px) { .struct { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+    }
+    .card strong { display: block; margin-bottom: 8px; }
+    .card ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.92rem; }
+    footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--faint); font-size: 0.8rem; }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>对照 · 超级玛丽16 × 万家康尊尚保</h1>
+    <p class="sub">由 L2 <code>样卡.csv</code> 派生的受控字段并排。跨内地/港险只比结构，不在此页比保费或「谁更好」。</p>
+    <div class="meta">
+      <span class="chip accent">样卡对照 v1</span>
+      <span class="chip">cn-君龙人寿-0001</span>
+      <span class="chip">hk-永明香港-0124</span>
+    </div>
+    <div class="links"><a href="超级玛丽16_速查.html">超级玛丽16 速查</a> · <a href="万家康尊尚保_速查.html">万家康尊尚保 速查</a></div>
+    <div class="callout">
+      高亮行 = 两边取值不同。单元格下方浅灰字来自样卡 notes（出处摘要）。
+      缴费年期两边都是多档，单值格均为「未压单值」——具体档见各时速查。
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>字段</th><th class='prod'>超级玛丽16</th><th class='prod'>万家康尊尚保</th><th>差在哪</th></tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><td colspan="4">身份</td></tr><tr class="diff"><th>备案/计划代号</th><td class="v"><div class="val">君龙人寿[2026]疾病保险034号</div><div class=tip>条款封面；大众名超级玛丽16号</div></td><td class="v"><div class="val">CI1U0A / SWSC10/15/20/25</div><div class=tip>手册§8：计划编号CI1U0A；缩写按缴费年期SWSC10–25。条款样本号1-01-0314/0424+基本保障1-01-0319/0924</div></td><td class="delta">取值不同，点开单品速查看 notes</td></tr><tr class="sec"><td colspan="4">期间</td></tr><tr class="same"><th>保险期间</th><td class="v"><div class="val">终身</div><div class=tip>§2.4保险期间为终身；说明书§6一致</div></td><td class="v"><div class="val">终身</div><div class=tip>保障年期直至终身；部分早期/儿童/伤残等有年龄上限另注</div></td><td class="delta">相同或同义</td></tr><tr class="diff"><th>缴费期间类型</th><td class="v"><div class="val">§7：10/15/20/30/35年交五档</div><div class=tip>按年期</div></td><td class="v"><div class="val">10/15/20/25年；多档不压成单数</div><div class=tip>按年期</div></td><td class="delta">枚举相同，细则不同（见两列 notes）</td></tr><tr class="diff"><th>缴费年期（单值）</th><td class="v"><div class="val">多档可选不压成一个数；10|15|20|30|35</div><div class=tip>未压单值 / 未知</div></td><td class="v"><div class="val">可选四档</div><div class=tip>未压单值 / 未知</div></td><td class="delta">枚举相同，细则不同（见两列 notes）</td></tr><tr class="diff"><th>缴费频率</th><td class="v"><div class="val">年交</div><div class=tip>说明书§8交费方式=年交。条款脚注2仍写月/季/半年/年对应日，以说明书披露为年交</div></td><td class="v"><div class="val">年交 / 半年交 / 月交</div><div class=tip>年缴/半年缴/月缴；无季缴枚举</div></td><td class="delta">说明书：玛丽年交；尊尚年/半年/月</td></tr><tr class="same"><th>最小投保年龄</th><td class="v"><div class="val">0</div><div class=tip>投保范围：各交费档均为0周岁起</div></td><td class="v"><div class="val">0</div><div class=tip>上一个生日；随缴费期变：10年缴0–65 / 15年0–60 / 20年0–55 / 25年0–50。单格取下限0</div></td><td class="delta">相同或同义</td></tr><tr class="diff"><th>最大投保年龄</th><td class="v"><div class="val">50</div><div class=tip>随交费期收窄：10年交至50 / 15年至40 / 20年至45 / 30·35年交至35；单格取各档上限之最大</div></td><td class="v"><div class="val">65</div><div class=tip>取各缴费档上限之最大(10年缴至65)；实际随缴费期收窄</div></td><td class="delta">取值不同，点开单品速查看 notes</td></tr><tr class="diff"><th>犹豫/冷静期（日）</th><td class="v"><div class="val">15</div><div class=tip>§1.3电子保单次日起15日犹豫期</div></td><td class="v"><div class="val">21</div><div class=tip>冷静期21个历日</div></td><td class="delta">内地犹豫15 vs 港冷静21</td></tr><tr class="sec"><td colspan="4">机制</td></tr><tr class="same"><th>有现金价值</th><td class="v"><div class="val">是</div><div class=tip>§7.1；重疾给付后现价降为零(p5)</div></td><td class="v"><div class="val">是</div><div class=tip>保证现金价值定义；手册：第10保单年度起退保可领。首次严重危疾/安全网后现价与特别红利归零</div></td><td class="delta">相同或同义</td></tr><tr class="same"><th>可保单贷款</th><td class="v"><div class="val">是</div><div class=tip>§7.2；最高现价80%、单次最长6个月</div></td><td class="v"><div class="val">是</div><div class=tip>以保证现金价值为担保</div></td><td class="delta">相同或同义</td></tr><tr class="diff"><th>不能作废/退保选项</th><td class="v"><div class="val">退保领现价</div><div class=tip>§1.4犹豫期后退还现价；未见减额清缴/展期</div></td><td class="v"><div class="val">退保领现价 / 自动保费贷款</div><div class=tip>退保价值+自动保费贷款；明文减额缴清/展期不适用</div></td><td class="delta">取值不同，点开单品速查看 notes</td></tr><tr class="same"><th>不可异议（月）</th><td class="v"><div class="val">24</div><div class=tip>§9.2成立超过2年不得解除</div></td><td class="v"><div class="val">24</div><div class=tip>不可争议两年；条款写明只适用于身故保障</div></td><td class="delta">相同或同义</td></tr><tr class="diff"><th>自杀免责（月）</th><td class="v"><div class="val">24</div><div class=tip>§3.1成立或复效起2年内自杀</div></td><td class="v"><div class="val">12</div><div class=tip>签发或复效后一年内自杀不付身故保障</div></td><td class="delta">玛丽24月 vs 尊尚12月</td></tr><tr class="sec"><td colspan="4">港格</td></tr><tr class="diff"><th>身故赔偿口径</th><td class="v"><div class="val">—</div></td><td class="v"><div class="val">取高</div><div class=tip>现有保额100%+额外全护(如适用)+特别红利面值 vs 已缴保费扣早期/儿童已付；取高</div></td><td class="delta">尊尚有港式取高口径；玛丽身故为可选责任</td></tr><tr class="diff"><th>可减保/部份退保</th><td class="v"><div class="val">—</div></td><td class="v"><div class="val">是</div><div class=tip>可部份退保，保障额/现价/保费相应下调</div></td><td class="delta">取值不同，点开单品速查看 notes</td></tr><tr class="sec"><td colspan="4">危疾</td></tr><tr class="diff"><th>危疾形态</th><td class="v"><div class="val">独立重疾（身故可选）</div><div class=tip>重疾为主险必选；身故/全残为可选(§2.6.2)</div></td><td class="v"><div class="val">加速身故（与身故共用路径）</div><div class=tip>首次严重危疾或安全网后现价归零且身故终止；与身故共用路径</div></td><td class="delta">尊尚首次严重即清零现价并停身故；玛丽身故为可选，重疾后合同常继续</td></tr><tr class="diff"><th>等候/等待期（日）</th><td class="v"><div class="val">180</div><div class=tip>§2.5；意外无等待期。等待期内重疾/身故终止退费；中轻/结节等该责永久停保合同继续</div></td><td class="v"><div class="val">60</div><div class=tip>内部比较表等候期60日；疾病定义亦多见签发后60日。意外另计</div></td><td class="delta">港短内地长；玛丽等待期内分档后果更细</td></tr><tr class="diff"><th>分层</th><td class="v"><div class="val">重大110(p21)+中度35(p23)+轻度40(p23)；另有结节/拓展等专项</div><div class=tip>重大/严重 / 中度 / 轻度/早期</div></td><td class="v"><div class="val">严重71+早期90+儿童27；另安全网复杂手术38。无独立「中症」档名</div><div class=tip>重大/严重 / 轻度/早期</div></td><td class="delta">玛丽有中症档；尊尚是严重+早期+儿童，无「中症」名</td></tr><tr class="diff"><th>多次赔</th><td class="v"><div class="val">首次重疾后同组中轻停(附表3)；中轻合计最多6次。可选重疾2/3次(异病365日/同病730日·150%)或恶性肿瘤津贴/多次(互斥)</div><div class=tip>分组多次</div></td><td class="v"><div class="val">三组：组一癌/心/中风最多5次；组二脑退化/柏金逊1次；组三其他1次。严重危疾累计最多7次、与永安心合计≤700%原保额；后续赔至85岁</div><div class=tip>分组多次</div></td><td class="delta">枚举同为「分组多次」，组定义与次数上限不同——不是同一种多次</td></tr><tr class="same"><th>与身故共用保额</th><td class="v"><div class="val">是</div><div class=tip>选身故时与重大疾病保险金仅给付一项；重疾赔后身故责终止</div></td><td class="v"><div class="val">是</div><div class=tip>首次严重危疾或安全网后身故保障终止</div></td><td class="delta">相同或同义</td></tr><tr class="same"><th>重疾后豁免</th><td class="v"><div class="val">是</div><div class=tip>首次重疾后豁免本主险后续期交(必选内置)；中轻豁免为可选</div></td><td class="v"><div class="val">是</div><div class=tip>严重危疾保费豁免+儿童/早期豁免+父母身故豁免（手册核心表）</div></td><td class="delta">相同或同义</td></tr><tr class="same"><th>病种覆盖粗分</th><td class="v"><div class="val">宽</div><div class=tip>110重大+35中度+40轻度</div></td><td class="v"><div class="val">宽</div><div class=tip>188种受保疾病+38项复杂手术（手册表述）</div></td><td class="delta">相同或同义</td></tr><tr class="diff"><th>HKFI 定义版本</th><td class="v"><div class="val">不适用</div><div class=tip>内地产品；对齐中保协2020规范28种+增设</div></td><td class="v"><div class="val">未压单值 / 未知</div><div class=tip>港危疾定义在条款后部；未单列HKFI版次号</div></td><td class="delta">取值不同，点开单品速查看 notes</td></tr>
+      </tbody>
+    </table>
+
+    <h2>样卡装不下的结构差</h2>
+    <div class="struct">
+      <div class="card">
+        <strong>超级玛丽16（内地）</strong>
+        <ul>
+          <li>必选含重疾医疗费用（累计 ≤50% 保额）</li>
+          <li>中轻合计最多 6 次；首次重疾后合同常继续</li>
+          <li>身故/多次/癌津贴等为投保时勾选</li>
+          <li>交费档：10 / 15 / 20 / 30 / 35 年</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong>万家康尊尚保（港）</strong>
+        <ul>
+          <li>分红危疾：保证现价 + 特别红利</li>
+          <li>组一（癌/心/中风）最多 5 次；严重累计 ≤7、合计 ≤700%</li>
+          <li>尊尚独有：永安心、男女加护、特定疾病关爱</li>
+          <li>交费档：10 / 15 / 20 / 25 年 · 美元</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer>
+      生成自 <code>样卡.csv</code> · 脚本 <code>build_compare.py</code> · 以后加产品：改 id 参数重跑即可
+    </footer>
+  </div>
+</body>
+</html>

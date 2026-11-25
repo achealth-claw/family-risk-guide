@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="家庭生命周期地图 · 险种适配：每个阶段先配什么、补什么、什么可以缓，以及为什么。" />
+<meta name="format-detection" content="telephone=no" />
+<title>阶段 × 险种适配 | 家庭理财学习笔记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #13212e;
+    --ink-soft: #3a4a58;
+    --ink-mute: #6b7b89;
+    --priority: #0f6b5c;
+    --priority-soft: #d8efe9;
+    --supp: #1a6b8a;
+    --supp-soft: #d6eaf2;
+    --cond: #b45309;
+    --cond-soft: #fef3c7;
+    --hold: #8b5a4a;
+    --hold-soft: #f0e7e2;
+    --line: rgba(19, 33, 46, 0.12);
+    --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    --font-serif: "Songti SC", "Noto Serif SC", "STSong", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background:
+      radial-gradient(ellipse 80% 50% at 0% 0%, rgba(26, 107, 138, 0.16), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 20%, rgba(15, 107, 92, 0.13), transparent 50%),
+      linear-gradient(165deg, #eef4f7 0%, #e2ebf1 45%, #d8e3ea 100%);
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) 64px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+
+  header.top { margin-bottom: 18px; }
+  .kicker {
+    font-size: 12px; letter-spacing: .12em; color: var(--ink-mute);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 5vw, 30px);
+    letter-spacing: .01em;
+  }
+  .lead { margin-top: 10px; font-size: 14px; line-height: 1.75; color: var(--ink-soft); max-width: 60ch; }
+  .backlink {
+    display: inline-block; margin-top: 12px; font-size: 13px; color: var(--supp);
+    text-decoration: none; border-bottom: 1px dashed rgba(26,107,138,.45);
+  }
+
+  .legend {
+    margin: 20px 0 22px; padding: 14px 16px;
+    background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 14px;
+    font-size: 13px; line-height: 1.9; color: var(--ink-soft);
+  }
+  .legend b { color: var(--ink); }
+  .legend .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .money-note { margin-top: 8px; font-size: 12.5px; color: var(--hold); }
+  .money-note[hidden] { display: none; }
+
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .money-bar { margin-bottom: 18px; }
+  .money-label {
+    display: block; font-size: 12px; letter-spacing: .06em; color: var(--ink-mute);
+    margin-bottom: 8px; font-weight: 500;
+  }
+  .tab, .money-pill {
+    font: inherit; font-size: 14px; padding: 9px 18px; border-radius: 999px;
+    border: 1.5px solid var(--line); background: rgba(255,255,255,.7); color: var(--ink-soft);
+    cursor: pointer; transition: .2s ease;
+  }
+  .tab.on, .money-pill.on {
+    background: var(--ink); color: #fff; border-color: var(--ink);
+  }
+
+  .stage {
+    background: rgba(255,255,255,.82);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 18px 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 0 rgba(19,33,46,.04);
+  }
+  .stage-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .stage-name { font-family: var(--font-serif); font-size: 19px; }
+  .stage-age { font-size: 13px; color: var(--ink-mute); }
+  .stage-why { margin-top: 8px; font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
+
+  .fit-list { margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+  .fit {
+    display: grid; grid-template-columns: 62px 1fr; gap: 10px;
+    padding: 9px 10px; border-radius: 10px; background: rgba(19,33,46,.028);
+  }
+  .tag {
+    font-size: 11.5px; font-weight: 700; text-align: center; align-self: start;
+    padding: 3px 0; border-radius: 6px; letter-spacing: .04em;
+  }
+  .tag.p { background: var(--priority-soft); color: var(--priority); }
+  .tag.s { background: var(--supp-soft); color: var(--supp); }
+  .tag.c { background: var(--cond-soft); color: var(--cond); }
+  .tag.h { background: var(--hold-soft); color: var(--hold); }
+  .fit-body { font-size: 13.5px; line-height: 1.65; }
+  .fit-type { font-weight: 700; color: var(--ink); }
+  .fit-why { color: var(--ink-soft); }
+
+  .foot {
+    margin-top: 24px; padding: 14px 16px; border-radius: 14px;
+    background: rgba(255,255,255,.66); border: 1px solid var(--line);
+    font-size: 12.5px; line-height: 1.85; color: var(--ink-mute);
+  }
+  .foot b { color: var(--hold); }
+  @media print { body { background: #fff; } .tabs, .money-bar, .backlink { display: none; } .stage { page-break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">家庭理财学习笔记 · 配套表</div>
+    <h1>阶段 × 险种适配</h1>
+    <p class="lead">同一张生命周期地图，补上一层「这一段该配哪一类保障」。表里写的是<b>险种类型</b>，不是某家公司、某个产品；先看顺序，再谈产品。可选「钱的松紧」，同一阶段的优先 / 暂缓会不同。</p>
+    <a class="backlink" id="backlink" href="../?profile=family">← 回到家庭生命周期地图</a>
+  </header>
+
+  <div class="legend">
+    <div><b>怎么读：</b>优先 = 这一段先做，缺了别的都白搭；补充 = 做齐才完整；视情况 = 看责任与预算；暂缓 = 不是现在该花的钱。</div>
+    <div class="row">
+      <span class="tag p">优先</span><span class="tag s">补充</span><span class="tag c">视情况</span><span class="tag h">暂缓</span>
+    </div>
+    <div class="money-note" id="money-note" hidden></div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="money-bar">
+    <span class="money-label">钱的松紧（可选，不改阶段，只调优先级）</span>
+    <div class="tabs" id="money-pills" style="margin-bottom:0"></div>
+  </div>
+  <div id="list"></div>
+
+  <div class="foot">
+    <div>本表只到「险种类型」这一层，<b>不含产品名称、不含费率、不构成投保建议</b>。具体保额、期限、健康告知与核保结论，需要按个人情况单独评估。</div>
+    <div style="margin-top:8px">涉及<b>跨境 / 香港保单</b>的配置，须在合规场景下由持牌人一对一评估，不在公开渠道展开。</div>
+    <div style="margin-top:8px">人群统计仅作示意，个体差异大，不构成诊断或患病率承诺。「钱的松紧」只是侧重点示意，不问具体金额。</div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  single: {
+    label: "一个人",
+    stages: [
+      {
+        name: "起步期", age: "约 22–28 岁", why: "收入刚立住、责任不大：这一段的核心是「别被一次小冲击打回原点」。",
+        fits: [
+          { l: "p", t: "一年期意外险", w: "保费最低、杠杆最高，先对冲通勤 / 运动 / 出行这类高频场景。" },
+          { l: "p", t: "百万医疗险（社保之上）", w: "管大额住院账单，社保目录外的部分才是真缺口。" },
+          { l: "s", t: "重疾险（基础保额）", w: "这一年龄段核保通常最宽松、保费最低，先占住入口；预算有限就先做保额。",
+            money: { tight: { w: "先占入口即可，保额可控，别一次买满。" }, ample: { w: "窗口宽不等于一次买齐，按真缺口配，别用高额储蓄型先上车。" } } },
+          { l: "c", t: "定期寿险", w: "有助学贷款、或父母需要你兜底时再上，没有责任则不必抢。" },
+          { l: "h", t: "储蓄型 / 养老年金", w: "应急金没到 3–6 个月支出前，先别谈长期专款。",
+            money: { ample: { w: "宽裕时也先定义怕什么，再把长期目标记成专款，与保障分开。" } } }
+        ]
+      },
+      {
+        name: "自立期", age: "约 28–35 岁", why: "收入在涨、目标刚出现，但你自己仍是家里最主要的「资产」。",
+        fits: [
+          { l: "p", t: "重疾险（保额对齐 3–5 年收入）", w: "这一阶段最值钱的不是收益，是你未来几十年的赚钱能力。" },
+          { l: "p", t: "医疗险（可升级中端 / 特需）", w: "就医品质与账单缺口是两件事，收入上台阶后可同步升级。",
+            money: { tight: { w: "先堵住账单缺口，升级特需可以后排。" } } },
+          { l: "s", t: "意外险", w: "保额跟着收入走，不用年年重买，年度续保即可。" },
+          { l: "s", t: "定期寿险", w: "一旦有房贷意向或赡养责任，先按「负债 + 5 年生活费」粗算。",
+            money: { tight: { l: "c", w: "仅在已有硬债务或必须赡养时再评估，没有责任不必抢。" } } },
+          { l: "c", t: "长期储蓄 / 年金", w: "保障做齐、应急金到位，且有明确 5–10 年目标时再启动。",
+            money: { tight: { l: "h", w: "一切储蓄型目标先让路，先守赚钱能力。" }, ample: { l: "s", w: "可以启动，但单独记账，检视已有条款往往比再买一张更值。" } } },
+          { l: "h", t: "用收益演示当决策依据", w: "这个阶段用「演示收益」替代保障决策，是最常见的顺序错。" }
+        ]
+      },
+      {
+        name: "责任初显", age: "约 35–45 岁", why: "房贷、赡养、职业平台期叠加，风险敞口变宽，顺序比产品更重要。",
+        fits: [
+          { l: "p", t: "定期寿险（≈ 剩余负债 + 5–10 年家庭支出）", w: "先回答「万一收入没了，贷款和生活谁来顶」。" },
+          { l: "p", t: "重疾险 / 医疗险（补缺口）", w: "健康问题开始出现，趁还能核保把保额补齐。" },
+          { l: "s", t: "意外险（含身故 / 失能）", w: "意外是低保费补高保额的那一层，别省。" },
+          { l: "s", t: "收入中断安排（失能 / 长期给付类）", w: "大病之后最贵的往往不是医药费，是「人还在、收入停了」。" },
+          { l: "c", t: "年金 / 长期储蓄", w: "长期目标可以启动，但必须是保障之后的预算。",
+            money: { tight: { l: "h", w: "暂停用储蓄型保单「充场面」，保费先对准扛住冲击。" }, ample: { l: "s", w: "可用专款工具，但不拿收益故事替缺口；三笔钱分开看。" } } },
+          { l: "h", t: "用储蓄型保单顶保障缺口", w: "责任最重的十年，最怕把有限预算压在非保障责任上。" }
+        ]
+      },
+      {
+        name: "蓄力期", age: "约 45–55 岁", why: "离退休更近，开始把「活得久」和「钱够用」放在同一张图上。",
+        fits: [
+          { l: "p", t: "医疗险（看续保稳定性）", w: "账单风险不随年龄消失，这一段的重点是别断档。" },
+          { l: "p", t: "重疾险补缺口", w: "核保条件开始收窄，现在补的是「以后买不到或不划算」的那部分。",
+            money: { tight: { w: "保费可控为先，只补真缺口，不断保。" } } },
+          { l: "s", t: "养老年金 / 长期储蓄", w: "服务的是「专款专用」，不是收益竞赛。",
+            money: { tight: { l: "c", w: "能缓则缓，应急金与保费连续性优先于收益率。" }, ample: { w: "正式启动并隔离，把时间窗口用在确定性安排上。" } } },
+          { l: "s", t: "意外险", w: "意外与骨折的代价随年龄上升，低成本一层不要撤。" },
+          { l: "c", t: "护理 / 长期照护议题", w: "父母高龄护理已在上演，提前把自己的那份放进账本。",
+            money: { ample: { l: "s", w: "宽裕时把护理路径前瞻写清楚，比再堆一张单更值。" } } },
+          { l: "h", t: "把应急钱、保障、长期目标混在一仓", w: "混仓的结果通常是：急用时卖了不该卖的。" }
+        ]
+      },
+      {
+        name: "过渡退休", age: "约 55–65 岁", why: "从「赚钱」转向「用钱」，流动性与确定性比收益率更重要。",
+        fits: [
+          { l: "p", t: "医疗险不断档", w: "退休后账单风险不消失，反而叠加慢病与医疗通胀。" },
+          { l: "p", t: "意外险", w: "一次跌倒的陪护成本，可能比医疗费更伤现金流。" },
+          { l: "s", t: "年金 / 确定现金流安排", w: "把「活多久」这件不确定的事，换成可预期的生活成本。",
+            money: { tight: { l: "c", w: "量力而行，先稳住生活节奏，再谈加码。" } } },
+          { l: "c", t: "护理安排", w: "现在规划的成本，远低于将来被动选择的成本。",
+            money: { ample: { l: "s", w: "把账单、护理、陪护路径做实，变成可执行安排。" } } },
+          { l: "c", t: "传承相关安排（合规咨询内谈）", w: "受益人、账户、意愿是否清楚，比多买一单更值。",
+            money: { tight: { l: "h", w: "节奏稳住后再谈，先让已有安排用得上。" } } },
+          { l: "h", t: "新买高保费的重疾", w: "核保难、杠杆低，通常不如把已有保障与现金流理清。" }
+        ]
+      },
+      {
+        name: "长寿期", age: "约 65 岁以后", why: "活得久是好事，也要求现金流、护理与传承安排更清晰。",
+        fits: [
+          { l: "p", t: "医疗险 / 慢病相关保障持续有效", w: "这一段的主线是「开支可预期」，不是再加名目。" },
+          { l: "p", t: "护理 / 陪护资金安排", w: "护理支出往往持续多年，是晚年最大的不确定项。" },
+          { l: "s", t: "意外险（跌倒 / 骨折）", w: "高龄意外是住院与失能的常见入口。" },
+          { l: "s", t: "已有保单的理赔与受益人检视", w: "准备过，还要兑现得清楚：路径、受益人都要更新。" },
+          { l: "c", t: "传承工具", w: "家庭结构变了才需要工具，不是工具本身需要你。",
+            money: { tight: { l: "h", w: "可从简，先保证自己不被一次账单打乱。" }, ample: { w: "在合规框架下把交接路径写清楚。" } } },
+          { l: "h", t: "再堆新保障名目", w: "这一段的钱，更该花在兑现与照护，而不是买更多条款。" }
+        ]
+      }
+    ]
+  },
+  couple: {
+    label: "双人家庭",
+    stages: [
+      {
+        name: "成家初期", age: "约 25–32 岁", why: "两人的责任开始合并：不是自动需要更多保险，而是需要对齐。",
+        fits: [
+          { l: "p", t: "双方意外险 + 百万医疗", w: "两个人一起生活的第一道底，成本低、见效快。" },
+          { l: "s", t: "重疾险（主要收入方先做）", w: "谁断了收入谁的影响大，先把这一侧补上。",
+            money: { ample: { l: "p", w: "宽裕时把双方底子打齐，避免一方裸奔。" } } },
+          { l: "c", t: "定期寿险（共同债务出现后）", w: "结婚不自动需要寿险，共同负债出现才需要。" },
+          { l: "c", t: "长期储蓄 / 年金", w: "先对齐「两人最怕什么」，再决定钱花在哪。",
+            money: { tight: { l: "h", w: "共同应急金先于任何长期单，债务出现前少谈储蓄型。" }, ample: { w: "共同目标专款可启动，但必须与保障分账。" } } },
+          { l: "h", t: "只给一方配齐、另一方空窗", w: "保障水平不对称，是双人家庭最常见的隐性缺口。" }
+        ]
+      },
+      {
+        name: "置业期", age: "约 30–40 岁", why: "房贷把未来十几年的现金流绑在一起，谁断了收入，月供压力立刻显现。",
+        fits: [
+          { l: "p", t: "定期寿险（匹配剩余贷款 + 生活费）", w: "先回答：人没了，贷还还得上吗。" },
+          { l: "p", t: "重疾险 / 医疗险", w: "避免用存款硬扛康复期，那是最快掏空两人的方式。" },
+          { l: "s", t: "意外险（含失能）", w: "月供不因意外打折，这一层别省。" },
+          { l: "c", t: "储蓄型 / 教育金种子", w: "保障预算与储蓄预算分开记账，别互相挪用。",
+            money: { tight: { l: "h", w: "储蓄目标全部给月供与保费让路。" }, ample: { w: "专款可以并行，但不可顶替寿险缺口。" } } },
+          { l: "h", t: "只保房子、不保人", w: "房贷险保不了你的收入中断，顺序很容易搞反。" }
+        ]
+      },
+      {
+        name: "责任叠加期", age: "约 38–50 岁", why: "上有老、中有贷：家庭资产负债表最紧的一段，按「扛不扛得住」排序。",
+        fits: [
+          { l: "p", t: "重疾险 + 医疗险（保额复盘）", w: "责任变了，保额没变，等于缺口在扩大。" },
+          { l: "p", t: "寿险 / 收入中断安排", w: "双端赡养 + 房贷，一方出事就是全家现金流危机。" },
+          { l: "s", t: "意外险", w: "低成本的一层，别在预算紧张时先砍它。" },
+          { l: "c", t: "养老年金启动", w: "长期目标开始排队，但仍在保障之后。",
+            money: { tight: { l: "h", w: "禁用储蓄型顶保障缺口，每一分保费对准扛住冲击。" }, ample: { l: "s", w: "保障与专款分仓，窗口尾声前补真缺口，而非加概念单。" } } },
+          { l: "h", t: "用储蓄型保单顶替保障缺口", w: "责任最重时，先堵缺口，再谈专款。" }
+        ]
+      },
+      {
+        name: "空巢过渡", age: "约 50–60 岁", why: "债务渐清，目光转向自己的健康与退休现金流；核保窗口却在收窄。",
+        fits: [
+          { l: "p", t: "医疗险（续保与责任弄清）", w: "趁还能核保，把真正缺的那块补上。" },
+          { l: "s", t: "重疾险补缺口", w: "这个年龄买的是「还有没有机会」，不是性价比。",
+            money: { tight: { l: "p", w: "窗口还在又紧：只补缺了会后悔的那一块。" } } },
+          { l: "s", t: "养老年金 / 长期储蓄", w: "开始认真讨论现金流，而不是讨论演示收益。",
+            money: { tight: { l: "c", w: "能量力则启，不能则先记账规划。" }, ample: { w: "养老专款正式隔离，互相照护安排提前写清。" } } },
+          { l: "c", t: "意外险", w: "健康风险抬升期间，意外是廉价的第二层。" },
+          { l: "h", t: "把「演示收益」放在决策中心", w: "临近用钱的钱，回撤比收益更值得盯。" }
+        ]
+      },
+      {
+        name: "共同退休", age: "约 60 岁以后", why: "两人一起用钱的阶段：一个人的风险，最怕掏空两个人。",
+        fits: [
+          { l: "p", t: "医疗险持续有效", w: "一方的账单风险，会直接吃掉另一方的养老钱。" },
+          { l: "p", t: "护理 / 陪护安排", w: "长期护理是双人晚年最现实的财务冲击。" },
+          { l: "s", t: "年金 / 确定现金流", w: "服务确定开支，不作收益竞赛。" },
+          { l: "s", t: "意外险（跌倒 / 骨折）", w: "高龄一次意外，常常就是护理开支的起点。" },
+          { l: "c", t: "受益人与保单检视", w: "定期更新受益人与家庭财务地图，别让安排过期。",
+            money: { tight: { l: "s", w: "少加新单，多打通已有保单的兑现路径，减少家庭扯皮成本。" } } },
+          { l: "h", t: "为「收益」追新单", w: "这一阶段保险帮的是稳住节奏，不是提高收益。" }
+        ]
+      }
+    ]
+  },
+  family: {
+    label: "有娃家庭",
+    stages: [
+      {
+        name: "备孕 / 初为人父母", age: "约 28–35 岁", why: "孩子出生前后是重新画风险地图的时刻：保险首先保护的是大人的人力资本。",
+        fits: [
+          { l: "p", t: "大人的医疗险 + 重疾险", w: "大人先有保障，孩子才有稳定的抚养来源。" },
+          { l: "p", t: "定期寿险（按「孩子独立前需要多少年」粗算）", w: "这一段的寿险，是为抚养责任买的。",
+            money: { ample: { w: "对齐抚养年，避免买「越长越好」。" } } },
+          { l: "s", t: "意外险（双方）", w: "育儿期出行与照护场景变多，成本低的一层先铺。" },
+          { l: "s", t: "孩子：社保 + 基础医疗 / 意外", w: "孩子侧先做基础，不是一出生就配长期储蓄。" },
+          { l: "c", t: "教育金专款", w: "保障与应急金到位之后，再谈长期专款。",
+            money: { tight: { l: "h", w: "任何孩子储蓄型先停，保费只办一件事：保住大人的抚养能力。" }, ample: { l: "s", w: "大人保障配齐后再启动，专款排在大人保障之后。" } } },
+          { l: "h", t: "只给孩子买、大人裸奔", w: "这是有娃家庭最常见、也最贵的一个顺序错误。" }
+        ]
+      },
+      {
+        name: "育儿前期", age: "孩子约 0–6 岁", why: "支出刚性上升、容错率下降：顺序错了，再「规划教育金」也像在沙上盖楼。",
+        fits: [
+          { l: "p", t: "大人：医疗 + 重疾 + 寿险", w: "大人一次收入冲击，整个育儿计划就会停摆。" },
+          { l: "p", t: "孩子：基础医疗 + 意外", w: "孩子侧更高频的是意外与住院，先用基础层接住。" },
+          { l: "s", t: "寿险保额按托育 + 房贷重算", w: "支出结构变了，老保额往往已经不够。" },
+          { l: "c", t: "教育金长期专款", w: "有明确年限和用途再投，不能拿来顶保障缺口。",
+            money: { tight: { l: "h", w: "应急金 → 大人保障 → 止；教育金可等。" }, ample: { l: "s", w: "大人保障闭环后启动并隔离，写成真专款，而不是又一张随意保单。" } } },
+          { l: "h", t: "用「教育金」名义跳过应急与保障", w: "应急金 → 大人保障 → 再谈专款，这个顺序不能跳。" }
+        ]
+      },
+      {
+        name: "义务教育期", age: "孩子约 6–15 岁", why: "开支可预期，但要防的是「用短期教育投入挤掉长期风控」。",
+        fits: [
+          { l: "p", t: "保额复盘：重疾 / 寿险", w: "责任变了就要复算，保额不跟责任走就等于缩水。" },
+          { l: "p", t: "全家医疗险续保不断档", w: "教育开支再急，也别让保障断在这里。" },
+          { l: "s", t: "意外险（大人 + 孩子）", w: "课外活动与通勤增加，这一层性价比一直很高。" },
+          { l: "c", t: "教育金专款（看约束与流动性）", w: "看条款的约束与流动性，不看销售讲的故事。",
+            money: { tight: { l: "h", w: "若已有则按契约，勿再加码；课外与保费冲突时，保费优先。" }, ample: { l: "s", w: "检视是否真隔离；大人中年窗口保障占住，再谈加码教育。" } } },
+          { l: "h", t: "课外班预算顶掉重疾 / 医疗保费", w: "保费断了，前面几年的准备会一起作废。" }
+        ]
+      },
+      {
+        name: "教育高峰", age: "孩子约 15–22 岁", why: "现金需求集中爆发，家长的健康窗口却在收窄——高峰期考验的是「专款是否真专款」。",
+        fits: [
+          { l: "p", t: "家长医疗险 / 重疾险不断档", w: "高峰期收入中断，杀伤比任何时候都大。" },
+          { l: "s", t: "寿险（若房贷仍在）", w: "责任还没放下，寿险就别急着减。" },
+          { l: "s", t: "意外险", w: "家庭现金流紧绷时，意外是最不该撤的一层。" },
+          { l: "c", t: "已有教育金工具按契约使用", w: "避免临时拆东墙，反而两头都伤。" },
+          { l: "c", t: "跨境储蓄 / 港险（合规一对一评估）", w: "先过「适不适合」这一关，再看工具本身。",
+            money: { tight: { l: "h", w: "额外储蓄与跨境安排先搁置。" }, ample: { w: "只在适合框架下讨论，把「能付」和「结构对」分开看。" } } },
+          { l: "h", t: "拆养老钱补学费", w: "把教育缺口转成养老缺口，是这一阶段最容易踩的坑。" }
+        ]
+      },
+      {
+        name: "责任释放期", age: "孩子独立前后", why: "抚养责任下降，保障的焦点从「护航孩子」转回「护航自己的晚年」。",
+        fits: [
+          { l: "p", t: "医疗险延续 + 养老年金启动", w: "预算从抚养侧转向自己的账单与现金流。",
+            money: { tight: { w: "医疗延续是底线；年金能留多少算多少，先不断医疗。" } } },
+          { l: "s", t: "重疾 / 意外（按核保窗口）", w: "趁还能核保，补的是以后买不到的那部分。" },
+          { l: "c", t: "下调抚养相关的寿险保额", w: "按实际责任下调，不是一刀砍掉。",
+            money: { tight: { l: "s", w: "责任释放后减保费负担，把预算转回自己。" } } },
+          { l: "c", t: "受益人与家庭财务地图更新", w: "孩子独立了，受益人结构通常也该变。" },
+          { l: "h", t: "责任一放下就同步放松保障", w: "缺口会正好暴露在退休前那几年。" }
+        ]
+      },
+      {
+        name: "退休与长寿", age: "约 60 岁以后", why: "三代关系可能倒置：这一段的保险意义是让晚年节奏不被一次冲击打乱。",
+        fits: [
+          { l: "p", t: "医疗 + 护理安排持续有效", w: "账单元风险不因为退休而退休。" },
+          { l: "p", t: "意外险（跌倒 / 骨折）", w: "高龄意外往往是护理开支的第一张单。" },
+          { l: "s", t: "年金 / 长期储蓄", w: "服务确定生活成本，而不是追收益。" },
+          { l: "c", t: "传承安排（合规前提下讨论必要工具）", w: "先看家庭结构需不需要，再谈工具。",
+            money: { tight: { l: "h", w: "可从简，先保证自己不被一次账单打乱。" }, ample: { w: "意义是可预期、可执行、可交接。" } } },
+          { l: "h", t: "为「给子女留点什么」乱加保", w: "先把自己的现金流与照护安排说清楚。" }
+        ]
+      }
+    ]
+  }
+};
+
+const TAGNAME = { p: "优先", s: "补充", c: "视情况", h: "暂缓" };
+const ORDER = { p: 0, s: 1, c: 2, h: 3 };
+const MONEY_LEVELS = {
+  skip: { label: "跳过", short: null },
+  tight: { label: "手头紧一点", short: "手头紧" },
+  ok: { label: "大致够用", short: "大致够用" },
+  ample: { label: "相对宽裕", short: "相对宽裕" }
+};
+const MONEY_TONE = {
+  tight: "预算紧时：先分清「必须有」与「可延后」。",
+  ok: "有余力时：保障与专款预算分开记，别混仓。",
+  ample: "相对宽裕时：多看结构与隔离，少再堆一张单。"
+};
+
+const tabsEl = document.getElementById("tabs");
+const moneyEl = document.getElementById("money-pills");
+const listEl = document.getElementById("list");
+const noteEl = document.getElementById("money-note");
+const backEl = document.getElementById("backlink");
+
+function readState() {
+  const q = new URLSearchParams(location.search);
+  const profile = DATA[q.get("profile")] ? q.get("profile") : "family";
+  const raw = q.get("money");
+  const money = MONEY_LEVELS[raw] ? raw : "skip";
+  return { profile, money };
+}
+
+function writeState(profile, money) {
+  const url = new URL(location.href);
+  url.searchParams.set("profile", profile);
+  if (money && money !== "skip") url.searchParams.set("money", money);
+  else url.searchParams.delete("money");
+  history.replaceState(null, "", url);
+}
+
+function fitView(item, money) {
+  const ov = item.money && money !== "skip" && item.money[money];
+  return {
+    l: (ov && ov.l) || item.l,
+    t: (ov && ov.t) || item.t,
+    w: (ov && ov.w) || item.w
+  };
+}
+
+function renderTabs(profile, money) {
+  tabsEl.innerHTML = "";
+  Object.keys(DATA).forEach(key => {
+    const b = document.createElement("button");
+    b.className = "tab" + (key === profile ? " on" : "");
+    b.textContent = DATA[key].label;
+    b.onclick = () => { writeState(key, money); render(); };
+    tabsEl.appendChild(b);
+  });
+  moneyEl.innerHTML = "";
+  Object.keys(MONEY_LEVELS).forEach(key => {
+    const b = document.createElement("button");
+    b.className = "money-pill" + (key === money ? " on" : "");
+    b.textContent = MONEY_LEVELS[key].label;
+    b.onclick = () => { writeState(profile, key); render(); };
+    moneyEl.appendChild(b);
+  });
+}
+
+function render() {
+  const { profile, money } = readState();
+  renderTabs(profile, money);
+  const short = MONEY_LEVELS[money].short;
+  if (short) {
+    noteEl.hidden = false;
+    noteEl.textContent = "当前按「" + short + "」调整了优先 / 暂缓示意，不改阶段，不构成投保建议。";
+  } else {
+    noteEl.hidden = true;
+    noteEl.textContent = "";
+  }
+  const back = new URL("../", location.href);
+  back.searchParams.set("profile", profile);
+  if (money !== "skip") back.searchParams.set("money", money);
+  backEl.href = back.pathname + back.search;
+
+  const tone = MONEY_TONE[money];
+  const stages = DATA[profile].stages;
+  listEl.innerHTML = "";
+  stages.forEach((st, i) => {
+    const card = document.createElement("section");
+    card.className = "stage";
+    const fits = st.fits.map(item => fitView(item, money)).sort((a, b) => ORDER[a.l] - ORDER[b.l]);
+    const why = st.why + (tone ? " " + tone : "");
+    card.innerHTML =
+      '<div class="stage-head"><span class="stage-name">' + (i + 1) + '. ' + st.name + '</span>' +
+      '<span class="stage-age">' + st.age + '</span></div>' +
+      '<p class="stage-why">' + why + '</p>' +
+      '<div class="fit-list">' + fits.map(f =>
+        '<div class="fit"><span class="tag ' + f.l + '">' + TAGNAME[f.l] + '</span>' +
+        '<div class="fit-body"><span class="fit-type">' + f.t + '</span><span class="fit-why"> · ' + f.w + '</span></div></div>'
+      ).join("") + '</div>';
+    listEl.appendChild(card);
+  });
+}
+
+render();
+</script>
+</body>
+</html>

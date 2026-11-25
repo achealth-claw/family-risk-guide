@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>一个人、一个家庭，一生遇上重疾的概率怎么算 · 安康</title>
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap bar">
+      <div class="brand">
+        <a class="logo" href="index.html">安康 · 家庭风险与财务</a>
+        <span class="brand-sub">医学背景 · 香港持牌顾问的学习与分析站</span>
+      </div>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html">总览与诊断</a>
+        <a href="notes.html" aria-current="page">保险价值与数据</a>
+        <a href="tools.html">分析工具箱</a>
+        <a href="about.html">关于与问诊</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="narrow prose">
+      <div class="eyebrow">专题 01 · 流行病学推演与保险底层原理</div>
+      <h1>一个人、一个家庭，一生会不会得重疾？把概率和本质算清楚</h1>
+      <p class="stand">很多家庭讨论保障时，第一反应是「我们身体都不错，应该轮不到吧？」。流行病学不回答个体的「会不会」，但能用可核对的人群队列数据回答「有多大可能」。</p>
+
+      <h2>一、先分清三个口径：医学大病 ≠ 保险重疾表</h2>
+      <p>讨论概率前，必须把定义对齐，否则数字毫无意义：</p>
+      <table class="data">
+        <thead>
+          <tr>
+            <th>口径分类</th>
+            <th>涵盖范围</th>
+            <th>适合回答什么问题</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A. 医学核心大病</strong></td>
+            <td>恶性肿瘤、脑卒中（中风）、急性心梗等</td>
+            <td>人生遭遇重大健康冲击的真实基线概率（公开文献最完整）</td>
+          </tr>
+          <tr>
+            <td><strong>B. 保险行业重疾定义</strong></td>
+            <td>内地常见 28 种核心重疾 / 香港危疾定义（HKFI）</td>
+            <td>保单条款触发理赔的精算发生率（用于定价，不等于医学终生患病率）</td>
+          </tr>
+          <tr>
+            <td><strong>C. 日常口头俗称</strong></td>
+            <td>「大病」「住过院」「花过很多钱」</td>
+            <td>生活感受，包含大量医疗险报销范畴，不宜拿来算重疾概率</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>二、三份可核对的权威基线数据</h2>
+      <ul>
+        <li><strong>中国大陆终生患癌率约 27.61%</strong>：国家癌症中心团队基于 GLOBOCAN 2022 估算，中国人群一生罹患癌症概率约 27.61%，死于癌症概率约 18.62%（约 1/5）。出处：<em>Science China Life Sciences</em>, 2025（DOI: 10.1007/s11427-024-2810-y）。</li>
+        <li><strong>香港 75 岁前患癌：男约 1/4、女约 1/5</strong>：香港癌症资料统计中心《2023 年香港癌症统计概览》明确指出，每 4 名男性或每 5 名女性约有 1 人在 75 岁前患上癌症。</li>
+        <li><strong>中国 25 岁起终生卒中风险约 39.3%</strong>：《新英格兰医学杂志》（NEJM, 2018）全球疾病负担（GBD 2016）研究估算，全球终生卒中风险约 24.9%，中国约 39.3%（处于全球最高梯队）。</li>
+      </ul>
+
+      <div class="callout">
+        <strong>专业边界：为什么不能把 28%（癌）+ 39%（卒中）直接加出 67%？</strong><br />
+        1. <strong>事件重叠</strong>：同一人可能先患癌后卒中，相加会重复计算人数。<br />
+        2. <strong>竞争风险（Competing Risks）</strong>：死于一种疾病后，便不再暴露于另一种疾病的发病风险中。<br />
+        因此，严谨的结论不是报一个夸张的合并百分比，而是看清：仅单拎癌症或卒中任一条主线，成年人的终生风险都在三至四成量级——在家庭财务模型里，这是<strong>必须默认设防的高发冲击</strong>，而不是小概率彩票。
+      </div>
+
+      <h2>三、从「个人」到「家庭至少一人」：组合概率</h2>
+      <p>若单人发生冲击的概率为 \(p_i\)，在暂设家庭成员相互独立的简化模型下，家中<strong>至少有一人</strong>遭遇冲击的概率为：</p>
+      <div class="formula" style="font-size:14px;padding:10px 14px;margin-top:12px">
+        P(家庭至少一人发生) = 1 - ∏ (1 - pᵢ)
+      </div>
+      <p>仅以「终生患癌约 28%」这一条基线代入：一个人是 28%；<strong>夫妻二人（无孩或有孩）至少一人发生约为 1 - 0.72² = 48.2%（接近一半）</strong>；若算上双方长辈，概率会迅速超过七成。家庭成员共享饮食与居住环境，真实风险往往比独立假设更高。</p>
+
+      <h2>四、回到保险的本质：用确定的小代价，换家庭不翻船</h2>
+      <p>保险源自航海时代的互助池：只有一艘船的船主如果撞上风浪，就永远翻不了身；大家各出一点钱放进池子，是为了让那个真正撞上风浪的人不至于破产。现代精算与合同只是把这个池子标准化了。</p>
+      <p>所以评估保险从不看「没出事是不是亏了保费」，而是看：<strong>万一那 48% 的家庭概率落到自家头上，医疗发票和停工两年的房贷，是由保险池子买单，还是拆掉你存了十年的养老金与学区房？</strong></p>
+
+      <div class="tool-Jump" style="margin-top:24px">
+        <a class="btn" href="index.html#prob-title">返回首页用概率推演器试算</a>
+        <a class="btn ghost" href="note-necessities.html">下一篇：家庭刚需账本与配置顺序 ›</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site">
+    <p class="legal">声明：本文引用的流行病学统计为人群平均值，不构成个人医疗诊断或患病率承诺；具体保障安排以保单条款为准。</p>
+  </footer>
+</body>
+</html>

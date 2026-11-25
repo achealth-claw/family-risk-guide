@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="家庭生命周期地图：选视角、标出你在哪一段，看清节点、风险与保险作用。可导出长图。" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta property="og:title" content="家庭生命周期地图" />
+  <meta property="og:description" content="左右滑动，看清你在哪一段：节点 · 风险 · 保险作用" />
+  <meta property="og:type" content="website" />
+  <title>家庭生命周期地图</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #13212e;
+      --ink-soft: #3a4a58;
+      --suit: #0f6b5c;
+      --suit-soft: #d8efe9;
+      --hold: #9a4a2e;
+      --hold-soft: #f5e6df;
+      --accent: #1a6b8a;
+      --accent-soft: #d6eaf2;
+      --line: rgba(19, 33, 46, 0.12);
+      --rail: rgba(19, 33, 46, 0.18);
+      --here: #b45309;
+      --here-soft: #fef3c7;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      --font-serif: "Songti SC", "Noto Serif SC", "STSong", serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 50% at 0% 0%, rgba(26, 107, 138, 0.18), transparent 55%),
+        radial-gradient(ellipse 70% 45% at 100% 20%, rgba(15, 107, 92, 0.14), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(154, 74, 46, 0.08), transparent 55%),
+        linear-gradient(165deg, #eef4f7 0%, #e2ebf1 45%, #d8e3ea 100%);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    button { font: inherit; color: inherit; border: none; background: none; cursor: pointer; }
+    input {
+      font: inherit;
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 12px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+    }
+    input:focus { border-color: rgba(26, 107, 138, 0.5); }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .screen.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* —— Setup / Locate —— */
+    #setup, #locate {
+      padding: clamp(24px, 5vw, 48px) clamp(20px, 5vw, 40px) calc(28px + var(--safe-bottom));
+      justify-content: flex-start;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .setup-brand {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .setup-title {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 8vw, 52px);
+      line-height: 1.18;
+      font-weight: 700;
+    }
+    .setup-title span { color: var(--suit); }
+
+    .setup-lead {
+      margin-top: 14px;
+      font-size: clamp(15px, 3.6vw, 18px);
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 28em;
+    }
+
+    .profile-prompt {
+      margin-top: 28px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    .profiles { margin-top: 14px; display: grid; gap: 10px; }
+
+    .profile {
+      text-align: left;
+      padding: 18px 20px;
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 16px;
+    }
+    .profile strong { display: block; font-size: 18px; margin-bottom: 4px; }
+    .profile span { font-size: 14px; color: var(--ink-soft); line-height: 1.45; }
+
+    .setup-note {
+      margin-top: 28px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(58, 74, 88, 0.75);
+    }
+
+    .locate-fields { margin-top: 22px; display: grid; gap: 16px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .field .hint-inline {
+      margin-top: 6px;
+      font-size: 12px;
+      color: rgba(58, 74, 88, 0.7);
+    }
+
+    .gender-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .gender-pill,
+    .money-pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+    .gender-pill.active,
+    .money-pill.active {
+      border-color: rgba(15, 107, 92, 0.4);
+      background: var(--suit-soft);
+      color: var(--suit);
+      font-weight: 700;
+    }
+
+    .health-box {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(26, 107, 138, 0.18);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .health-box .health-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .health-box .health-note {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      color: rgba(58, 74, 88, 0.75);
+      line-height: 1.45;
+    }
+    .health-tip-text { margin-bottom: 10px; }
+    .disease-rows { display: grid; gap: 8px; margin-top: 4px; }
+    .disease-row {
+      display: grid;
+      grid-template-columns: 4.5em 1fr auto;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+    }
+    .disease-row .d-name { font-weight: 600; color: var(--ink); }
+    .disease-row .d-meter {
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(19, 33, 46, 0.08);
+      overflow: hidden;
+    }
+    .disease-row .d-meter > i {
+      display: block;
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #5b8fa8, #1a6b8a);
+    }
+    .disease-row .d-level {
+      font-size: 11px;
+      color: var(--ink-soft);
+      white-space: nowrap;
+      min-width: 2.5em;
+      text-align: right;
+    }
+    .disease-anchors {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(26, 107, 138, 0.25);
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+    .disease-anchors strong { color: var(--ink); font-weight: 600; }
+
+    .prepare-box {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--line);
+    }
+    .prepare-box .health-label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--suit);
+      margin-bottom: 10px;
+    }
+    .prepare-item {
+      padding: 10px 0;
+      border-top: 1px dashed var(--line);
+    }
+    .prepare-item:first-of-type { border-top: none; padding-top: 0; }
+    .prepare-redeem-now + .prepare-item { margin-top: 18px; }
+    .prepare-track {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr;
+      gap: 6px;
+      align-items: start;
+    }
+    .prepare-pole {
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .prepare-pole .pole-tag {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .prepare-pole.now {
+      background: var(--suit-soft);
+      border: 1px solid rgba(15, 107, 92, 0.2);
+    }
+    .prepare-pole.now .pole-tag { color: var(--suit); }
+    .prepare-pole.later {
+      background: var(--hold-soft);
+      border: 1px solid rgba(154, 74, 46, 0.18);
+    }
+    .prepare-pole.later .pole-tag { color: var(--hold); }
+    .prepare-arrow {
+      text-align: center;
+      padding-top: 18px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+    .prepare-why {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+    .prepare-redeem-now {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(26, 107, 138, 0.08);
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+    .prepare-redeem-now strong { color: var(--accent); }
+    .prepare-jump {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .locate-actions {
+      margin-top: 28px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .btn-primary, .btn-ghost, .btn-secondary {
+      padding: 15px 18px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .btn-primary {
+      background: var(--suit);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.55);
+      border: 1.5px solid var(--line);
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    /* —— Timeline —— */
+    #timeline {
+      max-width: 960px;
+      margin: 0 auto;
+      width: 100%;
+      padding-bottom: calc(72px + var(--safe-bottom));
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px clamp(16px, 4vw, 28px) 6px;
+      padding-top: max(14px, env(safe-area-inset-top));
+    }
+    .back { font-size: 14px; color: var(--accent); font-weight: 500; padding: 8px 0; }
+    .topbar-meta { text-align: right; font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; }
+    .topbar-meta strong { display: block; color: var(--ink); font-size: 14px; letter-spacing: 0; margin-top: 2px; }
+
+    .here-banner {
+      margin: 4px clamp(16px, 4vw, 28px) 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: var(--here-soft);
+      border: 1px solid rgba(180, 83, 9, 0.22);
+      color: #7c2d12;
+      font-size: 13px;
+      line-height: 1.45;
+      display: none;
+    }
+    .here-banner.show { display: block; }
+    .here-banner strong { font-weight: 700; }
+
+    .stage-progress { padding: 8px clamp(16px, 4vw, 28px) 0; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .progress-label strong {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 5vw, 28px);
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .rail { height: 3px; background: var(--rail); border-radius: 99px; overflow: hidden; }
+    .rail > i {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--suit));
+      border-radius: 99px; transition: width 0.35s ease;
+    }
+
+    .dots {
+      display: flex; gap: 6px; margin-top: 12px;
+      overflow-x: auto; scrollbar-width: none; padding-bottom: 2px;
+    }
+    .dots::-webkit-scrollbar { display: none; }
+
+    .dot {
+      flex: 0 0 auto;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.35);
+      white-space: nowrap;
+    }
+    .dot.active {
+      color: var(--suit);
+      background: var(--suit-soft);
+      border-color: rgba(15, 107, 92, 0.25);
+      font-weight: 700;
+    }
+    .dot.here {
+      border-color: rgba(180, 83, 9, 0.35);
+    }
+    .dot.here:not(.active) {
+      background: var(--here-soft);
+      color: #9a3412;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      padding: 8px clamp(16px, 4vw, 28px) 0;
+      flex-wrap: wrap;
+    }
+    .tool-btn {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--line);
+      color: var(--ink-soft);
+    }
+
+    .hint {
+      margin: 6px clamp(16px, 4vw, 28px) 0;
+      font-size: 12px;
+      color: rgba(58, 74, 88, 0.7);
+    }
+
+    .scroller {
+      flex: 1;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 14px;
+      padding: 10px clamp(16px, 4vw, 28px) 12px;
+      cursor: grab;
+    }
+    .scroller::-webkit-scrollbar { display: none; }
+    .scroller.dragging { cursor: grabbing; }
+
+    .panel {
+      flex: 0 0 min(86vw, 420px);
+      scroll-snap-align: center;
+      height: 100%;
+      max-height: calc(100dvh - 280px);
+      display: flex;
+      flex-direction: column;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 16px 40px rgba(19, 33, 46, 0.08);
+      overflow: hidden;
+      opacity: 0.55;
+      transform: scale(0.96);
+      transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.25s;
+    }
+    .panel.in-view { opacity: 1; transform: scale(1); }
+    .panel.is-here { border-color: rgba(180, 83, 9, 0.45); }
+
+    .panel-head {
+      padding: 20px 22px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(26, 107, 138, 0.08), transparent 60%), rgba(255,255,255,0.4);
+    }
+    .panel.is-here .panel-head {
+      background: linear-gradient(135deg, rgba(180, 83, 9, 0.12), transparent 60%), rgba(255,255,255,0.4);
+    }
+
+    .age-tag {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .panel-head h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 6vw, 30px);
+      line-height: 1.25;
+      font-weight: 700;
+    }
+    .panel-head p {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .panel-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .block h3 {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 13px; line-height: 1.35; padding: 8px 12px;
+      border-radius: 10px; background: rgba(26, 107, 138, 0.08);
+      border: 1px solid rgba(26, 107, 138, 0.12);
+    }
+    .risk-list, .role-list { list-style: none; display: grid; gap: 8px; }
+    .risk-list li, .role-list li {
+      display: grid; grid-template-columns: 8px 1fr; gap: 10px;
+      align-items: start; font-size: 14px; line-height: 1.5;
+    }
+    .risk-list li::before, .role-list li::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%; margin-top: 6px;
+    }
+    .risk-list li::before { background: var(--hold); }
+    .role-list li::before { background: var(--suit); }
+
+    .takeaway {
+      margin-top: auto;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--suit-soft);
+      border: 1px solid rgba(15, 107, 92, 0.18);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .takeaway strong { color: var(--suit); }
+
+    .nav-arrows {
+      display: none;
+      position: absolute;
+      left: 0; right: 0; top: 48%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      padding: 0 8px;
+      justify-content: space-between;
+    }
+    .nav-arrows button {
+      pointer-events: auto;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--line);
+      box-shadow: 0 6px 16px rgba(19,33,46,0.1);
+      font-size: 18px; color: var(--ink-soft);
+    }
+    .nav-arrows button:disabled { opacity: 0.35; }
+
+    /* Lead magnet bar */
+    .lead-bar {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 10px 16px calc(10px + var(--safe-bottom));
+      background: rgba(255, 255, 255, 0.92);
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      z-index: 5;
+    }
+    .lead-bar p {
+      flex: 1;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--ink-soft);
+    }
+    .lead-bar p strong { color: var(--ink); display: block; font-size: 13px; margin-bottom: 2px; }
+    .lead-bar .btn-primary {
+      flex: 0 0 auto;
+      padding: 12px 14px;
+      font-size: 14px;
+      border-radius: 12px;
+    }
+
+    /* Modals */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      background: rgba(19, 33, 46, 0.45);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+      padding-bottom: calc(16px + var(--safe-bottom));
+    }
+    .modal.show { display: flex; }
+    .modal-card {
+      width: min(520px, 100%);
+      max-height: min(86dvh, 720px);
+      overflow: auto;
+      background: #f7fafb;
+      border-radius: 20px;
+      padding: 22px 20px 20px;
+      box-shadow: 0 20px 50px rgba(19, 33, 46, 0.25);
+    }
+    .modal-card h3 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .modal-card .sub {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .wx-id-box {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px dashed rgba(26, 107, 138, 0.35);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .q-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+    .q-list li {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .modal-actions { display: grid; gap: 8px; }
+
+    #export-preview img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display: block;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(90px + var(--safe-bottom));
+      transform: translateX(-50%) translateY(12px);
+      background: rgba(19, 33, 46, 0.92);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 50;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (min-width: 768px) {
+      .nav-arrows { display: flex; }
+      .panel { flex-basis: 400px; }
+      .hint::after { content: " · 也可点两侧箭头"; }
+      .modal { align-items: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .screen { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <section id="setup" class="screen active" aria-label="选择画像">
+    <p class="setup-brand">家庭理财学习笔记</p>
+    <h1 class="setup-title">家庭<span>生命周期</span>地图</h1>
+    <p class="setup-lead">先选视角，再标出「你现在在哪一段」。左右滑动看节点、风险，以及保险在这一阶段真正在干什么。</p>
+    <p class="profile-prompt">先选一个视角</p>
+    <div class="profiles" role="list">
+      <button class="profile" type="button" data-profile="single" role="listitem">
+        <strong>一个人</strong>
+        <span>从起步到长寿，看清收入、健康与责任如何变化</span>
+      </button>
+      <button class="profile" type="button" data-profile="couple" role="listitem">
+        <strong>双人家庭</strong>
+        <span>成家、置业、赡养：两人责任叠在一起时怎么看</span>
+      </button>
+      <button class="profile" type="button" data-profile="family" role="listitem">
+        <strong>有娃家庭</strong>
+        <span>育儿到教育高峰：目标专款与保障如何先后排</span>
+      </button>
+    </div>
+    <p class="setup-note">科普框架，不构成产品推介或收益承诺。阶段年龄为示意区间，个体差异很大。</p>
+  </section>
+
+  <section id="locate" class="screen" aria-label="定位当前阶段" hidden>
+    <p class="setup-brand">家庭理财学习笔记</p>
+    <h1 class="setup-title">你现在在<br /><span>哪一段？</span></h1>
+    <p class="setup-lead" id="locate-lead">填个大概年龄，地图会帮你标出「你在这里」。不想填也可以直接进入浏览。</p>
+    <div class="locate-fields">
+      <div class="field" id="field-adult">
+        <label for="input-adult">你的年龄（周岁，大概即可）</label>
+        <input id="input-adult" type="number" inputmode="numeric" min="18" max="100" placeholder="例如 35" />
+      </div>
+      <div class="field" id="field-gender">
+        <label>性别（可选，用于健康侧提示）</label>
+        <div class="gender-pills" role="group" aria-label="性别">
+          <button type="button" class="gender-pill" data-gender="female">女</button>
+          <button type="button" class="gender-pill" data-gender="male">男</button>
+          <button type="button" class="gender-pill" data-gender="na">暂不透露</button>
+        </div>
+        <p class="hint-inline">只影响「健康提示」文案，不改变阶段定位；人群示意，不是体检结论</p>
+      </div>
+      <div class="field" id="field-money">
+        <label>钱的松紧（可选，同一阶段侧重点会不同）</label>
+        <div class="gender-pills" role="group" aria-label="资产松紧">
+          <button type="button" class="money-pill" data-money="tight">手头紧一点</button>
+          <button type="button" class="money-pill" data-money="ok">大致够用</button>
+          <button type="button" class="money-pill" data-money="ample">相对宽裕</button>
+          <button type="button" class="money-pill" data-money="skip">跳过</button>
+        </div>
+        <p class="hint-inline">不改「你在哪一段」，只调整保障优先级与小结语气；不问具体金额</p>
+      </div>
+      <div class="field" id="field-child" hidden>
+        <label for="input-child">孩子大概几岁（有多个可填最大的）</label>
+        <input id="input-child" type="number" inputmode="numeric" min="0" max="40" placeholder="例如 8" />
+        <p class="hint-inline">有娃家庭优先按孩子年龄定位育儿 / 教育阶段</p>
+      </div>
+    </div>
+    <div class="locate-actions">
+      <button type="button" class="btn-primary" id="btn-locate">标出我在哪一段</button>
+      <button type="button" class="btn-ghost" id="btn-skip-locate">先浏览全部阶段</button>
+      <button type="button" class="btn-ghost" id="btn-locate-back">← 换视角</button>
+    </div>
+    <p class="setup-note">仅用于本页定位，不上传、不保存到服务器。</p>
+  </section>
+
+  <section id="timeline" class="screen" aria-label="生命周期时间轴" hidden>
+    <header class="topbar">
+      <button class="back" type="button" id="btn-back">← 重新定位</button>
+      <div class="topbar-meta">
+        当前视角
+        <strong id="profile-label">有娃家庭</strong>
+      </div>
+    </header>
+
+    <div class="here-banner" id="here-banner"></div>
+
+    <div class="stage-progress">
+      <div class="progress-label">
+        <strong id="stage-name">起步期</strong>
+        <span id="stage-index">1 / 7</span>
+      </div>
+      <div class="rail" aria-hidden="true"><i id="rail-fill"></i></div>
+      <div class="dots" id="dots" role="tablist" aria-label="阶段导航"></div>
+    </div>
+
+    <div class="toolbar">
+      <button type="button" class="tool-btn" id="btn-export">保存本阶段图</button>
+      <button type="button" class="tool-btn" id="btn-lead-open">加微信 · 对号入座</button>
+    </div>
+
+    <p class="hint">左右滑动切换阶段 · 绿块是准备点，橙块是兑现点</p>
+    <div class="scroller" id="scroller" tabindex="0" aria-label="生命周期阶段列表"></div>
+
+    <div class="nav-arrows" aria-hidden="true">
+      <button type="button" id="btn-prev" aria-label="上一阶段">‹</button>
+      <button type="button" id="btn-next" aria-label="下一阶段">›</button>
+    </div>
+
+    <div class="lead-bar">
+      <p><strong>看完想对上自己的情况？</strong>加微信回三问，先判断值不值得继续。</p>
+      <button type="button" class="btn-primary" id="btn-lead-bar">加微信</button>
+    </div>
+  </section>
+
+  <div class="modal" id="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-title">
+    <div class="modal-card">
+      <h3 id="lead-title">加微信，对号入座</h3>
+      <p class="sub">香港持牌顾问 · 帮家庭把港险算明白：适不适合、怎么配置、怎么赴港。先科普判断，不硬推产品。</p>
+      <div class="wx-id-box" id="wx-id-display">（请配置微信号）</div>
+      <p class="sub" style="margin-bottom:8px">加我后回这 3 个信息即可：</p>
+      <ul class="q-list">
+        <li>① 主要目标：教育金 / 养老 / 传承 / 先了解</li>
+        <li>② 大概年交预算区间</li>
+        <li>③ 近 3–6 个月是否方便赴港</li>
+      </ul>
+      <div class="modal-actions">
+        <button type="button" class="btn-primary" id="btn-copy-wx">复制微信号</button>
+        <button type="button" class="btn-ghost" id="btn-copy-intro">复制「三问」话术</button>
+        <button type="button" class="btn-ghost" id="btn-close-lead">关闭</button>
+      </div>
+      <p class="setup-note" style="margin-top:14px">分享链接可加参数 <code>?wx=你的微信号</code>，页面会自动显示。</p>
+    </div>
+  </div>
+
+  <div class="modal" id="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-title">
+    <div class="modal-card" id="export-preview">
+      <h3 id="export-title">本阶段图已生成</h3>
+      <p class="sub" id="export-sub">只保存你当前这一段，方便发小红书或存相册。</p>
+      <p class="setup-note" id="export-save-tip" style="margin:0 0 10px;display:none"></p>
+      <img id="export-img" alt="本阶段生命周期图" />
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="btn-download-img">保存到本地</button>
+        <button type="button" class="btn-ghost" id="btn-close-export">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    /* —— 可配置：默认微信号；也可用 ?wx= 覆盖 —— */
+    const LEAD_CONFIG = {
+      defaultWx: "achealth",
+      brand: "家庭理财学习笔记"
+    };
+
+    const PROFILES = {
+      single: {
+        label: "一个人",
+        locateHint: "填你的年龄，地图会标出最接近的一段。",
+        stages: [
+          {
+            id: "s1", name: "起步期", age: "约 22–28 岁", ageMin: 20, ageMax: 28, matchBy: "adult",
+            blurb: "收入刚立住，责任还不大，但健康与应急底子要先铺。",
+            milestones: ["入职 / 跳槽", "独立租住", "开始积累应急金"],
+            risks: ["突发医疗费用打断现金流", "意外导致短期无法工作", "没有应急金时，小冲击也会变成借贷"],
+            roles: ["医疗保障：管账单缺口（社保之上）", "意外险：低成本对冲突发场景", "此时少谈「长期增值」，先谈扛得住"],
+            takeaway: "这一阶段保险的作用，是<strong>给起步期留缓冲</strong>，不是堆满产品。"
+          },
+          {
+            id: "s2", name: "自立期", age: "约 28–35 岁", ageMin: 28, ageMax: 35, matchBy: "adult",
+            blurb: "收入上升，开始考虑中长期目标；自己仍是主要「资产」。",
+            milestones: ["收入上台阶", "首套房意向", "父母开始需要更多关照"],
+            risks: ["重疾带来医疗费 + 收入中断双重冲击", "房贷意向让未来责任变重", "父母健康变化占用储蓄"],
+            roles: ["重疾 / 医疗：保住人力资本", "寿险：若已有债务或赡养责任再评估", "储蓄型目标（若有）排在保障之后"],
+            takeaway: "人还年轻时，保险优先<strong>守住赚钱能力</strong>，而不是替代投资。"
+          },
+          {
+            id: "s3", name: "责任初显", age: "约 35–45 岁", ageMin: 35, ageMax: 45, matchBy: "adult",
+            blurb: "房贷、赡养、职业平台期叠加，风险敞口变宽。",
+            milestones: ["房贷高峰", "赡养压力上升", "职业责任加重"],
+            risks: ["收入中断会连带影响房贷与赡养", "健康问题出现概率抬升", "长期计划被一笔大支出打断"],
+            roles: ["寿险 / 失能相关保障：对冲收入中断", "医疗 / 重疾：补社保边界外的缺口", "检视已有保单是否仍匹配当前责任"],
+            takeaway: "责任变大时，先问<strong>万一收入没了谁顶</strong>，再问要不要加储蓄。"
+          },
+          {
+            id: "s4", name: "蓄力期", age: "约 45–55 岁", ageMin: 45, ageMax: 55, matchBy: "adult",
+            blurb: "离退休更近，开始把「活得久」和「钱够用」放在同一张图上。",
+            milestones: ["还贷进入后半程", "父母高龄护理议题", "退休账开始算"],
+            risks: ["慢病与大病医疗开支上升", "护理成本可能高于预期", "投资波动冲击即将要用的钱"],
+            roles: ["保障型：继续守健康与收入缺口", "年金 / 长期储蓄：讨论「专款专用」而非收益竞赛", "区分：应急钱、保障、长期目标，不要混仓"],
+            takeaway: "这一阶段保险开始同时服务<strong>当下冲击</strong>与<strong>未来现金流</strong>。"
+          },
+          {
+            id: "s5", name: "过渡退休", age: "约 55–65 岁", ageMin: 55, ageMax: 65, matchBy: "adult",
+            blurb: "从「赚钱」转向「用钱」；流动性与确定性变得更重要。",
+            milestones: ["工作收入下降或结束", "社保养老开始衔接", "资产再配置"],
+            risks: ["长寿导致后期现金流吃紧", "医疗通胀侵蚀退休金", "过早动用长期储蓄造成缺口"],
+            roles: ["医疗持续覆盖：账单风险不因退休消失", "年金类工具：讨论确定现金流是否需要", "减少「用演示收益衡量一切」的误读"],
+            takeaway: "退休前后，保险的角色更接近<strong>稳住生活节奏</strong>，不是冲收益。"
+          },
+          {
+            id: "s6", name: "长寿期", age: "约 65 岁以后", ageMin: 65, ageMax: 120, matchBy: "adult",
+            blurb: "活得久是好事，也要求现金流、护理与传承安排更清晰。",
+            milestones: ["长期护理可能上升", "资产传承安排", "家庭支持网络变化"],
+            risks: ["护理与陪护支出持续多年", "认知障碍等导致财务决策风险", "传承安排不清引发家庭摩擦"],
+            roles: ["医疗 / 护理相关安排：看缺口而非产品名", "已有保单的理赔与受益人检视", "传承相关工具（若需要）放在合规咨询里谈"],
+            takeaway: "长寿期的保险，是<strong>把不确定的晚年开支变可预期</strong>。"
+          }
+        ]
+      },
+      couple: {
+        label: "双人家庭",
+        locateHint: "填你的年龄（或双方平均），标出责任叠在一起时你大概在哪一段。",
+        stages: [
+          {
+            id: "c1", name: "成家初期", age: "约 25–32 岁", ageMin: 23, ageMax: 32, matchBy: "adult",
+            blurb: "两人账户开始合并责任；共同目标刚写下第一笔。",
+            milestones: ["结婚 / 同居共财", "共同应急金", "首套房讨论"],
+            risks: ["一方大病拖累两人现金流", "共同债务出现后敞口变大", "两人保障水平不对称"],
+            roles: ["双方都要有基础医疗 / 意外底子", "共同债务出现后，再评估寿险需求", "先对齐「怕什么」，再分工买什么"],
+            takeaway: "成家不是自动需要更多保险，而是<strong>责任开始共享</strong>。"
+          },
+          {
+            id: "c2", name: "置业期", age: "约 30–40 岁", ageMin: 30, ageMax: 40, matchBy: "adult",
+            blurb: "房贷把未来十几年的现金流绑在一起。",
+            milestones: ["首付与月供", "双方事业上升期", "赡养两端浮现"],
+            risks: ["主要收入者中断 → 月供压力", "健康冲击叠加装修 / 贷款支出", "只保房子、不保人"],
+            roles: ["寿险优先匹配「还不清的债 + 生活费」", "重疾：避免用存款硬扛康复期", "储蓄目标与保障预算分开记账"],
+            takeaway: "有房贷时，保险先回答：<strong>人没了，贷还还得上吗</strong>。"
+          },
+          {
+            id: "c3", name: "责任叠加期", age: "约 38–50 岁", ageMin: 38, ageMax: 50, matchBy: "adult",
+            blurb: "上有老、中有贷、工作平台期——家庭资产负债表最紧的一段。",
+            milestones: ["双方父母进入高龄", "房贷中后期", "职业变动风险上升"],
+            risks: ["双端赡养与护理开支", "一方失业 / 失能冲击全家", "长期计划被迫中断"],
+            roles: ["按「发生后扛不扛得住」排保障优先级", "检视保额是否仍覆盖当前责任", "避免用储蓄型保单顶替保障缺口"],
+            takeaway: "责任最重时，顺序是<strong>先堵缺口，再谈专款</strong>。"
+          },
+          {
+            id: "c4", name: "空巢过渡", age: "约 50–60 岁", ageMin: 50, ageMax: 60, matchBy: "adult",
+            blurb: "债务渐清，目光转向自己的健康与退休现金流。",
+            milestones: ["贷款尾声", "父母照护高峰可能已过", "退休规划具体化"],
+            risks: ["健康风险抬升但收入窗口收窄", "核保条件可能不如年轻时", "投资回撤影响临近使用的钱"],
+            roles: ["趁仍可核保，补齐真正缺的保障", "开始认真讨论养老现金流工具", "把「演示收益」从决策中心拿开"],
+            takeaway: "窗口还在时，补的是<strong>以后买不到或不划算的保障</strong>。"
+          },
+          {
+            id: "c5", name: "共同退休", age: "约 60 岁以后", ageMin: 60, ageMax: 120, matchBy: "adult",
+            blurb: "两人一起用钱的阶段；互相护理与现金流安排成为日常题。",
+            milestones: ["双方退休收入衔接", "互相照护", "资产与传承安排"],
+            risks: ["一方长期护理拖垮另一方储蓄", "医疗通胀", "受益人 / 传承安排过时"],
+            roles: ["医疗持续有效；检视既往保单条款", "年金 / 储蓄型：服务确定开支，不作收益竞赛", "定期更新受益人与家庭财务地图"],
+            takeaway: "双人晚年，保险帮的是<strong>别让一个人的风险掏空两个人</strong>。"
+          }
+        ]
+      },
+      family: {
+        label: "有娃家庭",
+        locateHint: "填你和孩子的大概年龄；育儿 / 教育阶段优先按孩子年龄定位。",
+        stages: [
+          {
+            id: "f1", name: "备孕 / 初为人父人母", age: "约 28–35 岁", ageMin: 26, ageMax: 36, matchBy: "adult",
+            childMin: 0, childMax: 0.5,
+            blurb: "家庭责任陡增：孩子出生前后，是重新画风险地图的时刻。",
+            milestones: ["怀孕与生产", "育儿假 / 收入波动", "家庭角色重新分工"],
+            risks: ["孕产相关医疗开支与收入波动", "主要收入者一旦中断，抚养压力立刻显现", "只给孩子买保险、大人裸奔"],
+            roles: ["大人保障优先于孩子储蓄型产品", "医疗 / 重疾：守住抚养能力", "寿险：按「孩子独立前需要多少年」粗算"],
+            takeaway: "有娃之后，保险首先保护的是<strong>大人的人力资本</strong>。"
+          },
+          {
+            id: "f2", name: "育儿前期", age: "孩子约 0–6 岁", ageMin: 28, ageMax: 42, matchBy: "child",
+            childMin: 0, childMax: 6,
+            blurb: "支出刚性上升，时间被育儿占满，容错率下降。",
+            milestones: ["托育 / 早教开支", "房贷与育儿叠加", "应急金更容易被侵蚀"],
+            risks: ["大人健康或收入冲击 → 整个育儿计划停摆", "孩子意外 / 住院打断家庭节奏", "用教育金名义跳过应急与保障"],
+            roles: ["家庭：应急金 → 大人医疗/重疾/寿险 → 再谈教育金", "孩子：先基础医疗 / 意外，再考虑长期专款", "教育金是长期专款，不能拿来顶替保障缺口"],
+            takeaway: "顺序错了，再「规划教育金」也像在沙上盖楼。"
+          },
+          {
+            id: "f3", name: "义务教育期", age: "孩子约 6–15 岁", ageMin: 32, ageMax: 50, matchBy: "child",
+            childMin: 6, childMax: 15,
+            blurb: "开支可预期，但竞争型教育支出与家庭责任仍在抬升。",
+            milestones: ["学区 / 课外投入", "双方事业关键节点", "二孩或赡养叠加（若有）"],
+            risks: ["教育开支挤占保障保费的连续性", "收入中断导致「目标专款」被迫赎回", "保单多年未检视，保额跟不上责任"],
+            roles: ["定期复盘：责任变了，保额要不要变", "储蓄型教育金：看约束与流动性，不看故事", "坚持「先保障后储蓄」不被年度开销带偏"],
+            takeaway: "这一阶段要防的是<strong>用短期教育投入挤掉长期风控</strong>。"
+          },
+          {
+            id: "f4", name: "教育高峰", age: "孩子约 15–22 岁", ageMin: 40, ageMax: 58, matchBy: "child",
+            childMin: 15, childMax: 22,
+            blurb: "留学 / 高等教育现金需求集中爆发；也是家庭责任的峰值之一。",
+            milestones: ["高中冲刺 / 留学准备", "大额教育金支出", "孩子逐步独立"],
+            risks: ["教育金准备不足 → 动用养老或借贷", "家长健康窗口收窄，核保变难", "只盯学费，忽略家长收入中断风险"],
+            roles: ["已有教育金工具：按契约使用，避免临时拆东墙", "家长保障：高峰期更不能断", "若考虑跨境储蓄 / 港险，先过「适不适合」框架"],
+            takeaway: "教育高峰考验的是<strong>专款是否真专款</strong>，以及大人是否仍被保护。"
+          },
+          {
+            id: "f5", name: "责任释放期", age: "孩子独立前后", ageMin: 48, ageMax: 62, matchBy: "adult",
+            childMin: 22, childMax: 30,
+            blurb: "抚养责任下降，目光转向自己的退休与父母（若仍在）护理。",
+            milestones: ["孩子经济独立", "房贷尾声", "为自己的晚年做账"],
+            risks: ["突然放松保障导致缺口暴露在退休前", "长寿与护理成本被低估", "资产结构仍偏「冲收益」"],
+            roles: ["下调与抚养相关的寿险保额（按实际）", "把预算转向医疗延续与养老现金流", "受益人与家庭财务地图更新"],
+            takeaway: "孩子独立后，保险从「护航孩子」转回<strong>护航自己的晚年</strong>。"
+          },
+          {
+            id: "f6", name: "退休与长寿", age: "约 60 岁以后", ageMin: 60, ageMax: 120, matchBy: "adult",
+            blurb: "三代关系可能倒置：你照顾父母的岁月过去，孩子开始关心你。",
+            milestones: ["退休收入衔接", "可能的隔代照料", "传承安排"],
+            risks: ["长寿现金流不足", "护理开支", "传承与受益安排不清"],
+            roles: ["医疗与护理安排持续有效", "年金 / 储蓄型服务确定生活成本", "合规前提下讨论传承工具是否必要"],
+            takeaway: "到这里，保险的意义是<strong>让晚年节奏不被一次冲击打乱</strong>。"
+          }
+        ]
+      }
+    };
+
+    /* 健康侧提示：人群示意，按阶段 × 性别微调；不是诊断或发病率承诺 */
+    const HEALTH_TIPS = {
+      s1: {
+        neutral: "这一年龄段绝对发病率通常还不最高，但意外与突发医疗更伤现金流。保障优先铺医疗 / 意外底子。",
+        female: "育龄相关检查与妇科常见议题开始进入视野；若备孕或刚生育，健康窗口更敏感，医疗保障别空窗。",
+        male: "体检依从往往偏低；意外之外，体重、血压、烟酒等代谢苗头值得早盯，别等「有症状再管」。"
+      },
+      s2: {
+        neutral: "重疾一旦发生，损失的往往是最长的收入年限。医疗 / 重疾是在守人力资本，不是买收益。",
+        female: "乳腺、甲状腺等议题在人群讨论中更常出现；生育相关风险若适用，和普通重疾保障分开看。",
+        male: "肝、部分消化道与心血管风险因素（作息、烟酒）开始累积；别只用「还年轻」推迟体检与保障。"
+      },
+      s3: {
+        neutral: "肿瘤与心血管的年龄别风险抬升，又常叠房贷、赡养。健康冲击会直接打断长期计划。",
+        female: "部分女性高发癌种进入更需关注的年龄窗口（示意）；责任变大时，保额要不要跟着复盘。",
+        male: "心血管与部分癌种压力上升更快的区间（示意）；收入中断对房贷 / 赡养的杀伤要单独算。"
+      },
+      s4: {
+        neutral: "慢病与大病开支更常见，护理议题开始露头。保障要同时看「当下账单」和「未来现金流」。",
+        female: "骨密度、心脑血管与肿瘤筛查议题加重；核保条件可能不如年轻时宽松，缺口宜早补。",
+        male: "心脑血管与肿瘤相关风险继续抬升；别用储蓄型保单去顶已经抬高的保障缺口。"
+      },
+      s5: {
+        neutral: "多病共存更常见，医疗通胀侵蚀退休金。保险角色更接近稳住生活节奏，不是冲收益。",
+        female: "预期寿命往往更长，长寿现金流与后期护理要提早放进同一张图。",
+        male: "心血管事件与肿瘤负担在统计上仍重；退休后医疗保障别因「收入停了」一起停。"
+      },
+      s6: {
+        neutral: "慢病管理、护理与陪护开支可能持续多年。重点是把不确定开支变得可预期。",
+        female: "独居或丧偶概率随年龄上升（示意），护理安排与受益人要定期更新。",
+        male: "慢病与失能风险抬升；已有保单的理赔路径、受益人是否仍有效，值得检视。"
+      },
+      c1: {
+        neutral: "两人刚合并责任时，健康冲击会传导到共同账户。双方都要有基础医疗 / 意外底子。",
+        female: "若涉及备孕 / 生育，医疗开支与收入波动更集中；不要只给孩子留预算、大人空窗。",
+        male: "若你是主要收入，健康与意外保障优先对齐「共同生活费」；别只保房子不保人。"
+      },
+      c2: {
+        neutral: "房贷把十几年现金流绑在一起。谁的健康窗口更紧，谁病了月供压力更大，要分开看。",
+        female: "责任上升期叠加部分女性高发议题；保障顺序仍是：先守收入与账单，再谈专款。",
+        male: "心血管与代谢风险因素常在此年龄段累积；寿险 / 重疾要回答「人没了贷还还得上吗」。"
+      },
+      c3: {
+        neutral: "上有老、中有贷时，一方大病会拖垮两人计划。按「发生后扛不扛住」排保障优先级。",
+        female: "年龄别肿瘤风险抬升的窗口，又叠赡养；保额是否仍覆盖当前责任，建议复盘。",
+        male: "心脑血管与部分癌种压力更明显的区间；失能 / 收入中断对全家敞口最大。"
+      },
+      c4: {
+        neutral: "债务渐清，但健康风险抬升、核保窗口收窄。补的是以后买不到或不划算的保障。",
+        female: "预期寿命与护理需求拉长；养老现金流工具和医疗保障要一起看，别只盯演示收益。",
+        male: "心脑血管负担仍重；趁仍可核保，先补真缺口，再谈储蓄型结构。"
+      },
+      c5: {
+        neutral: "双人晚年最怕「一个人的病掏空两个人」。医疗持续有效，受益人与护理安排要更新。",
+        female: "长寿与护理开支更突出；互相照护安排比产品名更重要。",
+        male: "慢病与失能风险抬升；检视既往保单条款与理赔路径是否仍清楚。"
+      },
+      f1: {
+        neutral: "有娃后，大人健康冲击会立刻变成抚养压力。保险首先保护大人的人力资本。",
+        female: "孕产相关医疗与收入波动集中；产后康复期保障别空窗，孩子储蓄型排后面。",
+        male: "若你是主要收入，身故 / 重疾保障要按「孩子独立前需要多少年」粗算，而不是先给孩子买一堆。"
+      },
+      f2: {
+        neutral: "大人病了，整个育儿计划可能停摆；孩子侧更常见的是意外与住院打断节奏。先大人医疗/重疾/寿险，再谈教育金。",
+        female: "育儿期睡眠与体检容易被挤掉；自身健康窗口不能让给「只给孩子买保险」。",
+        male: "加班与压力叠育儿开支；收入中断对托育 / 房贷的杀伤，要单独放进风险图。"
+      },
+      f3: {
+        neutral: "教育开支挤占保费时，最容易断的是大人保障。孩子意外 / 医疗可保留基础，保额复盘看责任有没有变。",
+        female: "自身进入部分癌种更需关注的年龄带（示意）时，别用课外班预算顶掉重疾 / 医疗。",
+        male: "心脑血管风险因素累积期，又叠学区与事业节点；保单多年未看，保额可能已不够。"
+      },
+      f4: {
+        neutral: "教育高峰现金压力最大，家长健康窗口却在收窄。专款别拆养老，大人保障高峰期更不能断。",
+        female: "核保与健康告知可能不如年轻时宽松；学费再急，也不要用储蓄型去替代保障缺口。",
+        male: "心血管与肿瘤负担抬升的年龄带，叠大额教育金支出；先问收入中断谁顶，再问留学预算。"
+      },
+      f5: {
+        neutral: "孩子独立后，风险焦点转回自己的健康与退休。下调抚养相关寿险（按实际），医疗与养老现金流接上来。",
+        female: "预期寿命更长，护理与长寿现金流要提早进账；受益人从「护孩」转向「护己 / 伴侣」。",
+        male: "慢病风险抬升；别在责任刚放下时一起放松保障，缺口会暴露在退休前。"
+      },
+      f6: {
+        neutral: "长寿、护理与传承成为主线。医疗安排持续有效，比再买一堆名目更重要。",
+        female: "独居或照护依赖可能上升；护理安排与家庭支持网络要说清楚。",
+        male: "慢病与失能开支可能持续多年；已有保单理赔路径、受益人是否过时，建议检视。"
+      }
+    };
+
+    const HEALTH_DISCLAIMER = "人群统计示意，个体差异大；不构成诊断、体检替代或产品推介。条形是年龄带相对高低，不是「你个人患病率」。";
+
+    /* 准备点 → 兑现点：保险是提前准备、长期兑现 */
+    const PREPARE_LINKS = {
+      s1: {
+        redeemNow: "这一阶段更多是「打底」：兑现的是小冲击扛得住，而不是收益。",
+        links: [
+          { now: "医疗 / 意外底子", later: "自立期及以后的大额账单", laterId: "s2", why: "健康窗口宽、保费相对低，先占住保障入口" },
+          { now: "应急金习惯", later: "责任初显时的收入波动", laterId: "s3", why: "保险管大冲击，应急金管短期断裂" }
+        ]
+      },
+      s2: {
+        redeemNow: "若已有基础保障，本阶段开始「兑现」其对冲小–中冲击的意义。",
+        links: [
+          { now: "重疾 / 医疗对齐收入", later: "责任初显 · 房贷赡养高峰", laterId: "s3", why: "高发与责任上升前，核保通常更容易" },
+          { now: "若有长期目标再谈专款", later: "蓄力期 / 退休现金流", laterId: "s4", why: "专款抢时间窗口，但不能顶保障缺口" }
+        ]
+      },
+      s3: {
+        redeemNow: "寿险 / 重疾开始为「房贷 + 赡养」责任兑现意义。",
+        links: [
+          { now: "保额复盘（债 + 生活费）", later: "蓄力期健康高发带", laterId: "s4", why: "责任最重时，窗口一旦错过更贵更难" },
+          { now: "区分保障与储蓄预算", later: "过渡退休的用钱节奏", laterId: "s5", why: "避免用演示收益耽误真缺口" }
+        ]
+      },
+      s4: {
+        redeemNow: "医疗账单与慢病开支开始更频繁地「兑现」保障价值。",
+        links: [
+          { now: "趁可核保补真缺口", later: "过渡退休 / 长寿期护理", laterId: "s5", why: "以后买不到或不划算的，现在补" },
+          { now: "养老专款是否启动", later: "长寿期现金流", laterId: "s6", why: "专款要的是确定性，不是临老再堆" }
+        ]
+      },
+      s5: {
+        redeemNow: "从赚钱转向用钱：年金 / 医疗安排开始兑现「稳住节奏」。",
+        links: [
+          { now: "医疗不断档", later: "长寿期护理与慢病", laterId: "s6", why: "退休后账单风险不消失" },
+          { now: "检视受益人与条款", later: "长寿期传承安排", laterId: "s6", why: "兑现路径要清楚，才叫准备过" }
+        ]
+      },
+      s6: {
+        redeemNow: "长期准备在这里兑现：护理、医疗、现金流是否可预期。",
+        links: [
+          { now: "理赔与陪护路径是否清楚", later: "当下的晚年开支", laterId: null, why: "这一段以兑现与检视为主，少做冲动加保" }
+        ]
+      },
+      c1: {
+        redeemNow: "共同责任刚形成：保障开始为「两人账户」兑现底线。",
+        links: [
+          { now: "双方医疗 / 意外对齐", later: "置业期月供压力", laterId: "c2", why: "债务出现前先把人保住" },
+          { now: "共同应急金", later: "责任叠加期双端开支", laterId: "c3", why: "保险之前先有短期缓冲" }
+        ]
+      },
+      c2: {
+        redeemNow: "房贷期间，寿险 / 重疾开始为「人在贷还在」兑现。",
+        links: [
+          { now: "寿险匹配剩余贷款 + 生活费", later: "责任叠加期", laterId: "c3", why: "责任年限还很长，窗口宜早" },
+          { now: "重疾避免存款硬扛", later: "空巢前的健康抬升带", laterId: "c4", why: "康复期收入中断比账单更伤" }
+        ]
+      },
+      c3: {
+        redeemNow: "责任最重：保障密集兑现其「扛住冲击」的功能。",
+        links: [
+          { now: "按扛不扛住排优先级", later: "空巢过渡的核保窗口尾声", laterId: "c4", why: "再晚，健康条件可能更苛刻" },
+          { now: "别用储蓄型顶缺口", later: "共同退休现金流", laterId: "c5", why: "专款与保障混仓，兑现时会乱" }
+        ]
+      },
+      c4: {
+        redeemNow: "债务渐清，健康风险抬升：补保是在为晚年兑现做最后冲刺。",
+        links: [
+          { now: "补齐真缺口（趁可核保）", later: "共同退休互相照护", laterId: "c5", why: "一人病掏空两人，要靠提前准备" },
+          { now: "养老现金流工具讨论", later: "长寿期用钱", laterId: "c5", why: "时间窗口比收益故事更重要" }
+        ]
+      },
+      c5: {
+        redeemNow: "双人晚年：医疗与护理安排在此兑现。",
+        links: [
+          { now: "更新受益人与护理安排", later: "当下的互相照护开支", laterId: null, why: "以兑现与检视为主" }
+        ]
+      },
+      f1: {
+        redeemNow: "有娃后，大人保障开始为抚养能力兑现。",
+        links: [
+          { now: "大人医疗 / 重疾 / 寿险优先", later: "育儿前期至教育高峰", laterId: "f2", why: "健康与保费窗口还在，孩子储蓄排后" },
+          { now: "寿险粗算到孩子独立", later: "责任释放前", laterId: "f5", why: "对齐抚养年，而不是买最多年" }
+        ]
+      },
+      f2: {
+        redeemNow: "育儿刚性开支下，应急与大人保障持续兑现「计划不停摆」。",
+        links: [
+          { now: "保障齐了再启动教育金专款", later: "教育高峰学费集中期", laterId: "f4", why: "专款抢时间，但不能沙上盖楼" },
+          { now: "孩子基础医疗 / 意外", later: "义务教育期住院 / 意外", laterId: "f3", why: "孩子侧先基础，大人侧仍优先" }
+        ]
+      },
+      f3: {
+        redeemNow: "教育开支上升时，最怕断掉的是大人保障的「兑现能力」。",
+        links: [
+          { now: "复盘保额；教育金是否真专款", later: "教育高峰", laterId: "f4", why: "临近高峰再堆，只能靠现金流硬扛" },
+          { now: "自己中年健康窗口保障", later: "责任释放 / 退休前高发带", laterId: "f5", why: "核保窗口与责任高峰错开前要占住" }
+        ]
+      },
+      f4: {
+        redeemNow: "教育金专款与大人保障在此集中兑现；也是检验「是否真专款」。",
+        links: [
+          { now: "专款按契约用，勿拆养老", later: "责任释放与自己的退休", laterId: "f5", why: "高峰期拆东墙，晚年兑现会缺一块" },
+          { now: "家长保障不断档", later: "退休与长寿", laterId: "f6", why: "学费再急，收入中断更伤" }
+        ]
+      },
+      f5: {
+        redeemNow: "抚养责任下降：部分寿险使命兑现完毕，焦点转向自己。",
+        links: [
+          { now: "下调抚养相关寿险（按实际）", later: "退休与长寿医疗 / 护理", laterId: "f6", why: "预算从护孩转向护己" },
+          { now: "养老与医疗安排接上来", later: "长寿期现金流", laterId: "f6", why: "别在责任刚放下时一起放松准备" }
+        ]
+      },
+      f6: {
+        redeemNow: "一生准备在此兑现：医疗、护理、传承是否可预期。",
+        links: [
+          { now: "检视理赔路径与受益人", later: "当下的晚年节奏", laterId: null, why: "以兑现与检视为主" }
+        ]
+      }
+    };
+
+    const PREPARE_NOTE = "示意框架：准备点占窗口，兑现点看责任与健康节奏；不构成投保建议。";
+
+    /* 资产松紧：不改阶段定位，只调「保险作用 / 小结 / 准备点语气」 */
+    const MONEY_LEVELS = {
+      tight: { label: "手头紧一点", short: "手头紧" },
+      ok: { label: "大致够用", short: "大致够用" },
+      ample: { label: "相对宽裕", short: "相对宽裕" }
+    };
+    const MONEY_PREPARE_TONE = {
+      tight: "预算紧时：先分清「必须有」与「可延后」。",
+      ok: "有余力时：保障与专款预算分开记，别混仓。",
+      ample: "相对宽裕时：多看结构与隔离，少再堆一张单。"
+    };
+    const MONEY_OVERLAYS = {
+      s1: {
+        tight: {
+          roles: ["先把医疗 / 意外底子占住，保费可控即可", "应急金习惯比任何长期单都优先", "暂缓储蓄型与「增值」叙事"],
+          takeaway: "手头紧时，这一阶段只做一件事：<strong>用小保费买下「扛得住」</strong>。"
+        },
+        ok: {
+          roles: ["医疗保障对齐基础账单缺口", "意外险补低成本突发场景", "有余力再谈极小额长期习惯，仍排保障后"],
+          takeaway: "够用时，保险仍是<strong>起步缓冲</strong>，不是提前堆满产品。"
+        },
+        ample: {
+          roles: ["打好医疗 / 意外底子，别用高额储蓄型「先上车」", "把长期目标记成专款账户，与保障分开", "窗口宽不等于要一次买齐"],
+          takeaway: "宽裕时更要防：<strong>用闲钱堆保单，却没先定义怕什么</strong>。"
+        }
+      },
+      s2: {
+        tight: {
+          roles: ["重疾 / 医疗优先对齐「收入中断」", "寿险仅在已有硬债务时再评估", "一切储蓄型目标先让路"],
+          takeaway: "紧的时候，先守<strong>赚钱能力</strong>，再谈以后的专款。"
+        },
+        ok: {
+          roles: ["重疾 / 医疗对齐收入水平", "若有债务或赡养，评估寿险缺口", "长期专款排在保障预算之后"],
+          takeaway: "人还年轻时，顺序仍是<strong>守人，再守目标</strong>。"
+        },
+        ample: {
+          roles: ["保障按真实缺口配齐，避免重复投保", "长期专款可以启动，但单独记账", "检视已有保单条款，比再买一张更值"],
+          takeaway: "宽裕不等于加保：先问<strong>缺的是不是真缺口</strong>。"
+        }
+      },
+      s3: {
+        tight: {
+          roles: ["寿险 / 失能相关：先覆盖「停薪后谁顶月供与赡养」", "医疗 / 重疾：堵住最贵的账单场景", "暂停用储蓄型保单「充场面」"],
+          takeaway: "责任最重又手头紧：只问一句——<strong>收入没了，家还转得动吗</strong>。"
+        },
+        ok: {
+          roles: ["寿险保额按债 + 几年生活费粗算", "医疗 / 重疾补社保边界外缺口", "保障与储蓄预算分账，避免互相挤"],
+          takeaway: "责任变大时，先堵缺口，再谈专款。"
+        },
+        ample: {
+          roles: ["保额按责任上限检视，避免不足或过度", "区分保障、应急、长期目标三笔钱", "可用专款工具，但不拿收益故事替缺口"],
+          takeaway: "宽裕时检视的是<strong>结构是否清楚</strong>，不是单子多不多。"
+        }
+      },
+      s4: {
+        tight: {
+          roles: ["保障型继续守健康与收入缺口，保费可控为先", "年金 / 长期储蓄能缓则缓", "应急金与保费连续性优先于收益率"],
+          takeaway: "蓄力又紧巴时：<strong>不断保、不硬上专款</strong>。"
+        },
+        ok: {
+          roles: ["保障型继续守冲击", "开始讨论专款专用的养老 / 长期目标", "三笔钱分开：应急、保障、长期"],
+          takeaway: "这一阶段开始同时服务<strong>当下冲击</strong>与<strong>未来现金流</strong>。"
+        },
+        ample: {
+          roles: ["补齐仍缺的保障窗口", "正式启动养老 / 长期专款并隔离", "减少「演示收益」对决策的干扰"],
+          takeaway: "宽裕时把时间窗口用在<strong>确定性安排</strong>上，而不是产品对比赛。"
+        }
+      },
+      s5: {
+        tight: {
+          roles: ["医疗不断档是底线", "年金类工具量力而行，先保生活节奏", "少做冲动加保，多检视已有条款"],
+          takeaway: "过渡退休又紧时：保险是<strong>稳住节奏</strong>，不是冲收益。"
+        },
+        ok: {
+          roles: ["医疗持续覆盖", "讨论是否需要一笔确定现金流", "受益人与条款定期检视"],
+          takeaway: "退休前后，角色更接近<strong>稳住生活</strong>。"
+        },
+        ample: {
+          roles: ["医疗与护理安排前瞻性检视", "现金流工具服务确定开支", "开始理顺传承与受益路径（合规咨询）"],
+          takeaway: "宽裕时把「可预期」做实：账单、护理、传承路径。"
+        }
+      },
+      s6: {
+        tight: {
+          roles: ["医疗 / 护理：先弄清已有保障能赔什么", "少买新单，多打通理赔与陪护路径", "传承话题可暂缓到节奏稳住后"],
+          takeaway: "长寿又紧：先让<strong>已有安排真正用得上</strong>。"
+        },
+        ok: {
+          roles: ["医疗 / 护理看缺口而非产品名", "检视理赔与受益人", "若需要传承工具，放进合规咨询"],
+          takeaway: "把不确定的晚年开支，尽量变成<strong>可预期</strong>。"
+        },
+        ample: {
+          roles: ["护理、医疗、陪护路径写清楚", "检视保单与资产的配合关系", "传承安排在合规框架下讨论"],
+          takeaway: "宽裕的长寿期：重点是<strong>结构清楚、兑现顺畅</strong>。"
+        }
+      },
+      c1: {
+        tight: {
+          roles: ["双方先有基础医疗 / 意外，保费可分担", "共同应急金先于任何长期单", "债务出现前，少谈储蓄型"],
+          takeaway: "成家又紧：先对齐<strong>怕什么</strong>，再分工买最小必要。"
+        },
+        ok: {
+          roles: ["双方基础医疗 / 意外对齐", "共同债务出现后再评估寿险", "先对齐风险，再分工保障"],
+          takeaway: "成家是责任共享，不是自动加保。"
+        },
+        ample: {
+          roles: ["双方保障底子打齐，避免一方裸奔", "共同目标专款可启动，但与保障分账", "别用高额储蓄型代替沟通「怕什么」"],
+          takeaway: "宽裕时更要先<strong>对齐责任地图</strong>，再谈配置。"
+        }
+      },
+      c2: {
+        tight: {
+          roles: ["寿险优先覆盖「人没了贷怎么办」", "重疾避免掏空仅有存款", "储蓄目标全部给月供与保费让路"],
+          takeaway: "有贷又紧：保险先回答<strong>人在不在，贷还还不还得上</strong>。"
+        },
+        ok: {
+          roles: ["寿险匹配剩余贷款 + 生活费", "重疾挡住康复期收入中断", "保障与储蓄预算分开"],
+          takeaway: "房贷期，顺序是债与人，再是专款。"
+        },
+        ample: {
+          roles: ["寿险按剩余贷 + 生活费检视是否过度/不足", "重疾与医疗齐备", "专款可以并行，但不可顶替寿险缺口"],
+          takeaway: "宽裕也不混仓：<strong>还贷能力</strong>和<strong>专款目标</strong>分开看。"
+        }
+      },
+      c3: {
+        tight: {
+          roles: ["严格按「发生后扛不扛住」排优先级", "保额只保真责任，砍掉面子型保单", "禁用储蓄型顶保障缺口"],
+          takeaway: "责任最重又紧：每一分保费都要对准<strong>扛住冲击</strong>。"
+        },
+        ok: {
+          roles: ["按扛不扛住排保障优先级", "检视保额是否覆盖当前责任", "避免储蓄型顶替缺口"],
+          takeaway: "先堵缺口，再谈专款。"
+        },
+        ample: {
+          roles: ["责任地图更新后重算保额", "保障与专款分仓，条款与受益人清晰", "窗口尾声前补真缺口，而非加概念单"],
+          takeaway: "宽裕时补的是<strong>以后更贵或买不到的保障</strong>。"
+        }
+      },
+      c4: {
+        tight: {
+          roles: ["趁可核保，只补真正缺的保障", "养老现金流能量力则启，不能则先记账规划", "砍掉重复与低效保单减负"],
+          takeaway: "窗口还在又紧：只补<strong>缺了会后悔</strong>的那一块。"
+        },
+        ok: {
+          roles: ["趁可核保补真缺口", "开始讨论养老现金流工具", "把演示收益从决策中心拿开"],
+          takeaway: "补的是以后买不到或不划算的保障。"
+        },
+        ample: {
+          roles: ["系统检视双方保障是否闭环", "养老专款正式隔离", "互相照护与受益安排提前写清"],
+          takeaway: "宽裕的空巢过渡：把<strong>两人互相照护</strong>做成可执行安排。"
+        }
+      },
+      c5: {
+        tight: {
+          roles: ["医疗持续有效即可，少加新单", "检视已有保单能否兑现", "受益人更新，减少家庭扯皮成本"],
+          takeaway: "双人晚年又紧：让已有保障<strong>真能用上</strong>。"
+        },
+        ok: {
+          roles: ["医疗持续；检视条款", "年金 / 储蓄服务确定开支", "定期更新受益人与财务地图"],
+          takeaway: "别让一个人的风险掏空两个人。"
+        },
+        ample: {
+          roles: ["医疗与护理路径清晰", "现金流服务确定生活成本", "合规下讨论传承是否必要"],
+          takeaway: "宽裕晚年的重点是<strong>路径清楚、两人互相托底</strong>。"
+        }
+      },
+      f1: {
+        tight: {
+          roles: ["大人医疗 / 重疾 / 寿险绝对优先", "孩子侧只留基础医疗 / 意外", "任何孩子储蓄型先停"],
+          takeaway: "有娃又紧：保费只办一件事——<strong>保住大人的抚养能力</strong>。"
+        },
+        ok: {
+          roles: ["大人保障优先于孩子储蓄", "医疗 / 重疾守抚养能力", "寿险按孩子独立前年数粗算"],
+          takeaway: "保险首先保护大人的人力资本。"
+        },
+        ample: {
+          roles: ["大人保障配齐后再谈孩子长期安排", "寿险对齐抚养年，避免买「越长越好」", "专款可启动，但排在大人保障之后"],
+          takeaway: "宽裕也不颠倒：<strong>先大人，后孩子专款</strong>。"
+        }
+      },
+      f2: {
+        tight: {
+          roles: ["应急金 → 大人保障 → 止；教育金可等", "孩子仅基础医疗 / 意外", "课外与保费冲突时，保费优先"],
+          takeaway: "育儿前期又紧：顺序错了，再规划也像沙上盖楼。"
+        },
+        ok: {
+          roles: ["应急金 → 大人医疗/重疾/寿险 → 再谈教育金", "孩子先基础医疗 / 意外", "教育金是专款，不能顶保障"],
+          takeaway: "顺序对了，专款才站得住。"
+        },
+        ample: {
+          roles: ["大人保障闭环后启动教育金专款并隔离", "孩子基础保障齐备", "专款契约写清，避免日后挪用"],
+          takeaway: "宽裕时把教育金做成<strong>真专款</strong>，而不是又一张随意保单。"
+        }
+      },
+      f3: {
+        tight: {
+          roles: ["保费连续性优先于课外扩容", "定期复盘保额，砍非必要开支保保障", "教育金若已有则按契约，勿再加码"],
+          takeaway: "义务教育期最怕：<strong>短期教育投入挤掉长期风控</strong>。"
+        },
+        ok: {
+          roles: ["定期复盘责任与保额", "教育金看约束与流动性", "坚持先保障后储蓄"],
+          takeaway: "防的是用短期教育投入挤掉长期风控。"
+        },
+        ample: {
+          roles: ["保额与责任对齐，避免不足", "教育金专款检视：是否真隔离", "大人中年窗口保障占住，再谈加码教育"],
+          takeaway: "宽裕时也要防：教育故事讲太满，保障与专款反而糊。"
+        }
+      },
+      f4: {
+        tight: {
+          roles: ["已有教育金按契约用，禁止拆养老/保障", "家长保障不断档是底线", "跨境 / 额外储蓄先搁置"],
+          takeaway: "教育高峰又紧：专款是否真专款，大人是否仍被保护。"
+        },
+        ok: {
+          roles: ["教育金按契约使用", "家长保障不断档", "若考虑跨境安排，先过适不适合框架"],
+          takeaway: "高峰考验专款纯度，与大人是否仍被保护。"
+        },
+        ample: {
+          roles: ["专款按契约兑现学费，勿临时拆东墙", "家长保障与现金流压力一并复盘", "跨境工具只在适合框架下讨论"],
+          takeaway: "宽裕的高峰：把「能付」和「结构对」分开看。"
+        }
+      },
+      f5: {
+        tight: {
+          roles: ["下调抚养相关寿险，减保费负担", "预算转向自己的医疗延续", "养老专款能留多少算多少，先不断医疗"],
+          takeaway: "孩子独立后：从护航孩子转回<strong>护航自己</strong>，量力即可。"
+        },
+        ok: {
+          roles: ["下调抚养相关寿险（按实际）", "预算转向医疗与养老现金流", "更新受益人与财务地图"],
+          takeaway: "保险从护孩转回护己的晚年。"
+        },
+        ample: {
+          roles: ["责任释放后重算保障与资产配合", "养老与医疗安排提上日程", "开始理顺传承路径（若需要）"],
+          takeaway: "宽裕的责任释放：把目光正式转回<strong>自己的可预期晚年</strong>。"
+        }
+      },
+      f6: {
+        tight: {
+          roles: ["医疗与护理：用好已有安排", "少加新单，多打通兑现路径", "传承可从简，先保证自己不被一次账单打乱"],
+          takeaway: "长寿又紧：先让晚年节奏<strong>不被一次冲击打乱</strong>。"
+        },
+        ok: {
+          roles: ["医疗与护理安排持续有效", "年金 / 储蓄服务确定生活成本", "合规下讨论传承是否必要"],
+          takeaway: "让晚年节奏不被一次冲击打乱。"
+        },
+        ample: {
+          roles: ["医疗、护理、陪护路径文档化", "现金流与生活成本匹配", "传承工具在合规咨询中安排"],
+          takeaway: "宽裕长寿期：意义是<strong>可预期、可执行、可交接</strong>。"
+        }
+      }
+    };
+
+    function moneyLabel(level) {
+      if (!level || level === "skip") return null;
+      return MONEY_LEVELS[level] ? MONEY_LEVELS[level].short : null;
+    }
+
+    function moneyContent(stage) {
+      const base = { roles: stage.roles, takeaway: stage.takeaway };
+      if (!moneyLevel || moneyLevel === "skip") return base;
+      const ov = MONEY_OVERLAYS[stage.id] && MONEY_OVERLAYS[stage.id][moneyLevel];
+      if (!ov) return base;
+      return {
+        roles: ov.roles || stage.roles,
+        takeaway: ov.takeaway || stage.takeaway
+      };
+    }
+
+    function prepareDataFor(stage) {
+      const data = PREPARE_LINKS[stage.id];
+      if (!data) return null;
+      const tone = moneyLevel && moneyLevel !== "skip" ? MONEY_PREPARE_TONE[moneyLevel] : null;
+      return {
+        redeemNow: data.redeemNow,
+        links: data.links.map((link) => ({
+          ...link,
+          why: tone ? `${link.why}；${tone}` : link.why
+        }))
+      };
+    }
+
+    /* 阶段内病种相对风险（1–5）：反映年龄别发病率大致走势，非精确患病率 */
+    const LEVEL_WORDS = ["", "较低", "抬头", "升高", "较高", "突出"];
+    const DISEASE_RISK = {
+      // level: cancer, stroke, cvd, accident (optional)
+      s1: { cancer: 1, stroke: 1, cvd: 1, accident: 3 },
+      s2: { cancer: 2, stroke: 1, cvd: 2, accident: 2 },
+      s3: { cancer: 3, stroke: 2, cvd: 3, accident: 2 },
+      s4: { cancer: 4, stroke: 3, cvd: 4 },
+      s5: { cancer: 4, stroke: 4, cvd: 4 },
+      s6: { cancer: 4, stroke: 5, cvd: 5 },
+      c1: { cancer: 1, stroke: 1, cvd: 1, accident: 3 },
+      c2: { cancer: 2, stroke: 2, cvd: 3, accident: 2 },
+      c3: { cancer: 3, stroke: 3, cvd: 4 },
+      c4: { cancer: 4, stroke: 4, cvd: 4 },
+      c5: { cancer: 4, stroke: 5, cvd: 5 },
+      f1: { cancer: 2, stroke: 1, cvd: 2, accident: 2 },
+      f2: { cancer: 2, stroke: 2, cvd: 2, accident: 3 },
+      f3: { cancer: 3, stroke: 2, cvd: 3 },
+      f4: { cancer: 4, stroke: 3, cvd: 4 },
+      f5: { cancer: 4, stroke: 4, cvd: 4 },
+      f6: { cancer: 4, stroke: 5, cvd: 5 }
+    };
+
+    /* 可核对的终生锚点（与公众号《一生重疾概率推演》同口径，示意） */
+    const LIFETIME_ANCHORS = {
+      cancer: { text: "中国人群终生患癌约 28%", source: "Sci China Life Sci, 2025" },
+      stroke: { text: "中国 25 岁起终生卒中约 39%", source: "NEJM / GBD, 2018" },
+      cvd: {
+        female: { text: "多项危险因素下，女终生心血管约 24%（50→90 岁口径）", source: "NEJM, 2024–25" },
+        male: { text: "多项危险因素下，男终生心血管约 38%（50→90 岁口径）", source: "NEJM, 2024–25" },
+        neutral: { text: "心血管终生风险随危险因素可差数倍", source: "NEJM 队列汇总" }
+      }
+    };
+
+    function diseaseRowsFor(stage) {
+      const raw = DISEASE_RISK[stage.id];
+      if (!raw) return [];
+      let cancer = raw.cancer;
+      let stroke = raw.stroke;
+      let cvd = raw.cvd;
+      const accident = raw.accident;
+      const mid = /^(s|c|f)[2-5]$/.test(stage.id);
+      const late = /^(s|c|f)[4-6]$/.test(stage.id);
+      if (gender === "male" && late) cvd = Math.min(5, cvd + 1);
+      if (gender === "female" && mid) cancer = Math.min(5, cancer + 1);
+      const rows = [];
+      if (accident) rows.push({ key: "accident", name: "意外医疗", level: accident });
+      rows.push({ key: "cancer", name: "恶性肿瘤", level: cancer });
+      rows.push({ key: "stroke", name: "脑卒中", level: stroke });
+      rows.push({ key: "cvd", name: "心血管", level: cvd });
+      return rows;
+    }
+
+    function anchorsHtml() {
+      const cvdA = gender === "female" ? LIFETIME_ANCHORS.cvd.female
+        : gender === "male" ? LIFETIME_ANCHORS.cvd.male
+        : LIFETIME_ANCHORS.cvd.neutral;
+      return `<div class="disease-anchors"><strong>终生锚点（可核对，勿与上图条形相加）</strong><br/>· ${LIFETIME_ANCHORS.cancer.text}<br/>· ${LIFETIME_ANCHORS.stroke.text}<br/>· ${cvdA.text}</div>`;
+    }
+
+    function healthBlockHtml(stage) {
+      const text = healthTipFor(stage);
+      if (!text) return "";
+      const tag = genderLabel(gender);
+      const label = tag ? `健康风险 · ${tag}` : "健康风险（年龄带示意）";
+      const rows = diseaseRowsFor(stage);
+      const meters = rows.map((r) => {
+        const pct = Math.round((r.level / 5) * 100);
+        return `<div class="disease-row"><span class="d-name">${r.name}</span><span class="d-meter" aria-hidden="true"><i style="width:${pct}%"></i></span><span class="d-level">${LEVEL_WORDS[r.level]}</span></div>`;
+      }).join("");
+      return `<div class="block"><div class="health-box"><span class="health-label">${label}</span><p class="health-tip-text">${text}</p><div class="disease-rows">${meters}</div>${anchorsHtml()}<span class="health-note">${HEALTH_DISCLAIMER}</span></div></div>`;
+    }
+
+    function stageIndexById(profileKey, stageId) {
+      if (!stageId) return -1;
+      return PROFILES[profileKey].stages.findIndex((s) => s.id === stageId);
+    }
+
+    function prepareBlockHtml(stage) {
+      const data = prepareDataFor(stage);
+      if (!data) return "";
+      const items = data.links.map((link) => {
+        const jump = link.laterId
+          ? `<button type="button" class="prepare-jump" data-jump-id="${link.laterId}">查看兑现阶段 →</button>`
+          : "";
+        return `<div class="prepare-item">
+          <div class="prepare-track">
+            <div class="prepare-pole now"><span class="pole-tag">准备点 · 现在</span>${link.now}</div>
+            <div class="prepare-arrow" aria-hidden="true">→</div>
+            <div class="prepare-pole later"><span class="pole-tag">兑现点 · 以后</span>${link.later}</div>
+          </div>
+          <p class="prepare-why">${link.why}</p>
+          ${jump}
+        </div>`;
+      }).join("");
+      const redeem = data.redeemNow
+        ? `<p class="prepare-redeem-now"><strong>本阶段在兑现什么</strong>　${data.redeemNow}</p>`
+        : "";
+      const moneyNote = moneyLabel(moneyLevel)
+        ? `<span class="health-note">当前按「${moneyLabel(moneyLevel)}」调整了保障优先级示意，不构成投保建议。</span>`
+        : "";
+      return `<div class="block"><div class="prepare-box"><span class="health-label">时间错位 · 准备点 / 兑现点</span>${redeem}${items}${moneyNote}<span class="health-note">${PREPARE_NOTE}</span></div></div>`;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const wxId = (params.get("wx") || LEAD_CONFIG.defaultWx).trim();
+
+    const setupEl = document.getElementById("setup");
+    const locateEl = document.getElementById("locate");
+    const timelineEl = document.getElementById("timeline");
+    const scroller = document.getElementById("scroller");
+    const dotsEl = document.getElementById("dots");
+    const stageName = document.getElementById("stage-name");
+    const stageIndex = document.getElementById("stage-index");
+    const railFill = document.getElementById("rail-fill");
+    const profileLabel = document.getElementById("profile-label");
+    const hereBanner = document.getElementById("here-banner");
+    const fieldChild = document.getElementById("field-child");
+    const locateLead = document.getElementById("locate-lead");
+    const inputAdult = document.getElementById("input-adult");
+    const inputChild = document.getElementById("input-child");
+    const toastEl = document.getElementById("toast");
+
+    let currentProfile = null;
+    let currentIndex = 0;
+    let hereIndex = null;
+    let adultAge = null;
+    let childAge = null;
+    let gender = null; // "female" | "male" | "na" | null
+    let moneyLevel = null; // "tight" | "ok" | "ample" | "skip" | null
+    let panels = [];
+    let scrollTicking = false;
+    let programmaticScroll = false;
+
+    document.getElementById("wx-id-display").textContent = wxId;
+
+    function genderLabel(g) {
+      if (g === "female") return "女";
+      if (g === "male") return "男";
+      return null;
+    }
+
+    function healthTipFor(stage) {
+      const tip = HEALTH_TIPS[stage.id];
+      if (!tip) return null;
+      if (gender === "female") return tip.female || tip.neutral;
+      if (gender === "male") return tip.male || tip.neutral;
+      return tip.neutral;
+    }
+
+    function syncGenderPills() {
+      document.querySelectorAll(".gender-pill").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.gender === gender);
+      });
+    }
+
+    function syncMoneyPills() {
+      document.querySelectorAll(".money-pill").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.money === moneyLevel);
+      });
+    }
+
+    document.querySelectorAll(".gender-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        gender = btn.dataset.gender;
+        syncGenderPills();
+      });
+    });
+
+    document.querySelectorAll(".money-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        moneyLevel = btn.dataset.money;
+        syncMoneyPills();
+      });
+    });
+
+    function writeMoneyParam(url) {
+      if (moneyLevel && moneyLevel !== "skip" && MONEY_LEVELS[moneyLevel]) {
+        url.searchParams.set("money", moneyLevel);
+      } else {
+        url.searchParams.delete("money");
+      }
+    }
+
+    function toast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toastEl.classList.remove("show"), 2200);
+    }
+
+    function showScreen(which) {
+      [setupEl, locateEl, timelineEl].forEach((el) => {
+        const on = el.id === which;
+        el.classList.toggle("active", on);
+        el.hidden = !on;
+      });
+    }
+
+    function stripHtml(html) {
+      const d = document.createElement("div");
+      d.innerHTML = html;
+      return d.textContent || "";
+    }
+
+    function findHereIndex(profileKey, adult, child) {
+      const stages = PROFILES[profileKey].stages;
+      if (profileKey === "family" && child != null && !Number.isNaN(child)) {
+        for (let i = 0; i < stages.length; i++) {
+          const s = stages[i];
+          if (s.matchBy === "child" && child >= s.childMin && child <= s.childMax) return i;
+        }
+        // newborn / 备孕：child 0 and adult in range
+        if (child <= 0.5 && adult != null) {
+          for (let i = 0; i < stages.length; i++) {
+            const s = stages[i];
+            if (s.id === "f1" && adult >= s.ageMin && adult <= s.ageMax) return i;
+          }
+        }
+        if (child > 22 && adult != null) {
+          for (let i = 0; i < stages.length; i++) {
+            const s = stages[i];
+            if (s.matchBy === "adult" && adult >= s.ageMin && adult <= s.ageMax) return i;
+          }
+        }
+      }
+      if (adult != null && !Number.isNaN(adult)) {
+        for (let i = 0; i < stages.length; i++) {
+          const s = stages[i];
+          if (adult >= s.ageMin && adult <= s.ageMax) return i;
+        }
+        if (adult < stages[0].ageMin) return 0;
+        return stages.length - 1;
+      }
+      return null;
+    }
+
+    function openLocate(profileKey) {
+      currentProfile = profileKey;
+      locateLead.textContent = PROFILES[profileKey].locateHint;
+      fieldChild.hidden = profileKey !== "family";
+      inputAdult.value = adultAge != null ? adultAge : "";
+      inputChild.value = childAge != null ? childAge : "";
+      if (!gender) gender = "na";
+      syncGenderPills();
+      syncMoneyPills();
+      showScreen("locate");
+      const url = new URL(window.location.href);
+      url.searchParams.set("profile", profileKey);
+      url.searchParams.delete("stage");
+      url.searchParams.delete("age");
+      url.searchParams.delete("child");
+      url.searchParams.delete("sex");
+      url.searchParams.delete("money");
+      history.replaceState(null, "", url);
+    }
+
+    function renderTimeline(profileKey, jumpTo) {
+      const profile = PROFILES[profileKey];
+      currentProfile = profileKey;
+      profileLabel.textContent = profile.label;
+
+      scroller.innerHTML = "";
+      dotsEl.innerHTML = "";
+
+      if (hereIndex != null) {
+        const stage = profile.stages[hereIndex];
+        const bits = [];
+        if (adultAge != null) bits.push(`你约 ${adultAge} 岁`);
+        const gl = genderLabel(gender);
+        if (gl) bits.push(gl);
+        const ml = moneyLabel(moneyLevel);
+        if (ml) bits.push(ml);
+        if (profileKey === "family" && childAge != null) bits.push(`孩子约 ${childAge} 岁`);
+        hereBanner.innerHTML = `<strong>你在这里 · ${stage.name}</strong>　${bits.join(" · ")}　（示意定位，可左右滑看相邻阶段）`;
+        hereBanner.classList.add("show");
+      } else {
+        hereBanner.classList.remove("show");
+        hereBanner.innerHTML = "";
+      }
+
+      profile.stages.forEach((stage, i) => {
+        const isHere = hereIndex === i;
+        const view = moneyContent(stage);
+        const panel = document.createElement("article");
+        panel.className = "panel" + (isHere ? " is-here" : "");
+        panel.dataset.index = String(i);
+        panel.innerHTML = `
+          <div class="panel-head">
+            <span class="age-tag">${stage.age}</span>
+            <h2>${stage.name}</h2>
+            <p>${stage.blurb}</p>
+          </div>
+          <div class="panel-body">
+            ${prepareBlockHtml(stage)}
+            ${healthBlockHtml(stage)}
+            <div class="block">
+              <h3>重要节点</h3>
+              <div class="chips">${stage.milestones.map((m) => `<span class="chip">${m}</span>`).join("")}</div>
+            </div>
+            <div class="block">
+              <h3>可能面临的风险</h3>
+              <ul class="risk-list">${stage.risks.map((r) => `<li>${r}</li>`).join("")}</ul>
+            </div>
+            <div class="block">
+              <h3>保险在这一阶段的作用</h3>
+              <ul class="role-list">${view.roles.map((r) => `<li>${r}</li>`).join("")}</ul>
+            </div>
+            <p class="takeaway">${view.takeaway}</p>
+          </div>
+        `;
+        scroller.appendChild(panel);
+
+        panel.querySelectorAll(".prepare-jump").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const idx = stageIndexById(profileKey, btn.dataset.jumpId);
+            if (idx >= 0) goTo(idx, true);
+          });
+        });
+
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "dot" + (isHere ? " here" : "");
+        dot.textContent = isHere ? `● ${stage.name}` : stage.name;
+        dot.setAttribute("role", "tab");
+        dot.addEventListener("click", () => goTo(i, true));
+        dotsEl.appendChild(dot);
+      });
+
+      panels = Array.from(scroller.querySelectorAll(".panel"));
+      const target = jumpTo != null ? jumpTo : 0;
+      updateChrome(target);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => goTo(target, false));
+      });
+    }
+
+    function updateChrome(index) {
+      const stages = PROFILES[currentProfile].stages;
+      const stage = stages[index];
+      currentIndex = index;
+      stageName.textContent = stage.name;
+      stageIndex.textContent = `${index + 1} / ${stages.length}`;
+      railFill.style.width = `${((index + 1) / stages.length) * 100}%`;
+
+      Array.from(dotsEl.children).forEach((dot, i) => {
+        const on = i === index;
+        dot.classList.toggle("active", on);
+        dot.setAttribute("aria-selected", on ? "true" : "false");
+        if (on) dot.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+      });
+
+      document.getElementById("btn-prev").disabled = index === 0;
+      document.getElementById("btn-next").disabled = index === stages.length - 1;
+      panels.forEach((panel, i) => panel.classList.toggle("in-view", i === index));
+    }
+
+    function nearestIndex() {
+      const center = scroller.scrollLeft + scroller.clientWidth / 2;
+      let best = 0, bestDist = Infinity;
+      panels.forEach((panel, i) => {
+        const mid = panel.offsetLeft + panel.offsetWidth / 2;
+        const dist = Math.abs(mid - center);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      return best;
+    }
+
+    function updateInView() {
+      if (programmaticScroll || !panels.length) return;
+      const best = nearestIndex();
+      if (best !== currentIndex) updateChrome(best);
+      else panels.forEach((panel, i) => panel.classList.toggle("in-view", i === currentIndex));
+    }
+
+    function goTo(index, smooth) {
+      const panel = panels[index];
+      if (!panel) return;
+      const left = Math.max(0, panel.offsetLeft - (scroller.clientWidth - panel.offsetWidth) / 2);
+      programmaticScroll = true;
+      updateChrome(index);
+      if (smooth) {
+        scroller.scrollTo({ left, behavior: "smooth" });
+        window.setTimeout(() => { programmaticScroll = false; updateInView(); }, 380);
+      } else {
+        scroller.scrollLeft = left;
+        programmaticScroll = false;
+      }
+    }
+
+    scroller.addEventListener("scroll", () => {
+      if (scrollTicking || programmaticScroll) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => { updateInView(); scrollTicking = false; });
+    });
+
+    let isDown = false, startX = 0, startScroll = 0;
+    scroller.addEventListener("pointerdown", (e) => {
+      if (e.target.closest("button")) return;
+      isDown = true;
+      scroller.classList.add("dragging");
+      startX = e.clientX;
+      startScroll = scroller.scrollLeft;
+      scroller.setPointerCapture(e.pointerId);
+    });
+    scroller.addEventListener("pointermove", (e) => {
+      if (!isDown) return;
+      scroller.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    function endDrag() { isDown = false; scroller.classList.remove("dragging"); }
+    scroller.addEventListener("pointerup", endDrag);
+    scroller.addEventListener("pointercancel", endDrag);
+
+    document.querySelectorAll(".profile").forEach((btn) => {
+      btn.addEventListener("click", () => openLocate(btn.dataset.profile));
+    });
+
+    document.getElementById("btn-locate-back").addEventListener("click", () => showScreen("setup"));
+    document.getElementById("btn-back").addEventListener("click", () => openLocate(currentProfile));
+
+    document.getElementById("btn-skip-locate").addEventListener("click", () => {
+      hereIndex = null;
+      adultAge = null;
+      childAge = null;
+      if (!gender) gender = "na";
+      if (!moneyLevel) moneyLevel = "skip";
+      const url = new URL(window.location.href);
+      url.searchParams.set("profile", currentProfile);
+      if (gender && gender !== "na") url.searchParams.set("sex", gender);
+      else url.searchParams.delete("sex");
+      writeMoneyParam(url);
+      history.replaceState(null, "", url);
+      renderTimeline(currentProfile, 0);
+      showScreen("timeline");
+    });
+
+    document.getElementById("btn-locate").addEventListener("click", () => {
+      const a = inputAdult.value === "" ? null : Number(inputAdult.value);
+      const c = inputChild.value === "" ? null : Number(inputChild.value);
+      if (a == null && (currentProfile !== "family" || c == null)) {
+        toast("先填一个大概年龄，或点「先浏览」");
+        return;
+      }
+      if (!gender) gender = "na";
+      if (!moneyLevel) moneyLevel = "skip";
+      adultAge = a;
+      childAge = c;
+      hereIndex = findHereIndex(currentProfile, a, c);
+      if (hereIndex == null) {
+        toast("没法定位，先进入浏览吧");
+        hereIndex = 0;
+      }
+      const url = new URL(window.location.href);
+      url.searchParams.set("profile", currentProfile);
+      if (a != null) url.searchParams.set("age", String(a));
+      if (c != null) url.searchParams.set("child", String(c));
+      if (gender && gender !== "na") url.searchParams.set("sex", gender);
+      else url.searchParams.delete("sex");
+      writeMoneyParam(url);
+      url.searchParams.set("stage", String(hereIndex + 1));
+      history.replaceState(null, "", url);
+      renderTimeline(currentProfile, hereIndex);
+      showScreen("timeline");
+    });
+
+    document.getElementById("btn-prev").addEventListener("click", () => goTo(Math.max(0, currentIndex - 1), true));
+    document.getElementById("btn-next").addEventListener("click", () => {
+      goTo(Math.min(PROFILES[currentProfile].stages.length - 1, currentIndex + 1), true);
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (timelineEl.hidden) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); document.getElementById("btn-prev").click(); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); document.getElementById("btn-next").click(); }
+    });
+
+    /* —— Lead magnet —— */
+    const leadModal = document.getElementById("lead-modal");
+    function openLead() { leadModal.classList.add("show"); }
+    function closeLead() { leadModal.classList.remove("show"); }
+    document.getElementById("btn-lead-bar").addEventListener("click", openLead);
+    document.getElementById("btn-lead-open").addEventListener("click", openLead);
+    document.getElementById("btn-close-lead").addEventListener("click", closeLead);
+    leadModal.addEventListener("click", (e) => { if (e.target === leadModal) closeLead(); });
+
+    async function copyText(text, okMsg) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+        }
+        toast(okMsg);
+      } catch (err) {
+        toast("复制失败，请手动长按选择");
+      }
+    }
+
+    document.getElementById("btn-copy-wx").addEventListener("click", () => copyText(wxId, "微信号已复制"));
+    document.getElementById("btn-copy-intro").addEventListener("click", () => {
+      const stage = currentProfile ? PROFILES[currentProfile].stages[hereIndex ?? currentIndex] : null;
+      const line = stage ? `我刚看了生命周期地图，觉得自己大概在「${stage.name}」。` : "我刚看了家庭生命周期地图。";
+      const text = `${line}\n微信号：${wxId}\n\n① 目标：教育金 / 养老 / 传承 / 先了解\n② 年交预算区间：\n③ 近3–6个月能否赴港：`;
+      copyText(text, "话术已复制，去微信粘贴");
+    });
+
+    /* —— Export long image —— */
+    function wrapText(ctx, text, maxWidth) {
+      const chars = String(text).split("");
+      const lines = [];
+      let line = "";
+      for (const ch of chars) {
+        const test = line + ch;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          lines.push(line);
+          line = ch;
+        } else line = test;
+      }
+      if (line) lines.push(line);
+      return lines;
+    }
+
+    function drawExportCard() {
+      const profile = PROFILES[currentProfile];
+      const stageIdx = currentIndex;
+      const stage = profile.stages[stageIdx];
+      const isLocated = hereIndex != null && hereIndex === stageIdx;
+
+      const W = 1080;
+      const pad = 56;
+      const contentW = W - pad * 2;
+      const cardPad = 44;
+      const inner = contentW - cardPad * 2;
+      // 行距约 1.65–1.75，区块间距拉开，避免导出图挤在一起
+      const LH = { body: 44, small: 40, list: 48 };
+      const GAP = { section: 44, afterTitle: 24, item: 18 };
+      const measure = document.createElement("canvas").getContext("2d");
+
+      function linesOf(text, size, width) {
+        measure.font = `400 ${size}px sans-serif`;
+        return wrapText(measure, text, width);
+      }
+
+      const blurbLines = linesOf(stage.blurb, 26, inner);
+      const view = moneyContent(stage);
+      const prep = prepareDataFor(stage);
+      const diseaseRows = diseaseRowsFor(stage);
+      const healthText = healthTipFor(stage);
+      const healthLabel = genderLabel(gender) ? `健康风险 · ${genderLabel(gender)}` : "健康风险（年龄带示意）";
+      const healthLines = healthText ? linesOf(healthText, 24, inner) : [];
+      const takeLines = linesOf(stripHtml(view.takeaway), 26, inner - 40);
+      const milestoneLines = linesOf(stage.milestones.join("  ·  "), 24, inner);
+      const cvdA = gender === "female" ? LIFETIME_ANCHORS.cvd.female
+        : gender === "male" ? LIFETIME_ANCHORS.cvd.male
+        : LIFETIME_ANCHORS.cvd.neutral;
+      const anchorLines = [
+        ...linesOf("终生锚点（可核对，勿与条形相加）", 22, inner),
+        ...linesOf("· " + LIFETIME_ANCHORS.cancer.text, 22, inner),
+        ...linesOf("· " + LIFETIME_ANCHORS.stroke.text, 22, inner),
+        ...linesOf("· " + cvdA.text, 22, inner)
+      ];
+
+      // 与绘制同一套节奏估算；末尾留余量，避免白卡片裁切
+      const sectionHead = GAP.section + GAP.afterTitle + 30;
+      let est = 48 + 58 + 58 + blurbLines.length * LH.body;
+      if (prep) {
+        est += sectionHead;
+        if (prep.redeemNow) {
+          const rn = linesOf(prep.redeemNow, 24, inner - 32);
+          est += 56 + rn.length * LH.small + 16 + 24;
+        }
+        prep.links.forEach((l) => {
+          const colW = (inner - 48) / 2;
+          const poleH = 48 + Math.max(linesOf(l.now, 24, colW - 28).length, linesOf(l.later, 24, colW - 28).length) * LH.small + 20;
+          est += poleH + 16 + linesOf(l.why, 22, inner).length * LH.small + 20;
+        });
+      }
+      if (healthText) {
+        est += sectionHead;
+        est += healthLines.length * LH.small + 16;
+        est += diseaseRows.length * 48 + 16;
+        est += anchorLines.length * LH.small + 12;
+      }
+      est += sectionHead + milestoneLines.length * LH.small;
+      est += sectionHead;
+      stage.risks.forEach((r) => {
+        est += Math.max(LH.list, linesOf(r, 25, inner - 36).length * LH.body) + GAP.item;
+      });
+      est += sectionHead;
+      view.roles.forEach((r) => {
+        est += Math.max(LH.list, linesOf(r, 25, inner - 36).length * LH.body) + GAP.item;
+      });
+      est += GAP.section + 44 + takeLines.length * LH.body + 20 + 48;
+      est += 64;
+
+      const headerH = 48 + 88 + 56 + (isLocated ? 96 : 0) + 24;
+      const footLines = linesOf("科普框架，不构成产品推介或收益承诺。想继续聊可加微信：" + wxId, 22, contentW);
+      const footerH = 48 + footLines.length * 34;
+      const canvasH = Math.max(Math.round(W * 4 / 3), headerH + est + footerH + 96);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = W;
+      canvas.height = canvasH;
+      const ctx = canvas.getContext("2d");
+
+      const g = ctx.createLinearGradient(0, 0, 0, canvasH);
+      g.addColorStop(0, "#eef4f7");
+      g.addColorStop(0.5, "#e2ebf1");
+      g.addColorStop(1, "#d8e3ea");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, canvasH);
+      ctx.fillStyle = "rgba(26,107,138,0.12)";
+      ctx.beginPath(); ctx.ellipse(80, 60, 280, 160, 0, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "rgba(15,107,92,0.10)";
+      ctx.beginPath(); ctx.ellipse(W - 40, 320, 220, 180, 0, 0, Math.PI * 2); ctx.fill();
+
+      let y = 72;
+      ctx.fillStyle = "#1a6b8a";
+      ctx.font = "700 28px sans-serif";
+      ctx.fillText(LEAD_CONFIG.brand, pad, y);
+      y += 48;
+      ctx.fillStyle = "#13212e";
+      ctx.font = "700 64px serif";
+      ctx.fillText("家庭生命周期地图", pad, y + 50);
+      y += 88;
+      ctx.fillStyle = "#3a4a58";
+      ctx.font = "400 28px sans-serif";
+      ctx.fillText(`视角：${profile.label}　｜　${stageIdx + 1}/${profile.stages.length}`, pad, y + 24);
+      y += 56;
+
+      if (isLocated) {
+        const tip = [
+          adultAge != null ? `你约 ${adultAge} 岁` : null,
+          genderLabel(gender),
+          moneyLabel(moneyLevel),
+          childAge != null ? `孩子约 ${childAge} 岁` : null
+        ].filter(Boolean).join(" · ");
+        roundRect(ctx, pad, y, contentW, 72, 18, "#fef3c7");
+        ctx.fillStyle = "#9a3412";
+        ctx.font = "700 26px sans-serif";
+        ctx.fillText("你在这里 · " + stage.name + (tip ? "　" + tip : ""), pad + 28, y + 46);
+        y += 96;
+      }
+
+      y += 16;
+      const startY = y;
+      const cardLeft = pad;
+      let yy = startY + 48;
+
+      roundRect(ctx, cardLeft, startY, contentW, est + 24, 28, "#ffffff");
+      if (isLocated) {
+        ctx.strokeStyle = "rgba(180,83,9,0.45)";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(cardLeft + 1.5, startY + 1.5, contentW - 3, est + 24 - 3);
+      }
+
+      function sectionRule() {
+        yy += GAP.section;
+        ctx.strokeStyle = "rgba(19,33,46,0.08)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cardLeft + cardPad, yy);
+        ctx.lineTo(cardLeft + cardPad + inner, yy);
+        ctx.stroke();
+        yy += GAP.afterTitle;
+      }
+
+      function sectionTitle(text, color) {
+        ctx.fillStyle = color || "#3a4a58";
+        ctx.font = "700 24px sans-serif";
+        ctx.fillText(text, cardLeft + cardPad, yy);
+        yy += GAP.afterTitle + 8;
+      }
+
+      ctx.fillStyle = "#1a6b8a";
+      ctx.font = "700 22px sans-serif";
+      ctx.fillText(stage.age, cardLeft + cardPad, yy);
+      yy += 58;
+      ctx.fillStyle = "#13212e";
+      ctx.font = "700 48px serif";
+      ctx.fillText(stage.name, cardLeft + cardPad, yy);
+      yy += 58;
+      ctx.fillStyle = "#3a4a58";
+      ctx.font = "400 26px sans-serif";
+      blurbLines.forEach((ln) => { ctx.fillText(ln, cardLeft + cardPad, yy); yy += LH.body; });
+
+      // —— 准备点 / 兑现点 ——
+      if (prep) {
+        sectionRule();
+        sectionTitle("时间错位 · 准备点 / 兑现点", "#0f6b5c");
+        if (prep.redeemNow) {
+          const rn = linesOf(prep.redeemNow, 24, inner - 32);
+          const boxH = 56 + rn.length * LH.small + 16;
+          roundRect(ctx, cardLeft + cardPad, yy, inner, boxH, 14, "#d6eaf2");
+          ctx.fillStyle = "#1a6b8a";
+          ctx.font = "700 20px sans-serif";
+          ctx.fillText("本阶段在兑现什么", cardLeft + cardPad + 20, yy + 34);
+          ctx.fillStyle = "#13212e";
+          ctx.font = "400 24px sans-serif";
+          rn.forEach((ln, i) => ctx.fillText(ln, cardLeft + cardPad + 20, yy + 68 + i * LH.small));
+          yy += boxH + 24;
+        }
+        prep.links.forEach((l) => {
+          const colW = (inner - 48) / 2;
+          const nowLines = linesOf(l.now, 24, colW - 28);
+          const laterLines = linesOf(l.later, 24, colW - 28);
+          const poleH = 48 + Math.max(nowLines.length, laterLines.length) * LH.small + 20;
+          roundRect(ctx, cardLeft + cardPad, yy, colW, poleH, 14, "#d8efe9");
+          roundRect(ctx, cardLeft + cardPad + colW + 48, yy, colW, poleH, 14, "#f5e6df");
+          ctx.fillStyle = "#0f6b5c";
+          ctx.font = "700 18px sans-serif";
+          ctx.fillText("准备点 · 现在", cardLeft + cardPad + 18, yy + 32);
+          ctx.fillStyle = "#9a4a2e";
+          ctx.fillText("兑现点 · 以后", cardLeft + cardPad + colW + 66, yy + 32);
+          ctx.fillStyle = "#13212e";
+          ctx.font = "400 24px sans-serif";
+          nowLines.forEach((ln, i) => ctx.fillText(ln, cardLeft + cardPad + 18, yy + 68 + i * LH.small));
+          laterLines.forEach((ln, i) => ctx.fillText(ln, cardLeft + cardPad + colW + 66, yy + 68 + i * LH.small));
+          ctx.fillStyle = "#3a4a58";
+          ctx.font = "700 22px sans-serif";
+          ctx.fillText("→", cardLeft + cardPad + colW + 14, yy + poleH / 2 + 8);
+          yy += poleH + 16;
+          const whyLines = linesOf(l.why, 22, inner);
+          ctx.fillStyle = "#3a4a58";
+          ctx.font = "400 22px sans-serif";
+          whyLines.forEach((ln) => { ctx.fillText(ln, cardLeft + cardPad, yy); yy += LH.small; });
+          yy += 20;
+        });
+      }
+
+      // —— 健康风险条 + 终生锚点 ——
+      if (healthText) {
+        sectionRule();
+        sectionTitle(healthLabel, "#1a6b8a");
+        ctx.fillStyle = "#13212e";
+        ctx.font = "400 24px sans-serif";
+        healthLines.forEach((ln) => { ctx.fillText(ln, cardLeft + cardPad, yy); yy += LH.small; });
+        yy += 16;
+        diseaseRows.forEach((r) => {
+          ctx.fillStyle = "#13212e";
+          ctx.font = "600 24px sans-serif";
+          ctx.fillText(r.name, cardLeft + cardPad, yy + 6);
+          const barX = cardLeft + cardPad + 150;
+          const barW = inner - 240;
+          roundRect(ctx, barX, yy - 10, barW, 18, 9, "rgba(19,33,46,0.08)");
+          roundRect(ctx, barX, yy - 10, Math.round(barW * r.level / 5), 18, 9, "#1a6b8a");
+          ctx.fillStyle = "#3a4a58";
+          ctx.font = "400 22px sans-serif";
+          ctx.fillText(LEVEL_WORDS[r.level], barX + barW + 14, yy + 6);
+          yy += 48;
+        });
+        yy += 10;
+        ctx.fillStyle = "#3a4a58";
+        ctx.font = "400 22px sans-serif";
+        anchorLines.forEach((ln) => { ctx.fillText(ln, cardLeft + cardPad, yy); yy += LH.small; });
+      }
+
+      sectionRule();
+      sectionTitle("重要节点");
+      ctx.font = "400 24px sans-serif";
+      ctx.fillStyle = "#13212e";
+      milestoneLines.forEach((ln) => { ctx.fillText(ln, cardLeft + cardPad, yy); yy += LH.small; });
+
+      sectionRule();
+      sectionTitle("可能面临的风险");
+      stage.risks.forEach((r) => {
+        ctx.fillStyle = "#9a4a2e";
+        ctx.beginPath(); ctx.arc(cardLeft + cardPad + 8, yy - 8, 5, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#13212e";
+        ctx.font = "400 25px sans-serif";
+        const ls = linesOf(r, 25, inner - 36);
+        ls.forEach((ln, li) => ctx.fillText(ln, cardLeft + cardPad + 28, yy + li * LH.body));
+        yy += Math.max(LH.list, ls.length * LH.body) + GAP.item;
+      });
+
+      sectionRule();
+      sectionTitle("保险在这一阶段的作用");
+      view.roles.forEach((r) => {
+        ctx.fillStyle = "#0f6b5c";
+        ctx.beginPath(); ctx.arc(cardLeft + cardPad + 8, yy - 8, 5, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#13212e";
+        ctx.font = "400 25px sans-serif";
+        const ls = linesOf(r, 25, inner - 36);
+        ls.forEach((ln, li) => ctx.fillText(ln, cardLeft + cardPad + 28, yy + li * LH.body));
+        yy += Math.max(LH.list, ls.length * LH.body) + GAP.item;
+      });
+
+      yy += GAP.section;
+      const takeH = 44 + takeLines.length * LH.body + 20;
+      roundRect(ctx, cardLeft + cardPad, yy, inner, takeH, 16, "#d8efe9");
+      ctx.fillStyle = "#13212e";
+      ctx.font = "400 26px sans-serif";
+      takeLines.forEach((ln, li) => ctx.fillText(ln, cardLeft + cardPad + 24, yy + 44 + li * LH.body));
+      yy += takeH + 40;
+
+      const footY = Math.max(yy + 28, canvasH - footerH - 40);
+      ctx.fillStyle = "#3a4a58";
+      ctx.font = "400 22px sans-serif";
+      footLines.forEach((ln, i) => ctx.fillText(ln, pad, footY + 28 + i * 34));
+
+      return { canvas, stage };
+    }
+
+    function roundRect(ctx, x, y, w, h, r, fill) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.fill();
+    }
+
+    function isWeChat() {
+      return /MicroMessenger/i.test(navigator.userAgent || "");
+    }
+    function isIOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
+
+    let lastExportBlob = null;
+    let lastExportUrl = null;
+    let lastExportName = "生命周期阶段.png";
+
+    function revokeExportUrl() {
+      if (lastExportUrl) {
+        try { URL.revokeObjectURL(lastExportUrl); } catch (e) { /* ignore */ }
+        lastExportUrl = null;
+      }
+    }
+
+    function canvasToBlob(canvas) {
+      return new Promise((resolve, reject) => {
+        if (canvas.toBlob) {
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error("toBlob failed"));
+          }, "image/png");
+        } else {
+          try {
+            const data = canvas.toDataURL("image/png");
+            const bin = atob(data.split(",")[1]);
+            const arr = new Uint8Array(bin.length);
+            for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+            resolve(new Blob([arr], { type: "image/png" }));
+          } catch (err) {
+            reject(err);
+          }
+        }
+      });
+    }
+
+    async function saveBlobLocally(blob, filename) {
+      // File System Access API（部分桌面 Chrome）
+      if (window.showSaveFilePicker) {
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: filename,
+            types: [{ description: "PNG 图片", accept: { "image/png": [".png"] } }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+          return "picker";
+        } catch (err) {
+          if (err && err.name === "AbortError") return "cancel";
+          // fall through
+        }
+      }
+
+      // 常规 a[download] + blob URL（多数浏览器可用）
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.rel = "noopener";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      // 延迟释放，给浏览器下载时间
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      return "download";
+    }
+
+    function updateExportTips(atHere, stageName) {
+      const tip = document.getElementById("export-save-tip");
+      const btn = document.getElementById("btn-download-img");
+      if (isWeChat() || (isIOS() && !window.showSaveFilePicker)) {
+        tip.style.display = "block";
+        tip.textContent = isWeChat()
+          ? "微信里请长按上方图片 → 保存到手机。下方按钮在微信中可能无效。"
+          : "若未自动下载，请长按上方图片 → 存储图像 / 添加到照片。";
+        btn.textContent = "再试一次保存";
+      } else {
+        tip.style.display = "none";
+        btn.textContent = "保存到本地";
+      }
+      document.getElementById("export-sub").textContent = atHere
+        ? `已生成「${stageName}」这一段（含你的年龄定位）。`
+        : hereIndex == null
+          ? `已生成「${stageName}」。建议先标出你在哪一段，图片会更贴你。`
+          : `已生成当前浏览的「${stageName}」。滑回标黄的那段再保存，可带上定位。`;
+    }
+
+    const exportModal = document.getElementById("export-modal");
+    document.getElementById("btn-export").addEventListener("click", () => {
+      if (!currentProfile) return;
+      toast("正在生成图片…");
+      requestAnimationFrame(async () => {
+        try {
+          const { canvas, stage: exported } = drawExportCard();
+          const blob = await canvasToBlob(canvas);
+          revokeExportUrl();
+          lastExportBlob = blob;
+          lastExportUrl = URL.createObjectURL(blob);
+          lastExportName = `生命周期-${exported.name}.png`;
+
+          const img = document.getElementById("export-img");
+          img.src = lastExportUrl;
+
+          const atHere = hereIndex != null && hereIndex === currentIndex;
+          updateExportTips(atHere, exported.name);
+          exportModal.classList.add("show");
+
+          // 生成后立刻尝试保存到本地（用户手势链上更稳）
+          const result = await saveBlobLocally(blob, lastExportName);
+          if (result === "picker" || result === "download") {
+            toast(isWeChat() ? "请长按图片保存到相册" : "已开始保存到本地");
+          } else if (result === "cancel") {
+            toast("已取消保存");
+          }
+        } catch (err) {
+          console.error(err);
+          toast("生成失败，请换浏览器重试");
+        }
+      });
+    });
+
+    document.getElementById("btn-download-img").addEventListener("click", async () => {
+      if (!lastExportBlob) {
+        toast("请先生成图片");
+        return;
+      }
+      if (isWeChat()) {
+        toast("请长按上方图片 → 保存到手机");
+        return;
+      }
+      const result = await saveBlobLocally(lastExportBlob, lastExportName);
+      if (result === "picker" || result === "download") toast("已开始保存到本地");
+      else if (result === "cancel") toast("已取消保存");
+      else toast("请长按上方图片保存");
+    });
+    document.getElementById("btn-close-export").addEventListener("click", () => exportModal.classList.remove("show"));
+    exportModal.addEventListener("click", (e) => { if (e.target === exportModal) exportModal.classList.remove("show"); });
+
+    /* —— Boot —— */
+    const bootProfile = params.get("profile");
+    const bootAge = params.get("age") !== null && params.get("age") !== "" ? Number(params.get("age")) : null;
+    const bootChild = params.get("child") !== null && params.get("child") !== "" ? Number(params.get("child")) : null;
+    const bootStage = params.get("stage") ? Math.max(1, Number(params.get("stage"))) : null;
+    const bootSex = params.get("sex");
+    const bootMoney = params.get("money");
+    if (bootSex === "female" || bootSex === "male" || bootSex === "na") gender = bootSex;
+    if (bootMoney === "tight" || bootMoney === "ok" || bootMoney === "ample") moneyLevel = bootMoney;
+    else if (bootMoney === "skip") moneyLevel = "skip";
+
+    if (bootProfile && PROFILES[bootProfile]) {
+      currentProfile = bootProfile;
+      if (bootAge != null || bootChild != null) {
+        adultAge = bootAge;
+        childAge = bootChild;
+        if (!gender) gender = "na";
+        if (!moneyLevel) moneyLevel = "skip";
+        hereIndex = findHereIndex(bootProfile, bootAge, bootChild);
+        renderTimeline(bootProfile, hereIndex != null ? hereIndex : (bootStage ? bootStage - 1 : 0));
+        showScreen("timeline");
+      } else if (bootStage) {
+        if (!gender) gender = "na";
+        if (!moneyLevel) moneyLevel = "skip";
+        renderTimeline(bootProfile, Math.min(bootStage - 1, PROFILES[bootProfile].stages.length - 1));
+        showScreen("timeline");
+      } else {
+        openLocate(bootProfile);
+      }
+    }
+  </script>
+</body>
+</html>

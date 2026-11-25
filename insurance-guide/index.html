@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="按你关心的问题选一路：为什么买保险、险种干什么、买什么顺序。笔记与公开精读清单。" />
+  <title>保险科普 · 想从哪个问题开始</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #13212e;
+      --ink-soft: #3a4a58;
+      --suit: #0f6b5c;
+      --suit-soft: #d8efe9;
+      --accent: #1a6b8a;
+      --accent-soft: #d6eaf2;
+      --line: rgba(19, 33, 46, 0.12);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      --font-serif: "Songti SC", "Noto Serif SC", "STSong", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 50% at 0% 0%, rgba(26, 107, 138, 0.16), transparent 55%),
+        radial-gradient(ellipse 70% 45% at 100% 15%, rgba(15, 107, 92, 0.12), transparent 50%),
+        linear-gradient(165deg, #eef4f7 0%, #e2ebf1 45%, #d8e3ea 100%);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    button { font: inherit; color: inherit; border: none; background: none; cursor: pointer; }
+    a { color: var(--accent); }
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: clamp(24px, 5vw, 40px) clamp(18px, 4vw, 28px) calc(40px + var(--safe-bottom));
+    }
+    .brand {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 7vw, 40px);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+    h1 em { font-style: normal; color: var(--suit); }
+    .lead {
+      margin-top: 12px;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 34em;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(58, 74, 88, 0.75);
+    }
+    .paths { margin-top: 28px; display: grid; gap: 12px; }
+    .path {
+      text-align: left;
+      width: 100%;
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.65);
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .path:hover, .path:focus-visible {
+      border-color: rgba(26, 107, 138, 0.45);
+      background: rgba(255, 255, 255, 0.92);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .path .num {
+      flex: 0 0 28px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 13px; font-weight: 700; color: #fff;
+      background: var(--accent);
+      margin-top: 2px;
+    }
+    .path:nth-child(2) .num { background: var(--suit); }
+    .path:nth-child(3) .num { background: #9a4a2e; }
+    .path:nth-child(4) .num { background: #5c4a8a; }
+    .path:nth-child(5) .num { background: #3a4a58; }
+    .path strong { display: block; font-size: 16px; line-height: 1.45; margin-bottom: 4px; }
+    .path span.desc { display: block; font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+    .path .go { margin-left: auto; align-self: center; color: var(--accent); font-size: 20px; }
+
+    .screen { display: none; }
+    .screen.active { display: block; animation: rise 0.3s ease; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .back {
+      display: inline-flex;
+      font-size: 14px;
+      color: var(--ink-soft);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .back:hover { color: var(--accent); }
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .layer-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 5.5vw, 30px);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .layer-meta {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 22px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin: 22px 0 10px;
+    }
+    .list { display: grid; gap: 10px; }
+    .item {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+    }
+    a.item:hover { border-color: rgba(26, 107, 138, 0.4); background: #fff; }
+    .item-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .item-top h3 { font-size: 15px; font-weight: 700; line-height: 1.4; flex: 1 1 auto; }
+    .pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--suit-soft);
+      color: var(--suit);
+      white-space: nowrap;
+    }
+    .pill.muted { background: rgba(19, 33, 46, 0.06); color: var(--ink-soft); }
+    .pill.warn { background: #f5e6df; color: #9a4a2e; }
+    .item p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+    .item .src { font-size: 12px; color: rgba(58, 74, 88, 0.7); margin-top: 4px; }
+    .empty {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      padding: 12px 4px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section id="home" class="screen active">
+      <p class="brand">家庭理财学习笔记</p>
+      <h1>想从哪个<br /><em>问题</em>开始？</h1>
+      <p class="lead">选一个此刻最关心的问题。</p>
+      <div class="paths" id="path-list"></div>
+      <p class="note">科普框架，不构成产品推介或收益承诺。外链仅供学习对照，打开后请自行判断来源。</p>
+    </section>
+
+    <section id="layer" class="screen" hidden>
+      <button type="button" class="back" id="btn-back">← 返回选层</button>
+      <p class="tag" id="layer-tag"></p>
+      <h2 class="layer-title" id="layer-ask"></h2>
+      <p class="layer-meta" id="layer-meta"></p>
+
+      <p class="section-label">本站 / 自有</p>
+      <div class="list" id="own-list"></div>
+
+      <p class="section-label">延伸精读（外链）</p>
+      <div class="list" id="link-list"></div>
+    </section>
+  </div>
+
+  <script src="./catalog.js"></script>
+  <script>
+    const data = window.GUIDE_CATALOG;
+    const home = document.getElementById("home");
+    const layerEl = document.getElementById("layer");
+    const pathList = document.getElementById("path-list");
+
+    function statusPill(status) {
+      if (status === "可站内读" || status === "已上线" || status === "已有") return "pill";
+      if (status === "待写" || status === "大纲" || status === "待挂站") return "pill warn";
+      return "pill muted";
+    }
+
+    function showHome() {
+      home.classList.add("active");
+      home.hidden = false;
+      layerEl.classList.remove("active");
+      layerEl.hidden = true;
+      history.replaceState(null, "", location.pathname + location.search);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showLayer(id) {
+      const layer = data.layers.find((l) => l.id === id);
+      if (!layer) return;
+      home.classList.remove("active");
+      home.hidden = true;
+      layerEl.classList.add("active");
+      layerEl.hidden = false;
+
+      document.getElementById("layer-tag").textContent = layer.id + " · 这一路";
+      document.getElementById("layer-ask").textContent = layer.ask;
+      document.getElementById("layer-meta").innerHTML =
+        "这一路大概会碰到：<strong>" + layer.goal + "</strong><br />看完，多半能更清楚： " + layer.outcome;
+
+      const own = document.getElementById("own-list");
+      own.innerHTML = layer.own.map((item) => {
+        const body =
+          '<div class="item-top"><h3>' + item.title + '</h3>' +
+          '<span class="pill muted">' + item.channel + '</span>' +
+          '<span class="' + statusPill(item.status) + '">' + item.status + '</span></div>' +
+          (item.note ? '<p>' + item.note + '</p>' : '') +
+          (item.href && !item.href.startsWith("http") ? '<p>点击打开站内阅读 →</p>' : '') +
+          (item.href && item.href.startsWith("http") ? '<p>点击打开工具 →</p>' : '');
+        if (item.href) {
+          const ext = item.href.startsWith("http") ? ' target="_blank" rel="noopener noreferrer"' : '';
+          return '<a class="item" href="' + item.href + '"' + ext + '>' + body + '</a>';
+        }
+        return '<div class="item">' + body + '</div>';
+      }).join("");
+
+      const links = document.getElementById("link-list");
+      if (!layer.links.length) {
+        links.innerHTML = '<p class="empty">本层外链精读仍在增补；可先看上方本站素材与工具。</p>';
+      } else {
+        links.innerHTML = layer.links.map((item) =>
+          '<a class="item" href="' + item.href + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="item-top"><h3>' + item.title + '</h3><span class="pill">外链</span></div>' +
+          '<p>' + item.why + '</p>' +
+          '<p class="src">来源：' + item.source + '</p>' +
+          '</a>'
+        ).join("");
+      }
+
+      history.replaceState(null, "", "#" + id);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    pathList.innerHTML = data.layers.map((layer, i) =>
+      '<button type="button" class="path" data-id="' + layer.id + '">' +
+      '<span class="num" aria-hidden="true">' + (i + 1) + '</span>' +
+      '<span><strong>' + layer.ask + '</strong><span class="desc">' + layer.goal + '</span></span>' +
+      '<span class="go" aria-hidden="true">›</span>' +
+      '</button>'
+    ).join("");
+
+    pathList.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-id]");
+      if (btn) showLayer(btn.getAttribute("data-id"));
+    });
+    document.getElementById("btn-back").addEventListener("click", showHome);
+
+    const hash = (location.hash || "").replace("#", "");
+    if (hash && data.layers.some((l) => l.id === hash)) showLayer(hash);
+  </script>
+</body>
+</html>
