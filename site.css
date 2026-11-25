@@ -318,6 +318,16 @@ h1 {
   background: #f4f1ea;
   padding: 4px;
   border-radius: 12px;
+  max-width: 100%;
+}
+.seg.two {
+  grid-template-columns: 1fr 1fr;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+}
+.seg.two button {
+  padding: 8px 14px;
 }
 .seg.four { grid-template-columns: repeat(4, 1fr); }
 .seg button {
@@ -329,6 +339,7 @@ h1 {
   color: var(--muted);
   font-size: 13.5px;
   white-space: nowrap;
+  min-width: 0;
 }
 .seg button small {
   display: block;
@@ -1063,4 +1074,57 @@ footer.site {
   }
   .seg.four { grid-template-columns: repeat(2, 1fr); }
   .brand-sub, .subbar-desc { display: none; }
+}
+
+@media (max-width: 680px) {
+  .wrap, .narrow, .legal { width: calc(100% - 28px); }
+  .bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 8px 0;
+    min-height: auto;
+  }
+  .nav { width: 100%; gap: 4px; }
+  .nav a { padding: 5px 10px; font-size: 13px; }
+  .subbar { padding: 7px 0; }
+  .card { padding: 18px 16px; border-radius: 15px; }
+  .alloc-col, .alloc-col.good { padding: 16px 15px; }
+  .seg.two {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+  .seg button, .seg.two button {
+    padding: 8px 4px;
+    font-size: 12.5px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .good-stack .bar-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: auto !important;
+  }
+  .good-stack .bar-seg {
+    width: 100% !important;
+    padding: 8px 6px;
+  }
+  .good-stack .meter-track {
+    height: auto !important;
+    flex-direction: column;
+  }
+  .good-stack .meter-fill {
+    width: 100% !important;
+    padding: 7px 10px;
+    white-space: normal;
+  }
+  .meter-fill, .meter-lost, .meter-swing {
+    font-size: 11px;
+    padding-left: 6px;
+    padding-right: 4px;
+  }
+  table.data th, table.data td {
+    padding: 8px 8px;
+    font-size: 12.5px;
+  }
 }
