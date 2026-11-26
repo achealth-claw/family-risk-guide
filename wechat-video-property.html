@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>视频号 9:16 ＆ 小红书 3:4 素材台 · 为什么越来越多人把「第 2 套房」换成了「金融房产」？</title>
+  <style>
+    :root {
+      --bg: #111615;
+      --panel: #1a2220;
+      --panel-2: #222d2a;
+      --ink: #f4f1ea;
+      --muted: #9aa6a1;
+      --gold: #e5b869;
+      --gold-soft: rgba(229, 184, 105, 0.16);
+      --green: #184c3f;
+      --green-bright: #34a882;
+      --red: #e06c5a;
+      --blue: #52a2c4;
+      --line: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(17, 22, 21, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; }
+    .tag-pill {
+      background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      padding: 2px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 600;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--line);
+      background: var(--panel-2); color: var(--ink);
+      padding: 6px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn:hover { background: #2c3a36; border-color: rgba(255,255,255,0.25); }
+    .btn.gold { background: var(--gold); color: #141917; border-color: var(--gold); }
+    .btn.gold:hover { background: #ecc47c; }
+
+    .workspace {
+      max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px;
+      display: grid; grid-template-columns: 400px 1fr; gap: 28px; align-items: start;
+    }
+    .stage-col { position: sticky; top: 68px; display: flex; flex-direction: column; align-items: center; }
+    .phone-reel {
+      width: 378px; height: 672px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 55%, #121c1a 100%);
+      border-radius: 24px; border: 6px solid #2b3532;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 26px 20px 22px; user-select: none;
+    }
+    .phone-reel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .reel-top {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(229, 184, 105, 0.22); padding-bottom: 10px;
+    }
+    .reel-brand { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; }
+    .reel-step-indicator {
+      font-size: 11px; color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px;
+    }
+    .reel-body {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; padding: 10px 0;
+    }
+    .slide { display: none; animation: slideFade 0.32s ease; }
+    .slide.active { display: block; }
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-kicker {
+      display: inline-block; background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229,184,105,0.35);
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px;
+    }
+    .slide-title {
+      font-size: 24px; line-height: 1.28; font-weight: 800; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: 0.2px;
+    }
+    .slide-title .hl { color: var(--gold); }
+    .slide-title .green { color: #5ce0b5; }
+    .slide-sub { font-size: 13.5px; color: #c6d1cd; line-height: 1.55; margin: 0 0 14px; }
+
+    .v-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 12px; padding: 12px 13px; margin-bottom: 9px;
+    }
+    .v-card.gold-border { border-color: rgba(229, 184, 105, 0.55); background: rgba(229, 184, 105, 0.09); }
+    .v-card.green-border { border-color: rgba(92, 224, 181, 0.5); background: rgba(24, 76, 63, 0.45); }
+    .v-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .v-card-num { font-size: 14px; font-weight: 800; color: var(--gold); }
+    .v-card-desc { font-size: 12px; color: #b8c4bf; line-height: 1.46; }
+
+    .reel-caption-box {
+      position: relative; z-index: 2;
+      background: rgba(0, 0, 0, 0.62);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 10px; padding: 9px 12px; text-align: center;
+      min-height: 54px; display: flex; align-items: center; justify-content: center;
+    }
+    .reel-caption-text { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.42; }
+    .reel-caption-text span { color: var(--gold); }
+
+    .stage-controls {
+      margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .dots { display: flex; gap: 6px; margin: 0 6px; }
+    .dot {
+      width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line);
+      background: var(--panel); color: var(--muted); font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .dot.active { background: var(--gold); color: #141917; border-color: var(--gold); }
+
+    .script-col { display: flex; flex-direction: column; gap: 20px; }
+    .panel-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .panel-head h2 { font-size: 17px; margin: 0; color: #fff; }
+    .scene-list { display: flex; flex-direction: column; gap: 12px; }
+    .scene-item {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; cursor: pointer; transition: all 0.15s ease;
+    }
+    .scene-item:hover { border-color: rgba(229, 184, 105, 0.4); }
+    .scene-item.active {
+      border-color: var(--gold); background: rgba(229, 184, 105, 0.08); box-shadow: 0 0 0 1px var(--gold);
+    }
+    .scene-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px;
+    }
+    .scene-time { color: var(--muted); font-weight: 500; }
+    .scene-lines { font-size: 15px; line-height: 1.68; color: #fff; margin: 0; }
+    .scene-lines strong { color: var(--gold); background: rgba(229,184,105,0.14); padding: 0 4px; border-radius: 4px; }
+    .meta-box {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.65;
+    }
+    .meta-box strong { color: var(--gold); display: block; margin-bottom: 4px; }
+
+    body.record-mode .topbar, body.record-mode .script-col { display: none !important; }
+    body.record-mode .workspace { grid-template-columns: 1fr; padding: 12px; min-height: 100vh; align-items: center; justify-items: center; }
+    body.record-mode .stage-col { position: static; }
+    body.record-mode .phone-reel { width: 432px; height: 768px; border: none; border-radius: 0; }
+
+    /* Xiaohongshu 3:4 Note Grid Mode */
+    .xhs-section { display: none; max-width: 1240px; margin: 0 auto; padding: 22px 20px 64px; }
+    body.xhs-mode .workspace { display: none; }
+    body.xhs-mode .xhs-section { display: block; }
+    .xhs-toolbar {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+    }
+    .xhs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(348px, 1fr)); gap: 22px; justify-items: center;
+    }
+    .xhs-card {
+      width: 360px; height: 480px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 60%, #121c1a 100%);
+      border-radius: 16px; border: 1px solid rgba(229, 184, 105, 0.28);
+      padding: 20px 18px 16px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.38);
+    }
+    .xhs-card .slide { display: block !important; animation: none !important; }
+    .xhs-card .slide-title { font-size: 20.5px; margin-bottom: 8px; }
+    .xhs-card .slide-sub { font-size: 12.5px; margin-bottom: 10px; }
+    .xhs-card .v-card { padding: 9px 11px; margin-bottom: 7px; }
+    .xhs-card .v-card-head { font-size: 12.5px; }
+    .xhs-card .v-card-desc { font-size: 11.5px; }
+    .xhs-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 8px; font-size: 11px; color: rgba(255,255,255,0.6);
+    }
+    body.xhs-ivory .xhs-card {
+      background: #faf7f0; border: 1px solid #dfd8c8; color: #17211d; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+    body.xhs-ivory .xhs-card .reel-brand { color: #184c3f; }
+    body.xhs-ivory .xhs-card .reel-step-indicator { background: #e9e4d8; color: #44514b; }
+    body.xhs-ivory .xhs-card .slide-kicker { background: #e4efe9; color: #184c3f; border-color: #b7d2c5; }
+    body.xhs-ivory .xhs-card .slide-title { color: #17211d; }
+    body.xhs-ivory .xhs-card .slide-title .hl { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .slide-title .green { color: #184c3f; }
+    body.xhs-ivory .xhs-card .slide-sub { color: #44514b; }
+    body.xhs-ivory .xhs-card .v-card { background: #ffffff; border-color: #dfd8c8; }
+    body.xhs-ivory .xhs-card .v-card.gold-border { background: #fcf4e8; border-color: #e5c494; }
+    body.xhs-ivory .xhs-card .v-card.green-border { background: #eef5f1; border-color: #b5d1c3; }
+    body.xhs-ivory .xhs-card .v-card-head { color: #17211d; }
+    body.xhs-ivory .xhs-card .v-card-num { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .v-card-desc { color: #44514b; }
+    body.xhs-ivory .xhs-card .xhs-foot { border-top-color: #e2dcd0; color: #63706a; }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: 1fr; }
+      .stage-col { position: static; }
+      .phone-reel { width: 100%; max-width: 378px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>🎬 第 6 期：为什么把「第 2 套房」换成「金融房产」？（视频号 9:16 ＆ 小红书 3:4）</span>
+      <span class="tag-pill">一鱼三吃 · 买房 vs 买保单</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn" href="wechat-property-vs-insurance.html">📄 公众号图文版</a>
+      <button type="button" class="btn gold" id="xhsModeBtn">📕 切换小红书 3:4 笔记模式（7图平铺）</button>
+      <button type="button" class="btn" id="autoPlayBtn">▶️ 自动轮播演示</button>
+      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式</button>
+      <button type="button" class="btn" id="copyScriptBtn">📋 复制视频号口播稿</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <!-- Left: 9:16 Vertical Stage -->
+    <div class="stage-col">
+      <div class="phone-reel" id="phoneReel">
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator" id="stepCounter">第 1 / 7 幕</span>
+        </div>
+
+        <div class="reel-body">
+          <!-- Slide 1: Hook -->
+          <div class="slide active" data-index="0">
+            <span class="slide-kicker">买房收租 vs 金融房产</span>
+            <h3 class="slide-title">为什么越来越多人把<span class="hl">「第 2 套房」</span><br />换成了<span class="green">「金融房产」</span>？</h3>
+            <p class="slide-sub">第 1 套自住房是温暖的家；但从第 2 套、第 3 套纯收租房开始，它就是一件金融工具：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🏠 第 2/3 套实体砖头房</span>
+                <span style="color:#e06c5a">净租 &lt; 1.2% · 难切碎</span>
+              </div>
+              <div class="v-card-desc">还要操心找租客、修马桶、交物业费、承担 30 年房龄折旧。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>📜 金融房产（香港长期分红保单）</span>
+                <span style="color:#5ce0b5">5.5%～6.5% 复利收租</span>
+              </div>
+              <div class="v-card-desc">0 物业费、0 折旧、随时按需部分提现、9 种货币随人走全球。</div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Account 1 (Yield & Compounding) -->
+          <div class="slide" data-index="1">
+            <span class="slide-kicker">第 1 本账 · 收租回报率对比</span>
+            <h3 class="slide-title">一线净租 <span class="hl">&lt; 1.2% 单利</span><br />vs 金融房产 <span class="green">6% 复利收租</span></h3>
+            <p class="slide-sub">600 万的房子月租七八千，扣掉空置期、中介费、物业维修后还剩多少？</p>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>🏠 实体房收租：单利且易被花掉</span>
+                <span style="color:var(--muted)">约 1.2% / 年</span>
+              </div>
+              <div class="v-card-desc">每月几千块房租很难再投资滚雪球，还要倒贴精力和翻新费。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>📜 金融房产：利滚利 + 终身提取</span>
+                <span class="v-card-num" style="color:#5ce0b5">5.5% ~ 6.5%</span>
+              </div>
+              <div class="v-card-desc">不取时在池子里自动复利滚大；第 6～8 年起可每年提取 5%～6% 当终身免打理租金。</div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Account 2 (Divisibility & Liquidity) -->
+          <div class="slide" data-index="2">
+            <span class="slide-kicker">第 2 本账 · 急用钱时的「切碎能力」</span>
+            <h3 class="slide-title">急需 50 万时，你没法<br /><span class="hl">「锯掉一个卫生间」</span>去卖</h3>
+            <p class="slide-sub">实体房产最大的软肋叫「不可分割性」：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>⚠️ 实体房产：整套挂牌半年 · 急售打 75 折</span>
+                <span style="color:#e06c5a">流动性锁死</span>
+              </div>
+              <div class="v-card-desc">
+                • 800 万的房子急用 50 万，只能整套卖，急售常被砍掉一两百万；<br />
+                • <strong>金融房产</strong>：需要 50 万就在线部分提取 50 万，几天到账，<strong>剩下的几百万继续按 6% 滚复利</strong>，一分钱折价都不受。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Account 3 & 4 (Maintenance & Leverage) -->
+          <div class="slide" data-index="3">
+            <span class="slide-kicker">第 3 ＆ 4 本账 · 折旧操心与杠杆方向</span>
+            <h3 class="slide-title">水泥砖头越老越<span class="hl">折旧</span><br />金融房产越老越<span class="green">值钱</span></h3>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>🔧 房东其实是「给房子打工的保姆」</span>
+                <span style="color:#e06c5a">物理折旧</span>
+              </div>
+              <div class="v-card-desc">房龄超 20 年电梯管道老化、租客半夜报修；贷款买房若跌 30% 首付归零，月供还得硬扣。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🛡️ 保单是「0 追缴底盘 + 正向救命杠杆」</span>
+                <span style="color:#5ce0b5">越老复利越陡</span>
+              </div>
+              <div class="v-card-desc">保证现金价值写进合同，绝无断供法拍；重疾/定寿还能在危难时放大 10 倍保住你的自住房。</div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Account 5 (Location vs 9 Currencies) -->
+          <div class="slide" data-index="4">
+            <span class="slide-kicker">第 5 本账 · 地域绑定 vs 随人走全球</span>
+            <h3 class="slide-title">水泥房子搬不走，金融房产<br />内置 <span class="green">6～9 种货币</span>随你走天下</h3>
+            <p class="slide-sub">实体房产永远跟脚下的单一城市、单一地段绑死：</p>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🌍 一张保单 = 长了脚的全球收租房</span>
+                <span class="v-card-num">自由转换</span>
+              </div>
+              <div class="v-card-desc">
+                • 内置美元、港币、人民币、英镑、加元、澳元、新加坡元等 6～9 种货币；<br />
+                • 孩子 18 岁去英国留学就转成<strong>英镑</strong>交学费，自己 60 岁回国内养老就转成<strong>人民币</strong>领生活费，去哪都能无缝收租。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: Account 6 (Inheritance & Splitting) -->
+          <div class="slide" data-index="5">
+            <span class="slide-kicker">第 6 本账 · 多子女分家与防婚变混同</span>
+            <h3 class="slide-title">一套房没法劈成两半，保单却能<br /><span class="green">「1 拆 N」</span>且握住 <span class="hl">100% 控制权</span></h3>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>👨‍👩‍👧‍👦 传房子 vs 传「金融房产」</span>
+                <span class="v-card-num">0 印花税摩擦</span>
+              </div>
+              <div class="v-card-desc">
+                • <strong>传实体房</strong>：一套大房难平分给两个孩子，继承需全员公证，给子女买房易在婚变时被分走一半；<br />
+                • <strong>传金融房产</strong>：父母做投保人握住 100% 控制权 + 随时<strong>「保单 1 拆 N」</strong>精准分给子女孙辈 + 身故金可设定按月定额发放防挥霍。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: Closing Summary & CTA -->
+          <div class="slide" data-index="6">
+            <span class="slide-kicker">黄金组合 · 建议截图保存</span>
+            <h3 class="slide-title">最聪明的家庭标配：<br /><span class="hl">「1 套好自住房 + 1 套金融房产」</span></h3>
+            <div class="v-card green-border" style="padding:13px">
+              <div style="font-size:13px;color:#fff;line-height:1.6">
+                • <strong>第 1 套自住房</strong>：装下全家的生活与烟火气；<br />
+                • <strong>第 2 套「金融房产」</strong>：不用交物业费、不用修马桶、随时可切碎提现、按 6% 全球复利终身收租。
+              </div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>📌 房产 vs 香港保单等 6 大资产全维度对比表</span>
+                <span style="color:var(--gold);font-size:12px">见下方公众号链接</span>
+              </div>
+              <div class="v-card-desc">点击下方链接，直接查看 6 大资产类别的完整对比表与现金流测算工具。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-caption-box">
+          <div class="reel-caption-text" id="reelCaption">
+            为什么越来越多人把手里的<span>「第 2 套房」</span>，换成了不用修马桶的<span>「金融房产」</span>？
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-controls">
+        <button type="button" class="btn" id="prevSlideBtn">⬅️ 上一幕</button>
+        <div class="dots" id="slideDots">
+          <button type="button" class="dot active" data-go="0">1</button>
+          <button type="button" class="dot" data-go="1">2</button>
+          <button type="button" class="dot" data-go="2">3</button>
+          <button type="button" class="dot" data-go="3">4</button>
+          <button type="button" class="dot" data-go="4">5</button>
+          <button type="button" class="dot" data-go="5">6</button>
+          <button type="button" class="dot" data-go="6">7</button>
+        </div>
+        <button type="button" class="btn" id="nextSlideBtn">下一幕 ➡️</button>
+      </div>
+    </div>
+
+    <!-- Right: Teleprompter & Copy Pack -->
+    <div class="script-col">
+      <div class="panel-card">
+        <div class="panel-head">
+          <h2>🎙️ 90 秒视频号分镜口播逐字稿（点击卡片同步切换左侧画面）</h2>
+          <span class="tag-pill">第 6 期 · 买房 vs 金融房产</span>
+        </div>
+
+        <div class="scene-list" id="sceneList">
+          <div class="scene-item active" data-scene="0" data-caption="为什么越来越多人把手里的<span>「第 2 套房」</span>，换成了不用修马桶的<span>「金融房产」</span>？">
+            <div class="scene-meta">
+              <span>第 1 幕 · 黄金前 3 秒钩子（自住房 vs 投资房分水岭）</span>
+              <span class="scene-time">00:00 - 00:13</span>
+            </div>
+            <p class="scene-lines">
+              「中国人骨子里最喜欢买房收租。家庭的第一套自住房承载着生活与烟火气，无可替代；但从<strong>第二套、第三套纯收租房</strong>开始，它就变成了一件金融工具。为什么这几年越来越多老房东，把多余的砖头房换成了被称为<strong>金融房产</strong>的长期分红保单？算完这六本账你就明白了。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="1" data-caption="第一本账：一线房产净租金不到 <span>1.2% 单利</span>，而金融房产是 <span>5.5%～6.5% 复利收租</span>。">
+            <div class="scene-meta">
+              <span>第 2 幕 · 第一本账：收租回报率（1.2% 单利 vs 6% 复利）</span>
+              <span class="scene-time">00:13 - 00:27</span>
+            </div>
+            <p class="scene-lines">
+              「第一本是收租账：一套 600 万的一线住宅，月租七八千，扣掉空置期、中介费和物业维修，<strong>真实净租金不到 1.2%</strong>，而且每月几千块房租很难形成复利。而在金融房产里，不取时按 <strong>5.5% 到 6.5%</strong> 自动复利滚大，退休时每年稳定提取 5% 到 6% 当终身租金。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="2" data-caption="第二本账：急需 50 万时你没法<span>「锯掉一个卫生间去卖」</span>，而保单可随时部分提取。">
+            <div class="scene-meta">
+              <span>第 3 幕 · 第二本账：急用钱时的「切碎变现能力」</span>
+              <span class="scene-time">00:27 - 00:41</span>
+            </div>
+            <p class="scene-lines">
+              「第二本是救急账：实体房最大的软肋是<strong>不能切碎卖</strong>。800 万的房子，家里急需 50 万周转时，你没法锯掉一个卫生间去卖，整套急售往往要打七五折砍掉一两百万；而金融房产需要 50 万就在线提取 50 万，<strong>剩下的几百万继续按 6% 滚复利</strong>。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="3" data-caption="水泥砖头越老越<span>折旧操心</span>，金融房产<span>0 物业费、0 租客纠纷、越老越值钱</span>。">
+            <div class="scene-meta">
+              <span>第 4 幕 · 第三＆四本账：折旧维护与杠杆安全</span>
+              <span class="scene-time">00:41 - 00:56</span>
+            </div>
+            <p class="scene-lines">
+              「第三、四本是省心与安全账：水泥砖头超过二十年管道老化、还得操心找租客修马桶；贷款买房一旦跌三成首付归零，月供还得硬扣。而金融房产<strong>零物业费、零折旧、零追缴风险</strong>，越到第十年、二十年复利越陡峭。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="4" data-caption="水泥房子搬不走，金融房产内置 <span>6～9 种货币</span>，孩子去哪留学、你在哪养老就跟到哪。">
+            <div class="scene-meta">
+              <span>第 5 幕 · 第五本账：死锁单一地段 vs 9 种货币随人走</span>
+              <span class="scene-time">00:56 - 01:09</span>
+            </div>
+            <p class="scene-lines">
+              「第五本是全球账：实体房产永远焊死在一个地段，搬不走一砖一瓦；而香港多元货币保单内置美元、人民币、英镑等<strong>九种货币自由转换</strong>，孩子去英国读书就转英镑，自己回国内养老就转人民币，是一套长了脚的收租房。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="5" data-caption="一套房没法劈成两半，保单却能<span>「1 拆 N」</span>精准传承，且父母握住 <span>100% 控制权</span>。">
+            <div class="scene-meta">
+              <span>第 6 幕 · 第六本账：多子女拆分与防婚变混同</span>
+              <span class="scene-time">01:09 - 01:22</span>
+            </div>
+            <p class="scene-lines">
+              「第六本是传家账：一套大房很难平分给两个孩子，还怕未来子女婚变被分走一半；而金融房产支持<strong>保单 1 拆 N</strong>、零印花税无限次传承，父母做投保人牢牢握住 100% 控制权。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="6" data-caption="最聪明的家庭组合：<span>「1 套好自住房 + 1 套不用修马桶的金融房产」</span>。">
+            <div class="scene-meta">
+              <span>第 7 幕 · 总结金句与导流</span>
+              <span class="scene-time">01:22 - 01:30</span>
+            </div>
+            <p class="scene-lines">
+              「<strong>一套好自住房装下生活，一套金融房产稳拿终身复利租金。</strong>想看房产与保单等六大资产的完整对比表，直接点视频下方的公众号链接。」
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xiaohongshu 3:4 Note Grid Section -->
+  <section class="xhs-section" id="xhsSection">
+    <div class="xhs-toolbar">
+      <div>
+        <strong style="font-size:15px;color:#fff;display:block;margin-bottom:3px;">📕 小红书 3:4 黄金比例笔记卡（共 7 张 · 360×480 标准封面比例）</strong>
+        <span style="font-size:12.5px;color:var(--muted);">支持一键切换「暖白杂志风」与「深色黑金风」，下方配好小红书标题与正文。</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn" id="toggleXhsThemeBtn">☀️ 切换为「暖白杂志风」</button>
+        <button type="button" class="btn gold" id="copyXhsCopyBtn">📋 一键复制小红书标题 + 正文 + 标签</button>
+      </div>
+    </div>
+
+    <div class="xhs-grid" id="xhsGrid"></div>
+
+    <div class="panel-card" style="margin-top:24px;">
+      <div class="panel-head">
+        <h2>📕 小红书专属爆款标题与正文（可直接复制发布）</h2>
+        <span class="tag-pill">第 6 期 · 买房 vs 金融房产</span>
+      </div>
+      <div class="meta-box">
+        <strong>🔥 5 个小红书高点击标题（任选 1 个）</strong>
+        1. 为什么越来越多人把「第2套房」换成了「金融房产」？🏠<br />
+        2. 买房收租 vs 长期保单：算完这 6 本账彻底清醒了📊<br />
+        3. 急需50万时，你没法「锯掉一个卫生间」去卖💡<br />
+        4. 不用交物业费、不用修马桶的「金融房产」到底香在哪？<br />
+        5. 最聪明的中产标配：1套好自住房 + 1套金融房产⚓
+      </div>
+      <div class="meta-box" id="xhsPostBody" style="margin-bottom:0;white-space:pre-line;">中国人骨子里最喜欢买房收租。
+家庭的「第 1 套自住房」承载着居住、学区和烟火气，没有任何金融工具可以替代；
+但从「第 2 套、第 3 套纯收租房」开始，它就变成了一件纯粹的金融工具。
+
+为什么这几年越来越多老房东，把多余的砖头房换成了被称为「金融房产」的香港长期分红保单？算完这 6 本隐性账你就懂了👇
+
+1️⃣ 收租回报账：1.2% 单利 vs 6% 复利
+• 实体房产：600 万的一线住宅月租七八千，扣掉空置期、中介费、物业维修后，真实净租金不到 1.2%，且每月散碎房租极易被花掉；
+• 金融房产：不取时按 5.5%～6.5% 自动复利滚雪球，第 6～8 年起可每年稳定提取 5%～6% 当「终身免打理租金」📈。
+
+2️⃣ 救急变现账：「不能锯掉卫生间卖」vs「按需提取」
+• 实体房产：800 万的房子急需 50 万周转时，没法只卖一个卫生间，整套急售往往被打 7.5 折砍掉一两百万；
+• 金融房产：需要 50 万就在线部分提取 50 万，剩下的几百万继续在池子里按 6% 滚复利💧。
+
+3️⃣ 折旧省心账：水泥砖头越老越折旧，金融房产越老越值钱
+• 实体房产：房龄超 20 年电梯管道老化，还得操心找租客、修马桶、交物业取暖费；
+• 金融房产：0 物业费、0 折旧、0 租客纠纷，越到第 15、20 年复利曲线越陡峭。
+
+4️⃣ 杠杆安全账：负向按揭 vs 正向救命杠杆
+• 贷款买房跌 30% 首付归零，按揭月供一分不能少；而保单保证现金价值写进合同，0 追缴风险，重疾/定寿还能在危难时放大 10 倍保住你的自住房🛡️。
+
+5️⃣ 地域币种账：死锁单一地段 vs 9 种货币随人走
+• 实体房产搬不走；而香港多币种保单支持美元、人民币、港币、英镑、加元等 6～9 种货币自由转换，孩子去哪留学、你在哪养老，「房子」就跟到哪🌍。
+
+6️⃣ 多代传承账：分家难题 vs「保单 1 拆 N」
+• 一套大房难平分给两个孩子，还怕子女婚变混同；而金融房产支持「保单 1 拆 N」+ 父母握住 100% 投保人控制权 + 身故类信托按月给付。
+
+✨ 最舒服的家庭底盘：1 套住得舒心的自住房 + 1 套不用修马桶的「金融房产」。
+
+#买房收租 #金融房产 #香港保险 #家庭资产配置 #中产家庭财务 #被动收入 #多币种保单 #财富传承 #房产置换</div>
+    </div>
+  </section>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const scenes = Array.from(document.querySelectorAll('.scene-item'));
+    const stepCounter = document.getElementById('stepCounter');
+    const reelCaption = document.getElementById('reelCaption');
+    let current = 0;
+    let timer = null;
+
+    function goToSlide(idx) {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      scenes.forEach((sc, i) => sc.classList.toggle('active', i === current));
+      stepCounter.textContent = `第 ${current + 1} / ${slides.length} 幕`;
+      const cap = scenes[current]?.getAttribute('data-caption');
+      if (cap) reelCaption.innerHTML = cap;
+    }
+
+    document.getElementById('prevSlideBtn').addEventListener('click', () => goToSlide(current - 1));
+    document.getElementById('nextSlideBtn').addEventListener('click', () => goToSlide(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goToSlide(Number(d.dataset.go))));
+    scenes.forEach(sc => sc.addEventListener('click', () => goToSlide(Number(sc.dataset.scene))));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
+      else if (e.key === 'Escape' && document.body.classList.contains('record-mode')) {
+        document.body.classList.remove('record-mode');
+      }
+    });
+
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    autoPlayBtn.addEventListener('click', () => {
+      if (timer) {
+        clearInterval(timer); timer = null;
+        autoPlayBtn.textContent = '▶️ 自动轮播演示';
+      } else {
+        autoPlayBtn.textContent = '⏸️ 暂停轮播';
+        timer = setInterval(() => goToSlide(current + 1), 4500);
+      }
+    });
+
+    document.getElementById('recordModeBtn').addEventListener('click', () => {
+      document.body.classList.toggle('record-mode');
+    });
+
+    const copyScriptBtn = document.getElementById('copyScriptBtn');
+    copyScriptBtn.addEventListener('click', () => {
+      const lines = scenes.map(sc => {
+        const meta = sc.querySelector('.scene-meta').innerText.replace(/\n/g, ' ');
+        const text = sc.querySelector('.scene-lines').innerText.trim();
+        return `【${meta}】\n${text}`;
+      }).join('\n\n');
+      navigator.clipboard.writeText(lines).then(() => {
+        const orig = copyScriptBtn.textContent;
+        copyScriptBtn.textContent = '✅ 已复制 90 秒口播稿！';
+        setTimeout(() => { copyScriptBtn.textContent = orig; }, 3000);
+      });
+    });
+
+    // Build 7 Xiaohongshu 3:4 Cards
+    const xhsGrid = document.getElementById('xhsGrid');
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'xhs-card';
+      const clone = s.cloneNode(true);
+      clone.classList.add('active');
+      card.innerHTML = `
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator">${i === 0 ? '封面 · P1' : `P${i + 1} / 7`}</span>
+        </div>
+      `;
+      const bodyWrap = document.createElement('div');
+      bodyWrap.style.flex = '1';
+      bodyWrap.style.display = 'flex';
+      bodyWrap.style.flexDirection = 'column';
+      bodyWrap.style.justifyContent = 'center';
+      bodyWrap.appendChild(clone);
+      card.appendChild(bodyWrap);
+
+      const foot = document.createElement('div');
+      foot.className = 'xhs-foot';
+      foot.innerHTML = `<span>实体房产 vs 金融房产 · 6 本明白账</span><span>向右滑看完整拆解 →</span>`;
+      card.appendChild(foot);
+      xhsGrid.appendChild(card);
+    });
+
+    const xhsModeBtn = document.getElementById('xhsModeBtn');
+    xhsModeBtn.addEventListener('click', () => {
+      const isXhs = document.body.classList.toggle('xhs-mode');
+      xhsModeBtn.textContent = isXhs
+        ? '🎬 切回视频号 9:16 竖屏演播台'
+        : '📕 切换小红书 3:4 笔记模式（7图平铺）';
+    });
+
+    if (location.search.includes('mode=xhs')) {
+      document.body.classList.add('xhs-mode');
+      xhsModeBtn.textContent = '🎬 切回视频号 9:16 竖屏演播台';
+    }
+
+    const toggleXhsThemeBtn = document.getElementById('toggleXhsThemeBtn');
+    toggleXhsThemeBtn.addEventListener('click', () => {
+      const isIvory = document.body.classList.toggle('xhs-ivory');
+      toggleXhsThemeBtn.textContent = isIvory
+        ? '🌙 切换为「深色黑金风」'
+        : '☀️ 切换为「暖白杂志风」';
+    });
+
+    const copyXhsCopyBtn = document.getElementById('copyXhsCopyBtn');
+    copyXhsCopyBtn.addEventListener('click', () => {
+      const bodyText = document.getElementById('xhsPostBody').innerText.trim();
+      const xhsFull = `为什么越来越多人把「第2套房」换成了「金融房产」？🏠\n\n${bodyText}`;
+      navigator.clipboard.writeText(xhsFull).then(() => {
+        const orig = copyXhsCopyBtn.textContent;
+        copyXhsCopyBtn.textContent = '✅ 已复制小红书标题+正文+标签！';
+        setTimeout(() => { copyXhsCopyBtn.textContent = orig; }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>
