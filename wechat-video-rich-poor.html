@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>视频号 9:16 ＆ 小红书 3:4 素材台 · 「钱少不用管，钱多不用保」？拆穿财富两端的认知盲区</title>
+  <style>
+    :root {
+      --bg: #111615;
+      --panel: #1a2220;
+      --panel-2: #222d2a;
+      --ink: #f4f1ea;
+      --muted: #9aa6a1;
+      --gold: #e5b869;
+      --gold-soft: rgba(229, 184, 105, 0.16);
+      --green: #184c3f;
+      --green-bright: #34a882;
+      --red: #e06c5a;
+      --blue: #52a2c4;
+      --line: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(17, 22, 21, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; }
+    .tag-pill {
+      background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      padding: 2px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 600;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--line);
+      background: var(--panel-2); color: var(--ink);
+      padding: 6px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn:hover { background: #2c3a36; border-color: rgba(255,255,255,0.25); }
+    .btn.gold { background: var(--gold); color: #141917; border-color: var(--gold); }
+    .btn.gold:hover { background: #ecc47c; }
+
+    .workspace {
+      max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px;
+      display: grid; grid-template-columns: 400px 1fr; gap: 28px; align-items: start;
+    }
+    .stage-col { position: sticky; top: 68px; display: flex; flex-direction: column; align-items: center; }
+    .phone-reel {
+      width: 378px; height: 672px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 55%, #121c1a 100%);
+      border-radius: 24px; border: 6px solid #2b3532;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 26px 20px 22px; user-select: none;
+    }
+    .phone-reel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .reel-top {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(229, 184, 105, 0.22); padding-bottom: 10px;
+    }
+    .reel-brand { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; }
+    .reel-step-indicator {
+      font-size: 11px; color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px;
+    }
+    .reel-body {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; padding: 10px 0;
+    }
+    .slide { display: none; animation: slideFade 0.32s ease; }
+    .slide.active { display: block; }
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-kicker {
+      display: inline-block; background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229,184,105,0.35);
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px;
+    }
+    .slide-title {
+      font-size: 24px; line-height: 1.28; font-weight: 800; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: 0.2px;
+    }
+    .slide-title .hl { color: var(--gold); }
+    .slide-title .green { color: #5ce0b5; }
+    .slide-sub { font-size: 13.5px; color: #c6d1cd; line-height: 1.55; margin: 0 0 14px; }
+
+    .v-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 12px; padding: 12px 13px; margin-bottom: 9px;
+    }
+    .v-card.gold-border { border-color: rgba(229, 184, 105, 0.55); background: rgba(229, 184, 105, 0.09); }
+    .v-card.green-border { border-color: rgba(92, 224, 181, 0.5); background: rgba(24, 76, 63, 0.45); }
+    .v-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .v-card-num { font-size: 14px; font-weight: 800; color: var(--gold); }
+    .v-card-desc { font-size: 12px; color: #b8c4bf; line-height: 1.46; }
+
+    .reel-caption-box {
+      position: relative; z-index: 2;
+      background: rgba(0, 0, 0, 0.62);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 10px; padding: 9px 12px; text-align: center;
+      min-height: 54px; display: flex; align-items: center; justify-content: center;
+    }
+    .reel-caption-text { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.42; }
+    .reel-caption-text span { color: var(--gold); }
+
+    .stage-controls {
+      margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .dots { display: flex; gap: 6px; margin: 0 6px; }
+    .dot {
+      width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line);
+      background: var(--panel); color: var(--muted); font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .dot.active { background: var(--gold); color: #141917; border-color: var(--gold); }
+
+    .script-col { display: flex; flex-direction: column; gap: 20px; }
+    .panel-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .panel-head h2 { font-size: 17px; margin: 0; color: #fff; }
+    .scene-list { display: flex; flex-direction: column; gap: 12px; }
+    .scene-item {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; cursor: pointer; transition: all 0.15s ease;
+    }
+    .scene-item:hover { border-color: rgba(229, 184, 105, 0.4); }
+    .scene-item.active {
+      border-color: var(--gold); background: rgba(229, 184, 105, 0.08); box-shadow: 0 0 0 1px var(--gold);
+    }
+    .scene-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px;
+    }
+    .scene-time { color: var(--muted); font-weight: 500; }
+    .scene-lines { font-size: 15px; line-height: 1.68; color: #fff; margin: 0; }
+    .scene-lines strong { color: var(--gold); background: rgba(229,184,105,0.14); padding: 0 4px; border-radius: 4px; }
+    .meta-box {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.65;
+    }
+    .meta-box strong { color: var(--gold); display: block; margin-bottom: 4px; }
+
+    body.record-mode .topbar, body.record-mode .script-col { display: none !important; }
+    body.record-mode .workspace { grid-template-columns: 1fr; padding: 12px; min-height: 100vh; align-items: center; justify-items: center; }
+    body.record-mode .stage-col { position: static; }
+    body.record-mode .phone-reel { width: 432px; height: 768px; border: none; border-radius: 0; }
+
+    /* Xiaohongshu 3:4 Note Grid Mode */
+    .xhs-section { display: none; max-width: 1240px; margin: 0 auto; padding: 22px 20px 64px; }
+    body.xhs-mode .workspace { display: none; }
+    body.xhs-mode .xhs-section { display: block; }
+    .xhs-toolbar {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+    }
+    .xhs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(348px, 1fr)); gap: 22px; justify-items: center;
+    }
+    .xhs-card {
+      width: 360px; height: 480px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 60%, #121c1a 100%);
+      border-radius: 16px; border: 1px solid rgba(229, 184, 105, 0.28);
+      padding: 20px 18px 16px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.38);
+    }
+    .xhs-card .slide { display: block !important; animation: none !important; }
+    .xhs-card .slide-title { font-size: 20.5px; margin-bottom: 8px; }
+    .xhs-card .slide-sub { font-size: 12.5px; margin-bottom: 10px; }
+    .xhs-card .v-card { padding: 9px 11px; margin-bottom: 7px; }
+    .xhs-card .v-card-head { font-size: 12.5px; }
+    .xhs-card .v-card-desc { font-size: 11.5px; }
+    .xhs-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 8px; font-size: 11px; color: rgba(255,255,255,0.6);
+    }
+    body.xhs-ivory .xhs-card {
+      background: #faf7f0; border: 1px solid #dfd8c8; color: #17211d; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+    body.xhs-ivory .xhs-card .reel-brand { color: #184c3f; }
+    body.xhs-ivory .xhs-card .reel-step-indicator { background: #e9e4d8; color: #44514b; }
+    body.xhs-ivory .xhs-card .slide-kicker { background: #e4efe9; color: #184c3f; border-color: #b7d2c5; }
+    body.xhs-ivory .xhs-card .slide-title { color: #17211d; }
+    body.xhs-ivory .xhs-card .slide-title .hl { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .slide-title .green { color: #184c3f; }
+    body.xhs-ivory .xhs-card .slide-sub { color: #44514b; }
+    body.xhs-ivory .xhs-card .v-card { background: #ffffff; border-color: #dfd8c8; }
+    body.xhs-ivory .xhs-card .v-card.gold-border { background: #fcf4e8; border-color: #e5c494; }
+    body.xhs-ivory .xhs-card .v-card.green-border { background: #eef5f1; border-color: #b5d1c3; }
+    body.xhs-ivory .xhs-card .v-card-head { color: #17211d; }
+    body.xhs-ivory .xhs-card .v-card-num { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .v-card-desc { color: #44514b; }
+    body.xhs-ivory .xhs-card .xhs-foot { border-top-color: #e2dcd0; color: #63706a; }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: 1fr; }
+      .stage-col { position: static; }
+      .phone-reel { width: 100%; max-width: 378px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>🎬 第 4 期：「钱少不用管，钱多不用保」？（视频号 9:16 ＆ 小红书 3:4）</span>
+      <span class="tag-pill">一鱼三吃 · 财富两端盲区</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn" href="wechat-rich-poor-paradox.html">📄 公众号图文版</a>
+      <button type="button" class="btn gold" id="xhsModeBtn">📕 切换小红书 3:4 笔记模式（7图平铺）</button>
+      <button type="button" class="btn" id="autoPlayBtn">▶️ 自动轮播演示</button>
+      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式</button>
+      <button type="button" class="btn" id="copyScriptBtn">📋 复制视频号口播稿</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <!-- Left: 9:16 Vertical Stage -->
+    <div class="stage-col">
+      <div class="phone-reel" id="phoneReel">
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator" id="stepCounter">第 1 / 7 幕</span>
+        </div>
+
+        <div class="reel-body">
+          <!-- Slide 1: Hook -->
+          <div class="slide active" data-index="0">
+            <span class="slide-kicker">家庭财富最可惜的两个误区</span>
+            <h3 class="slide-title">为什么<span class="hl">「钱少觉得不用管」</span><br /><span class="green">「钱多觉得不用保」</span>？</h3>
+            <p class="slide-sub">做家庭财务规划时，最常听到两句正好相反、却同样危险的话：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🌱 钱少时的误区</span>
+                <span style="color:#e06c5a">浪费复利时间</span>
+              </div>
+              <div class="v-card-desc">「手头也没几个钱，有什么好打理的？等以后挣到大钱再说吧。」</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🏰 钱多时的误区</span>
+                <span style="color:#5ce0b5">低估失血速度</span>
+              </div>
+              <div class="v-card-desc">「我已经有几百万几套房了，生病自己掏得起，根本不需要什么保险。」</div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Why Small Money Needs Protection (Zero Tolerance) -->
+          <div class="slide" data-index="1">
+            <span class="slide-kicker">第一端盲区（上）· 为什么钱少更要先保？</span>
+            <h3 class="slide-title">本金越薄，你的容错率<br />越趋近于 <span class="hl">0（一病即清零）</span></h3>
+            <p class="slide-sub">越是刚起步、存款只有一二十万的个人或小家庭，越经不起一次中等风险冲击：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>⚠️ 2000 万 vs 20 万的抗冲击差</span>
+                <span class="v-card-num">擦破皮 vs 返贫</span>
+              </div>
+              <div class="v-card-desc">
+                • 身家 2000 万生病花 40 万，只是擦破一点皮；<br />
+                • 刚攒下 20 万生病花 40 万，三年积蓄<strong>瞬间清零还倒欠 20 万</strong>，直接打断原始积累。<br />
+                • <strong>正解</strong>：先花几千块配齐医疗+重疾，把「返贫归零」的洞焊死。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Why Small Money Needs Compounding -->
+          <div class="slide" data-index="2">
+            <span class="slide-kicker">第一端盲区（下）· 为什么钱少也能积少成多？</span>
+            <h3 class="slide-title">复利公式里最值钱的<br />不是本金，而是<span class="green">「时间指数 n」</span></h3>
+            <p class="slide-sub">总想「等攒够 100 万再开始打理」的人，最后钱全在日常消费升级里漏光了：</p>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>📈 定期小投入的滚雪球效应</span>
+                <span class="v-card-num">积少成多</span>
+              </div>
+              <div class="v-card-desc">
+                • 哪怕每年只从收入里强制切出 <strong>2 万～3 万</strong> 锁进跨周期复利池，连续坚持 15～20 年，滚出来的安全垫远超中年临时抱佛脚；<br />
+                • <strong>财富不是有了大钱才开始打理，而是因为开始了规律打理，才慢慢长成了大钱。</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Why Rich People Bleed Faster -->
+          <div class="slide" data-index="3">
+            <span class="slide-kicker">第二端盲区（上）· 为什么有钱了更不能裸奔？</span>
+            <h3 class="slide-title">收入放大 <span class="hl">10 倍</span>，刚性支出与<br />失血速度也放大了 <span class="hl">10 倍</span></h3>
+            <p class="slide-sub">很多高净值人士忘了：<strong>疾病概率对所有人完全平等，但你的收支水位高得多！</strong></p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🌊 船造得越大，吃水越深</span>
+                <span style="color:#e06c5a">高刚需锁死</span>
+              </div>
+              <div class="v-card-desc">
+                • 年入 30 万家庭，月刚需 1.5 万；<br />
+                • 年入 300 万家庭，背着<strong>每月 8 万豪宅按揭 + 两个孩子每年 60 万国际学校/留学硬账单 + 企业固定开支</strong>；<br />
+                • 一旦顶梁柱停摆两年，每月硬扣的失血窟窿是普通家庭的十倍以上。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Paper Wealth vs Liquid Cash -->
+          <div class="slide" data-index="4">
+            <span class="slide-kicker">第二端盲区（中）· 纸面资产 ≠ 救命活钱</span>
+            <h3 class="slide-title">身家几千万，急用时愿意<br /><span class="hl">7 折卖房</span>或<span class="hl">熊市割肉</span>吗？</h3>
+            <p class="slide-sub">有钱人说「生病几百万我自己掏得起」，但打开资产表一看，钱全锁死了：</p>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>🏠 房产 + 📈 股票 + 🏢 公司股权</span>
+                <span style="color:var(--gold)">缺免折价活水</span>
+              </div>
+              <div class="v-card-desc">
+                • 房产急售常被压价至 <strong>7～8 折</strong>（蒸发几百万）；股票若逢熊市回撤 35%，割肉即永久伤本；<br />
+                • 配齐<strong>全球高端医疗险 + 大额危疾定寿</strong>，是为了去香港养和或海外就医时由保司现金池买单，<strong>保护你的优质房产与股票不被迫贱卖</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: 4 New Problems Only Rich People Have -->
+          <div class="slide" data-index="5">
+            <span class="slide-kicker">第二端盲区（下）· 资产增加后的 4 个新课题</span>
+            <h3 class="slide-title">钱越多，越需要解决这 <span class="green">4 个</span><br />没钱时不存在的<span class="hl">边界问题</span></h3>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🏰 高净值专属的四大契约工具</span>
+                <span class="v-card-num">守住资产边界</span>
+              </div>
+              <div class="v-card-desc">
+                ① <strong>家企隔离</strong>：顺风期抽离利润建独立保单安全舱，防经营连带清零；<br />
+                ② <strong>全球医疗权</strong>：数千万高端医疗直付香港/欧美顶尖私立医院；<br />
+                ③ <strong>多币种与税务</strong>：6～9 种货币转换，规避非美居民直持美股 40% 遗产税；<br />
+                ④ <strong>防挥霍与防婚变</strong>：父母做投保人握 100% 控制权 + 保单 1 拆 N。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: Closing Summary & CTA -->
+          <div class="slide" data-index="6">
+            <span class="slide-kicker">一句话总结 · 建议截图保存</span>
+            <h3 class="slide-title">钱少靠<span class="hl">「时间滚雪球」</span><br />钱多靠<span class="green">「契约建防水舱」</span></h3>
+            <div class="v-card gold-border" style="padding:13px">
+              <div style="font-size:13px;color:#fff;line-height:1.6">
+                • <strong>起步期</strong>：花几千块焊死「大病不归零底线」+ 定期小投入积少成多；<br />
+                • <strong>富裕期</strong>：用高端医疗与独立分红契约，护住房产股权、隔离家企与婚变风险。
+              </div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>📌 在线双轨诊断（工薪四仓 vs 企业主隔离）</span>
+                <span style="color:var(--gold);font-size:12px">见下方公众号链接</span>
+              </div>
+              <div class="v-card-desc">点击下方链接，一键切换「守住家庭现金流」与「守住家族资产边界」双视角。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-caption-box">
+          <div class="reel-caption-text" id="reelCaption">
+            <span>「钱少觉得不用管，钱多觉得不用保」</span>——这是家庭财富两端最大的盲区。
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-controls">
+        <button type="button" class="btn" id="prevSlideBtn">⬅️ 上一幕</button>
+        <div class="dots" id="slideDots">
+          <button type="button" class="dot active" data-go="0">1</button>
+          <button type="button" class="dot" data-go="1">2</button>
+          <button type="button" class="dot" data-go="2">3</button>
+          <button type="button" class="dot" data-go="3">4</button>
+          <button type="button" class="dot" data-go="4">5</button>
+          <button type="button" class="dot" data-go="5">6</button>
+          <button type="button" class="dot" data-go="6">7</button>
+        </div>
+        <button type="button" class="btn" id="nextSlideBtn">下一幕 ➡️</button>
+      </div>
+    </div>
+
+    <!-- Right: Teleprompter & Copy Pack -->
+    <div class="script-col">
+      <div class="panel-card">
+        <div class="panel-head">
+          <h2>🎙️ 90 秒视频号分镜口播逐字稿（点击卡片同步切换左侧画面）</h2>
+          <span class="tag-pill">第 4 期 · 财富两端盲区</span>
+        </div>
+
+        <div class="scene-list" id="sceneList">
+          <div class="scene-item active" data-scene="0" data-caption="<span>「钱少觉得不用管，钱多觉得不用保」</span>——这是家庭财富两端最大的盲区。">
+            <div class="scene-meta">
+              <span>第 1 幕 · 黄金前 3 秒钩子（两端反差痛点）</span>
+              <span class="scene-time">00:00 - 00:13</span>
+            </div>
+            <p class="scene-lines">
+              「做家庭财务规划久了，我常听到两句正好相反、却同样危险的话：刚起步的朋友说，<strong>我手头也没几个钱，等以后挣到大钱再打理吧</strong>；而身家几千万的朋友说，<strong>我钱已经够多了，生病几百万自己掏得起，根本不需要买保险</strong>。其实这两句话，正好踩中了财富生命周期两端的盲区。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="1" data-caption="本金越薄，抗风险容错率越趋近于 <span>0</span>——先花小钱焊死<span>「大病不归零底线」</span>。">
+            <div class="scene-meta">
+              <span>第 2 幕 · 第一端盲区（上）：为什么钱少更要先防归零？</span>
+              <span class="scene-time">00:13 - 00:26</span>
+            </div>
+            <p class="scene-lines">
+              「先看钱少的时候：一个有两千万的人，生病花 40 万只是擦破皮；但一个刚攒下 20 万的年轻人，一场大病花 40 万就是<strong>直接清零返贫</strong>，彻底打断原始积累。越是本金薄，越要先花几千块钱配好医疗和重疾，把归零漏洞焊死。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="2" data-caption="复利公式里威力最大的是<span>「时间指数 n」</span>——定期小投入才能滚出大安全垫。">
+            <div class="scene-meta">
+              <span>第 3 幕 · 第一端盲区（下）：为什么钱少也能积少成多？</span>
+              <span class="scene-time">00:26 - 00:40</span>
+            </div>
+            <p class="scene-lines">
+              「而且很多人不知道，复利公式里指数位置上的变量不是本金，而是<strong>时间</strong>。哪怕每年只从收入里切出两三万做定期长期投入，坚持十五年滚出来的安全垫，远超中年临时抱佛脚。<strong>财富不是有了大钱才开始打理，而是因为开始了规律打理，才慢慢长成了大钱。</strong>」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="3" data-caption="疾病概率对所有人平等，但高净值家庭的<span>刚性支出与失血速度</span>放大了 10 倍。">
+            <div class="scene-meta">
+              <span>第 4 幕 · 第二端盲区（上）：为什么有钱了失血更快？</span>
+              <span class="scene-time">00:40 - 00:56</span>
+            </div>
+            <p class="scene-lines">
+              「那反过来，有钱了就真能硬扛风险吗？恰恰相反。首先，<strong>疾病概率对所有人一视同仁，但你的收支水位被同步放大了</strong>。年入 300 万的家庭，往往背着每月七八万的豪宅按揭、两个孩子一年 60 万的国际学校与留学硬账单，一旦顶梁柱停摆两年，每月硬扣的失血速度是普通家庭的十倍以上。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="4" data-caption="纸面资产几千万 ≠ 救命活钱。配高端医疗与大额危疾，是为了<span>不 7 折贱卖房、不熊市割肉股</span>。">
+            <div class="scene-meta">
+              <span>第 5 幕 · 第二端盲区（中）：纸面富贵 vs 免折价活水</span>
+              <span class="scene-time">00:56 - 01:10</span>
+            </div>
+            <p class="scene-lines">
+              「其次，<strong>纸面有几千万不等于随时拿得出无损现金</strong>。有钱人的钱都在房产、股票和公司股权里——急用几百万去海外或香港私立医院看病时，难道要打七折贱卖房子、或者在熊市底部割肉股票吗？配齐高端医疗和大额危疾，本质是给你的优质资产买一张<strong>免打折变现护盾</strong>。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="5" data-caption="资产跨过千万后，新增了<span>家企隔离、全球医疗、跨境税务、防挥霍婚变</span>四大课题。">
+            <div class="scene-meta">
+              <span>第 6 幕 · 第二端盲区（下）：有钱人多出来的 4 个专属课题</span>
+              <span class="scene-time">01:10 - 01:23</span>
+            </div>
+            <p class="scene-lines">
+              「更重要的是，随着资产增加，你多出了四个没钱时根本不存在的课题：<strong>怎么把顺风期企业利润抽离成连带债务碰不到的安全舱？怎么直通全球顶尖私立医院？怎么规避美股 40% 遗产税？怎么把钱传给孩子既防挥霍又防婚姻混同？</strong>」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="6" data-caption="钱少靠<span>时间滚雪球</span>，钱多靠<span>契约建防水舱</span>。点下方链接切换双轨诊断。">
+            <div class="scene-meta">
+              <span>第 7 幕 · 总结金句与双轨导流</span>
+              <span class="scene-time">01:23 - 01:30</span>
+            </div>
+            <p class="scene-lines">
+              「<strong>钱少靠时间滚雪球，钱多靠契约建防水舱。</strong>想看你当前阶段对应的完整配置方案，可以直接点视频下方的公众号文章链接。」
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xiaohongshu 3:4 Note Grid Section -->
+  <section class="xhs-section" id="xhsSection">
+    <div class="xhs-toolbar">
+      <div>
+        <strong style="font-size:15px;color:#fff;display:block;margin-bottom:3px;">📕 小红书 3:4 黄金比例笔记卡（共 7 张 · 360×480 标准封面比例）</strong>
+        <span style="font-size:12.5px;color:var(--muted);">支持一键切换「暖白杂志风」与「深色黑金风」，下方配好小红书标题与正文。</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn" id="toggleXhsThemeBtn">☀️ 切换为「暖白杂志风」</button>
+        <button type="button" class="btn gold" id="copyXhsCopyBtn">📋 一键复制小红书标题 + 正文 + 标签</button>
+      </div>
+    </div>
+
+    <div class="xhs-grid" id="xhsGrid"></div>
+
+    <div class="panel-card" style="margin-top:24px;">
+      <div class="panel-head">
+        <h2>📕 小红书专属爆款标题与正文（可直接复制发布）</h2>
+        <span class="tag-pill">第 4 期 · 财富两端盲区</span>
+      </div>
+      <div class="meta-box">
+        <strong>🔥 5 个小红书高点击标题（任选 1 个）</strong>
+        1. 「钱少不用管，钱多不用保」？太扎心了📉<br />
+        2. 家庭财富最可惜的两个误区，很多人都中了<br />
+        3. 为什么有几千万的人，一场变故比普通人崩得快？<br />
+        4. 钱少靠时间滚雪球，钱多靠契约建防水舱⚓<br />
+        5. 别等攒够100万才开始！两个阶段的财务真相
+      </div>
+      <div class="meta-box" id="xhsPostBody" style="margin-bottom:0;white-space:pre-line;">跟不同资产量级的家庭聊规划时，最常听到两句正好相反、却同样危险的话：
+• 刚起步的朋友说：「我手头也没几个钱，等以后挣到大钱再打理吧。」
+• 身家几千万的朋友说：「我已经有几套房几百万了，生病自己掏得起，根本不需要买保险。」
+
+一边觉得「钱少不用管」，一边觉得「钱多不用保」。用资产负债表算一笔账，这两句话正好踩中了财富两端的盲区👇
+
+🌱 盲区一：为什么「钱少」更要先管？
+1️⃣ 本金越薄，抗风险容错率越是 0：
+身家 2000 万生病花 40 万只是擦破皮；但刚攒下 20 万的年轻人一场大病花 40 万，三年积蓄瞬间清零还倒欠 20 万，彻底打断原始积累。越没钱，越要先花几千块配好医疗+重疾，把「返贫归零」的洞焊死🛡️。
+2️⃣ 复利公式里威力最大的是「时间指数 n」：
+总想「等攒够 100 万再打理」的人，钱最后全在日常消费升级里漏光了。哪怕每年只强制切出 2～3 万做定期长期投入，坚持 15 年滚出来的安全垫远超中年临时抱佛脚。财富不是有了大钱才开始打理，而是因为开始了打理，才慢慢长成了大钱📈。
+
+🏰 盲区二：为什么「有钱了」反而更需要保障与契约？
+1️⃣ 收支是相对的，疾病概率对所有人一视同仁：
+年入 300 万的家庭，往往背着每月 8 万的豪宅按揭 + 两个孩子一年 60 万的国际学校/留学硬账单 + 企业固定开支。一旦顶梁柱停摆两年，每月硬扣的失血速度是普通家庭的 10 倍以上！
+2️⃣ 纸面资产几千万 ≠ 随时拿得出无损救命钱：
+有钱人的钱都在房产、股票和股权里——急用几百万去香港养和或海外私立医院看病时，难道要 7 折贱卖房产、或者在熊市底部割肉股票吗？配齐高端医疗与大额危疾，是给优质资产买一张「免打折变现护盾」。
+3️⃣ 资产跨过千万后，新增了 4 个「没钱时不存在的课题」：
+① 家企债务隔离（顺风期抽离利润建独立安全舱）；
+② 全球顶尖私立医疗直付权；
+③ 多元货币转换与规避非美居民直持美股 40% 遗产税；
+④ 代际传承防挥霍、防子女婚姻混同（父母握住 100% 投保人控制权 + 保单 1 拆 N）。
+
+✨ 钱少靠「时间滚雪球」，钱多靠「契约建防水舱」——什么时候开始搭建结构，财富才真正属于你。
+
+#家庭资产配置 #中产家庭财务 #高净值财富管理 #财富传承 #香港保险 #家企隔离 #攒钱干货 #复利思维 #家庭风险管理</div>
+    </div>
+  </section>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const scenes = Array.from(document.querySelectorAll('.scene-item'));
+    const stepCounter = document.getElementById('stepCounter');
+    const reelCaption = document.getElementById('reelCaption');
+    let current = 0;
+    let timer = null;
+
+    function goToSlide(idx) {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      scenes.forEach((sc, i) => sc.classList.toggle('active', i === current));
+      stepCounter.textContent = `第 ${current + 1} / ${slides.length} 幕`;
+      const cap = scenes[current]?.getAttribute('data-caption');
+      if (cap) reelCaption.innerHTML = cap;
+    }
+
+    document.getElementById('prevSlideBtn').addEventListener('click', () => goToSlide(current - 1));
+    document.getElementById('nextSlideBtn').addEventListener('click', () => goToSlide(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goToSlide(Number(d.dataset.go))));
+    scenes.forEach(sc => sc.addEventListener('click', () => goToSlide(Number(sc.dataset.scene))));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
+      else if (e.key === 'Escape' && document.body.classList.contains('record-mode')) {
+        document.body.classList.remove('record-mode');
+      }
+    });
+
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    autoPlayBtn.addEventListener('click', () => {
+      if (timer) {
+        clearInterval(timer); timer = null;
+        autoPlayBtn.textContent = '▶️ 自动轮播演示';
+      } else {
+        autoPlayBtn.textContent = '⏸️ 暂停轮播';
+        timer = setInterval(() => goToSlide(current + 1), 4500);
+      }
+    });
+
+    document.getElementById('recordModeBtn').addEventListener('click', () => {
+      document.body.classList.toggle('record-mode');
+    });
+
+    const copyScriptBtn = document.getElementById('copyScriptBtn');
+    copyScriptBtn.addEventListener('click', () => {
+      const lines = scenes.map(sc => {
+        const meta = sc.querySelector('.scene-meta').innerText.replace(/\n/g, ' ');
+        const text = sc.querySelector('.scene-lines').innerText.trim();
+        return `【${meta}】\n${text}`;
+      }).join('\n\n');
+      navigator.clipboard.writeText(lines).then(() => {
+        const orig = copyScriptBtn.textContent;
+        copyScriptBtn.textContent = '✅ 已复制 90 秒口播稿！';
+        setTimeout(() => { copyScriptBtn.textContent = orig; }, 3000);
+      });
+    });
+
+    // Build 7 Xiaohongshu 3:4 Cards
+    const xhsGrid = document.getElementById('xhsGrid');
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'xhs-card';
+      const clone = s.cloneNode(true);
+      clone.classList.add('active');
+      card.innerHTML = `
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator">${i === 0 ? '封面 · P1' : `P${i + 1} / 7`}</span>
+        </div>
+      `;
+      const bodyWrap = document.createElement('div');
+      bodyWrap.style.flex = '1';
+      bodyWrap.style.display = 'flex';
+      bodyWrap.style.flexDirection = 'column';
+      bodyWrap.style.justifyContent = 'center';
+      bodyWrap.appendChild(clone);
+      card.appendChild(bodyWrap);
+
+      const foot = document.createElement('div');
+      foot.className = 'xhs-foot';
+      foot.innerHTML = `<span>钱少靠时间滚雪球 · 钱多靠契约建防水舱</span><span>向右滑看完整拆解 →</span>`;
+      card.appendChild(foot);
+      xhsGrid.appendChild(card);
+    });
+
+    const xhsModeBtn = document.getElementById('xhsModeBtn');
+    xhsModeBtn.addEventListener('click', () => {
+      const isXhs = document.body.classList.toggle('xhs-mode');
+      xhsModeBtn.textContent = isXhs
+        ? '🎬 切回视频号 9:16 竖屏演播台'
+        : '📕 切换小红书 3:4 笔记模式（7图平铺）';
+    });
+
+    if (location.search.includes('mode=xhs')) {
+      document.body.classList.add('xhs-mode');
+      xhsModeBtn.textContent = '🎬 切回视频号 9:16 竖屏演播台';
+    }
+
+    const toggleXhsThemeBtn = document.getElementById('toggleXhsThemeBtn');
+    toggleXhsThemeBtn.addEventListener('click', () => {
+      const isIvory = document.body.classList.toggle('xhs-ivory');
+      toggleXhsThemeBtn.textContent = isIvory
+        ? '🌙 切换为「深色黑金风」'
+        : '☀️ 切换为「暖白杂志风」';
+    });
+
+    const copyXhsCopyBtn = document.getElementById('copyXhsCopyBtn');
+    copyXhsCopyBtn.addEventListener('click', () => {
+      const bodyText = document.getElementById('xhsPostBody').innerText.trim();
+      const xhsFull = `「钱少不用管，钱多不用保」？太扎心了📉\n\n${bodyText}`;
+      navigator.clipboard.writeText(xhsFull).then(() => {
+        const orig = copyXhsCopyBtn.textContent;
+        copyXhsCopyBtn.textContent = '✅ 已复制小红书标题+正文+标签！';
+        setTimeout(() => { copyXhsCopyBtn.textContent = orig; }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>
