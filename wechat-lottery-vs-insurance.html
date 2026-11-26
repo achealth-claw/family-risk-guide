@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>为什么人愿意满仓炒股、买彩票，却对保险格外谨慎？</title>
+  <title>为什么人愿意满仓炒股、买彩票，却对「花小钱挡大风险」格外谨慎？</title>
   <style>
     :root {
       --bg: #ededed;
@@ -25,9 +25,11 @@
     .preview-bar {
       position: sticky; top: 0; z-index: 100;
       background: rgba(24, 76, 63, 0.96);
+      backdrop-filter: blur(8px);
       color: #fff; padding: 10px 16px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       font-size: 13px; box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      flex-wrap: wrap;
     }
     .preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .preview-btn {
@@ -36,11 +38,21 @@
       padding: 5px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 600;
       cursor: pointer; text-decoration: none;
     }
+    .preview-btn:hover { background: rgba(255,255,255,0.22); }
     .preview-btn.primary { background: #fff; color: var(--green); border-color: #fff; }
     .stage {
       max-width: 677px; margin: 0 auto; background: var(--paper);
       min-height: calc(100vh - 48px); padding: 28px 20px 64px;
       box-shadow: 0 0 24px rgba(0,0,0,0.05);
+      transition: max-width 0.25s ease, margin 0.25s ease, border-radius 0.25s ease;
+    }
+    body.mobile-frame .stage {
+      max-width: 414px;
+      margin: 20px auto 40px;
+      border-radius: 28px;
+      border: 8px solid #2b2f36;
+      padding: 24px 16px 48px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.18);
     }
     .wx-title {
       font-size: 22px; line-height: 1.4; font-weight: 700;
@@ -56,17 +68,19 @@
     }
     .wx-author { color: #576b95; font-weight: 500; text-decoration: none; }
     @media (max-width: 680px) {
+      .hide-mobile { display: none; }
       .stage { padding: 22px 16px 48px; }
     }
   </style>
 </head>
 <body>
   <div class="preview-bar">
-    <div><strong>微信公众号文章预览</strong> · 行为金融 · 彩票 vs 保险</div>
+    <div><strong>微信公众号文章预览</strong> · 第 2 期：彩票、满仓炒股与保险谨慎悖论</div>
     <div class="preview-actions">
-      <a class="preview-btn" href="index.html">🏠 回主站</a>
-      <a class="preview-btn" href="wechat-stock-budget.html">📄 上一篇：多少钱能炒股</a>
-      <button type="button" class="preview-btn primary" id="copyWxBtn">📋 一键复制排版</button>
+      <a class="preview-btn" href="wechat-video-lottery.html">🎬 视频号 9:16 ＆ 📕 小红书 3:4 素材台</a>
+      <a class="preview-btn hide-mobile" href="wechat-stock-budget.html">📄 第 1 期：多少钱能炒股</a>
+      <button type="button" class="preview-btn hide-mobile" id="toggleFrameBtn">📱 切换手机窄屏框</button>
+      <button type="button" class="preview-btn primary" id="copyWxBtn">📋 一键复制排版（直接粘贴公众号后台）</button>
     </div>
   </div>
 
@@ -76,134 +90,164 @@
       <span class="wx-tag">原创</span>
       <span>安康 · 医学与数据分析背景</span>
       <a class="wx-author" href="index.html">安康家庭风险与财务</a>
+      <span>香港</span>
     </div>
 
     <div id="js_content" style="font-size:15.5px;color:#2b2b2b;line-height:1.82;letter-spacing:0.3px;">
 
+      <!-- Lead Quote Box -->
       <section style="background:#f6f8f7;border-left:4px solid #184c3f;padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 22px;font-size:14.5px;color:#3d4843;line-height:1.72;">
         <strong style="color:#184c3f;display:block;margin-bottom:4px;">写在前面：</strong>
-        同样是「花小钱碰小概率」——买彩票是向上搏暴富，买保险是向下挡大损。人脑天然更爱前者，却对后者格外谨慎。这不是精明，往往是<strong>风险顺序反了</strong>。
+        亏光不用赔你的地方（股市、彩票站），永远把入口修得像滑梯一样顺滑，进出只需 3 秒；而未来三四十年要替你刚性兜底几百万、且单方面绝不能毁约的地方（长期保单契约），才必须在签字前把权属、边界与底线一页页钉死。
       </section>
 
-      <p style="margin:0 0 16px;">身边有个很常见、却很少被认真拆开的现象：</p>
-      <p style="margin:0 0 16px;">有人可以把<strong>几乎全部身家</strong>放进证券账户，甚至加杠杆；有人每周买彩票，明知中大奖概率极低，仍然愿意「花小钱搏一把」；可一说到保险，哪怕只是每年拿出年结余的一小部分，去挡「万一倒下、房贷断供、孩子学费断档」这类巨大冲击，很多人会立刻变得格外谨慎——怕条款坑人、怕被骗、怕钱拿不回来。</p>
-      <p style="margin:0 0 24px;">更吊诡的是：银行存款、证券开户协议相对标准化，普通人感觉「放进去、取出来都很方便」，于是趋之若鹜；而保险合同条款更长、签字确认更多——本来是保护消费者的程序，却常常被读成「这么复杂，肯定有坑」。</p>
+      <p style="margin:0 0 16px;">做家庭财务咨询久了，你会发现一个极其普遍、却很少有人仔细深想的反差现象：</p>
+      <p style="margin:0 0 16px;">身边有人敢把<strong>几乎全部身家</strong>转进证券账户，甚至加融资杠杆单押一两只股票；有人每次路过彩票站都愿意掏几十块钱买刮刮乐或双色球，明知中头奖概率微乎其微，也乐意「花小钱搏一个万一」；</p>
+      <p style="margin:0 0 16px;">可一旦说到给家里配齐基础保障，哪怕只是从每年结余里拿出 5% 的小钱，去挡住「顶梁柱大病停工、房贷断供、孩子学费断档」这种足以掀翻整个家庭的巨大风险，很多人瞬间就变得高度警惕——<strong>嫌协议太厚、嫌签字确认太繁琐、生怕自己被骗了。</strong></p>
+      <p style="margin:0 0 24px;">为什么面对同样一笔钱，人会在最该敬畏风险的地方大胆裸奔，却在最该建立防波堤的地方犹豫不决？背后其实藏着三个反直觉的底层真相。</p>
 
-      <section style="margin:28px 0 18px;">
-        <span style="display:inline-block;background:#184c3f;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">反差一</span>
-        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">同一颗「小概率骰子」，人却用两套标准去看</h2>
+      <!-- Visual 3-Inversion Summary Box -->
+      <section style="background:#faf9f5;border:1px solid #e4dfd5;border-radius:12px;padding:16px 14px;margin:0 0 28px;">
+        <div style="font-size:13.5px;font-weight:700;color:#184c3f;text-align:center;margin-bottom:12px;letter-spacing:0.5px;">
+          ▼ 一图看懂：普通人财务决策的「三大认知倒置」
+        </div>
+        <div style="background:#ffffff;border:1px solid #dcd6ca;border-radius:8px;padding:11px 12px;margin-bottom:8px;font-size:13.5px;">
+          <strong style="color:#b86b1b;display:block;margin-bottom:3px;">倒置 ① · 概率感知倒置（相差 600 万倍）</strong>
+          相信 <strong>0.000005%（两千万分之一）</strong>的彩票头奖会砸中自己 ↔ 却赌 <strong>30%～39%（三分之一）</strong>的终生重大疾病绝对轮不到自己。
+        </div>
+        <div style="background:#ffffff;border:1px solid #dcd6ca;border-radius:8px;padding:11px 12px;margin-bottom:8px;font-size:13.5px;">
+          <strong style="color:#1d5a73;display:block;margin-bottom:3px;">倒置 ② · 协议复杂度倒置（免责滑梯 vs 房产证级确权）</strong>
+          对「亏光概不负责、3秒一键转账」的证券账户毫无戒心 ↔ 对「写死几十年刚性赔付责任与受益人产权」的严谨契约满怀戒备。
+        </div>
+        <div style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:8px;padding:11px 12px;font-size:13.5px;color:#184c3f;">
+          <strong style="display:block;margin-bottom:3px;">倒置 ③ · 流动性安全感倒置（过程随时能动 ≠ 结果安全）</strong>
+          以为「随时能存能取」最安全，结果牛市顶峰一把梭哈、熊市急用钱被迫割肉 ↔ 反而抗拒帮家庭锁住底线的长期契约。
+        </div>
       </section>
+
+      <!-- Section 1 -->
+      <section style="margin:30px 0 18px;">
+        <span style="display:inline-block;background:#b86b1b;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第一层真相 · 600 万倍的数学反差</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">为什么人愿意花小钱买彩票，却舍不得花小钱挡大灾？</h2>
+      </section>
+
+      <p style="margin:0 0 16px;">从数学结构上看，买彩票和买保障型保险（医疗、重疾、定期寿险）长得一模一样——都是<strong>「现在掏一笔确定的小钱，去交换一个不确定发生的大额结果」</strong>。</p>
+      <p style="margin:0 0 16px;">但如果我们把两者的真实概率摆在桌面上，差距会让人倒吸一口凉气：</p>
 
       <table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 18px;border:1px solid #dcd6ca;">
         <thead>
           <tr style="background:#eef5f1;color:#184c3f;text-align:left;">
-            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:22%;">决策场景</th>
-            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;">本质结构</th>
-            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:28%;">多数人态度</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:24%;">对比维度</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:36%;">买彩票（向上搏暴富）</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;">买保险护盾（向下挡灾难）</th>
           </tr>
         </thead>
         <tbody>
           <tr style="border-bottom:1px solid #eae6de;">
-            <td style="padding:9px 10px;font-weight:700;color:#b86b1b;">买彩票</td>
-            <td style="padding:9px 10px;">花小钱，换「极低概率的巨大收益」</td>
-            <td style="padding:9px 10px;">愿意，甚至带着期待</td>
+            <td style="padding:9px 10px;font-weight:700;">真实发生概率</td>
+            <td style="padding:9px 10px;color:#b86b1b;font-weight:700;">约 1 / 17,720,000<br /><span style="font-size:11.5px;font-weight:400;color:#63706a;">（约 0.000005%，近两千万分之一）</span></td>
+            <td style="padding:9px 10px;color:#184c3f;font-weight:700;">终生患癌 27.6% / 卒中 39.3%<br /><span style="font-size:11.5px;font-weight:400;color:#63706a;">（比彩票头奖高出约 600 万倍）</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;">
+            <td style="padding:9px 10px;font-weight:700;">掏钱时的心理</td>
+            <td style="padding:9px 10px;">分泌多巴胺（幻想中奖后换房辞职，充满愉悦感）</td>
+            <td style="padding:9px 10px;">触发心理防御（被迫直面生病、停工与身故，本能抗拒）</td>
           </tr>
           <tr>
-            <td style="padding:9px 10px;font-weight:700;color:#184c3f;">买保险</td>
-            <td style="padding:9px 10px;">花小钱，换「真实小概率的巨大损失被挡住」</td>
-            <td style="padding:9px 10px;">谨慎、拖延、怀疑</td>
+            <td style="padding:9px 10px;font-weight:700;">不买的后果</td>
+            <td style="padding:9px 10px;">毫无损失，生活照旧</td>
+            <td style="padding:9px 10px;color:#b86b1b;font-weight:700;">一旦出事，只能卖房、割肉股票或掏空全家几十年积蓄</td>
           </tr>
         </tbody>
       </table>
 
-      <p style="margin:0 0 16px;">两边都是「小钱 × 小概率 × 大结果」。差别只在结果的方向：彩票是<strong style="color:#b86b1b;">向上的暴富幻想</strong>；保险是<strong style="color:#184c3f;">向下的灾难缓冲</strong>。</p>
-      <p style="margin:0 0 24px;">人脑天然更爱向上幻想，而讨厌向下预案——不是因为后者不重要，恰恰因为后者一旦被认真面对，会逼人承认：<strong>「我也可能倒霉。」</strong></p>
+      <p style="margin:0 0 16px;">这就是行为经济学著名的「前景理论」与「乐观偏差」：</p>
+      <p style="margin:0 0 24px;">人脑天生喜欢为<strong>两千万分之一的向上暴富幻想</strong>买单，因为买彩票买的是多巴胺；却本能地逃避<strong>比彩票高出 600 万倍的向下风险预案</strong>，因为认真配置保险需要承认一句话——<strong>「我和我的家人不是铁打的，我们也需要保护。」</strong></p>
 
-      <section style="margin:28px 0 18px;">
-        <span style="display:inline-block;background:#1d5a73;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">反差二</span>
-        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">为什么「简单协议」让人放心，「复杂协议」反而让人怕？</h2>
+      <!-- Section 2 -->
+      <section style="margin:30px 0 18px;">
+        <span style="display:inline-block;background:#1d5a73;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第二层真相 · 为什么证券开户简单，保险协议复杂？</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">亏光不赔你的地方，永远把入口修得像滑梯一样顺滑</h2>
       </section>
 
-      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 14px;">
-        <div style="font-size:15px;font-weight:700;color:#b86b1b;margin-bottom:6px;">证券与存款：流程短，体感像「自己控盘」</div>
-        <p style="margin:0;font-size:14.5px;color:#3d4843;">开户、买入、卖出、转出——路径短、反馈快，人会自然产生掌控感：「钱还在我账户里，我想卖就卖。」可急用钱那年恰好是熊市、加了杠杆被迫平仓、全仓一只股票把全家押在单一风险上——流程简单，不等于风险简单。它只是把复杂风险藏在了行情波动里。</p>
-      </section>
+      <p style="margin:0 0 16px;">很多人问过我一个问题：<em>「为什么我往银行存钱、往证券账户转 100 万炒股，手机上点两下就进去了，连个复杂合同都不用看；而买份保险，条款厚厚一摞，签单前还要反复确认健康状况、回本年限和冷静期？是不是越复杂越有鬼？」</em></p>
+      <p style="margin:0 0 16px;">如果你换到金融契约的底层权责来看，答案恰恰相反：</p>
 
-      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 18px;">
-        <div style="font-size:15px;font-weight:700;color:#184c3f;margin-bottom:6px;">保险：流程长，体感像「对方在防我」</div>
-        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">签前确认多，恰恰因为要讲清保证与非保证、冷静期、适当性评估与退保损失。这些程序的本意是<strong>防止冲动购买、防止误导销售、保护消费者</strong>；情绪上却容易被读成：「对方这么啰嗦，是不是怕我看懂了就不买？」</p>
-        <p style="margin:0;font-size:13.5px;color:#7c4813;background:#fcf4e8;padding:9px 12px;border-radius:6px;">
-          ⚠️ <strong>复杂性悖论</strong>：简单、快进快出的工具被当成「安全透明」；被迫慢下来、把风险写清楚的工具，反而被当成「可疑有坑」。真实世界往往反过来——越是长期、越关系到生死病残与家庭现金流的安排，越需要把丑话说在前面。
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 16px;">
+        <div style="font-size:15.5px;font-weight:700;color:#b86b1b;margin-bottom:8px;">
+          ① 为什么证券账户「进出极方便、协议极简单」？因为券商只提供通道，不兜底你的盈亏
+        </div>
+        <p style="margin:0;font-size:14.5px;color:#3d4843;">
+          你把 200 万转进股票账户满仓杀入，券商为什么不拦着你、不让你签几十页确认书？因为<strong>股票赚了是你的，跌掉 100 万也是你自己扛，券商只赚万分之几的通道交易佣金，亏光了它一分钱都不用赔你</strong>。对只收过路费的平台来说，当然要把入口修得像滑梯一样顺滑，让你 3 秒钟就能把全部身家充进去。
         </p>
       </section>
 
-      <section style="margin:28px 0 18px;">
-        <span style="display:inline-block;background:#b86b1b;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">反差三</span>
-        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">高杠杆满仓：不是勇敢，是把全家压在一个风险点上</h2>
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 18px;">
+        <div style="font-size:15.5px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          ② 为什么保险合同像「买房过户」一样繁琐？因为它是单向锁定的几十年刚性确权契约
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">
+          回想一下，你人生中还有哪件事需要签厚厚一沓合同、一页页按手印、去窗口面对面核验身份与共有人？——<strong>只有买一套几百万的房子办理产权过户。</strong>
+        </p>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">
+          保险合同之所以同样严谨，是因为它有一个极其霸道的法律属性：<strong>「单向不可毁约性」</strong>。一旦保单核保生效，你今年只交了 1 万块保费，保司就立刻背上了 200 万的赔付责任；而且在未来 30 年、50 年甚至终身时间里，哪怕你后来身体变差了、哪怕外部市场利率跌穿了，<strong>只要你按时交保费，保险公司永远无权单方面退保、涨价或修改条款（而你却随时拥有退保的权利）</strong>。
+        </p>
+        <div style="background:#eef5f1;border-radius:8px;padding:10px 12px;font-size:13.5px;color:#184c3f;">
+          <strong>所以，签单前那些「繁琐确认」到底在干什么？</strong><br />
+          • <strong>核实健康告知</strong>：防止有人已经查出重病才来突击投保，抽干老实交费客户的互助资金池；<br />
+          • <strong>反复确认前期退保现金价值与保证/非保证分列</strong>：监管局强制要求把「前两年退保会亏、短钱不能买长险」的丑话当面讲透，防止销售人员拿短期高息忽悠你；<br />
+          • <strong>明确投保人、受保人、指定受益人顺位</strong>：像房产证确权一样，把未来几十年这笔钱「归谁管、赔给谁、算不算夫妻混同财产」钉死在法律合同里。
+        </div>
       </section>
 
-      <p style="margin:0 0 16px;">几乎不留应急金、医疗重疾护盾空缺、稳健底仓很少，却把大部分金融资产甚至借贷资金推进高波动权益仓——看起来像进取，底层结构却是：家庭资产负债表高度集中在「单一风险引擎」上。</p>
-      <p style="margin:0 0 24px;">一旦市场大跌与家里急需现金同时发生，人就会被迫在最差价格上卖出。这不是选股能力问题，是<strong>家庭风险排序问题</strong>。保险真正要解决的，从来不是「帮你赚过股票」，而是：<strong>别让一次健康或收入冲击，逼你在最差时刻卖掉本该长期持有的资产。</strong></p>
-
-      <section style="margin:28px 0 18px;">
-        <span style="display:inline-block;background:#184c3f;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">一张对照表</span>
-        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">彩票思维 vs 护盾思维：两种「花小钱」完全不同</h2>
+      <!-- Section 3 -->
+      <section style="margin:30px 0 18px;">
+        <span style="display:inline-block;background:#184c3f;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第三层真相 · 「随时能拿出来」的幻觉</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">把「过程进出自由」当成「安全」，往往是中产留不住钱的根源</h2>
       </section>
 
-      <table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 18px;border:1px solid #dcd6ca;">
-        <thead>
-          <tr style="background:#eef5f1;color:#184c3f;text-align:left;">
-            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:22%;"></th>
-            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;">彩票思维</th>
-            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;">护盾思维</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid #eae6de;"><td style="padding:9px 10px;font-weight:600;">付钱感受</td><td style="padding:9px 10px;">买希望、买刺激</td><td style="padding:9px 10px;">买无聊、买「但愿用不上」</td></tr>
-          <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;"><td style="padding:9px 10px;font-weight:600;">小概率方向</td><td style="padding:9px 10px;">向上：一夜暴富</td><td style="padding:9px 10px;">向下：大病、身故、失能、长寿活不够</td></tr>
-          <tr style="border-bottom:1px solid #eae6de;"><td style="padding:9px 10px;font-weight:600;">成功定义</td><td style="padding:9px 10px;">中了才算成功</td><td style="padding:9px 10px;"><strong>一辈子都不用理赔，也算成功</strong></td></tr>
-          <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;"><td style="padding:9px 10px;font-weight:600;">失败定义</td><td style="padding:9px 10px;">没中奖，亏小钱</td><td style="padding:9px 10px;">没配置，真出事时亏大钱</td></tr>
-          <tr><td style="padding:9px 10px;font-weight:600;">适合的钱</td><td style="padding:9px 10px;">纯娱乐小额</td><td style="padding:9px 10px;">家庭底盘里不可省的一小块</td></tr>
-        </tbody>
-      </table>
+      <p style="margin:0 0 16px;">普通人偏爱银行活期和股票账户的另一个原因，是觉得<strong>「钱放在那儿，我想什么时候拿出来就什么时候拿出来，掌控感最强」</strong>。</p>
+      <p style="margin:0 0 16px;">但从家庭二十年跨周期的数据来看，<strong>「毫无门槛的随时进出」，恰恰是绝大多数家庭存不下教育金、也守不住养老钱的最大漏口：</strong></p>
 
-      <p style="margin:0 0 24px;">很多人愿意为「向上的幻想」反复付钱，却不愿意为「向下的确定性冲击」提前付钱。这不是精明，是<strong>对家庭现金流脆弱性估计不足</strong>。</p>
+      <ul style="margin:0 0 20px;padding-left:20px;font-size:14.5px;color:#3d4843;">
+        <li style="margin-bottom:8px;"><strong>顺风期（牛市狂热或朋友鼓动创业）</strong>：因为没有任何协议拦着你，你很容易头脑一热，把原本留给孩子读书和自己养老的底仓一键转进股市追高，做成「倒金字塔加仓」；</li>
+        <li style="margin-bottom:8px;"><strong>逆风期（家里有人生病或行业寒冬碰上熊市）</strong>：虽然股票账户号称「随时能卖」，但当医院催缴押金、银行催缴月供恰好撞上股市跌去 35% 时，你的「随时取出」就变成了<strong>「在地板价含泪割肉，把账面浮亏变成永久真亏」</strong>。</li>
+      </ul>
 
-      <section style="margin:28px 0 18px;">
-        <span style="display:inline-block;background:#1d5a73;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">把丑话说清楚</span>
-        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">保险的「复杂协议」，到底在保护谁？</h2>
-      </section>
+      <p style="margin:0 0 24px;">反观一份设计良好的家庭保单组合：<strong>保障型保单（医疗+重疾+定寿）</strong>负责在你生病时直接打钱进账，保护你的股票不用在熊市割肉；<strong>长期储蓄分红契约</strong>则用恰当的跨周期规则，帮你把未来确定的教育金和退休活水锁在「连你自己冲动时都不会随便挪用」的安全舱里。</p>
 
-      <div style="background:#eef5f1;border-radius:10px;padding:14px 16px;margin:0 0 16px;font-size:14px;color:#184c3f;">
-        ① <strong>冷静期</strong>：给你反悔权，防止被情绪推动成交；<br />
-        ② <strong>保证 / 非保证分列</strong>：防止把演示收益当成银行存款；<br />
-        ③ <strong>免责与等待期写清楚</strong>：宁可现在难看，也不要出事时靠口头解释；<br />
-        ④ <strong>投保人 / 受保人 / 受益人结构</strong>：关系到钱最终给谁、谁能改；<br />
-        ⑤ <strong>退保现金价值曲线</strong>：明确前几年退保通常不划算，所以短钱不要进来。
-      </div>
-
-      <p style="margin:0 0 24px;">换个角度：证券账户用简单协议，是因为它默认你自己承担行情风险；保险用复杂协议，是因为它要在极端事件发生时，按事先写死的规则付钱。<strong>一个对「过程体验」友好，一个对「出事结果」负责。</strong>两者目标不同，不能用同一种舒服感去比较。</p>
-
+      <!-- Closing Summary -->
       <section style="background:#f6f8f7;border-radius:10px;padding:18px 16px;margin:28px 0 22px;">
-        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">写在最后：对进攻可以进取，对底盘必须保守</div>
-        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">真正理性的人，不是从不炒股，也不是从不碰复杂合同；而是用简单工具做自己可控的进攻，用写清楚的长期契约去做自己扛不住的下行保护——绝不把活水、护盾与教育养老底线，拿去满足进攻仓的刺激感。</p>
-        <p style="margin:0;font-size:14.5px;color:#184c3f;font-weight:700;">愿意为暴富幻想花小钱，却不愿意为灭顶风险花小钱——这不是风险偏好高，而是风险顺序反了。</p>
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          写在最后：真正成熟的财商，是把「顺滑」留给小钱，把「契约」留给底线
+        </div>
+        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">下次再看到「3 秒开户、一键买入」的账户时，不妨多一分敬畏——它之所以省事，是因为所有狂风暴雨都由你自己兜底；</p>
+        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">而下次再面对那份条款厚重、需要你逐项确认的保险契约时，也不妨多一分笃定——<strong>正是这几页写死在法律与精算规则里的繁琐条款，才让你的家庭在未来三四十年的无常周期里，拥有一张谁也拿不走的底牌。</strong></p>
+        <p style="margin:0;font-size:14.5px;color:#184c3f;font-weight:700;">先花小钱把那 30%～40% 的人生大风险挡在门外，再去用剩下的自由资金享受股市的弹性——这才是家庭财富真正聪明、从容的顺序。</p>
       </section>
 
+      <!-- Footer Call-to-Action Card -->
       <section style="border:1px solid #dcd6ca;border-radius:10px;padding:14px 16px;margin:24px 0 0;background:#ffffff;font-size:13px;color:#63706a;line-height:1.68;">
-        <strong style="color:#17211d;display:block;margin-bottom:4px;">📌 延伸阅读</strong>
-        若你想先算清「家里底盘配齐后，到底多少钱能拿去炒股」，可看上一篇演算文，或使用免登录的家庭四仓测算工具：<br />
-        <a href="https://achealth-claw.github.io/family-risk-guide/wechat-stock-budget.html" style="color:#184c3f;font-weight:600;word-break:break-all;">多少钱可以拿去炒股？</a><br />
-        <a href="https://achealth-claw.github.io/family-risk-guide/tools.html" style="color:#184c3f;font-weight:600;word-break:break-all;">https://achealth-claw.github.io/family-risk-guide/tools.html</a>
+        <strong style="color:#17211d;display:block;margin-bottom:4px;">📌 延伸工具 · 算一算你家的「重疾发生概率」与「四仓安全底盘」</strong>
+        我在网站里放了基于国家癌症中心、<em>NEJM</em>（卒中与心血管联盟）及 2020 版重疾表的<strong>家庭组合概率计算器</strong>与<strong>四仓比例测算工具</strong>（免登录、零推销），点击下方即可自测：<br />
+        <a href="https://achealth-claw.github.io/family-risk-guide/index.html#prob-title" style="color:#184c3f;font-weight:600;word-break:break-all;">👉 1. 测一测家庭全周期大病组合概率（index.html）</a><br />
+        <a href="https://achealth-claw.github.io/family-risk-guide/tools.html" style="color:#184c3f;font-weight:600;word-break:break-all;">👉 2. 算一算家庭保额缺口与四仓配置（tools.html）</a>
       </section>
 
-      <p style="margin:22px 0 0;font-size:12px;color:#8c938f;line-height:1.6;">
-        *本文仅作家庭财务决策与行为偏差的科普讨论，不构成任何证券、保险产品的推荐或收益承诺。*
-      </p>
     </div>
   </main>
 
   <script>
+    const toggleBtn = document.getElementById('toggleFrameBtn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('mobile-frame');
+        toggleBtn.textContent = document.body.classList.contains('mobile-frame')
+          ? '🖥️ 切回标准宽屏预览'
+          : '📱 切换手机窄屏框';
+      });
+    }
+
     const copyBtn = document.getElementById('copyWxBtn');
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
@@ -217,7 +261,7 @@
           document.execCommand('copy');
           selection.removeAllRanges();
           const orig = copyBtn.textContent;
-          copyBtn.textContent = '✅ 已复制！可粘贴公众号后台';
+          copyBtn.textContent = '✅ 已复制富文本！可直接去公众号后台粘贴';
           setTimeout(() => { copyBtn.textContent = orig; }, 3000);
         } catch (err) {
           alert('复制失败，请手动全选正文复制');

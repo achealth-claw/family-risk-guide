@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>视频号 9:16 ＆ 小红书 3:4 素材台 · 为什么人敢满仓炒股买彩票，却对保险格外谨慎？</title>
+  <style>
+    :root {
+      --bg: #111615;
+      --panel: #1a2220;
+      --panel-2: #222d2a;
+      --ink: #f4f1ea;
+      --muted: #9aa6a1;
+      --gold: #e5b869;
+      --gold-soft: rgba(229, 184, 105, 0.16);
+      --green: #184c3f;
+      --green-bright: #34a882;
+      --red: #e06c5a;
+      --blue: #52a2c4;
+      --line: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(17, 22, 21, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; }
+    .tag-pill {
+      background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      padding: 2px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 600;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--line);
+      background: var(--panel-2); color: var(--ink);
+      padding: 6px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn:hover { background: #2c3a36; border-color: rgba(255,255,255,0.25); }
+    .btn.gold { background: var(--gold); color: #141917; border-color: var(--gold); }
+    .btn.gold:hover { background: #ecc47c; }
+
+    .workspace {
+      max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px;
+      display: grid; grid-template-columns: 400px 1fr; gap: 28px; align-items: start;
+    }
+    .stage-col { position: sticky; top: 68px; display: flex; flex-direction: column; align-items: center; }
+    .phone-reel {
+      width: 378px; height: 672px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 55%, #121c1a 100%);
+      border-radius: 24px; border: 6px solid #2b3532;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 26px 20px 22px; user-select: none;
+    }
+    .phone-reel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .reel-top {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(229, 184, 105, 0.22); padding-bottom: 10px;
+    }
+    .reel-brand { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; }
+    .reel-step-indicator {
+      font-size: 11px; color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px;
+    }
+    .reel-body {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; padding: 10px 0;
+    }
+    .slide { display: none; animation: slideFade 0.32s ease; }
+    .slide.active { display: block; }
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-kicker {
+      display: inline-block; background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229,184,105,0.35);
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px;
+    }
+    .slide-title {
+      font-size: 24.5px; line-height: 1.28; font-weight: 800; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: 0.2px;
+    }
+    .slide-title .hl { color: var(--gold); }
+    .slide-title .green { color: #5ce0b5; }
+    .slide-sub { font-size: 13.5px; color: #c6d1cd; line-height: 1.55; margin: 0 0 14px; }
+
+    .v-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 12px; padding: 12px 13px; margin-bottom: 9px;
+    }
+    .v-card.gold-border { border-color: rgba(229, 184, 105, 0.55); background: rgba(229, 184, 105, 0.09); }
+    .v-card.green-border { border-color: rgba(92, 224, 181, 0.5); background: rgba(24, 76, 63, 0.45); }
+    .v-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .v-card-num { font-size: 14.5px; font-weight: 800; color: var(--gold); }
+    .v-card-desc { font-size: 12px; color: #b8c4bf; line-height: 1.46; }
+
+    .reel-caption-box {
+      position: relative; z-index: 2;
+      background: rgba(0, 0, 0, 0.62);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 10px; padding: 9px 12px; text-align: center;
+      min-height: 54px; display: flex; align-items: center; justify-content: center;
+    }
+    .reel-caption-text { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.42; }
+    .reel-caption-text span { color: var(--gold); }
+
+    .stage-controls {
+      margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .dots { display: flex; gap: 6px; margin: 0 6px; }
+    .dot {
+      width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line);
+      background: var(--panel); color: var(--muted); font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .dot.active { background: var(--gold); color: #141917; border-color: var(--gold); }
+
+    .script-col { display: flex; flex-direction: column; gap: 20px; }
+    .panel-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .panel-head h2 { font-size: 17px; margin: 0; color: #fff; }
+    .scene-list { display: flex; flex-direction: column; gap: 12px; }
+    .scene-item {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; cursor: pointer; transition: all 0.15s ease;
+    }
+    .scene-item:hover { border-color: rgba(229, 184, 105, 0.4); }
+    .scene-item.active {
+      border-color: var(--gold); background: rgba(229, 184, 105, 0.08); box-shadow: 0 0 0 1px var(--gold);
+    }
+    .scene-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px;
+    }
+    .scene-time { color: var(--muted); font-weight: 500; }
+    .scene-lines { font-size: 15px; line-height: 1.68; color: #fff; margin: 0; }
+    .scene-lines strong { color: var(--gold); background: rgba(229,184,105,0.14); padding: 0 4px; border-radius: 4px; }
+    .scene-visual-note { margin-top: 8px; font-size: 12px; color: var(--muted); }
+    .meta-box {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.65;
+    }
+    .meta-box strong { color: var(--gold); display: block; margin-bottom: 4px; }
+
+    body.record-mode .topbar, body.record-mode .script-col, body.record-mode .stage-controls-hint { display: none !important; }
+    body.record-mode .workspace { grid-template-columns: 1fr; padding: 12px; min-height: 100vh; align-items: center; justify-items: center; }
+    body.record-mode .stage-col { position: static; }
+    body.record-mode .phone-reel { width: 432px; height: 768px; border: none; border-radius: 0; }
+
+    /* Xiaohongshu 3:4 Note Grid Mode */
+    .xhs-section { display: none; max-width: 1240px; margin: 0 auto; padding: 22px 20px 64px; }
+    body.xhs-mode .workspace { display: none; }
+    body.xhs-mode .xhs-section { display: block; }
+    .xhs-toolbar {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+    }
+    .xhs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(348px, 1fr)); gap: 22px; justify-items: center;
+    }
+    .xhs-card {
+      width: 360px; height: 480px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 60%, #121c1a 100%);
+      border-radius: 16px; border: 1px solid rgba(229, 184, 105, 0.28);
+      padding: 20px 18px 16px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.38);
+    }
+    .xhs-card .slide { display: block !important; animation: none !important; }
+    .xhs-card .slide-title { font-size: 20.5px; margin-bottom: 8px; }
+    .xhs-card .slide-sub { font-size: 12.5px; margin-bottom: 10px; }
+    .xhs-card .v-card { padding: 9px 11px; margin-bottom: 7px; }
+    .xhs-card .v-card-head { font-size: 12.5px; }
+    .xhs-card .v-card-desc { font-size: 11.5px; }
+    .xhs-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 8px; font-size: 11px; color: rgba(255,255,255,0.6);
+    }
+    body.xhs-ivory .xhs-card {
+      background: #faf7f0; border: 1px solid #dfd8c8; color: #17211d; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+    body.xhs-ivory .xhs-card .reel-brand { color: #184c3f; }
+    body.xhs-ivory .xhs-card .reel-step-indicator { background: #e9e4d8; color: #44514b; }
+    body.xhs-ivory .xhs-card .slide-kicker { background: #e4efe9; color: #184c3f; border-color: #b7d2c5; }
+    body.xhs-ivory .xhs-card .slide-title { color: #17211d; }
+    body.xhs-ivory .xhs-card .slide-title .hl { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .slide-title .green { color: #184c3f; }
+    body.xhs-ivory .xhs-card .slide-sub { color: #44514b; }
+    body.xhs-ivory .xhs-card .v-card { background: #ffffff; border-color: #dfd8c8; }
+    body.xhs-ivory .xhs-card .v-card.gold-border { background: #fcf4e8; border-color: #e5c494; }
+    body.xhs-ivory .xhs-card .v-card.green-border { background: #eef5f1; border-color: #b5d1c3; }
+    body.xhs-ivory .xhs-card .v-card-head { color: #17211d; }
+    body.xhs-ivory .xhs-card .v-card-num { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .v-card-desc { color: #44514b; }
+    body.xhs-ivory .xhs-card .xhs-foot { border-top-color: #e2dcd0; color: #63706a; }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: 1fr; }
+      .stage-col { position: static; }
+      .phone-reel { width: 100%; max-width: 378px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>🎬 第 2 期：彩票、满仓炒股与保险谨慎悖论（视频号 9:16 ＆ 小红书 3:4）</span>
+      <span class="tag-pill">一鱼三吃 · 行为金融爆款</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn" href="wechat-lottery-vs-insurance.html">📄 公众号图文版</a>
+      <button type="button" class="btn gold" id="xhsModeBtn">📕 切换小红书 3:4 笔记模式（7图平铺）</button>
+      <button type="button" class="btn" id="autoPlayBtn">▶️ 自动轮播演示</button>
+      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式</button>
+      <button type="button" class="btn" id="copyScriptBtn">📋 复制视频号口播稿</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <!-- Left: 9:16 Vertical Stage -->
+    <div class="stage-col">
+      <div class="phone-reel" id="phoneReel">
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator" id="stepCounter">第 1 / 7 幕</span>
+        </div>
+
+        <div class="reel-body">
+          <!-- Slide 1: Hook -->
+          <div class="slide active" data-index="0">
+            <span class="slide-kicker">一个极其反常的财务现象</span>
+            <h3 class="slide-title">为什么人敢<span class="hl">满仓炒股、买彩票</span>，却对<span class="green">买保险</span>格外谨慎？</h3>
+            <p class="slide-sub">同样是掏钱面对不确定性，大多数人却把「大胆」和「谨慎」彻底用反了地方：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🔥 趋之若鹜的事</span>
+                <span style="color:#e06c5a">3 秒冲进去</span>
+              </div>
+              <div class="v-card-desc">全副身家一键转进股票账户满仓搏杀；路过彩票站毫不犹豫掏钱搏头奖。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🛡️ 瞻前顾后的事</span>
+                <span style="color:#5ce0b5">怕被骗、嫌麻烦</span>
+              </div>
+              <div class="v-card-desc">拿出年结余 5% 的小钱挡几百万大病与断供风险，却因合同厚、确认多而犹豫再三。</div>
+            </div>
+          </div>
+
+          <!-- Slide 2: 6 Million Times Probability Paradox -->
+          <div class="slide" data-index="1">
+            <span class="slide-kicker">第一层真相 · 相差 600 万倍的数学题</span>
+            <h3 class="slide-title">相信 <span class="hl">两千万分之一</span> 的暴富<br />却赌 <span class="green">三分之一</span> 的大病轮不到</h3>
+            <p class="slide-sub">买彩票和买重疾/医疗险，本质都是「花小钱交换不确定事件」，但真实概率差了 <strong>600 万倍</strong>：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🎰 彩票头奖概率</span>
+                <span class="v-card-num">0.000005%</span>
+              </div>
+              <div class="v-card-desc">约 1 / 1772 万。因为买的是「向上暴富的多巴胺」，明知打水漂也甘之如饴。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🏥 终生重大疾病概率</span>
+                <span class="v-card-num">28% ～ 39%</span>
+              </div>
+              <div class="v-card-desc">中国终生患癌 27.6%、卒中 39.3%（NEJM）。因为直面风险会触发心理防御，人本能选择逃避。</div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Why Brokerages Are Simple -->
+          <div class="slide" data-index="2">
+            <span class="slide-kicker">第二层真相 · 为什么股市开户这么简单？</span>
+            <h3 class="slide-title">亏光<span class="hl">不用赔你</span>的地方<br />永远把入口修得像<span class="hl">滑梯</span></h3>
+            <p class="slide-sub">很多人觉得「银行、证券账户没有复杂协议、进出方便，所以更安全」——恰恰相反：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>📉 为什么券商不拦着你满仓？</span>
+                <span style="color:#e06c5a">盈亏自负</span>
+              </div>
+              <div class="v-card-desc">
+                • 你转进 200 万亏掉 100 万，<strong>券商一分钱不用赔你</strong>；<br />
+                • 它只赚万分之几的通道过路费，当然要把入口做成「3 秒一键滑梯」，让你闭着眼把身家充进去。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Why Insurance Contracts Are Like Property Deeds -->
+          <div class="slide" data-index="3">
+            <span class="slide-kicker">第二层真相 · 为什么保险像「买房过户」？</span>
+            <h3 class="slide-title">要替你兜底 <span class="green">30～50 年</span><br />才必须把每个字<span class="hl">钉死在契约里</span></h3>
+            <p class="slide-sub">人生只有两件事需要签厚厚一沓合同、反复确认：<strong>买房办产权证</strong>，和<strong>签长期保单契约</strong>。</p>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>⚖️ 单向锁定的霸道契约</span>
+                <span class="v-card-num">保司禁毁约</span>
+              </div>
+              <div class="v-card-desc">
+                • 你交 1 万保费，保司立刻背上 200 万赔付责任；<br />
+                • 未来几十年哪怕你体况变差、哪怕利率跌到 0%，<strong>保司永远无权单方面退保或涨价</strong>；<br />
+                • 签单前确认健康告知、前两年退保折损与受益人产权，是为了<strong>把未来几十年不扯皮的规则焊死</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Illusion of Liquidity -->
+          <div class="slide" data-index="4">
+            <span class="slide-kicker">第三层真相 · 「随时能拿出来」的幻觉</span>
+            <h3 class="slide-title">把<span class="hl">「随时能动」</span>当成安全<br />是中产留不住钱的根源</h3>
+            <p class="slide-sub">没有协议门槛的钱，在跨周期里最容易死于两种冲动：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>① 牛市狂热期：一把梭哈</span>
+                <span style="color:#e06c5a">倒金字塔加仓</span>
+              </div>
+              <div class="v-card-desc">因为随时能转出，牛市顶部极易把孩子学费和养老底仓一键转进股市追高。</div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>② 熊市急用钱：地板价割肉</span>
+                <span style="color:var(--gold)">浮亏变永久真亏</span>
+              </div>
+              <div class="v-card-desc">医院催押金、银行催房贷撞上股市跌 35% 时，「随时能卖」就变成了被迫低点割肉。</div>
+            </div>
+          </div>
+
+          <!-- Slide 6: The 3 Inversions Table -->
+          <div class="slide" data-index="5">
+            <span class="slide-kicker">一张表对号入座</span>
+            <h3 class="slide-title">把颠倒的<span class="hl">风险顺序</span><br />重新正过来</h3>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>✅ 真正成熟的家庭财商</span>
+                <span class="v-card-num">先守后攻</span>
+              </div>
+              <div class="v-card-desc">
+                • <strong>第一步（花小钱锁底线）</strong>：用年结余 5%～8% 配齐医疗、重疾、定寿，把 30%～40% 概率的大病风险挡在门外；<br />
+                • <strong>第二步（用契约锁日历钱）</strong>：把孩子教育金与退休活水锁进不受行情冲动干扰的跨周期契约池；<br />
+                • <strong>第三步（用真闲钱去进攻）</strong>：剩下的自由子弹再去享受证券账户的方便与高弹性。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: Summary & CTA -->
+          <div class="slide" data-index="6">
+            <span class="slide-kicker">一句话总结 · 建议截图保存</span>
+            <h3 class="slide-title">把<span class="hl">「顺滑」</span>留给小钱<br />把<span class="green">「契约」</span>留给底线</h3>
+            <div class="v-card gold-border" style="padding:14px">
+              <div style="font-size:13.5px;color:#fff;line-height:1.6">
+                「愿意为两千万分之一的暴富幻想花小钱，却不愿为三分之一的大病冲击花小钱——<strong>这不是风险偏好高，而是家庭风险的先后顺序反了。</strong>」
+              </div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>📌 家庭大病组合概率 & 四仓测算器</span>
+                <span style="color:var(--gold);font-size:12px">见下方公众号链接</span>
+              </div>
+              <div class="v-card-desc">免登录，基于 NEJM 与 2020 重疾表，1 分钟测出你家的组合概率与四仓安全边界。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-caption-box">
+          <div class="reel-caption-text" id="reelCaption">
+            为什么人敢<span>满仓炒股、买彩票</span>，却对花小钱挡大风险的<span>保险</span>格外谨慎？
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-controls">
+        <button type="button" class="btn" id="prevSlideBtn">⬅️ 上一幕</button>
+        <div class="dots" id="slideDots">
+          <button type="button" class="dot active" data-go="0">1</button>
+          <button type="button" class="dot" data-go="1">2</button>
+          <button type="button" class="dot" data-go="2">3</button>
+          <button type="button" class="dot" data-go="3">4</button>
+          <button type="button" class="dot" data-go="4">5</button>
+          <button type="button" class="dot" data-go="5">6</button>
+          <button type="button" class="dot" data-go="6">7</button>
+        </div>
+        <button type="button" class="btn" id="nextSlideBtn">下一幕 ➡️</button>
+      </div>
+    </div>
+
+    <!-- Right: Teleprompter & Copy Pack -->
+    <div class="script-col">
+      <div class="panel-card">
+        <div class="panel-head">
+          <h2>🎙️ 90 秒视频号分镜口播逐字稿（点击卡片同步切换左侧画面）</h2>
+          <span class="tag-pill">第 2 期 · 行为金融反差</span>
+        </div>
+
+        <div class="scene-list" id="sceneList">
+          <div class="scene-item active" data-scene="0" data-caption="为什么人敢<span>满仓炒股、买彩票</span>，却对花小钱挡大风险的<span>保险</span>格外谨慎？">
+            <div class="scene-meta">
+              <span>第 1 幕 · 黄金前 3 秒钩子（日常反差提问）</span>
+              <span class="scene-time">00:00 - 00:13</span>
+            </div>
+            <p class="scene-lines">
+              「你有没有发现一个特别反常的现象？身边很多人敢把<strong>全部身家</strong>一键转进股票账户满仓搏杀，路过彩票站也愿意掏几十块钱搏一把大奖；可一说到拿出年结余 5% 的小钱配份保险、挡住几百万的大病和断供风险，立刻就变得小心翼翼，嫌合同太厚、怕自己被骗。为什么会这样？」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="1" data-caption="彩票头奖<span>两千万分之一</span>抢着买，重疾概率高出<span> 600 万倍</span>却赌轮不到自己。">
+            <div class="scene-meta">
+              <span>第 2 幕 · 第一层真相：600 万倍的数学反差</span>
+              <span class="scene-time">00:13 - 00:30</span>
+            </div>
+            <p class="scene-lines">
+              「第一层真相，是一道相差 <strong>600 万倍</strong> 的数学题。买彩票和买重疾医疗险，本质都是花小钱交换不确定事件。但彩票头奖概率只有<strong>两千万分之一</strong>，大家抢着买，因为买的是向上暴富的多巴胺；而人一生患癌或脑中风的概率高达 <strong>28% 到 39%</strong>，比中彩票高出 600 万倍，大家却本能逃避，因为没人愿意承认自己和家人也会倒下。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="2" data-caption="亏光<span>不用赔你</span>的地方，永远把入口修得像<span>滑梯</span>一样顺滑。">
+            <div class="scene-meta">
+              <span>第 3 幕 · 第二层真相（上）：为什么证券开户这么简单？</span>
+              <span class="scene-time">00:30 - 00:45</span>
+            </div>
+            <p class="scene-lines">
+              「第二层真相更扎心：很多人觉得银行、股票账户没有复杂协议、进出方便，所以更安全。其实你想想，<strong>为什么券商不拦着你满仓、不让你签几十页确认书？</strong>因为你转 200 万进去亏掉 100 万，券商一分钱不用赔你，它只赚通道佣金。<strong>亏光不用赔你的地方，永远把入口修得像滑梯一样顺滑。</strong>」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="3" data-caption="要替你刚性兜底<span>三五十年</span>且不能毁约，才必须像<span>房产证过户</span>一样逐字钉死。">
+            <div class="scene-meta">
+              <span>第 4 幕 · 第二层真相（下）：为什么保险合同像买房过户？</span>
+              <span class="scene-time">00:45 - 01:02</span>
+            </div>
+            <p class="scene-lines">
+              「反过来，人生只有两件事需要签厚厚一沓合同、逐项确认：<strong>买房办产权证，和签长期保单契约</strong>。因为保单是<strong>单向锁定契约</strong>——你今天交 1 万保费，保司立刻背上 200 万责任，而且未来三五十年哪怕你身体变差、利率跌到零，<strong>保司永远无权单方面退保或涨价</strong>。签单前核实健康告知、确认前两年退保折损和受益人产权，恰恰是监管逼保司把未来几十年不扯皮的规则焊死。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="4" data-caption="把<span>「随时能动」</span>当成安全，牛市容易一把梭哈，熊市急用钱被迫地板价割肉。">
+            <div class="scene-meta">
+              <span>第 5 幕 · 第三层真相：「随时能取」往往是散户亏光的根源</span>
+              <span class="scene-time">01:02 - 01:15</span>
+            </div>
+            <p class="scene-lines">
+              「第三层真相，是把<strong>随时能动</strong>误当成了安全。没有协议约束的钱，牛市狂热时最容易被你一把梭哈追高；而家里人生病急用钱撞上熊市暴跌时，你的随时取出，就变成了在地板价含泪割肉，把浮亏变成永久真亏。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="5" data-caption="先把 <span>30%～40% 概率</span> 的大病底盘锁死，再用剩下的自由资金去享受股市弹性。">
+            <div class="scene-meta">
+              <span>第 6 幕 · 正确顺序：先锁底盘，再谈进攻</span>
+              <span class="scene-time">01:15 - 01:24</span>
+            </div>
+            <p class="scene-lines">
+              「所以真正成熟的家庭财商，是把颠倒的顺序正过来：先花小钱配齐医疗、重疾、定寿护盾，再用跨周期契约锁死教育与养老底仓，最后拿纯自由资金去股市冲浪。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="6" data-caption="把<span>「顺滑」</span>留给小钱，把<span>「契约」</span>留给底线。点下方链接测测你家的大病组合概率。">
+            <div class="scene-meta">
+              <span>第 7 幕 · 金句收尾与工具导流</span>
+              <span class="scene-time">01:24 - 01:30</span>
+            </div>
+            <p class="scene-lines">
+              「记住一句话：<strong>把顺滑留给小钱，把契约留给底线</strong>。想用医学顶刊数据测一测自家全周期风险概率和四仓比例的朋友，可以直接点视频下方的公众号文章链接自测。」
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xiaohongshu 3:4 Note Grid Section -->
+  <section class="xhs-section" id="xhsSection">
+    <div class="xhs-toolbar">
+      <div>
+        <strong style="font-size:15px;color:#fff;display:block;margin-bottom:3px;">📕 小红书 3:4 黄金比例笔记卡（共 7 张 · 360×480 标准封面比例）</strong>
+        <span style="font-size:12.5px;color:var(--muted);">支持一键切换「暖白杂志风」与「深色黑金风」，下方配好小红书标题与正文。</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn" id="toggleXhsThemeBtn">☀️ 切换为「暖白杂志风」</button>
+        <button type="button" class="btn gold" id="copyXhsCopyBtn">📋 一键复制小红书标题 + 正文 + 标签</button>
+      </div>
+    </div>
+
+    <div class="xhs-grid" id="xhsGrid"></div>
+
+    <div class="panel-card" style="margin-top:24px;">
+      <div class="panel-head">
+        <h2>📕 小红书专属爆款标题与正文（可直接复制发布）</h2>
+        <span class="tag-pill">第 2 期 · 认知反差爆款</span>
+      </div>
+      <div class="meta-box">
+        <strong>🔥 5 个小红书高点击标题（任选 1 个）</strong>
+        1. 敢满仓炒股买彩票，却怕买保险？太扎心了<br />
+        2. 亏光不赔你的地方，永远把入口修得像滑梯📉<br />
+        3. 相差600万倍的数学题，90%的中产都算反了<br />
+        4. 为什么股票开户只需3秒，买保险却像买房过户？<br />
+        5. 把「随时能取」当安全，是家庭留不住钱的根源
+      </div>
+      <div class="meta-box" id="xhsPostBody" style="margin-bottom:0;white-space:pre-line;">做家庭财务咨询久了，发现一个极其普遍的反差现象：
+有人敢把全部身家一键转进股票账户满仓搏杀，路过彩票站也愿意掏几十块搏大奖；
+可一说到拿出年结余 5% 的小钱配齐基础保障，挡住「大病停工、房贷断供」的灭顶风险，立刻变得小心翼翼——嫌协议太厚、嫌确认太烦、怕被骗📉。
+
+为什么我们在最该敬畏风险的地方裸奔，却在最该修防波堤的地方犹豫？背后有 3 个底层真相👇
+
+1️⃣ 第一层真相：相差 600 万倍的数学题
+• 彩票头奖概率：约两千万分之一（0.000005%），大家抢着买，因为买的是向上暴富的多巴胺；
+• 终生重大疾病概率：患癌约 27.6%、脑卒中约 39.3%（NEJM顶刊数据），比彩票高出 600 万倍！但因为直面生病会触发心理防御，人本能选择侥幸逃避。
+
+2️⃣ 第二层真相：为什么股票开户简单，保险合同像「买房过户」？
+• 亏光不用赔你的地方（股市/彩票），永远把入口修得像滑梯一样顺滑——你转 200 万进去亏掉一半，券商一分钱不用赔你，只赚通道佣金，当然让你 3 秒冲进去；
+• 而长期保单是「单向锁定契约」——你交 1 万保费，保司立刻背上 200 万刚性责任，未来 30～50 年哪怕你身体变差、哪怕利率跌到 0%，保司永远无权单方面退保或涨价！
+• 签单前核实健康告知、确认前两年退保折损与受益人产权，就像买房办房产证一样，是把未来几十年不扯皮的法律边界钉死🛡️。
+
+3️⃣ 第三层真相：「随时能取」往往是散户亏光的根源
+没有协议门槛的钱，牛市狂热时最容易被你一把梭哈追高；熊市急用钱看病还贷时，「随时取出」就变成了在地板价含泪割肉。
+
+✨ 真正成熟的财商：把「顺滑」留给小钱，把「契约」留给底线。先花小钱锁死家庭底盘，再用纯自由资金去享受股市弹性！
+
+#家庭资产配置 #中产家庭财务 #行为金融学 #家庭风险管理 #保险科普 #理性投资 #财商思维 #香港保险顾问</div>
+    </div>
+  </section>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const scenes = Array.from(document.querySelectorAll('.scene-item'));
+    const stepCounter = document.getElementById('stepCounter');
+    const reelCaption = document.getElementById('reelCaption');
+    let current = 0;
+    let timer = null;
+
+    function goToSlide(idx) {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      scenes.forEach((sc, i) => sc.classList.toggle('active', i === current));
+      stepCounter.textContent = `第 ${current + 1} / ${slides.length} 幕`;
+      const cap = scenes[current]?.getAttribute('data-caption');
+      if (cap) reelCaption.innerHTML = cap;
+    }
+
+    document.getElementById('prevSlideBtn').addEventListener('click', () => goToSlide(current - 1));
+    document.getElementById('nextSlideBtn').addEventListener('click', () => goToSlide(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goToSlide(Number(d.dataset.go))));
+    scenes.forEach(sc => sc.addEventListener('click', () => goToSlide(Number(sc.dataset.scene))));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
+      else if (e.key === 'Escape' && document.body.classList.contains('record-mode')) {
+        document.body.classList.remove('record-mode');
+      }
+    });
+
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    autoPlayBtn.addEventListener('click', () => {
+      if (timer) {
+        clearInterval(timer); timer = null;
+        autoPlayBtn.textContent = '▶️ 自动轮播演示';
+      } else {
+        autoPlayBtn.textContent = '⏸️ 暂停轮播';
+        timer = setInterval(() => goToSlide(current + 1), 4500);
+      }
+    });
+
+    document.getElementById('recordModeBtn').addEventListener('click', () => {
+      document.body.classList.toggle('record-mode');
+    });
+
+    const copyScriptBtn = document.getElementById('copyScriptBtn');
+    copyScriptBtn.addEventListener('click', () => {
+      const lines = scenes.map(sc => {
+        const meta = sc.querySelector('.scene-meta').innerText.replace(/\n/g, ' ');
+        const text = sc.querySelector('.scene-lines').innerText.trim();
+        return `【${meta}】\n${text}`;
+      }).join('\n\n');
+      navigator.clipboard.writeText(lines).then(() => {
+        const orig = copyScriptBtn.textContent;
+        copyScriptBtn.textContent = '✅ 已复制 90 秒口播稿！';
+        setTimeout(() => { copyScriptBtn.textContent = orig; }, 3000);
+      });
+    });
+
+    // Build 7 Xiaohongshu 3:4 Cards
+    const xhsGrid = document.getElementById('xhsGrid');
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'xhs-card';
+      const clone = s.cloneNode(true);
+      clone.classList.add('active');
+      card.innerHTML = `
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator">${i === 0 ? '封面 · P1' : `P${i + 1} / 7`}</span>
+        </div>
+      `;
+      const bodyWrap = document.createElement('div');
+      bodyWrap.style.flex = '1';
+      bodyWrap.style.display = 'flex';
+      bodyWrap.style.flexDirection = 'column';
+      bodyWrap.style.justifyContent = 'center';
+      bodyWrap.appendChild(clone);
+      card.appendChild(bodyWrap);
+
+      const foot = document.createElement('div');
+      foot.className = 'xhs-foot';
+      foot.innerHTML = `<span>家庭风险认知与契约底层逻辑</span><span>向右滑看三大真相 →</span>`;
+      card.appendChild(foot);
+      xhsGrid.appendChild(card);
+    });
+
+    const xhsModeBtn = document.getElementById('xhsModeBtn');
+    xhsModeBtn.addEventListener('click', () => {
+      const isXhs = document.body.classList.toggle('xhs-mode');
+      xhsModeBtn.textContent = isXhs
+        ? '🎬 切回视频号 9:16 竖屏演播台'
+        : '📕 切换小红书 3:4 笔记模式（7图平铺）';
+    });
+
+    if (location.search.includes('mode=xhs')) {
+      document.body.classList.add('xhs-mode');
+      xhsModeBtn.textContent = '🎬 切回视频号 9:16 竖屏演播台';
+    }
+
+    const toggleXhsThemeBtn = document.getElementById('toggleXhsThemeBtn');
+    toggleXhsThemeBtn.addEventListener('click', () => {
+      const isIvory = document.body.classList.toggle('xhs-ivory');
+      toggleXhsThemeBtn.textContent = isIvory
+        ? '🌙 切换为「深色黑金风」'
+        : '☀️ 切换为「暖白杂志风」';
+    });
+
+    const copyXhsCopyBtn = document.getElementById('copyXhsCopyBtn');
+    copyXhsCopyBtn.addEventListener('click', () => {
+      const bodyText = document.getElementById('xhsPostBody').innerText.trim();
+      const xhsFull = `亏光不赔你的地方，永远把入口修得像滑梯📉\n\n${bodyText}`;
+      navigator.clipboard.writeText(xhsFull).then(() => {
+        const orig = copyXhsCopyBtn.textContent;
+        copyXhsCopyBtn.textContent = '✅ 已复制小红书标题+正文+标签！';
+        setTimeout(() => { copyXhsCopyBtn.textContent = orig; }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>
