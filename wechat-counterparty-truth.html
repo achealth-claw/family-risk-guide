@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>你的「对家」靠什么赚钱？看懂买房、古董、炒股与保单背后的 4 种博弈真相</title>
+  <style>
+    :root {
+      --bg: #ededed;
+      --paper: #ffffff;
+      --ink: #1f2329;
+      --green: #184c3f;
+      --amber: #b86b1b;
+      --line: #e6e4de;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.78;
+    }
+    .preview-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(24, 76, 63, 0.96);
+      backdrop-filter: blur(8px);
+      color: #fff; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-size: 13px; box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      flex-wrap: wrap;
+    }
+    .preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .preview-btn {
+      appearance: none; border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.12); color: #fff;
+      padding: 5px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+    }
+    .preview-btn:hover { background: rgba(255,255,255,0.22); }
+    .preview-btn.primary { background: #fff; color: var(--green); border-color: #fff; }
+    .stage {
+      max-width: 677px; margin: 0 auto; background: var(--paper);
+      min-height: calc(100vh - 48px); padding: 28px 20px 64px;
+      box-shadow: 0 0 24px rgba(0,0,0,0.05);
+      transition: max-width 0.25s ease, margin 0.25s ease, border-radius 0.25s ease;
+    }
+    body.mobile-frame .stage {
+      max-width: 414px;
+      margin: 20px auto 40px;
+      border-radius: 28px;
+      border: 8px solid #2b2f36;
+      padding: 24px 16px 48px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+    }
+    .wx-title {
+      font-size: 22px; line-height: 1.4; font-weight: 700;
+      color: #191919; margin: 0 0 14px;
+    }
+    .wx-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      font-size: 14px; color: rgba(0,0,0,0.3); margin-bottom: 24px;
+    }
+    .wx-tag {
+      background: #f2f2f2; color: #576b95; font-size: 12px;
+      padding: 1px 7px; border-radius: 4px; font-weight: 500;
+    }
+    .wx-author { color: #576b95; font-weight: 500; text-decoration: none; }
+    @media (max-width: 680px) {
+      .hide-mobile { display: none; }
+      .stage { padding: 22px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-bar">
+    <div><strong>微信公众号文章预览</strong> · 第 3 期：你的「对家」靠什么赚钱？</div>
+    <div class="preview-actions">
+      <a class="preview-btn" href="wechat-video-counterparty.html">🎬 视频号 9:16 ＆ 📕 小红书 3:4 素材台</a>
+      <a class="preview-btn hide-mobile" href="wechat-lottery-vs-insurance.html">📄 第 2 期</a>
+      <a class="preview-btn hide-mobile" href="wechat-stock-budget.html">📄 第 1 期</a>
+      <button type="button" class="preview-btn hide-mobile" id="toggleFrameBtn">📱 切换手机窄屏框</button>
+      <button type="button" class="preview-btn primary" id="copyWxBtn">📋 一键复制排版（直接粘贴公众号后台）</button>
+    </div>
+  </div>
+
+  <main class="stage">
+    <h1 class="wx-title">你的「对家」靠什么赚钱？看懂买房、古董、炒股与保单背后的 4 种博弈真相</h1>
+    <div class="wx-meta">
+      <span class="wx-tag">原创</span>
+      <span>安康 · 医学与数据分析背景</span>
+      <a class="wx-author" href="index.html">安康家庭风险与财务</a>
+      <span>香港</span>
+    </div>
+
+    <div id="js_content" style="font-size:15.5px;color:#2b2b2b;line-height:1.82;letter-spacing:0.3px;">
+
+      <!-- Lead Quote Box -->
+      <section style="background:#f6f8f7;border-left:4px solid #184c3f;padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 22px;font-size:14.5px;color:#3d4843;line-height:1.72;">
+        <strong style="color:#184c3f;display:block;margin-bottom:4px;">写在前面：</strong>
+        买任何一项资产前，别只问「这东西能涨多少」，先问一句更要命的话：<strong>「把这东西卖给我的『对家』，到底靠什么赚钱？他是盼着我买贵接盘、盼着我频繁折腾，还是必须先帮我赚到钱，他自己才能分到钱？」</strong>
+      </section>
+
+      <p style="margin:0 0 16px;">几乎所有人在做家庭投资时，眼睛都盯着收益率曲线，却极少有人抬头看一眼牌桌对面——<strong>你的交易对手方（或平台），此刻正在盼着发生什么？</strong></p>
+      <p style="margin:0 0 16px;">在商业世界里，屁股决定脑袋，利益结构决定行为方式。如果你用「对家靠什么赚钱」这把手术刀，把中国家庭最常碰的五类资产（<strong>房产、古董藏品、股票账户、银行存款、长期保单契约</strong>）切开来看，你会发现四种截然不同的博弈真相。</p>
+
+      <!-- Overview Table -->
+      <section style="margin:24px 0 28px;">
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px;border:1px solid #dcd6ca;">
+          <thead>
+            <tr style="background:#eef5f1;color:#184c3f;text-align:left;">
+              <th style="padding:9px 8px;border-bottom:1px solid #dcd6ca;width:21%;">资产类别</th>
+              <th style="padding:9px 8px;border-bottom:1px solid #dcd6ca;width:23%;">你的「对家」是谁</th>
+              <th style="padding:9px 8px;border-bottom:1px solid #dcd6ca;width:28%;">对家靠什么赚钱</th>
+              <th style="padding:9px 8px;border-bottom:1px solid #dcd6ca;">对家内心最盼望什么？</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #eae6de;">
+              <td style="padding:9px 8px;font-weight:700;color:#9e3528;">① 买房 / 买古董玉石</td>
+              <td style="padding:9px 8px;">开发商 / 二手房东 / 古董商与拍卖行</td>
+              <td style="padding:9px 8px;"><strong>一锤子买卖差价</strong> + 15%～25% 拍卖佣金</td>
+              <td style="padding:9px 8px;color:#9e3528;"><strong>盼你高价接盘</strong>（你买得越贵、越吃亏，他赚得越肥；交割后跌穿与他无关）</td>
+            </tr>
+            <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;">
+              <td style="padding:9px 8px;font-weight:700;color:#b86b1b;">② 个人炒股 / 期货</td>
+              <td style="padding:9px 8px;">证券公司（通道方）+ 场内机构对手盘</td>
+              <td style="padding:9px 8px;"><strong>交易佣金 + 两融杠杆利息</strong></td>
+              <td style="padding:9px 8px;color:#b86b1b;"><strong>不管你输赢，盼你高频折腾、满仓加杠杆</strong>（你越冲动它抽水越多，爆仓 1 秒强平）</td>
+            </tr>
+            <tr style="border-bottom:1px solid #eae6de;">
+              <td style="padding:9px 8px;font-weight:700;color:#44514b;">③ 银行存单 / 活期</td>
+              <td style="padding:9px 8px;">商业银行</td>
+              <td style="padding:9px 8px;"><strong>存贷利差</strong>（低息揽储、高息放贷）</td>
+              <td style="padding:9px 8px;color:#44514b;">盼你长期接受 1%～2% 的低息，由你自己承担长期通胀缩水</td>
+            </tr>
+            <tr style="background:#eef5f1;">
+              <td style="padding:9px 8px;font-weight:700;color:#184c3f;">④ 重疾险 + 90:10 分红险</td>
+              <td style="padding:9px 8px;">头部人寿保险公司</td>
+              <td style="padding:9px 8px;"><strong>死差（不出险结余）+ 利差（90:10 分账）</strong></td>
+              <td style="padding:9px 8px;color:#184c3f;font-weight:700;"><strong>保障险盼你平安健康；分红险必须先帮你赚到 90%，股东才能分走 10%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Counterparty 1 -->
+      <section style="margin:30px 0 16px;">
+        <span style="display:inline-block;background:#9e3528;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第一种对家 · 零和接盘局</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">买房、买古董字画：在签字付钱的那一秒，对家希望你买得越贵越好</h2>
+      </section>
+
+      <p style="margin:0 0 14px;">先看我们最熟悉的<strong>买房（尤其是高点接盘二手房或商铺）</strong>，以及高净值人群常碰的<strong>古董、字画、玉石翡翠</strong>。</p>
+      <p style="margin:0 0 14px;">在这类交易里，卖方（房东、开发商、古董商）和你的关系，是标准的<strong>「一次性零和博弈」</strong>：</p>
+      <ul style="margin:0 0 16px;padding-left:20px;font-size:14.5px;color:#3d4843;">
+        <li style="margin-bottom:8px;"><strong>你多掏 100 万，他就多赚 100 万；你买亏了，他才赚大了。</strong></li>
+        <li style="margin-bottom:8px;"><strong>交割即终局</strong>：一旦房款付清、字画离手，他的利润已经 100% 落袋为安。至于三年后房价跌去 30%、商铺空置租不出去，或者你想把古董变现时发现拍卖行双向要抽走 20% 佣金且无人接盘，原来的卖家绝不会退你一分钱。</li>
+      </ul>
+      <p style="margin:0 0 24px;font-size:13.5px;color:#7c4813;background:#fcf4e8;padding:10px 12px;border-radius:8px;">
+        💡 <strong>博弈本质</strong>：在这类资产里，对家的全部动力都集中在「成交前把故事讲圆、把价格推高」，成交之后，所有的流动性枯竭与折价风险由你独自承受。
+      </p>
+
+      <!-- Counterparty 2 -->
+      <section style="margin:30px 0 16px;">
+        <span style="display:inline-block;background:#b86b1b;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第二种对家 · 赌场抽水与卖铲子局</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">证券公司：不管你输赢，只要你「多买、多卖、加杠杆」，它就赚得更多</h2>
+      </section>
+
+      <p style="margin:0 0 14px;">再看个人炒股。很多人觉得证券软件特别友好：开户只需 3 分钟，银证转账秒到账，买进卖出点一下就行，连句啰嗦的劝阻都没有。</p>
+      <p style="margin:0 0 14px;">为什么它对你这么「顺滑」？因为你要看清券商对散户赚钱的两大核心引擎：</p>
+
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:15px 16px;margin:0 0 16px;">
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">
+          <strong>1. 经纪交易佣金（按成交额抽水）</strong>：券商根本不在乎你这笔股票是赚了 20% 还是腰斩了 50%——<strong>只要你交易，它就抽水。</strong>一个拿着 100 万买进好公司五年不动的理性投资者，券商在他身上几乎赚不到钱；而一个拿着 100 万天天追涨杀跌、一年换手 30 次最后亏剩 30 万的散户，反而是券商眼里的「优质贡献客户」。
+        </p>
+        <p style="margin:0;font-size:14.5px;color:#3d4843;">
+          <strong>2. 两融杠杆利息（旱涝保收的放贷人）</strong>：当你觉得本金不够、向券商借钱融资炒股时，它收的是 5%～8% 铁打不动的刚性利息。股票涨了它收利息，股票暴跌触发平仓线，系统 <strong>1 秒钟强制平仓卖掉你的股票拿回它的本息</strong>，亏损全部由你的本金垫背。
+        </p>
+      </section>
+
+      <p style="margin:0 0 24px;font-size:13.5px;color:#63706a;background:#f7f6f2;padding:10px 12px;border-radius:8px;">
+        💡 <strong>博弈本质</strong>：券商的商业模式，决定了它内心最渴望你<strong>「冲动、手痒、高频交易、加满杠杆」</strong>。如果它像保险一样在每次下单前弹出一堆冷静期提示，它的佣金收入立刻就会掉一半。
+      </p>
+
+      <!-- Counterparty 3 -->
+      <section style="margin:30px 0 16px;">
+        <span style="display:inline-block;background:#184c3f;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第三种对家 · 同船共乘局</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">为什么唯独长期保单的「对家」，必须盼着你平安、盼着你的钱赚大钱？</h2>
+      </section>
+
+      <p style="margin:0 0 14px;">现在，我们用同样挑剔的眼光，来看看很多人戒备心最重的<strong>「保险公司」</strong>。保险公司当然不是慈善机构，它也是商业公司，也要赚钱——但奇妙的地方在于，<strong>精算与监管规则把它的赚钱条件，死死绑在了你的利益同侧：</strong></p>
+
+      <section style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:10px;padding:16px;margin:0 0 16px;">
+        <div style="font-size:15.5px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          ① 在医疗、重疾与定期寿险里：它是全世界除了父母之外，最盼着你「千万别生病、长命百岁」的机构
+        </div>
+        <p style="margin:0;font-size:14.5px;color:#2b3833;">
+          当你通过核保、交了 1 万块保费，保司立刻背上了 200 万的刚性赔付责任。如果明天你不幸确诊重疾，保司就要真金白银赔出 200 万（瞬间亏损 199 万）。<br />
+          所以，<strong>一旦保单生效，保司在财务利益上 100% 盼着你健健康康、平平安安活到老！</strong>它之所以在签单前严格查你的体检报告（健康告知），不是为了害你，而是为了把「已经生病想来薅羊毛的人」挡在门外，保护池子里所有健康投保人的资金安全。
+        </p>
+      </section>
+
+      <section style="background:#eef5f1;border:1px solid #bdd6c9;border-radius:10px;padding:16px;margin:0 0 20px;">
+        <div style="font-size:15.5px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          ② 在香港 90:10 长期分红保单里：保司要想赚 1 块钱股东利润，必须先帮你赚到 9 块钱
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#2b3833;">
+          很多人以为储蓄分红险里「保司少分我一点，它自己就多拿一点」——那是完全不懂香港分红险的<strong>「90 : 10 同船分账铁律」</strong>。
+        </p>
+        <p style="margin:0;font-size:14.5px;color:#2b3833;">
+          在香港保监局监管与分红基金核算规则下，分红账户里的可分配投资盈余，<strong>至少 90% 必须归保单持有人（客户），保险公司股东最多只能分走 10%</strong>。而且保司不收你股票那样的频繁交易佣金——如果你头两年冲动退保，保司前期垫付的核保与合规建账成本还没收回来，双方都亏；<strong>只有你的钱在池子里稳稳放够 10 年、20 年、30 年，保司依靠全球股债与基建投资把蛋糕做大，先帮你赚到那 90%，它的股东才能合法拿到那 10%。</strong>
+        </p>
+      </section>
+
+      <!-- Closing Summary -->
+      <section style="background:#f6f8f7;border-radius:10px;padding:18px 16px;margin:28px 0 22px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          写在最后：选资产，本质上是在选「谁跟你坐一条船」
+        </div>
+        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">把这四种对家的底牌翻开后，你会恍然大悟：</p>
+        <p style="margin:0 0 12px;font-size:14.5px;color:#3d4843;">
+          • <strong>买房、买古董的对家</strong>，在「你掏钱接盘的那一秒」就已经赚完了，之后跌穿你自己扛；<br />
+          • <strong>炒股通道的对家（券商）</strong>，在「你每一次冲动换仓和借钱加杠杆」里旱涝保收，亏光了它不赔；<br />
+          • <strong>唯独一张长期保单契约</strong>，用法律和精算规则，把一家百年金融机构的利益死死绑在了你的船上——<strong>在保障端，它盼着你一生平安；在储蓄端，它必须先替你赚到 90，自己才能拿走那 10。</strong>
+        </p>
+        <p style="margin:0;font-size:14.5px;color:#184c3f;font-weight:700;">看懂了「对家靠什么赚钱」，你就再也不会被「3 秒丝滑开户」的表象迷惑，也不会再对那份「签字前反复确认、把三十年权责写死」的保单契约感到畏惧了。</p>
+      </section>
+
+      <!-- Footer Call-to-Action Card -->
+      <section style="border:1px solid #dcd6ca;border-radius:10px;padding:14px 16px;margin:24px 0 0;background:#ffffff;font-size:13px;color:#63706a;line-height:1.68;">
+        <strong style="color:#17211d;display:block;margin-bottom:4px;">📌 延伸工具 · 一张表看清「六大资产类别底层差异」与「保司 90:10 赚钱机制」</strong>
+        我把保险公司的「三差资金池 + 90:10 分账流程图」，以及「房产、股票、黄金、企业股权、艺术品古董 vs 香港长期保单」的 6×6 全景对照表整理在了网站第 3 页，点击可直接查看：<br />
+        <a href="https://achealth-claw.github.io/family-risk-guide/insurer.html" style="color:#184c3f;font-weight:600;word-break:break-all;">https://achealth-claw.github.io/family-risk-guide/insurer.html</a>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleFrameBtn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('mobile-frame');
+        toggleBtn.textContent = document.body.classList.contains('mobile-frame')
+          ? '🖥️ 切回标准宽屏预览'
+          : '📱 切换手机窄屏框';
+      });
+    }
+
+    const copyBtn = document.getElementById('copyWxBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const content = document.getElementById('js_content');
+        const range = document.createRange();
+        range.selectNodeContents(content);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        try {
+          document.execCommand('copy');
+          selection.removeAllRanges();
+          const orig = copyBtn.textContent;
+          copyBtn.textContent = '✅ 已复制富文本！可直接去公众号后台粘贴';
+          setTimeout(() => { copyBtn.textContent = orig; }, 3000);
+        } catch (err) {
+          alert('复制失败，请手动全选正文复制');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>视频号 9:16 ＆ 小红书 3:4 素材台 · 你的「对家」靠什么赚钱？（买房、古董、炒股 vs 保单）</title>
+  <style>
+    :root {
+      --bg: #111615;
+      --panel: #1a2220;
+      --panel-2: #222d2a;
+      --ink: #f4f1ea;
+      --muted: #9aa6a1;
+      --gold: #e5b869;
+      --gold-soft: rgba(229, 184, 105, 0.16);
+      --green: #184c3f;
+      --green-bright: #34a882;
+      --red: #e06c5a;
+      --blue: #52a2c4;
+      --line: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(17, 22, 21, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; }
+    .tag-pill {
+      background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      padding: 2px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 600;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--line);
+      background: var(--panel-2); color: var(--ink);
+      padding: 6px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn:hover { background: #2c3a36; border-color: rgba(255,255,255,0.25); }
+    .btn.gold { background: var(--gold); color: #141917; border-color: var(--gold); }
+    .btn.gold:hover { background: #ecc47c; }
+
+    .workspace {
+      max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px;
+      display: grid; grid-template-columns: 400px 1fr; gap: 28px; align-items: start;
+    }
+    .stage-col { position: sticky; top: 68px; display: flex; flex-direction: column; align-items: center; }
+    .phone-reel {
+      width: 378px; height: 672px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 55%, #121c1a 100%);
+      border-radius: 24px; border: 6px solid #2b3532;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 26px 20px 22px; user-select: none;
+    }
+    .phone-reel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .reel-top {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(229, 184, 105, 0.22); padding-bottom: 10px;
+    }
+    .reel-brand { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; }
+    .reel-step-indicator {
+      font-size: 11px; color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px;
+    }
+    .reel-body {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; padding: 10px 0;
+    }
+    .slide { display: none; animation: slideFade 0.32s ease; }
+    .slide.active { display: block; }
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-kicker {
+      display: inline-block; background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229,184,105,0.35);
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px;
+    }
+    .slide-title {
+      font-size: 24px; line-height: 1.28; font-weight: 800; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: 0.2px;
+    }
+    .slide-title .hl { color: var(--gold); }
+    .slide-title .green { color: #5ce0b5; }
+    .slide-sub { font-size: 13.5px; color: #c6d1cd; line-height: 1.55; margin: 0 0 14px; }
+
+    .v-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 12px; padding: 12px 13px; margin-bottom: 9px;
+    }
+    .v-card.gold-border { border-color: rgba(229, 184, 105, 0.55); background: rgba(229, 184, 105, 0.09); }
+    .v-card.green-border { border-color: rgba(92, 224, 181, 0.5); background: rgba(24, 76, 63, 0.45); }
+    .v-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .v-card-num { font-size: 14px; font-weight: 800; color: var(--gold); }
+    .v-card-desc { font-size: 12px; color: #b8c4bf; line-height: 1.46; }
+
+    .reel-caption-box {
+      position: relative; z-index: 2;
+      background: rgba(0, 0, 0, 0.62);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 10px; padding: 9px 12px; text-align: center;
+      min-height: 54px; display: flex; align-items: center; justify-content: center;
+    }
+    .reel-caption-text { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.42; }
+    .reel-caption-text span { color: var(--gold); }
+
+    .stage-controls {
+      margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .dots { display: flex; gap: 6px; margin: 0 6px; }
+    .dot {
+      width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line);
+      background: var(--panel); color: var(--muted); font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .dot.active { background: var(--gold); color: #141917; border-color: var(--gold); }
+
+    .script-col { display: flex; flex-direction: column; gap: 20px; }
+    .panel-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .panel-head h2 { font-size: 17px; margin: 0; color: #fff; }
+    .scene-list { display: flex; flex-direction: column; gap: 12px; }
+    .scene-item {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; cursor: pointer; transition: all 0.15s ease;
+    }
+    .scene-item:hover { border-color: rgba(229, 184, 105, 0.4); }
+    .scene-item.active {
+      border-color: var(--gold); background: rgba(229, 184, 105, 0.08); box-shadow: 0 0 0 1px var(--gold);
+    }
+    .scene-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px;
+    }
+    .scene-time { color: var(--muted); font-weight: 500; }
+    .scene-lines { font-size: 15px; line-height: 1.68; color: #fff; margin: 0; }
+    .scene-lines strong { color: var(--gold); background: rgba(229,184,105,0.14); padding: 0 4px; border-radius: 4px; }
+    .meta-box {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.65;
+    }
+    .meta-box strong { color: var(--gold); display: block; margin-bottom: 4px; }
+
+    body.record-mode .topbar, body.record-mode .script-col { display: none !important; }
+    body.record-mode .workspace { grid-template-columns: 1fr; padding: 12px; min-height: 100vh; align-items: center; justify-items: center; }
+    body.record-mode .stage-col { position: static; }
+    body.record-mode .phone-reel { width: 432px; height: 768px; border: none; border-radius: 0; }
+
+    /* Xiaohongshu 3:4 Note Grid Mode */
+    .xhs-section { display: none; max-width: 1240px; margin: 0 auto; padding: 22px 20px 64px; }
+    body.xhs-mode .workspace { display: none; }
+    body.xhs-mode .xhs-section { display: block; }
+    .xhs-toolbar {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+    }
+    .xhs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(348px, 1fr)); gap: 22px; justify-items: center;
+    }
+    .xhs-card {
+      width: 360px; height: 480px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 60%, #121c1a 100%);
+      border-radius: 16px; border: 1px solid rgba(229, 184, 105, 0.28);
+      padding: 20px 18px 16px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.38);
+    }
+    .xhs-card .slide { display: block !important; animation: none !important; }
+    .xhs-card .slide-title { font-size: 20.5px; margin-bottom: 8px; }
+    .xhs-card .slide-sub { font-size: 12.5px; margin-bottom: 10px; }
+    .xhs-card .v-card { padding: 9px 11px; margin-bottom: 7px; }
+    .xhs-card .v-card-head { font-size: 12.5px; }
+    .xhs-card .v-card-desc { font-size: 11.5px; }
+    .xhs-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 8px; font-size: 11px; color: rgba(255,255,255,0.6);
+    }
+    body.xhs-ivory .xhs-card {
+      background: #faf7f0; border: 1px solid #dfd8c8; color: #17211d; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+    body.xhs-ivory .xhs-card .reel-brand { color: #184c3f; }
+    body.xhs-ivory .xhs-card .reel-step-indicator { background: #e9e4d8; color: #44514b; }
+    body.xhs-ivory .xhs-card .slide-kicker { background: #e4efe9; color: #184c3f; border-color: #b7d2c5; }
+    body.xhs-ivory .xhs-card .slide-title { color: #17211d; }
+    body.xhs-ivory .xhs-card .slide-title .hl { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .slide-title .green { color: #184c3f; }
+    body.xhs-ivory .xhs-card .slide-sub { color: #44514b; }
+    body.xhs-ivory .xhs-card .v-card { background: #ffffff; border-color: #dfd8c8; }
+    body.xhs-ivory .xhs-card .v-card.gold-border { background: #fcf4e8; border-color: #e5c494; }
+    body.xhs-ivory .xhs-card .v-card.green-border { background: #eef5f1; border-color: #b5d1c3; }
+    body.xhs-ivory .xhs-card .v-card-head { color: #17211d; }
+    body.xhs-ivory .xhs-card .v-card-num { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .v-card-desc { color: #44514b; }
+    body.xhs-ivory .xhs-card .xhs-foot { border-top-color: #e2dcd0; color: #63706a; }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: 1fr; }
+      .stage-col { position: static; }
+      .phone-reel { width: 100%; max-width: 378px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>🎬 第 3 期：你的「对家」靠什么赚钱？（视频号 9:16 ＆ 小红书 3:4）</span>
+      <span class="tag-pill">一鱼三吃 · 博弈论透视</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn" href="wechat-counterparty-truth.html">📄 公众号图文版</a>
+      <button type="button" class="btn gold" id="xhsModeBtn">📕 切换小红书 3:4 笔记模式（7图平铺）</button>
+      <button type="button" class="btn" id="autoPlayBtn">▶️ 自动轮播演示</button>
+      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式</button>
+      <button type="button" class="btn" id="copyScriptBtn">📋 复制视频号口播稿</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <!-- Left: 9:16 Vertical Stage -->
+    <div class="stage-col">
+      <div class="phone-reel" id="phoneReel">
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator" id="stepCounter">第 1 / 7 幕</span>
+        </div>
+
+        <div class="reel-body">
+          <!-- Slide 1: Hook -->
+          <div class="slide active" data-index="0">
+            <span class="slide-kicker">买任何资产前，先问这句要命的话</span>
+            <h3 class="slide-title">把资产卖给你的<span class="hl">「对家」</span><br />到底靠什么<span class="hl">赚你的钱</span>？</h3>
+            <p class="slide-sub">几乎所有人只看「能涨多少」，却从没看一眼牌桌对面——<strong>你的交易对手方，此刻内心正在盼着发生什么？</strong></p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>❌ 零和与抽水局</span>
+                <span style="color:#e06c5a">盼你买贵 / 盼你折腾</span>
+              </div>
+              <div class="v-card-desc">买房、买古董的对家盼你高价接盘；证券公司不管你输赢，盼你高频折腾抽佣金。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>✅ 同船共乘局</span>
+                <span style="color:#5ce0b5">盼你平安 / 先赚90再拿10</span>
+              </div>
+              <div class="v-card-desc">唯独长期保单把对家的利益死死绑在你的船上。</div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Counterparty 1 - Property & Antiques -->
+          <div class="slide" data-index="1">
+            <span class="slide-kicker">第一种对家 · 买房与古董字画</span>
+            <h3 class="slide-title">一锤子零和博弈：<br />你买得<span class="hl">越贵越亏</span>，他赚得<span class="hl">越肥</span></h3>
+            <p class="slide-sub">在二手房东、开发商、古董商和拍卖行面前，交易是一次性的零和游戏：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🏠 买房 / 🏺 收古董玉石</span>
+                <span style="color:#e06c5a">交割即终局</span>
+              </div>
+              <div class="v-card-desc">
+                • <strong>你多掏 100 万，他就多赚 100 万</strong>；<br />
+                • 字签完、钱付清的那一秒，对家利润已 100% 落袋；<br />
+                • 至于三年后房价跌 30%、商铺空置，或古董拍卖双向抽佣 20% 无人接盘，<strong>卖家绝不退你一分钱</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Counterparty 2 - Stock Brokerages -->
+          <div class="slide" data-index="2">
+            <span class="slide-kicker">第二种对家 · 证券公司与交易所</span>
+            <h3 class="slide-title">不管你死活，只要你<br /><span class="hl">高频买卖+加杠杆</span>，它就稳赚</h3>
+            <p class="slide-sub">为什么股票软件 3 秒开户、买卖毫无阻拦？看看券商的两大印钞机就懂了：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>📉 印钞机 1：按成交额抽交易佣金</span>
+                <span class="v-card-num">越折腾越肥</span>
+              </div>
+              <div class="v-card-desc">你买好公司 5 年不动，券商赚不到钱；你一年追涨杀跌换手 30 次亏掉一半，反而是券商的优质客户。</div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>⚡ 印钞机 2：两融杠杆刚性收息</span>
+                <span style="color:#e06c5a">跌破线 1 秒强平</span>
+              </div>
+              <div class="v-card-desc">借钱给你炒股收 5%～8% 旱涝保收利息；一旦暴跌触发平仓线，系统 1 秒强平拿回本息，亏损全归你。</div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Counterparty 3 - Banks -->
+          <div class="slide" data-index="3">
+            <span class="slide-kicker">第三种对家 · 商业银行存款</span>
+            <h3 class="slide-title">保你本金安全，但靠<br /><span class="hl">「存贷利差」</span>赚走通胀购买力</h3>
+            <p class="slide-sub">存银行当然不会骗你本金，但在银行的商业模型里，你的角色是什么？</p>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>🏦 低息揽储 → 高息放贷</span>
+                <span class="v-card-num">吃固定息差</span>
+              </div>
+              <div class="v-card-desc">
+                • 银行给你 <strong>1%～1.5%</strong> 的存款利率，转手以 <strong>3.5%～5%</strong> 贷给企业和买房人；<br />
+                • 适合放 6～12 个月日常活水，但若把 20 年后的教育养老全存银行，<strong>跑不赢通胀的隐形缩水由你自己承担</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Counterparty 4A - Health & Life Insurer -->
+          <div class="slide" data-index="4">
+            <span class="slide-kicker">第四种对家（上）· 医疗 / 重疾 / 定寿</span>
+            <h3 class="slide-title">全世界除了父母，最盼你<br /><span class="green">「平安别生病」</span>的机构</h3>
+            <p class="slide-sub">很多人怕保险公司拒赔，却没算过保司在保障险里到底靠什么赚钱：</p>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🛡️ 死差池逻辑：你平安，它才盈余</span>
+                <span class="v-card-num">利益完全同向</span>
+              </div>
+              <div class="v-card-desc">
+                • 保单一旦生效，你交 1 万保费，保司立刻背上 200 万刚性责任；<br />
+                • 如果你生大病，保司真金白银赔 200 万（净亏 199 万）；<br />
+                • <strong>所以保单生效后，保司在财务上 100% 盼着你健健康康、长命百岁！</strong>签单前严查体检，是为了挡住已生病来薅羊毛的人。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: Counterparty 4B - HK 90:10 Participating Insurer -->
+          <div class="slide" data-index="5">
+            <span class="slide-kicker">第四种对家（下）· 香港 90:10 分红保单</span>
+            <h3 class="slide-title">保司股东想赚 <span class="hl">1 块钱</span><br />必须先帮你赚到 <span class="green">9 块钱</span></h3>
+            <p class="slide-sub">在香港分红险的法律与精算框架下，保司不靠你频繁交易抽水，而是靠<strong>「90 : 10 同船铁律」</strong>：</p>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>⚓ 至少 90% 归客户 ：最多 10% 归股东</span>
+                <span class="v-card-num">同船共乘</span>
+              </div>
+              <div class="v-card-desc">
+                • 分红池的可分配投资盈余，<strong>法定/契约规定至少 90% 归保单持有人</strong>，保司股东最多拿 10%；<br />
+                • 若你头两年退保，双方都亏；只有长钱稳放 10～30 年，保司把全球股债与基建蛋糕做大，<strong>先帮你赚到 90，它才能拿走那 10</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: Summary Table & CTA -->
+          <div class="slide" data-index="6">
+            <span class="slide-kicker">一张图截图保存 · 选资产就是选同船人</span>
+            <h3 class="slide-title">看懂四种<span class="hl">「对家底牌」</span><br />少交几百万认知学费</h3>
+            <div class="v-card gold-border" style="padding:12px">
+              <div style="font-size:12.5px;color:#fff;line-height:1.62">
+                • <strong>买房/买古董对家</strong>：在「你掏钱高价接盘那一秒」赚完离场；<br />
+                • <strong>炒股通道对家（券商）</strong>：在「你每次冲动换仓与加杠杆」里旱涝保收；<br />
+                • <strong>长期保单对家（保司）</strong>：保障端盼你一生平安，储蓄端<strong>先帮你赚 90 才能拿 10</strong>。
+              </div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>📌 六大资产 6×6 全景对照表 & 90:10 机制</span>
+                <span style="color:var(--gold);font-size:12px">见下方公众号链接</span>
+              </div>
+              <div class="v-card-desc">点击下方链接查看完整《保司赚钱机制与六大资产全景对照表》。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-caption-box">
+          <div class="reel-caption-text" id="reelCaption">
+            买房、收古董、炒股、买保单——你的<span>「对家」</span>到底靠什么赚你的钱？
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-controls">
+        <button type="button" class="btn" id="prevSlideBtn">⬅️ 上一幕</button>
+        <div class="dots" id="slideDots">
+          <button type="button" class="dot active" data-go="0">1</button>
+          <button type="button" class="dot" data-go="1">2</button>
+          <button type="button" class="dot" data-go="2">3</button>
+          <button type="button" class="dot" data-go="3">4</button>
+          <button type="button" class="dot" data-go="4">5</button>
+          <button type="button" class="dot" data-go="5">6</button>
+          <button type="button" class="dot" data-go="6">7</button>
+        </div>
+        <button type="button" class="btn" id="nextSlideBtn">下一幕 ➡️</button>
+      </div>
+    </div>
+
+    <!-- Right: Teleprompter & Copy Pack -->
+    <div class="script-col">
+      <div class="panel-card">
+        <div class="panel-head">
+          <h2>🎙️ 90 秒视频号分镜口播逐字稿（点击卡片同步切换左侧画面）</h2>
+          <span class="tag-pill">第 3 期 · 对家博弈论</span>
+        </div>
+
+        <div class="scene-list" id="sceneList">
+          <div class="scene-item active" data-scene="0" data-caption="买房、收古董、炒股、买保单——你的<span>「对家」</span>到底靠什么赚你的钱？">
+            <div class="scene-meta">
+              <span>第 1 幕 · 黄金前 3 秒钩子（灵魂提问）</span>
+              <span class="scene-time">00:00 - 00:12</span>
+            </div>
+            <p class="scene-lines">
+              「买任何一项资产之前，别只问它能涨多少，先问一句更要命的话：<strong>把这东西卖给你的『对家』，到底靠什么赚钱？</strong>他是盼着你买贵亏钱、盼着你频繁折腾，还是必须先帮你赚到钱，他自己才能分到钱？今天用 90 秒把买房、古董、炒股和保单背后的四种对家底牌扒个底朝天。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="1" data-caption="买房、买古董的对家：<span>一锤子零和博弈</span>，你买得越贵越亏，他赚得越肥。">
+            <div class="scene-meta">
+              <span>第 2 幕 · 第一种对家：买房与古董字画（零和接盘局）</span>
+              <span class="scene-time">00:12 - 00:28</span>
+            </div>
+            <p class="scene-lines">
+              「第一种对家，是<strong>买房的二手房东、开发商，还有卖古董字画玉石的商家</strong>。你们是一次性的零和博弈——<strong>你多掏 100 万，他就多赚 100 万；你买得越贵越亏，他赚得越肥</strong>。字签完、钱付清的那一秒，他的利润已经百分百落袋；至于三年后房价跌三成、或者古董拍卖双向抽佣 20% 根本没人接盘，卖家绝不会退你一分钱。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="2" data-caption="证券公司：不管你输赢，只要你<span>频繁买卖+借钱加杠杆</span>，它就旱涝保收。">
+            <div class="scene-meta">
+              <span>第 3 幕 · 第二种对家：证券公司（赌场抽水与卖铲子局）</span>
+              <span class="scene-time">00:28 - 00:46</span>
+            </div>
+            <p class="scene-lines">
+              「第二种对家，是<strong>证券公司</strong>。它不在乎你买股票是赚是亏，它的两大印钞机是<strong>交易佣金和两融杠杆利息</strong>。你拿着好股票五年不动，它赚不到钱；你一年追涨杀跌折腾 30 次把本金亏掉一半，它反而赚得盆满钵满；借钱给你加杠杆收固定利息，跌破平仓线 <strong>1 秒强平</strong>拿回本息。所以它最盼着你冲动、手痒、天天换仓。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="3" data-caption="银行存款：保你本金，但靠<span>「存贷利差」</span>赚走你的长期通胀购买力。">
+            <div class="scene-meta">
+              <span>第 4 幕 · 第三种对家：商业银行（固定息差局）</span>
+              <span class="scene-time">00:46 - 00:56</span>
+            </div>
+            <p class="scene-lines">
+              「第三种对家是<strong>银行存款</strong>：给你百分之一点几的利息，转手按百分之四放贷吃息差。它保你本金安全，但二十年跑不赢通胀的隐形缩水，由你自己买单。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="4" data-caption="重疾与医疗险：一旦生效，保司是全世界除了父母之外最盼你<span>「平安别生病」</span>的机构。">
+            <div class="scene-meta">
+              <span>第 5 幕 · 第四种对家（上）：医疗重疾险（盼你平安局）</span>
+              <span class="scene-time">00:56 - 01:12</span>
+            </div>
+            <p class="scene-lines">
+              「而第四种对家——<strong>头部寿险公司</strong>，精算规则把它的利益绑在了你的同侧。在重疾和医疗险里，一旦核保生效，你交 1 万保费，它立刻背上 200 万赔付责任。如果你生大病，它真金白银赔 200 万。所以<strong>保单生效后，它是全世界除了你父母之外，在财务上最盼着你平安健康、长命百岁的机构！</strong>」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="5" data-caption="香港 90:10 分红险：保司股东想赚<span> 1 块钱</span>，必须先帮你赚到<span> 9 块钱</span>。">
+            <div class="scene-meta">
+              <span>第 6 幕 · 第四种对家（下）：香港 90:10 分红险（同船分账局）</span>
+              <span class="scene-time">01:12 - 01:23</span>
+            </div>
+            <p class="scene-lines">
+              「而在<strong>香港 90 比 10 长期分红保单</strong>里，可分配投资盈余法定<strong>至少 90% 必须分给客户，股东最多只能拿 10%</strong>。它不靠你频繁交易抽水，要想多赚 1 块钱股东利润，唯一途径是把长钱管好，先帮你赚到 9 块钱。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="6" data-caption="选资产就是选<span>「谁跟你坐一条船」</span>。点下方链接看六大资产 6×6 全景对照表。">
+            <div class="scene-meta">
+              <span>第 7 幕 · 总结金句与导流</span>
+              <span class="scene-time">01:23 - 01:30</span>
+            </div>
+            <p class="scene-lines">
+              「选资产，本质上是在选<strong>谁跟你坐一条船</strong>。想看完整的保司三差机制与六大资产全景对照表，可以直接点视频下方的公众号文章链接。」
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xiaohongshu 3:4 Note Grid Section -->
+  <section class="xhs-section" id="xhsSection">
+    <div class="xhs-toolbar">
+      <div>
+        <strong style="font-size:15px;color:#fff;display:block;margin-bottom:3px;">📕 小红书 3:4 黄金比例笔记卡（共 7 张 · 360×480 标准封面比例）</strong>
+        <span style="font-size:12.5px;color:var(--muted);">支持一键切换「暖白杂志风」与「深色黑金风」，下方配好小红书标题与正文。</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn" id="toggleXhsThemeBtn">☀️ 切换为「暖白杂志风」</button>
+        <button type="button" class="btn gold" id="copyXhsCopyBtn">📋 一键复制小红书标题 + 正文 + 标签</button>
+      </div>
+    </div>
+
+    <div class="xhs-grid" id="xhsGrid"></div>
+
+    <div class="panel-card" style="margin-top:24px;">
+      <div class="panel-head">
+        <h2>📕 小红书专属爆款标题与正文（可直接复制发布）</h2>
+        <span class="tag-pill">第 3 期 · 对家博弈真相</span>
+      </div>
+      <div class="meta-box">
+        <strong>🔥 5 个小红书高点击标题（任选 1 个）</strong>
+        1. 你的「对家」靠什么赚钱？看懂少交百万学费<br />
+        2. 买房、收古董、炒股、买保单，对家盼你什么？<br />
+        3. 有的对家盼你买贵，有的对家盼你天天折腾📉<br />
+        4. 选资产，本质上是在选「谁跟你坐一条船」⚓<br />
+        5. 为什么唯独这张契约，对家必须盼你平安发财？
+      </div>
+      <div class="meta-box" id="xhsPostBody" style="margin-bottom:0;white-space:pre-line;">买任何一项资产前，别只盯着「能涨多少」，先问一句更要命的话：
+【把这东西卖给我的「对家」，到底靠什么赚钱？他是盼着我买贵接盘、盼着我频繁折腾，还是必须先帮我赚到钱，他自己才能分到钱？】
+
+用这把手术刀切开中国家庭最常碰的 4 类资产，真相让人后背发凉👇
+
+1️⃣ 第一种对家：买房（房东/开发商）& 古董字画（古董商/拍卖行）
+👉 【一锤子零和博弈：盼你高价接盘】
+你多掏 100 万，他就多赚 100 万；你买得越贵越吃亏，他赚得越肥。字签完、钱付清的那一秒，对家利润已 100% 落袋；至于三年后房价跌 30% 或古董有价无市（拍卖行还要双向抽佣 20%），原卖家绝不退你一分钱。
+
+2️⃣ 第二种对家：个人炒股（证券公司）
+👉 【赌场抽水与卖铲子局：不管你输赢，盼你高频折腾+加杠杆】
+券商对散户的两大印钞机是「交易佣金」和「两融杠杆利息」。你买好公司 5 年不动，它赚不到钱；你一年追涨杀跌换手 30 次亏掉一半，它反而赚得盆满钵满；借钱给你加杠杆收固定利息，一旦暴跌触发平仓线，系统 1 秒强平拿回它的本息，亏损全归你。
+
+3️⃣ 第三种对家：银行存款（商业银行）
+👉 【固定息差局：保本金，但赚走你的跨周期购买力】
+给你 1%～1.5% 存款利息，转手 3.5%～5% 放贷吃息差。适合放半年日常活水，但长期通胀缩水由你自己承担。
+
+4️⃣ 第四种对家：医疗重疾险 & 香港 90:10 长期分红保单（头部保司）
+👉 【同船共乘局：利益死死绑在你的同侧】
+• 在保障端（医疗/重疾/定寿）：保单一旦生效，你交 1 万保费，保司立刻背上 200 万刚性责任。你若生病它真赔 200 万——所以保单生效后，它是全世界除了父母之外，在财务上最盼着你平安健康、长命百岁的机构🛡️！
+• 在储蓄端（香港 90:10 分红险）：可分配投资盈余法定「至少 90% 归客户，保司股东最多拿 10%」。它不靠你频繁交易抽水，要想多赚 1 块钱股东利润，必须把长钱管好，先帮你赚到 9 块钱⚓！
+
+✨ 选资产，本质上是在选「谁跟你坐一条船」。
+
+#家庭资产配置 #中产家庭财务 #博弈论 #认知升级 #香港保险 #分红险底层逻辑 #理性投资 #财富管理 #家庭风险管理</div>
+    </div>
+  </section>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const scenes = Array.from(document.querySelectorAll('.scene-item'));
+    const stepCounter = document.getElementById('stepCounter');
+    const reelCaption = document.getElementById('reelCaption');
+    let current = 0;
+    let timer = null;
+
+    function goToSlide(idx) {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      scenes.forEach((sc, i) => sc.classList.toggle('active', i === current));
+      stepCounter.textContent = `第 ${current + 1} / ${slides.length} 幕`;
+      const cap = scenes[current]?.getAttribute('data-caption');
+      if (cap) reelCaption.innerHTML = cap;
+    }
+
+    document.getElementById('prevSlideBtn').addEventListener('click', () => goToSlide(current - 1));
+    document.getElementById('nextSlideBtn').addEventListener('click', () => goToSlide(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goToSlide(Number(d.dataset.go))));
+    scenes.forEach(sc => sc.addEventListener('click', () => goToSlide(Number(sc.dataset.scene))));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
+      else if (e.key === 'Escape' && document.body.classList.contains('record-mode')) {
+        document.body.classList.remove('record-mode');
+      }
+    });
+
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    autoPlayBtn.addEventListener('click', () => {
+      if (timer) {
+        clearInterval(timer); timer = null;
+        autoPlayBtn.textContent = '▶️ 自动轮播演示';
+      } else {
+        autoPlayBtn.textContent = '⏸️ 暂停轮播';
+        timer = setInterval(() => goToSlide(current + 1), 4500);
+      }
+    });
+
+    document.getElementById('recordModeBtn').addEventListener('click', () => {
+      document.body.classList.toggle('record-mode');
+    });
+
+    const copyScriptBtn = document.getElementById('copyScriptBtn');
+    copyScriptBtn.addEventListener('click', () => {
+      const lines = scenes.map(sc => {
+        const meta = sc.querySelector('.scene-meta').innerText.replace(/\n/g, ' ');
+        const text = sc.querySelector('.scene-lines').innerText.trim();
+        return `【${meta}】\n${text}`;
+      }).join('\n\n');
+      navigator.clipboard.writeText(lines).then(() => {
+        const orig = copyScriptBtn.textContent;
+        copyScriptBtn.textContent = '✅ 已复制 90 秒口播稿！';
+        setTimeout(() => { copyScriptBtn.textContent = orig; }, 3000);
+      });
+    });
+
+    // Build 7 Xiaohongshu 3:4 Cards
+    const xhsGrid = document.getElementById('xhsGrid');
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'xhs-card';
+      const clone = s.cloneNode(true);
+      clone.classList.add('active');
+      card.innerHTML = `
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator">${i === 0 ? '封面 · P1' : `P${i + 1} / 7`}</span>
+        </div>
+      `;
+      const bodyWrap = document.createElement('div');
+      bodyWrap.style.flex = '1';
+      bodyWrap.style.display = 'flex';
+      bodyWrap.style.flexDirection = 'column';
+      bodyWrap.style.justifyContent = 'center';
+      bodyWrap.appendChild(clone);
+      card.appendChild(bodyWrap);
+
+      const foot = document.createElement('div');
+      foot.className = 'xhs-foot';
+      foot.innerHTML = `<span>家庭资产博弈论 · 看清交易对手方</span><span>向右滑看四种对家 →</span>`;
+      card.appendChild(foot);
+      xhsGrid.appendChild(card);
+    });
+
+    const xhsModeBtn = document.getElementById('xhsModeBtn');
+    xhsModeBtn.addEventListener('click', () => {
+      const isXhs = document.body.classList.toggle('xhs-mode');
+      xhsModeBtn.textContent = isXhs
+        ? '🎬 切回视频号 9:16 竖屏演播台'
+        : '📕 切换小红书 3:4 笔记模式（7图平铺）';
+    });
+
+    if (location.search.includes('mode=xhs')) {
+      document.body.classList.add('xhs-mode');
+      xhsModeBtn.textContent = '🎬 切回视频号 9:16 竖屏演播台';
+    }
+
+    const toggleXhsThemeBtn = document.getElementById('toggleXhsThemeBtn');
+    toggleXhsThemeBtn.addEventListener('click', () => {
+      const isIvory = document.body.classList.toggle('xhs-ivory');
+      toggleXhsThemeBtn.textContent = isIvory
+        ? '🌙 切换为「深色黑金风」'
+        : '☀️ 切换为「暖白杂志风」';
+    });
+
+    const copyXhsCopyBtn = document.getElementById('copyXhsCopyBtn');
+    copyXhsCopyBtn.addEventListener('click', () => {
+      const bodyText = document.getElementById('xhsPostBody').innerText.trim();
+      const xhsFull = `你的「对家」靠什么赚钱？看懂少交百万学费\n\n${bodyText}`;
+      navigator.clipboard.writeText(xhsFull).then(() => {
+        const orig = copyXhsCopyBtn.textContent;
+        copyXhsCopyBtn.textContent = '✅ 已复制小红书标题+正文+标签！';
+        setTimeout(() => { copyXhsCopyBtn.textContent = orig; }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>
