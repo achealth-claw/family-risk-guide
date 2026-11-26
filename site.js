@@ -301,10 +301,31 @@ const PROB_BASIS = {
   },
   cn_stroke: {
     label: "中国 25 岁起终生卒中（约 39.3%）",
-    src: "NEJM · GBD 2016 Lifetime Risk of Stroke",
+    src: "NEJM 2018 · GBD 2016 Lifetime Risk of Stroke (DOI: 10.1056/NEJMoa1804492)",
     self: 0.393,
     spouse: 0.393,
     elder: 0.42
+  },
+  cvd_50: {
+    label: "50 岁起终生重大心血管病（男约 38% / 女约 24%）",
+    src: "NEJM 2025 · Global Cardiovascular Risk Consortium (DOI: 10.1056/NEJMoa2415879)",
+    self: 0.38,
+    spouse: 0.24,
+    elder: 0.40
+  },
+  ad_65: {
+    label: "65 岁起终生阿尔茨海默病/重度失智（女约 20% / 男约 11%）",
+    src: "Framingham Heart Study (Alzheimer's & Dementia 2015) / Lancet Public Health 2020",
+    self: 0.20,
+    spouse: 0.11,
+    elder: 0.22
+  },
+  ci_70: {
+    label: "70 岁前发生至少 1 种核心重疾（男约 34% / 女约 29%）",
+    src: "中国精算师协会《中国人身保险业重大疾病经验发生率表（2020）》多减因推算",
+    self: 0.34,
+    spouse: 0.29,
+    elder: 0.45
   }
 };
 

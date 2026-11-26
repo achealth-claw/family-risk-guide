@@ -721,9 +721,12 @@
             <div class="fields">
               <label>公开研究口径
                 <select id="prob-basis">
-                  <option value="cn_cancer">中国终生患癌率（约 27.6% · 国家癌症中心）</option>
-                  <option value="hk_75">香港 75 岁前患癌（男 1/4，女 1/5 · 癌症统计中心）</option>
-                  <option value="cn_stroke">中国 25 岁起终生卒中风险（约 39.3% · NEJM）</option>
+                  <option value="cn_cancer">① 恶性肿瘤：中国终生患癌率（约 27.6% · 国家癌症中心）</option>
+                  <option value="hk_75">② 恶性肿瘤：香港 75 岁前患癌（男 1/4，女 1/5 · 香港癌统中心）</option>
+                  <option value="cn_stroke">③ 脑卒中（中风）：中国 25 岁起终生风险（约 39.3% · NEJM）</option>
+                  <option value="cvd_50">④ 重大心血管病（心梗/冠心病等）：50 岁起终生风险（男 38% / 女 24% · NEJM 2025）</option>
+                  <option value="ad_65">⑤ 阿尔茨海默病/重度失智：65 岁起终生风险（女 20% / 男 11% · Framingham）</option>
+                  <option value="ci_70">⑥ 综合重疾（6 大高发重疾去重）：70 岁前累积发生（男 34% / 女 29% · 2020重疾表）</option>
                 </select>
               </label>
               <label>家庭覆盖人数（成年人）
@@ -737,6 +740,35 @@
             </div>
 
             <div class="prob-box" data-prob-out></div>
+
+            <details
+              class="view-fold"
+              style="margin-top:14px"
+              ontoggle="var b=this.querySelector('[data-lit-label]');if(b)b.textContent=this.open?'收起文献':'展开文献';"
+            >
+              <summary
+                class="view-fold-summary"
+                style="list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:#faf9f5;cursor:pointer"
+              >
+                <span style="font-size:13px;font-weight:700;color:var(--ink)">📚 医学顶刊与精算文献速查（除癌症外，心梗、中风、失智与肾衰的真实概率）</span>
+                <span
+                  data-lit-label
+                  style="flex-shrink:0;padding:3px 10px;border-radius:999px;border:1px solid #c8d9d0;background:#fff;color:var(--green-2);font-size:12px;font-weight:700"
+                >展开文献</span>
+              </summary>
+              <div style="margin-top:10px;padding:12px 14px;background:#faf9f5;border:1px solid var(--line);border-radius:10px;font-size:12.5px;line-height:1.68;color:var(--ink-2)">
+                <p style="margin:0 0 8px"><strong>1. 脑卒中（中风）· 中国人群 25 岁起终生风险 39.3%（全球最高梯队）</strong><br />
+                出处：<em>NEJM</em> (2018), GBD 2016 Lifetime Risk of Stroke Collaborators (<code>DOI: 10.1056/NEJMoa1804492</code>)。全球平均约 24.9%，中国达 39.3%（男 41.1% / 女 36.7%）。中风核心财务冲击并非短期药费，而是长达 5–15 年的偏瘫康复、护工与失能收入中断。</p>
+                <p style="margin:0 0 8px"><strong>2. 重大心血管事件（急性心梗 / 冠脉搭桥 / 冠心病）· 男约 38% / 女约 24%</strong><br />
+                出处：<em>NEJM</em> (2025), Global Cardiovascular Risk Consortium (<code>DOI: 10.1056/NEJMoa2415879</code>，覆盖全球 207 万人队列，50→90 岁口径)；经典 Framingham 心脏研究（<em>NEJM</em> 2012, <code>DOI: 10.1056/NEJMoa1012848</code>）亦显示 40 岁人群余生冠心病风险男约 48.6%、女约 31.7%。</p>
+                <p style="margin:0 0 8px"><strong>3. 阿尔茨海默病与老年重度失智 · 65 岁以上女性终生风险约 20%（1/5）、男性约 11%</strong><br />
+                出处：Framingham Heart Study (<em>Alzheimer's &amp; Dementia</em> 2015, <code>DOI: 10.1016/j.jalz.2014.03.003</code>)；中国 60 岁以上人群流调（贾建平团队，<em>The Lancet Public Health</em> 2020）显示痴呆患病率 6.0%、轻度认知障碍（MCI）达 15.5%。高龄认知下降意味着无法自行盯盘炒股或打理收租房，需提前锁定自动到账的终身年金与脑退化多次赔付。</p>
+                <p style="margin:0 0 8px"><strong>4. 慢性肾脏病（CKD）与终末期肾衰（透析/肾移植）· 成人患病率 8.2%–10.8%</strong><br />
+                出处：<em>JAMA Internal Medicine</em> (2023, <code>DOI: 10.1001/jamainternmed.2022.6817</code>) 及 <em>The Lancet</em> (2012)。进入终末期肾病需长期规律血液透析或器官移植的终生累积风险约 2.5%–3.5%，属于持续十余年的刚性现金流消耗。</p>
+                <p style="margin:0"><strong>5. 精算综合口径（6 大核心重疾去重后）· 70 岁前约 29%–34%，80 岁前约 58%–65%</strong><br />
+                出处：中国精算师协会《中国人身保险业重大疾病经验发生率表（2020）》。恶性肿瘤、急性心梗、脑中风后遗症、重大器官移植、冠脉搭桥、终末期肾病 6 项合计占全部重疾理赔的 <strong>92%–96%</strong>（注意：不同疾病不可直接相加，须用多减因模型去重）。</p>
+              </div>
+            </details>
           </section>
 
           <section class="card">
@@ -1231,6 +1263,6 @@
       声明：本站所有文章、概率推演与测算工具仅供家庭财务学习与风险框架对照，不构成任何保险产品要约、招揽、推荐或税务/医疗意见。涉及香港保险之具体讨论，仅在符合监管要求之前提下，面向身处香港特别行政区或明确预约赴港之人士一对一进行；正式保费、核保结论及理赔标准概以保险公司官方保单条款为准。
     </p>
   </footer>
-  <script src="site.js?v=12"></script>
+  <script src="site.js?v=13"></script>
 </body>
 </html>
