@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>视频号 9:16 ＆ 小红书 3:4 素材台 · 我不移民、花人民币，为什么要配境外资产？</title>
+  <style>
+    :root {
+      --bg: #111615;
+      --panel: #1a2220;
+      --panel-2: #222d2a;
+      --ink: #f4f1ea;
+      --muted: #9aa6a1;
+      --gold: #e5b869;
+      --gold-soft: rgba(229, 184, 105, 0.16);
+      --green: #184c3f;
+      --green-bright: #34a882;
+      --red: #e06c5a;
+      --blue: #52a2c4;
+      --line: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(17, 22, 21, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; }
+    .tag-pill {
+      background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      padding: 2px 9px; border-radius: 99px; font-size: 11.5px; font-weight: 600;
+    }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--line);
+      background: var(--panel-2); color: var(--ink);
+      padding: 6px 12px; border-radius: 7px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn:hover { background: #2c3a36; border-color: rgba(255,255,255,0.25); }
+    .btn.gold { background: var(--gold); color: #141917; border-color: var(--gold); }
+    .btn.gold:hover { background: #ecc47c; }
+
+    .workspace {
+      max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px;
+      display: grid; grid-template-columns: 400px 1fr; gap: 28px; align-items: start;
+    }
+    .stage-col { position: sticky; top: 68px; display: flex; flex-direction: column; align-items: center; }
+    .phone-reel {
+      width: 378px; height: 672px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 55%, #121c1a 100%);
+      border-radius: 24px; border: 6px solid #2b3532;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 26px 20px 22px; user-select: none;
+    }
+    .phone-reel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .reel-top {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(229, 184, 105, 0.22); padding-bottom: 10px;
+    }
+    .reel-brand { font-size: 12px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; }
+    .reel-step-indicator {
+      font-size: 11px; color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px;
+    }
+    .reel-body {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; justify-content: center; padding: 10px 0;
+    }
+    .slide { display: none; animation: slideFade 0.32s ease; }
+    .slide.active { display: block; }
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-kicker {
+      display: inline-block; background: var(--gold-soft); color: var(--gold);
+      border: 1px solid rgba(229,184,105,0.35);
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px;
+    }
+    .slide-title {
+      font-size: 24px; line-height: 1.28; font-weight: 800; color: #ffffff;
+      margin: 0 0 12px; letter-spacing: 0.2px;
+    }
+    .slide-title .hl { color: var(--gold); }
+    .slide-title .green { color: #5ce0b5; }
+    .slide-sub { font-size: 13.5px; color: #c6d1cd; line-height: 1.55; margin: 0 0 14px; }
+
+    .v-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 12px; padding: 12px 13px; margin-bottom: 9px;
+    }
+    .v-card.gold-border { border-color: rgba(229, 184, 105, 0.55); background: rgba(229, 184, 105, 0.09); }
+    .v-card.green-border { border-color: rgba(92, 224, 181, 0.5); background: rgba(24, 76, 63, 0.45); }
+    .v-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .v-card-num { font-size: 14px; font-weight: 800; color: var(--gold); }
+    .v-card-desc { font-size: 12px; color: #b8c4bf; line-height: 1.46; }
+
+    .reel-caption-box {
+      position: relative; z-index: 2;
+      background: rgba(0, 0, 0, 0.62);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 10px; padding: 9px 12px; text-align: center;
+      min-height: 54px; display: flex; align-items: center; justify-content: center;
+    }
+    .reel-caption-text { font-size: 13.5px; font-weight: 700; color: #fff; line-height: 1.42; }
+    .reel-caption-text span { color: var(--gold); }
+
+    .stage-controls {
+      margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    }
+    .dots { display: flex; gap: 6px; margin: 0 6px; }
+    .dot {
+      width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--line);
+      background: var(--panel); color: var(--muted); font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .dot.active { background: var(--gold); color: #141917; border-color: var(--gold); }
+
+    .script-col { display: flex; flex-direction: column; gap: 20px; }
+    .panel-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+    .panel-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 12px;
+    }
+    .panel-head h2 { font-size: 17px; margin: 0; color: #fff; }
+    .scene-list { display: flex; flex-direction: column; gap: 12px; }
+    .scene-item {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; cursor: pointer; transition: all 0.15s ease;
+    }
+    .scene-item:hover { border-color: rgba(229, 184, 105, 0.4); }
+    .scene-item.active {
+      border-color: var(--gold); background: rgba(229, 184, 105, 0.08); box-shadow: 0 0 0 1px var(--gold);
+    }
+    .scene-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 6px;
+    }
+    .scene-time { color: var(--muted); font-weight: 500; }
+    .scene-lines { font-size: 15px; line-height: 1.68; color: #fff; margin: 0; }
+    .scene-lines strong { color: var(--gold); background: rgba(229,184,105,0.14); padding: 0 4px; border-radius: 4px; }
+    .meta-box {
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.65;
+    }
+    .meta-box strong { color: var(--gold); display: block; margin-bottom: 4px; }
+
+    body.record-mode .topbar, body.record-mode .script-col { display: none !important; }
+    body.record-mode .workspace { grid-template-columns: 1fr; padding: 12px; min-height: 100vh; align-items: center; justify-items: center; }
+    body.record-mode .stage-col { position: static; }
+    body.record-mode .phone-reel { width: 432px; height: 768px; border: none; border-radius: 0; }
+
+    /* Xiaohongshu 3:4 Note Grid Mode */
+    .xhs-section { display: none; max-width: 1240px; margin: 0 auto; padding: 22px 20px 64px; }
+    body.xhs-mode .workspace { display: none; }
+    body.xhs-mode .xhs-section { display: block; }
+    .xhs-toolbar {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+    }
+    .xhs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(348px, 1fr)); gap: 22px; justify-items: center;
+    }
+    .xhs-card {
+      width: 360px; height: 480px;
+      background: linear-gradient(165deg, #112e26 0%, #0b1916 60%, #121c1a 100%);
+      border-radius: 16px; border: 1px solid rgba(229, 184, 105, 0.28);
+      padding: 20px 18px 16px; display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.38);
+    }
+    .xhs-card .slide { display: block !important; animation: none !important; }
+    .xhs-card .slide-title { font-size: 20.5px; margin-bottom: 8px; }
+    .xhs-card .slide-sub { font-size: 12.5px; margin-bottom: 10px; }
+    .xhs-card .v-card { padding: 9px 11px; margin-bottom: 7px; }
+    .xhs-card .v-card-head { font-size: 12.5px; }
+    .xhs-card .v-card-desc { font-size: 11.5px; }
+    .xhs-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 8px; font-size: 11px; color: rgba(255,255,255,0.6);
+    }
+    body.xhs-ivory .xhs-card {
+      background: #faf7f0; border: 1px solid #dfd8c8; color: #17211d; box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
+    body.xhs-ivory .xhs-card .reel-brand { color: #184c3f; }
+    body.xhs-ivory .xhs-card .reel-step-indicator { background: #e9e4d8; color: #44514b; }
+    body.xhs-ivory .xhs-card .slide-kicker { background: #e4efe9; color: #184c3f; border-color: #b7d2c5; }
+    body.xhs-ivory .xhs-card .slide-title { color: #17211d; }
+    body.xhs-ivory .xhs-card .slide-title .hl { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .slide-title .green { color: #184c3f; }
+    body.xhs-ivory .xhs-card .slide-sub { color: #44514b; }
+    body.xhs-ivory .xhs-card .v-card { background: #ffffff; border-color: #dfd8c8; }
+    body.xhs-ivory .xhs-card .v-card.gold-border { background: #fcf4e8; border-color: #e5c494; }
+    body.xhs-ivory .xhs-card .v-card.green-border { background: #eef5f1; border-color: #b5d1c3; }
+    body.xhs-ivory .xhs-card .v-card-head { color: #17211d; }
+    body.xhs-ivory .xhs-card .v-card-num { color: #b86b1b; }
+    body.xhs-ivory .xhs-card .v-card-desc { color: #44514b; }
+    body.xhs-ivory .xhs-card .xhs-foot { border-top-color: #e2dcd0; color: #63706a; }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: 1fr; }
+      .stage-col { position: static; }
+      .phone-reel { width: 100%; max-width: 378px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>🎬 第 5 期：不移民、花人民币，为什么要配境外资产？（视频号 9:16 ＆ 小红书 3:4）</span>
+      <span class="tag-pill">一鱼三吃 · 全球配置逻辑</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn" href="wechat-offshore-allocation.html">📄 公众号图文版</a>
+      <button type="button" class="btn gold" id="xhsModeBtn">📕 切换小红书 3:4 笔记模式（7图平铺）</button>
+      <button type="button" class="btn" id="autoPlayBtn">▶️ 自动轮播演示</button>
+      <button type="button" class="btn" id="recordModeBtn">🖥️ 纯净录屏模式</button>
+      <button type="button" class="btn" id="copyScriptBtn">📋 复制视频号口播稿</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <!-- Left: 9:16 Vertical Stage -->
+    <div class="stage-col">
+      <div class="phone-reel" id="phoneReel">
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator" id="stepCounter">第 1 / 7 幕</span>
+        </div>
+
+        <div class="reel-body">
+          <!-- Slide 1: Hook -->
+          <div class="slide active" data-index="0">
+            <span class="slide-kicker">跨地域配置 · 最常见的灵魂发问</span>
+            <h3 class="slide-title">我不移民、在国内<span class="hl">花人民币</span><br />为什么还要配<span class="green">「境外资产」</span>？</h3>
+            <p class="slide-sub">不是每个有钱人一开始就配了，但经历过完整周期的家庭，最终都会切出 15%～25%：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🤔 常见误解</span>
+                <span style="color:#e06c5a">以为出国才用得上</span>
+              </div>
+              <div class="v-card-desc">「我全家都在国内生活工作，也不打算赌汇率，去香港配资产是不是多此一举？」</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>💡 真实底牌</span>
+                <span style="color:#5ce0b5">3 个贴身真相</span>
+              </div>
+              <div class="v-card-desc">哪怕未来 20 年汇率一分钱不变、你一天都不出国，这 3 个现实需求依然绕不开。</div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Truth 1 (Globalized Core Expenses) -->
+          <div class="slide" data-index="1">
+            <span class="slide-kicker">真相 1 · 消费端的隐性全球化</span>
+            <h3 class="slide-title">你的收入是单一币种，但全家的<br /><span class="hl">「救命药与选择权」</span>全球定价</h3>
+            <p class="slide-sub">不出国定居，不代表你的核心硬账单不跟国际挂钩：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>💊 重症原研药 ＆ 🎓 子女深造权</span>
+                <span class="v-card-num">国际刚性定价</span>
+              </div>
+              <div class="v-card-desc">
+                • <strong>重症救命药</strong>：尚未进集采的进口原研靶向药、CAR-T 免疫疗法、赴港/海外就医，均按国际货币刚性定价；<br />
+                • <strong>教育选择权</strong>：万一 10 年后孩子想去香港、新加坡或英美读研，一年 40～80 万直接是外币硬账单。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Truth 2 (Underlying Investment Engine) -->
+          <div class="slide" data-index="2">
+            <span class="slide-kicker">真相 2 · 收益端的发动机代差</span>
+            <h3 class="slide-title">跨过那条河，不是为了赌汇率<br />而是借用<span class="green">「全球复利发动机」</span></h3>
+            <p class="slide-sub">哪怕在香港保单里直接选「人民币计价」，长期收益天花板也完全不同：</p>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>🏦 境内固收池（约 80% 境内债）</span>
+                <span style="color:var(--muted)">1.5% ~ 2.5%</span>
+              </div>
+              <div class="v-card-desc">受限于投资范围与低息环境，长期复利底座被锁在 2% 左右。</div>
+            </div>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>🌍 香港全球多元池（债 + 全球股权）</span>
+                <span class="v-card-num" style="color:#5ce0b5">5.5% ~ 6.5%</span>
+              </div>
+              <div class="v-card-desc">40%～60% 全球高评级长债 + 30%～50% 美股科技/全球股权 + 90:10 分红同船机制。</div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Truth 3 (Quadruple Same-Direction Exposure) -->
+          <div class="slide" data-index="3">
+            <span class="slide-kicker">真相 3 · 资产表的同向共振风险</span>
+            <h3 class="slide-title">别把全家鸡蛋放同一张桌子上<br />警惕<span class="hl">「四重同向叠加」</span></h3>
+            <p class="slide-sub">看看大多数未做跨地域分散的家庭账本，四样资产绑在同一根绳上：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>⚠️ 四重同向叠加 = 周期来时同时卡死</span>
+                <span style="color:#e06c5a">100% 同周期</span>
+              </div>
+              <div class="v-card-desc">
+                ① <strong>收入/生意</strong>在境内 + ② <strong>房产</strong>在境内 + ③ <strong>股票</strong>买 A 股 + ④ <strong>存款</strong>在境内银行。<br />
+                • 顺风时一起涨，一旦遇到行业逆风或周期调整，四样同时缩水。<br />
+                • 切出 <strong>15%～25%</strong> 放入低相关的全球多币种契约，就是全家的<strong>跨周期平衡翼</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: 5 Signals You Should Allocate -->
+          <div class="slide" data-index="4">
+            <span class="slide-kicker">对号入座 · 什么情况下该动手配？</span>
+            <h3 class="slide-title">只要命中这 <span class="green">5 个信号</span>中的 1～2 条<br />就到了配置境外底盘的节点</h3>
+            <div class="v-card green-border">
+              <div class="v-card-head">
+                <span>✅ 境外/香港资产配置 5 大触发信号</span>
+                <span class="v-card-num">自测清单</span>
+              </div>
+              <div class="v-card-desc">
+                ① <strong>可投资金融资产 ≥ 150～300 万</strong>（不甘心全放 <2% 低息存款）；<br />
+                ② <strong>孩子 0～15 岁</strong>（未来哪怕有 30% 概率赴港或海外深造）；<br />
+                ③ <strong>看重重症原研药与香港/全球私立医院就医权</strong>；<br />
+                ④ <strong>90% 身家锁在境内房产与单一企业经营/连带担保里</strong>；<br />
+                ⑤ <strong>直持美股 > 6 万美元（规避 40% 遗产税）或有防婚变传承需求</strong>。
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: 2 Honest Guardrails (When NOT to do it) -->
+          <div class="slide" data-index="5">
+            <span class="slide-kicker">顾问的诚实边界 · 什么情况先别折腾？</span>
+            <h3 class="slide-title">遇到这 <span class="hl">2 种情况</span>，我直接劝你<br />先把钱留在身边</h3>
+            <p class="slide-sub">不盲目跟风，先守住流动性底线：</p>
+            <div class="v-card gold-border">
+              <div class="v-card-head">
+                <span>🛑 情况 1：应急活钱与基础医保重疾还没配齐</span>
+                <span style="color:#e06c5a">先焊死防归零</span>
+              </div>
+              <div class="v-card-desc">6～12 个月紧急备用金没留够、境内几千块的医疗+重疾还没买的，先把身边底盘补齐。</div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>🛑 情况 2：这笔钱 3～5 年内要买房或还贷</span>
+                <span style="color:var(--gold)">短钱别长配</span>
+              </div>
+              <div class="v-card-desc">香港长期分红险第 5～7 年回本、10 年后腾飞，3 年内要用的钱老实放货币基金或短债。</div>
+            </div>
+          </div>
+
+          <!-- Slide 7: Closing Summary & CTA -->
+          <div class="slide" data-index="6">
+            <span class="slide-kicker">一句话总结 · 建议截图保存</span>
+            <h3 class="slide-title">配境外资产，买的不是<span class="hl">「离开」</span><br />而是<span class="green">「留在哪都有底气」</span></h3>
+            <div class="v-card green-border" style="padding:13px">
+              <div style="font-size:13px;color:#fff;line-height:1.6">
+                让 <strong>15%～25%</strong> 的家庭底盘站在全球多元引擎上复利生长——无论未来需要全球原研药、孩子去世界名校，还是对冲单一周期，永远有一笔跨币种活水为你托底。
+              </div>
+            </div>
+            <div class="v-card">
+              <div class="v-card-head">
+                <span>📌 内地 vs 香港保司底层投资引擎全景图</span>
+                <span style="color:var(--gold);font-size:12px">见下方公众号链接</span>
+              </div>
+              <div class="v-card-desc">点击下方链接，直接查看内地与香港保单底层资产配置与 6 类资产大对照。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reel-caption-box">
+          <div class="reel-caption-text" id="reelCaption">
+            我不移民、在国内花人民币，为什么还需要配一部分<span>境外资产</span>？
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-controls">
+        <button type="button" class="btn" id="prevSlideBtn">⬅️ 上一幕</button>
+        <div class="dots" id="slideDots">
+          <button type="button" class="dot active" data-go="0">1</button>
+          <button type="button" class="dot" data-go="1">2</button>
+          <button type="button" class="dot" data-go="2">3</button>
+          <button type="button" class="dot" data-go="3">4</button>
+          <button type="button" class="dot" data-go="4">5</button>
+          <button type="button" class="dot" data-go="5">6</button>
+          <button type="button" class="dot" data-go="6">7</button>
+        </div>
+        <button type="button" class="btn" id="nextSlideBtn">下一幕 ➡️</button>
+      </div>
+    </div>
+
+    <!-- Right: Teleprompter & Copy Pack -->
+    <div class="script-col">
+      <div class="panel-card">
+        <div class="panel-head">
+          <h2>🎙️ 90 秒视频号分镜口播逐字稿（点击卡片同步切换左侧画面）</h2>
+          <span class="tag-pill">第 5 期 · 境外配置逻辑</span>
+        </div>
+
+        <div class="scene-list" id="sceneList">
+          <div class="scene-item active" data-scene="0" data-caption="我不移民、在国内花人民币，为什么还需要配一部分<span>境外资产</span>？">
+            <div class="scene-meta">
+              <span>第 1 幕 · 黄金前 3 秒钩子（直击最普遍疑问）</span>
+              <span class="scene-time">00:00 - 00:13</span>
+            </div>
+            <p class="scene-lines">
+              「很多人一听到配置香港或境外资产，第一反应都是：<strong>我全家都在国内生活、挣人民币、花人民币，又不打算移民，折腾境外资产干嘛？</strong>其实，哪怕未来二十年汇率一分钱不变、你一天都不出国定居，当家庭资产跨过一定台阶后，依然有三个绕不开的现实原因。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="1" data-caption="你的收入是单一币种，但全家的<span>进口救命药、高端医疗与深造选择权</span>早就全球定价了。">
+            <div class="scene-meta">
+              <span>第 2 幕 · 真相 1：消费端的隐性全球化</span>
+              <span class="scene-time">00:13 - 00:28</span>
+            </div>
+            <p class="scene-lines">
+              「第一，<strong>你的收入是单一币种，但你全家的救命药和核心选择权早就全球定价了</strong>。万一家人遇上重症，想用还没进医保的进口原研靶向药、免疫疗法，或者去香港养和医院看诊；又或者十年后孩子想去香港、新加坡或英美读个研——这些关键账单全都是按国际货币刚性定价的。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="2" data-caption="跨过那条河不是为了赌汇率，而是借用<span>「全球多元资产池 5.5%～6.5% 的复利发动机」</span>。">
+            <div class="scene-meta">
+              <span>第 3 幕 · 真相 2：收益端的发动机代差</span>
+              <span class="scene-time">00:28 - 00:44</span>
+            </div>
+            <p class="scene-lines">
+              「第二，<strong>跨过那条河不是为了赌汇率，而是为了借用另一套复利发动机</strong>。在境内，保司八成资金只能买低息固收，长期收益锁在 2% 左右；而在香港，哪怕你直接选人民币计价保单，它背后也是用全球高评级长债加全球优质股权在跑复利，长期能达到 <strong>5.5% 到 6.5%</strong>，还能随时在九种货币间自由转换。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="3" data-caption="收入、房产、股票、存款全在同一周期里，叫<span>「四重同向叠加」</span>——切出 20% 建跨周期平衡翼。">
+            <div class="scene-meta">
+              <span>第 4 幕 · 真相 3：化解资产表的「四重同向叠加」</span>
+              <span class="scene-time">00:44 - 00:58</span>
+            </div>
+            <p class="scene-lines">
+              「第三，<strong>化解四重同向叠加</strong>。很多家庭的工资或生意在境内、房子在境内、股票买 A 股、存款在境内银行——顺风时一起涨，一旦遇到周期调整就同时卡死流动性。切出 <strong>15% 到 25%</strong> 放到低相关的全球资产舱里，就是给全家装上跨周期平衡翼。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="4" data-caption="可投资资产过 200 万、备战港校/留学、看重原研药、家企隔离、美股避税——<span>命中任一即需考虑</span>。">
+            <div class="scene-meta">
+              <span>第 5 幕 · 5 大配置触发信号（对号入座）</span>
+              <span class="scene-time">00:58 - 01:13</span>
+            </div>
+            <p class="scene-lines">
+              「那什么情况下该动手配？只要命中这五个信号之一：<strong>可投资金融资产超过两百万、孩子未来有哪怕三成概率赴港或海外深造、看重全球原研药就医权、九成身家锁在房产和企业连带担保里、或者直持美股超过六万美元需要规避 40% 遗产税</strong>。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="5" data-caption="应急备用金与基础重疾没配齐的、或者 3 年内要买房还贷的——<span>先别折腾长期境外储蓄</span>。">
+            <div class="scene-meta">
+              <span>第 6 幕 · 2 条诚实劝退底线（不盲目跟风）</span>
+              <span class="scene-time">01:13 - 01:23</span>
+            </div>
+            <p class="scene-lines">
+              「反过来，如果家里的应急备用金和几千块的基础重疾还没配齐，或者这笔钱三五年内就要买房还贷，那我直接劝你<strong>先别折腾长期境外储蓄险</strong>，先把身边的流动性底线守好。」
+            </p>
+          </div>
+
+          <div class="scene-item" data-scene="6" data-caption="配境外资产，买的从来不是<span>「离开」</span>，而是<span>「留在哪都有底气」</span>。">
+            <div class="scene-meta">
+              <span>第 7 幕 · 总结金句与导流</span>
+              <span class="scene-time">01:23 - 01:30</span>
+            </div>
+            <p class="scene-lines">
+              「<strong>配境外资产，买的从来不是离开，而是留在哪都有底气。</strong>想看内地与香港保单底层发动机的完整对比图，可以直接点视频下方的公众号链接。」
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Xiaohongshu 3:4 Note Grid Section -->
+  <section class="xhs-section" id="xhsSection">
+    <div class="xhs-toolbar">
+      <div>
+        <strong style="font-size:15px;color:#fff;display:block;margin-bottom:3px;">📕 小红书 3:4 黄金比例笔记卡（共 7 张 · 360×480 标准封面比例）</strong>
+        <span style="font-size:12.5px;color:var(--muted);">支持一键切换「暖白杂志风」与「深色黑金风」，下方配好小红书标题与正文。</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn" id="toggleXhsThemeBtn">☀️ 切换为「暖白杂志风」</button>
+        <button type="button" class="btn gold" id="copyXhsCopyBtn">📋 一键复制小红书标题 + 正文 + 标签</button>
+      </div>
+    </div>
+
+    <div class="xhs-grid" id="xhsGrid"></div>
+
+    <div class="panel-card" style="margin-top:24px;">
+      <div class="panel-head">
+        <h2>📕 小红书专属爆款标题与正文（可直接复制发布）</h2>
+        <span class="tag-pill">第 5 期 · 境外配置逻辑</span>
+      </div>
+      <div class="meta-box">
+        <strong>🔥 5 个小红书高点击标题（任选 1 个）</strong>
+        1. 不移民、在国内花人民币，为什么要配境外资产？<br />
+        2. 哪怕汇率一分不变，为什么有钱人都在配香港保单？<br />
+        3. 什么样的人需要配境外资产？看懂这5个信号🌍<br />
+        4. 别把全家鸡蛋放同一张桌子上！警惕「四重同向叠加」<br />
+        5. 配境外资产，买的不是离开，是留在哪都有底气⚓
+      </div>
+      <div class="meta-box" id="xhsPostBody" style="margin-bottom:0;white-space:pre-line;">很多人一听到「配置香港或境外资产」，第一反应是：
+「我全家都在国内生活、挣人民币、花人民币，又不打算移民，折腾境外资产干嘛？」
+
+其实，哪怕未来 20 年汇率一分钱不变、你一天都不出国定居，当家庭资产跨过一定台阶后，依然有 3 个绕不开的现实真相👇
+
+💊 真相 1：你的收入是单一币种，但全家的「救命药与选择权」早就全球定价了
+• 重症救命药：万一家人得重症，想用尚未进集采的进口原研靶向药、CAR-T 免疫疗法，或者去香港养和医院看诊，全部按国际货币刚性定价；
+• 教育选择权：哪怕现在不确定孩子出不出国，万一 10 年后想去香港、新加坡或英美读研，一年 40～80 万直接就是外币硬账单。
+
+🌍 真相 2：跨过那条河不是为了「赌汇率」，而是借用「另一套复利发动机」
+• 在境内：保司约 80% 资金只能配低息固收，长期收益锁在 2.0%～2.5% 左右；
+• 在香港：哪怕你直接选「人民币计价」保单，背后也是用「40%～60% 全球高评级长债 + 30%～50% 美股科技/全球股权」在跑复利，长期达 5.5%～6.5%，且支持 6～9 种货币随时自由转换。
+
+⚖️ 真相 3：化解「四重同向叠加」
+大多数家庭的账本：① 工资/生意在境内 + ② 房产在境内 + ③ 股票买 A 股 + ④ 存款在境内银行。顺风时一起涨，一旦遇到周期调整就同时卡死流动性。切出 15%～25% 放入低相关的全球多币种契约，就是全家的「跨周期平衡翼」。
+
+✅ 对号入座：命中这 5 个信号中的 1～2 条，就该动手配了：
+1️⃣ 可投资金融资产 ≥ 150～300 万（不甘心全放 <2% 低息存款）；
+2️⃣ 孩子 0～15 岁，未来哪怕有 30% 概率赴港或海外深造；
+3️⃣ 看重重症原研药与香港/全球私立医院直付权；
+4️⃣ 90% 身家锁在境内房产与单一企业经营/连带担保里；
+5️⃣ 直持美股 > 6 万美元（需规避 40% 美国遗产税）或有防婚变传承需求。
+
+🛑 顾问诚实劝退：哪 2 种情况先别折腾？
+• 家里 6～12 个月应急备用金没留够、境内几千块的基础医疗重疾还没配齐的，先焊死身边底盘；
+• 这笔钱 3～5 年内就要付买房首付或还贷的，老实放境内货币基金或短债，别锁进长期保单。
+
+✨ 配置境外资产，买的从来不是「离开」，而是「留在哪都有底气」。
+
+#全球资产配置 #香港保险 #美元配置 #中产家庭理财 #高净值财富管理 #多币种保单 #子女教育金 #家企隔离 #家庭风险管理</div>
+    </div>
+  </section>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    const scenes = Array.from(document.querySelectorAll('.scene-item'));
+    const stepCounter = document.getElementById('stepCounter');
+    const reelCaption = document.getElementById('reelCaption');
+    let current = 0;
+    let timer = null;
+
+    function goToSlide(idx) {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      scenes.forEach((sc, i) => sc.classList.toggle('active', i === current));
+      stepCounter.textContent = `第 ${current + 1} / ${slides.length} 幕`;
+      const cap = scenes[current]?.getAttribute('data-caption');
+      if (cap) reelCaption.innerHTML = cap;
+    }
+
+    document.getElementById('prevSlideBtn').addEventListener('click', () => goToSlide(current - 1));
+    document.getElementById('nextSlideBtn').addEventListener('click', () => goToSlide(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goToSlide(Number(d.dataset.go))));
+    scenes.forEach(sc => sc.addEventListener('click', () => goToSlide(Number(sc.dataset.scene))));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goToSlide(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goToSlide(current - 1); }
+      else if (e.key === 'Escape' && document.body.classList.contains('record-mode')) {
+        document.body.classList.remove('record-mode');
+      }
+    });
+
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    autoPlayBtn.addEventListener('click', () => {
+      if (timer) {
+        clearInterval(timer); timer = null;
+        autoPlayBtn.textContent = '▶️ 自动轮播演示';
+      } else {
+        autoPlayBtn.textContent = '⏸️ 暂停轮播';
+        timer = setInterval(() => goToSlide(current + 1), 4500);
+      }
+    });
+
+    document.getElementById('recordModeBtn').addEventListener('click', () => {
+      document.body.classList.toggle('record-mode');
+    });
+
+    const copyScriptBtn = document.getElementById('copyScriptBtn');
+    copyScriptBtn.addEventListener('click', () => {
+      const lines = scenes.map(sc => {
+        const meta = sc.querySelector('.scene-meta').innerText.replace(/\n/g, ' ');
+        const text = sc.querySelector('.scene-lines').innerText.trim();
+        return `【${meta}】\n${text}`;
+      }).join('\n\n');
+      navigator.clipboard.writeText(lines).then(() => {
+        const orig = copyScriptBtn.textContent;
+        copyScriptBtn.textContent = '✅ 已复制 90 秒口播稿！';
+        setTimeout(() => { copyScriptBtn.textContent = orig; }, 3000);
+      });
+    });
+
+    // Build 7 Xiaohongshu 3:4 Cards
+    const xhsGrid = document.getElementById('xhsGrid');
+    slides.forEach((s, i) => {
+      const card = document.createElement('div');
+      card.className = 'xhs-card';
+      const clone = s.cloneNode(true);
+      clone.classList.add('active');
+      card.innerHTML = `
+        <div class="reel-top">
+          <span class="reel-brand">安康 · 家庭财务与风险诊断</span>
+          <span class="reel-step-indicator">${i === 0 ? '封面 · P1' : `P${i + 1} / 7`}</span>
+        </div>
+      `;
+      const bodyWrap = document.createElement('div');
+      bodyWrap.style.flex = '1';
+      bodyWrap.style.display = 'flex';
+      bodyWrap.style.flexDirection = 'column';
+      bodyWrap.style.justifyContent = 'center';
+      bodyWrap.appendChild(clone);
+      card.appendChild(bodyWrap);
+
+      const foot = document.createElement('div');
+      foot.className = 'xhs-foot';
+      foot.innerHTML = `<span>3 个跨地域配置真相 · 5 大触发信号</span><span>向右滑看完整拆解 →</span>`;
+      card.appendChild(foot);
+      xhsGrid.appendChild(card);
+    });
+
+    const xhsModeBtn = document.getElementById('xhsModeBtn');
+    xhsModeBtn.addEventListener('click', () => {
+      const isXhs = document.body.classList.toggle('xhs-mode');
+      xhsModeBtn.textContent = isXhs
+        ? '🎬 切回视频号 9:16 竖屏演播台'
+        : '📕 切换小红书 3:4 笔记模式（7图平铺）';
+    });
+
+    if (location.search.includes('mode=xhs')) {
+      document.body.classList.add('xhs-mode');
+      xhsModeBtn.textContent = '🎬 切回视频号 9:16 竖屏演播台';
+    }
+
+    const toggleXhsThemeBtn = document.getElementById('toggleXhsThemeBtn');
+    toggleXhsThemeBtn.addEventListener('click', () => {
+      const isIvory = document.body.classList.toggle('xhs-ivory');
+      toggleXhsThemeBtn.textContent = isIvory
+        ? '🌙 切换为「深色黑金风」'
+        : '☀️ 切换为「暖白杂志风」';
+    });
+
+    const copyXhsCopyBtn = document.getElementById('copyXhsCopyBtn');
+    copyXhsCopyBtn.addEventListener('click', () => {
+      const bodyText = document.getElementById('xhsPostBody').innerText.trim();
+      const xhsFull = `不移民、在国内花人民币，为什么要配境外资产？🌍\n\n${bodyText}`;
+      navigator.clipboard.writeText(xhsFull).then(() => {
+        const orig = copyXhsCopyBtn.textContent;
+        copyXhsCopyBtn.textContent = '✅ 已复制小红书标题+正文+标签！';
+        setTimeout(() => { copyXhsCopyBtn.textContent = orig; }, 3000);
+      });
+    });
+  </script>
+</body>
+</html>

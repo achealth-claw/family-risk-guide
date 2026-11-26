@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>我不移民、全家都在国内花人民币，为什么还需要配一部分境外资产？</title>
+  <style>
+    :root {
+      --bg: #ededed;
+      --paper: #ffffff;
+      --ink: #1f2329;
+      --green: #184c3f;
+      --amber: #b86b1b;
+      --line: #e6e4de;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.78;
+    }
+    .preview-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(24, 76, 63, 0.96);
+      backdrop-filter: blur(8px);
+      color: #fff; padding: 10px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-size: 13px; box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+      flex-wrap: wrap;
+    }
+    .preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .preview-btn {
+      appearance: none; border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.12); color: #fff;
+      padding: 5px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+    }
+    .preview-btn:hover { background: rgba(255,255,255,0.22); }
+    .preview-btn.primary { background: #fff; color: var(--green); border-color: #fff; }
+    .stage {
+      max-width: 677px; margin: 0 auto; background: var(--paper);
+      min-height: calc(100vh - 48px); padding: 28px 20px 64px;
+      box-shadow: 0 0 24px rgba(0,0,0,0.05);
+      transition: max-width 0.25s ease, margin 0.25s ease, border-radius 0.25s ease;
+    }
+    body.mobile-frame .stage {
+      max-width: 414px;
+      margin: 20px auto 40px;
+      border-radius: 28px;
+      border: 8px solid #2b2f36;
+      padding: 24px 16px 48px;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+    }
+    .wx-title {
+      font-size: 22px; line-height: 1.4; font-weight: 700;
+      color: #191919; margin: 0 0 14px;
+    }
+    .wx-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+      font-size: 14px; color: rgba(0,0,0,0.3); margin-bottom: 24px;
+    }
+    .wx-tag {
+      background: #f2f2f2; color: #576b95; font-size: 12px;
+      padding: 1px 7px; border-radius: 4px; font-weight: 500;
+    }
+    .wx-author { color: #576b95; font-weight: 500; text-decoration: none; }
+    @media (max-width: 680px) {
+      .hide-mobile { display: none; }
+      .stage { padding: 22px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-bar">
+    <div><strong>微信公众号文章预览</strong> · 第 5 期：不移民、花人民币，为什么要配境外资产？</div>
+    <div class="preview-actions">
+      <a class="preview-btn" href="wechat-video-offshore.html">🎬 视频号 9:16 ＆ 📕 小红书 3:4 素材台</a>
+      <a class="preview-btn hide-mobile" href="wechat-rich-poor-paradox.html">📄 第 4 期</a>
+      <a class="preview-btn hide-mobile" href="wechat-counterparty-truth.html">📄 第 3 期</a>
+      <button type="button" class="preview-btn hide-mobile" id="toggleFrameBtn">📱 切换手机窄屏框</button>
+      <button type="button" class="preview-btn primary" id="copyWxBtn">📋 一键复制排版（直接粘贴公众号后台）</button>
+    </div>
+  </div>
+
+  <main class="stage">
+    <h1 class="wx-title">我不移民、全家都在国内花人民币，为什么还需要配一部分境外资产？</h1>
+    <div class="wx-meta">
+      <span class="wx-tag">原创</span>
+      <span>安康 · 医学与数据分析背景</span>
+      <a class="wx-author" href="index.html">安康家庭风险与财务</a>
+      <span>香港</span>
+    </div>
+
+    <div id="js_content" style="font-size:15.5px;color:#2b2b2b;line-height:1.82;letter-spacing:0.3px;">
+
+      <!-- Lead Quote Box -->
+      <section style="background:#f6f8f7;border-left:4px solid #184c3f;padding:14px 16px;border-radius:0 8px 8px 0;margin:0 0 22px;font-size:14.5px;color:#3d4843;line-height:1.72;">
+        <strong style="color:#184c3f;display:block;margin-bottom:4px;">写在前面：</strong>
+        很多人一听到「配置香港或境外资产」，第一反应是：<strong>「我全家都在国内生活、挣人民币、花人民币，又不打算移民，折腾境外资产干嘛？」</strong><br />
+        其实，哪怕未来 20 年汇率一分钱不变、你一天都不出国定居，当家庭资产跨过一定台阶后，依然有 3 个绕不开的现实原因，需要你把 15%～25% 的底盘放到跨周期、跨地域的篮子里。
+      </section>
+
+      <p style="margin:0 0 16px;">先回答一个很多人好奇的问题：<strong>有钱人是不是「一定」都会配境外资产？</strong></p>
+      <p style="margin:0 0 16px;">真实情况是：<strong>不是每个有钱人「现在都已经配了」，但几乎所有经历过完整周期洗礼的富裕家庭，「最终都会配」。</strong></p>
+      <p style="margin:0 0 16px;">为什么会有这个时间差？因为过去二十年，很多靠地产红利、实体工厂或单一行业顺风赚到几千万的家庭，路径依赖极强——觉得「我在国内买房、买理财已经赚到了钱，说明把 100% 身家放在自己熟悉的篮子里最安全」。</p>
+      <p style="margin:0 0 24px;">直到这几年地产流动性变慢、无风险存款利率一路跌破 1.5%～2.0%，越来越多人突然意识到：<strong>把全家所有的鸡蛋放在同一张桌子上，最大的风险不是鸡蛋坏了，而是桌子晃了。</strong></p>
+
+      <!-- Part 1: 3 Perspectives -->
+      <section style="margin:28px 0 18px;">
+        <span style="display:inline-block;background:#184c3f;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第一部分 · 打破认知盲区</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">不移民、不赌汇率，为什么你依然需要境外资产？（3 个贴身真相）</h2>
+      </section>
+
+      <!-- Truth 1 -->
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 16px;">
+        <div style="font-size:16px;font-weight:700;color:#b86b1b;margin-bottom:8px;">
+          真相 1：你的收入是单一币种，但你全家的「救命药与核心选择权」早就全球定价了
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">
+          你觉得自己不出国，就跟国际货币没关系吗？并不是。只要你的家庭追求品质生活与医疗底线，你的<strong>核心硬账单早就全球化了</strong>：
+        </p>
+        <ul style="margin:0 0 10px;padding-left:20px;font-size:14px;color:#3d4843;">
+          <li style="margin-bottom:6px;"><strong>重症原研药与高端医疗</strong>：万一家人遇上肿瘤或重症，想用尚未进集采的进口原研靶向药、PD-1/CAR-T 免疫疗法、质子重离子治疗，或者去香港养和医院看诊——这些救命资源全部以美元/港币等国际价格刚性定价；</li>
+          <li style="margin-bottom:4px;"><strong>子女未来的教育选择权</strong>：哪怕现在不确定孩子出不出国，万一 10 年后孩子想去香港、新加坡或英美读个研，一年 40 万～80 万的硬账单直接就是外币。</li>
+        </ul>
+        <p style="margin:0;font-size:13.5px;color:#8a4f11;background:#fcf4e8;padding:9px 12px;border-radius:6px;">
+          💡 <strong>一句话点醒</strong>：如果你未来的救命药、高端医疗和孩子的教育选择权是全球定价的，而你的资产 100% 锁在单一市场里，本质上是在拿全家的关键选择权做「单边裸奔」。
+        </p>
+      </section>
+
+      <!-- Truth 2 -->
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 16px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          真相 2：跨过那条河，不是为了「赌汇率」，而是为了借用「另一套发动机与法律工具箱」
+        </div>
+        <p style="margin:0 0 10px;font-size:14.5px;color:#3d4843;">
+          很多人不配境外资产，是因为怕「万一美元跌了、人民币升值了怎么办？」。其实这完全是误解——<strong>哪怕未来 20 年汇率一分钱不变，甚至你直接选择香港保单里的「人民币计价（RMB）」选项，两边跑出来的长期结果依然天差地别。</strong>
+        </p>
+        <p style="margin:0 0 10px;font-size:14px;color:#3d4843;">
+          为什么？因为决定保单长期收益天花板的，是监管允许保司投资什么<strong>底层资产池</strong>：
+        </p>
+        <ul style="margin:0 0 10px;padding-left:20px;font-size:14px;color:#3d4843;">
+          <li style="margin-bottom:6px;"><strong>在境内</strong>：受限于投资范围与资本管制，约 80% 资金只能配在境内低息国债与固收里，普通增额寿演示上限锁死在 2.0%～2.5% 区间；</li>
+          <li style="margin-bottom:4px;"><strong>在香港</strong>：没有外汇管制，保司可以把 <strong>40%～60% 配在 4.2%～5.2% 的全球高评级长债，再把 30%～50% 配在美股科技巨头、全球基建与私募股权</strong>，长期跑出 <strong>5.5%～6.5%</strong> 的平滑复利，且支持美元、港币、人民币、英镑、加元等 6～9 种货币随时自由转换。</li>
+        </ul>
+        <p style="margin:0;font-size:13.5px;color:#184c3f;background:#eef5f1;padding:9px 12px;border-radius:6px;">
+          💡 <strong>一句话点醒</strong>：去香港配资产，本质不是换钞票，而是借用「全球顶尖多元资产池的复利发动机 + 90:10 同船分红机制 + 普通法系的契约保护」。哪怕你在国内开车，也不妨碍给家里配一台进口发动机。
+        </p>
+      </section>
+
+      <!-- Truth 3 -->
+      <section style="background:#ffffff;border:1px solid #e4dfd5;border-radius:10px;padding:16px;margin:0 0 26px;">
+        <div style="font-size:16px;font-weight:700;color:#1d5a73;margin-bottom:8px;">
+          真相 3：化解「四重同向叠加」——给自己留一个与境内地产/行业周期不相关的备胎舱
+        </div>
+        <p style="margin:0;font-size:14.5px;color:#3d4843;">
+          打开绝大多数没有配过境外资产的家庭账本，你会看到惊人的<strong>「四重同向叠加」</strong>：<br />
+          ① 工资或企业利润在境内（受国内行业周期影响）＋ ② 两三套房子在境内（受国内地产周期影响）＋ ③ 股票买的是 A 股（受同一市场情绪影响）＋ ④ 存款在境内银行（受同一利率下行影响）。<br />
+          顺风时四样一起涨；可一旦遇到行业逆风或周期调整，四样资产同时缩水、同时卡死流动性。切出 <strong>15%～25%</strong> 放到与境内周期低相关的全球多币种契约里，就是给全家的财富船体装上一道<strong>跨周期平衡翼</strong>。
+        </p>
+      </section>
+
+      <!-- Part 2: 5 Signals & 2 Guardrails -->
+      <section style="margin:30px 0 18px;">
+        <span style="display:inline-block;background:#b86b1b;color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;margin-bottom:6px;">第二部分 · 对号入座自测表</span>
+        <h2 style="font-size:18.5px;font-weight:700;color:#17211d;margin:4px 0 0;line-height:1.4;">什么情况下「应该开始配」？什么情况下「先别折腾」？</h2>
+      </section>
+
+      <p style="margin:0 0 14px;">境外配置绝不是盲目跟风。作为顾问，我整理了一张客观的<strong>「5 大触发信号 + 2 条劝退底线」</strong>对照表——只要你命中前 5 个信号中的任意 1～2 条，就到了该动手的节点：</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 22px;border:1px solid #dcd6ca;">
+        <thead>
+          <tr style="background:#eef5f1;color:#184c3f;text-align:left;">
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:28%;">触发信号（命中任一即需考虑）</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;width:36%;">不配置的隐性痛点</th>
+            <th style="padding:9px 10px;border-bottom:1px solid #dcd6ca;">香港/境外工具的标准解法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #eae6de;">
+            <td style="padding:9px 10px;font-weight:700;color:#184c3f;">信号 1：可投资金融资产 ≥ 150 万～300 万（或年结余 ≥ 25 万）</td>
+            <td style="padding:9px 10px;">境内 1.5%～2% 单一低息无法跑赢长期医疗与生活通胀，复利底座过低</td>
+            <td style="padding:9px 10px;">切出 <strong>15%～25%</strong> 闲钱配置香港多币种分红险，用 5.5%～6.5% 长期引擎拉高底盘</td>
+          </tr>
+          <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;">
+            <td style="padding:9px 10px;font-weight:700;color:#184c3f;">信号 2：孩子 0～15 岁，未来有哪怕 30% 概率去香港/海外深造</td>
+            <td style="padding:9px 10px;">临出国才换汇，既错失 10～15 年复利，又极易在汇率高点被动硬换</td>
+            <td style="padding:9px 10px;">用 5 年期定投建立<strong>多币种教育金专户</strong>，18 岁去哪读书就一键转成当地货币提取</td>
+          </tr>
+          <tr style="border-bottom:1px solid #eae6de;">
+            <td style="padding:9px 10px;font-weight:700;color:#184c3f;">信号 3：看重重症时的全球原研药与私立医院就医权</td>
+            <td style="padding:9px 10px;">DRG/DIP 控费下院内难开昂贵进口原研药；跨国/赴港就医自费账单动辄数百万</td>
+            <td style="padding:9px 10px;">配齐<strong>香港早期+多次赔付重疾险</strong>及<strong>亚洲/全球高端医疗险</strong>（医院直付）</td>
+          </tr>
+          <tr style="border-bottom:1px solid #eae6de;background:#faf9f5;">
+            <td style="padding:9px 10px;font-weight:700;color:#184c3f;">信号 4：90% 身家锁在「境内房产 + 单一企业股权/连带担保」</td>
+            <td style="padding:9px 10px;">资产高度同质且流动性差；一旦行业逆风或企业涉诉，全家缺乏独立救命舱</td>
+            <td style="padding:9px 10px;">顺风期每年抽离 10%～20% 利润建<strong>香港独立保单安全舱</strong>，合规隔离经营风险</td>
+          </tr>
+          <tr>
+            <td style="padding:9px 10px;font-weight:700;color:#184c3f;">信号 5：直持美股 > 6 万美元，或有多子女传承、防婚变需求</td>
+            <td style="padding:9px 10px;">非美居民直持美股超 6 万美元面临最高 40% 美国遗产税；直接给子女转账易婚变混同</td>
+            <td style="padding:9px 10px;">用香港保单外壳规避美股遗产税 + <strong>保单 1 拆 N + 父母握 100% 投保人控制权</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Honest Guardrails Box -->
+      <section style="background:#fdf3f1;border:1px solid #ebcdc7;border-radius:10px;padding:16px;margin:0 0 26px;">
+        <div style="font-size:15.5px;font-weight:700;color:#b83b2a;margin-bottom:8px;">
+          🛑 反过来，哪 2 种情况我建议你「先别折腾境外储蓄险」？（诚实劝退边界）
+        </div>
+        <p style="margin:0 0 8px;font-size:14px;color:#4a3531;">
+          <strong>1. 家里的 6～12 个月紧急备用金还没留够，且境内百万医疗+基础重疾还没配齐：</strong><br />
+          请先花几千块钱把身边的「大病不归零底盘」焊死，留足随时能取的活钱，千万不要跳级把救命活钱锁进长期储蓄单里。
+        </p>
+        <p style="margin:0;font-size:14px;color:#4a3531;">
+          <strong>2. 这笔钱未来 3～5 年内就要用来付买房首付、装修或归还生意贷款：</strong><br />
+          香港长期分红险本质是跨周期基础设施（通常第 5～7 年回本，10 年后复利腾飞），前几年退保会有本金亏损。3 年内要用的钱，老老实实放境内货币基金或短期国债。
+        </p>
+      </section>
+
+      <!-- Closing Summary -->
+      <section style="background:#f6f8f7;border-radius:10px;padding:18px 16px;margin:28px 0 22px;">
+        <div style="font-size:16px;font-weight:700;color:#184c3f;margin-bottom:8px;">
+          写在最后：配置境外资产，买的从来不是「离开」，而是「留在哪都有底气」
+        </div>
+        <p style="margin:0;font-size:14.5px;color:#3d4843;">
+          真正的全球化资产配置，从来不需要你背井离乡。它只是在你努力工作、陪伴家人的同时，让你的财富有一部分站在全球多元引擎上复利生长——<strong>平时不显山露水，关键时刻（无论是需要全球原研药、孩子想去世界名校，还是行业周期波动），永远有一笔跨币种、跨周期的活水为你托底。</strong>
+        </p>
+      </section>
+
+      <!-- Footer Call-to-Action Card -->
+      <section style="border:1px solid #dcd6ca;border-radius:10px;padding:14px 16px;margin:24px 0 0;background:#ffffff;font-size:13px;color:#63706a;line-height:1.68;">
+        <strong style="color:#17211d;display:block;margin-bottom:4px;">📌 延伸工具 · 在线对比「内地保单 vs 香港多币种保单」底层资产引擎</strong>
+        我在公开科普站第 3 页用一张完整的架构图，拆解了内地与香港保司的资产配置比例、缓和机制与 6 类资产大对照，欢迎直接打开查阅：<br />
+        <a href="https://achealth-claw.github.io/family-risk-guide/insurer.html" style="color:#184c3f;font-weight:600;word-break:break-all;">👉 点击查看：内地 vs 香港保司底层投资引擎与 6 类资产全景对比（insurer.html）</a>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleFrameBtn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('mobile-frame');
+        toggleBtn.textContent = document.body.classList.contains('mobile-frame')
+          ? '🖥️ 切回标准宽屏预览'
+          : '📱 切换手机窄屏框';
+      });
+    }
+
+    const copyBtn = document.getElementById('copyWxBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const content = document.getElementById('js_content');
+        const range = document.createRange();
+        range.selectNodeContents(content);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        try {
+          document.execCommand('copy');
+          selection.removeAllRanges();
+          const orig = copyBtn.textContent;
+          copyBtn.textContent = '✅ 已复制富文本！可直接去公众号后台粘贴';
+          setTimeout(() => { copyBtn.textContent = orig; }, 3000);
+        } catch (err) {
+          alert('复制失败，请手动全选正文复制');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
